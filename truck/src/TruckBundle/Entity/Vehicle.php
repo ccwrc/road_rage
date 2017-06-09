@@ -24,9 +24,9 @@ class Vehicle
     /**
      * @var string
      *
-     * @ORM\Column(name="VIN", type="string", length=255, unique=true)
+     * @ORM\Column(name="vin", type="string", length=255, unique=true)
      */
-    private $vIN;
+    private $vin;
 
     /**
      * @var string
@@ -138,26 +138,26 @@ class Vehicle
     }
 
     /**
-     * Set vIN
+     * Set vin
      *
-     * @param string $vIN
+     * @param string $vin
      * @return Vehicle
      */
-    public function setVIN($vIN)
+    public function setVin($vin)
     {
-        $this->vIN = $vIN;
+        $this->vin = $vin;
 
         return $this;
     }
 
     /**
-     * Get vIN
+     * Get vin
      *
      * @return string 
      */
-    public function getVIN()
+    public function getVin()
     {
-        return $this->vIN;
+        return $this->vin;
     }
 
     /**
