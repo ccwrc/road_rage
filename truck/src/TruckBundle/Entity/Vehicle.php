@@ -31,100 +31,107 @@ class Vehicle
     /**
      * @var string
      *
-     * @ORM\Column(name="companyName", type="string", length=255)
+     * @ORM\Column(name="companyName", type="string", length=255, nullable=true)
      */
     private $companyName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="taxIdentificationNumber", type="string", length=255)
+     * @ORM\Column(name="taxIdentificationNumber", type="string", length=255, nullable=true)
      */
     private $taxIdentificationNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contact", type="string", length=255)
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
      */
     private $contact;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      */
     private $street;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zipCode", type="string", length=255)
+     * @ORM\Column(name="zipCode", type="string", length=255, nullable=true)
      */
     private $zipCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=255)
+     * @ORM\Column(name="fax", type="string", length=255, nullable=true)
      */
     private $fax;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
      */
     private $mail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="registrationNumber", type="string", length=255)
+     * @ORM\Column(name="registrationNumber", type="string", length=255, nullable=true)
      */
     private $registrationNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mileage", type="string", length=255)
+     * @ORM\Column(name="mileage", type="string", length=255, nullable=true)
      */
     private $mileage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="guaranteeType", type="string", length=255)
+     * @ORM\Column(name="guaranteeType", type="string", length=255, nullable=true)
      */
     private $guaranteeType;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="purchaseDate", type="date")
+     * @ORM\Column(name="purchaseDate", type="date", nullable=true)
      */
     private $purchaseDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="homeDealer", type="string", length=255)
+     * @ORM\Column(name="homeDealer", type="string", length=255, nullable=true)
      */
     private $homeDealer;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nameType", type="string", length=255, nullable=true)
+     */
+    private $nameType;
 
 
     /**
@@ -480,5 +487,28 @@ class Vehicle
     public function getHomeDealer()
     {
         return $this->homeDealer;
+    }
+
+    /**
+     * Set nameType
+     *
+     * @param string $nameType
+     * @return Vehicle
+     */
+    public function setNameType($nameType)
+    {
+        $this->nameType = $nameType;
+
+        return $this;
+    }
+
+    /**
+     * Get nameType
+     *
+     * @return string 
+     */
+    public function getNameType()
+    {
+        return $this->nameType;
     }
 }
