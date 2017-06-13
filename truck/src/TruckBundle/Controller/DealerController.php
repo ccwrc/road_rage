@@ -5,14 +5,14 @@ namespace TruckBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class CaseController extends Controller
+class DealerController extends Controller
 {
     /**
-     * @Route("/testCase")
+     * @Route("/testDealer")
      */
-    public function testAction()
+    public function testDealerAction()
     {
-        return $this->render('TruckBundle:Case:test.html.twig', array(
+        return $this->render('TruckBundle:Dealer:test_dealer.html.twig', array(
             // ...
         ));
     }

@@ -10,7 +10,7 @@ use TruckBundle\Entity\Vehicle;
 class VehicleController extends Controller
 {
     /**
-     * @Route("/test")
+     * @Route("/testVehicle")
      */
     public function testAction()
     {
