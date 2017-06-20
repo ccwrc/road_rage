@@ -24,14 +24,14 @@ class AccidentCase
     /**
      * @var string
      *
-     * @ORM\Column(name="damage_description", type="string", length=30100)
+     * @ORM\Column(name="damage_description", type="text", length=30100)
      */
     private $damageDescription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="location", type="string", length=30100)
+     * @ORM\Column(name="location", type="text", length=30100)
      */
     private $location;
 
@@ -45,7 +45,7 @@ class AccidentCase
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=65000, nullable=true)
+     * @ORM\Column(name="comment", type="text", length=65000, nullable=true)
      */
     private $comment;
 

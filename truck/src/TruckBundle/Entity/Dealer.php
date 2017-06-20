@@ -115,7 +115,7 @@ class Dealer
     /**
      * @var string
      *
-     * @ORM\Column(name="other_comments", type="string", length=65000, nullable=true)
+     * @ORM\Column(name="other_comments", type="text", length=65000, nullable=true)
      */
     private $otherComments;
 
