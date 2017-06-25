@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 22, 2017 at 03:20 PM
+-- Generation Time: Jun 25, 2017 at 02:22 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -42,7 +42,8 @@ CREATE TABLE `accident_case` (
   `report_repair_total` int(11) NOT NULL,
   `report_arrival_time` int(11) NOT NULL,
   `report_case_total` int(11) NOT NULL,
-  `report_repair_status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `report_repair_status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `vehicle_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -156,7 +157,8 @@ CREATE TABLE `vehicle` (
 -- Indexes for table `accident_case`
 --
 ALTER TABLE `accident_case`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_56A83C38545317D1` (`vehicle_id`);
 
 --
 -- Indexes for table `dealer`
@@ -217,6 +219,16 @@ ALTER TABLE `monitoring`
 --
 ALTER TABLE `vehicle`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `accident_case`
+--
+ALTER TABLE `accident_case`
+  ADD CONSTRAINT `FK_56A83C38545317D1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
