@@ -13,6 +13,16 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Vehicle
 {
+
+    public function __construct() {
+        $this->accidentCase = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="AccidentCase", mappedBy="vehicle")
+     */
+    private $accidentCases;
+
     /**
      * @var int
      *
@@ -511,5 +521,38 @@ class Vehicle
     public function getNameType()
     {
         return $this->nameType;
+    }
+
+    /**
+     * Add accidentCases
+     *
+     * @param \TruckBundle\Entity\AccidentCase $accidentCases
+     * @return Vehicle
+     */
+    public function addAccidentCase(\TruckBundle\Entity\AccidentCase $accidentCases)
+    {
+        $this->accidentCases[] = $accidentCases;
+
+        return $this;
+    }
+
+    /**
+     * Remove accidentCases
+     *
+     * @param \TruckBundle\Entity\AccidentCase $accidentCases
+     */
+    public function removeAccidentCase(\TruckBundle\Entity\AccidentCase $accidentCases)
+    {
+        $this->accidentCases->removeElement($accidentCases);
+    }
+
+    /**
+     * Get accidentCases
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAccidentCases()
+    {
+        return $this->accidentCases;
     }
 }

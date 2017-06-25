@@ -3,6 +3,7 @@
 namespace TruckBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Vehicle
@@ -12,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Vehicle
 {
+
+    public function __construct() {
+        $this->accidentCase = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="AccidentCase", mappedBy="vehicle")
+     */
+    private $accidentCases;
+
     /**
      * @var int
      *

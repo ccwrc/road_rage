@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 class AccidentCase
 {
     /**
+     * @ORM\ManyToOne(targetEntity="Vehicle", inversedBy="accidentCases")
+     * @ORM\JoinColumn(name="vehicle_id", referencedColumnName="id")
+     */
+    private $vehicle;
+
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -480,5 +487,28 @@ class AccidentCase
     public function getReportRepairStatus()
     {
         return $this->reportRepairStatus;
+    }
+
+    /**
+     * Set vehicle
+     *
+     * @param \TruckBundle\Entity\Vehicle $vehicle
+     * @return AccidentCase
+     */
+    public function setVehicle(\TruckBundle\Entity\Vehicle $vehicle = null)
+    {
+        $this->vehicle = $vehicle;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicle
+     *
+     * @return \TruckBundle\Entity\Vehicle 
+     */
+    public function getVehicle()
+    {
+        return $this->vehicle;
     }
 }
