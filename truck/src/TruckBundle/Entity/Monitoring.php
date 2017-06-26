@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Monitoring
 {
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
+     * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
+     */
+    private $accidentCase;
+
     /**
      * @var int
      *
@@ -390,5 +397,28 @@ class Monitoring
     public function getOptionalMails()
     {
         return $this->optionalMails;
+    }
+
+    /**
+     * Set accidentCase
+     *
+     * @param \TruckBundle\Entity\AccidentCase $accidentCase
+     * @return Monitoring
+     */
+    public function setAccidentCase(\TruckBundle\Entity\AccidentCase $accidentCase = null)
+    {
+        $this->accidentCase = $accidentCase;
+
+        return $this;
+    }
+
+    /**
+     * Get accidentCase
+     *
+     * @return \TruckBundle\Entity\AccidentCase 
+     */
+    public function getAccidentCase()
+    {
+        return $this->accidentCase;
     }
 }

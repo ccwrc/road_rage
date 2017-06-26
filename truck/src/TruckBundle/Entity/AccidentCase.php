@@ -13,6 +13,16 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class AccidentCase
 {
+    
+    public function __construct() {
+        $this->monitorings = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Monitoring", mappedBy="accidentCase")
+     */
+    private $monitorings;
+
     /**
      * @ORM\ManyToOne(targetEntity="Vehicle", inversedBy="accidentCases")
      * @ORM\JoinColumn(name="vehicle_id", referencedColumnName="id")
@@ -511,5 +521,38 @@ class AccidentCase
     public function getVehicle()
     {
         return $this->vehicle;
+    }
+
+    /**
+     * Add monitorings
+     *
+     * @param \TruckBundle\Entity\Monitoring $monitorings
+     * @return AccidentCase
+     */
+    public function addMonitoring(\TruckBundle\Entity\Monitoring $monitorings)
+    {
+        $this->monitorings[] = $monitorings;
+
+        return $this;
+    }
+
+    /**
+     * Remove monitorings
+     *
+     * @param \TruckBundle\Entity\Monitoring $monitorings
+     */
+    public function removeMonitoring(\TruckBundle\Entity\Monitoring $monitorings)
+    {
+        $this->monitorings->removeElement($monitorings);
+    }
+
+    /**
+     * Get monitorings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMonitorings()
+    {
+        return $this->monitorings;
     }
 }

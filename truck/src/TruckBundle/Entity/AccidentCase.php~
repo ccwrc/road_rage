@@ -3,6 +3,7 @@
 namespace TruckBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * AccidentCase
@@ -12,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AccidentCase
 {
+    
+    public function __construct() {
+        $this->monitorings = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Monitoring", mappedBy="accidentCase")
+     */
+    private $monitorings;
+
     /**
      * @ORM\ManyToOne(targetEntity="Vehicle", inversedBy="accidentCases")
      * @ORM\JoinColumn(name="vehicle_id", referencedColumnName="id")
@@ -487,5 +498,28 @@ class AccidentCase
     public function getReportRepairStatus()
     {
         return $this->reportRepairStatus;
+    }
+
+    /**
+     * Set vehicle
+     *
+     * @param \TruckBundle\Entity\Vehicle $vehicle
+     * @return AccidentCase
+     */
+    public function setVehicle(\TruckBundle\Entity\Vehicle $vehicle = null)
+    {
+        $this->vehicle = $vehicle;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicle
+     *
+     * @return \TruckBundle\Entity\Vehicle 
+     */
+    public function getVehicle()
+    {
+        return $this->vehicle;
     }
 }

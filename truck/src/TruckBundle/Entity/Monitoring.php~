@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Monitoring
 {
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
+     * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
+     */
+    private $accidentCase;
+
     /**
      * @var int
      *
