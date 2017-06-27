@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2017 at 02:22 PM
+-- Generation Time: Jun 27, 2017 at 02:29 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -120,7 +120,9 @@ CREATE TABLE `monitoring` (
   `home_dealer` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `repair_dealer` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `contact_mail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `optional_mails` varchar(600) COLLATE utf8_unicode_ci DEFAULT NULL
+  `optional_mails` varchar(600) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `accident_case_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -181,7 +183,9 @@ ALTER TABLE `fos_user`
 -- Indexes for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_BA4F975DE7C7236B` (`accident_case_id`),
+  ADD KEY `IDX_BA4F975DA76ED395` (`user_id`);
 
 --
 -- Indexes for table `vehicle`
@@ -228,6 +232,13 @@ ALTER TABLE `vehicle`
 --
 ALTER TABLE `accident_case`
   ADD CONSTRAINT `FK_56A83C38545317D1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`);
+
+--
+-- Constraints for table `monitoring`
+--
+ALTER TABLE `monitoring`
+  ADD CONSTRAINT `FK_BA4F975DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `fos_user` (`id`),
+  ADD CONSTRAINT `FK_BA4F975DE7C7236B` FOREIGN KEY (`accident_case_id`) REFERENCES `accident_case` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
