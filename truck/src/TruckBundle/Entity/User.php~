@@ -4,6 +4,7 @@ namespace TruckBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -20,6 +21,13 @@ class User extends BaseUser {
 
     public function __construct() {
         parent::__construct();
+
+        $this->monitorings = new ArrayCollection();
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Monitoring", mappedBy="user")
+     */
+    private $monitorings;
 
 }

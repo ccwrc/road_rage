@@ -522,4 +522,37 @@ class AccidentCase
     {
         return $this->vehicle;
     }
+
+    /**
+     * Add monitorings
+     *
+     * @param \TruckBundle\Entity\Monitoring $monitorings
+     * @return AccidentCase
+     */
+    public function addMonitoring(\TruckBundle\Entity\Monitoring $monitorings)
+    {
+        $this->monitorings[] = $monitorings;
+
+        return $this;
+    }
+
+    /**
+     * Remove monitorings
+     *
+     * @param \TruckBundle\Entity\Monitoring $monitorings
+     */
+    public function removeMonitoring(\TruckBundle\Entity\Monitoring $monitorings)
+    {
+        $this->monitorings->removeElement($monitorings);
+    }
+
+    /**
+     * Get monitorings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMonitorings()
+    {
+        return $this->monitorings;
+    }
 }

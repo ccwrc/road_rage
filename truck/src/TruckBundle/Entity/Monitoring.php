@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Monitoring
 {
     
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="monitorings")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;    
+    
      /**
      * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
      * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
@@ -420,5 +426,28 @@ class Monitoring
     public function getAccidentCase()
     {
         return $this->accidentCase;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \TruckBundle\Entity\User $user
+     * @return Monitoring
+     */
+    public function setUser(\TruckBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \TruckBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
