@@ -11,7 +11,10 @@
 }
 
 .menuBar {
-    
+    background-color: yellow;
+    width: 80%;
+    height: 15%;
+    float: left;
 }
 
 .cases {
