@@ -18,7 +18,10 @@
 }
 
 .cases {
-    
+    background-color: yellowgreen;
+    width: 20%;
+    height: 75%;
+    clear: both;
 }
 
 .monitoring {
