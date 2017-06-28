@@ -7,14 +7,53 @@
             <link href="{{ asset('/css/main.css') }}" rel="stylesheet" />
         {% endblock %}
     </head>
+
     <body>
         <div class="container">
             {% block body %}
 
+                <div class="logo">
+                    {% block logo %}
+                        block logo
+                    {% endblock %}
+                </div>
+
+                <div class="menuBar">
+                    {% block menuBar %}
+                        block menuBar
+                    {% endblock %}
+                </div>
+
+                <div class="cases">
+                    {% block cases %}
+                        block cases
+                    {% endblock %}
+                </div>
+
+                <div class="monitoring">
+                    {% block monitoring %}
+                        block monitoring
+                    {% endblock %}
+                </div>
+
+                <div class="logged">
+                    {% block logged %}
+                        block logged
+                    {% endblock %}
+                </div>
+
+                <div class="infoBar">
+                    {% block infoBar %}
+                        block infoBar
+                    {% endblock %}
+                </div>
+
             {% endblock %}
         </div>
+
         {% block javascripts %}
         {% endblock %}
+        
     </body>
 </html>
 
