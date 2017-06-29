@@ -133,13 +133,6 @@ class Vehicle
     /**
      * @var string
      *
-     * @ORM\Column(name="home_dealer", type="string", length=255, nullable=true)
-     */
-    private $homeDealer;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="name_type", type="string", length=255, nullable=true)
      */
     private $nameType;
@@ -475,29 +468,6 @@ class Vehicle
     public function getPurchaseDate()
     {
         return $this->purchaseDate;
-    }
-
-    /**
-     * Set homeDealer
-     *
-     * @param string $homeDealer
-     * @return Vehicle
-     */
-    public function setHomeDealer($homeDealer)
-    {
-        $this->homeDealer = $homeDealer;
-
-        return $this;
-    }
-
-    /**
-     * Get homeDealer
-     *
-     * @return string 
-     */
-    public function getHomeDealer()
-    {
-        return $this->homeDealer;
     }
 
     /**
