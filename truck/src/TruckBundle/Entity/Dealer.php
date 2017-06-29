@@ -13,6 +13,16 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Dealer
 {
+    
+    public function __construct() {
+        $this->vehicles = new ArrayCollection();
+    }    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Vehicle", mappedBy="dealer")
+     */
+    private $vehicles;    
+    
     /**
      * @var int
      *
@@ -481,5 +491,38 @@ class Dealer
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Add vehicles
+     *
+     * @param \TruckBundle\Entity\Vehicle $vehicles
+     * @return Dealer
+     */
+    public function addVehicle(\TruckBundle\Entity\Vehicle $vehicles)
+    {
+        $this->vehicles[] = $vehicles;
+
+        return $this;
+    }
+
+    /**
+     * Remove vehicles
+     *
+     * @param \TruckBundle\Entity\Vehicle $vehicles
+     */
+    public function removeVehicle(\TruckBundle\Entity\Vehicle $vehicles)
+    {
+        $this->vehicles->removeElement($vehicles);
+    }
+
+    /**
+     * Get vehicles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVehicles()
+    {
+        return $this->vehicles;
     }
 }

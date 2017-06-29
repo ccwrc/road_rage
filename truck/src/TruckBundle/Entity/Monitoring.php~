@@ -427,4 +427,27 @@ class Monitoring
     {
         return $this->accidentCase;
     }
+
+    /**
+     * Set user
+     *
+     * @param \TruckBundle\Entity\User $user
+     * @return Monitoring
+     */
+    public function setUser(\TruckBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \TruckBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

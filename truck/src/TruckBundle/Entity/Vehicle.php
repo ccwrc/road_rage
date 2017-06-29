@@ -22,6 +22,12 @@ class Vehicle
      * @ORM\OneToMany(targetEntity="AccidentCase", mappedBy="vehicle")
      */
     private $accidentCases;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Dealer", inversedBy="vehicles")
+     * @ORM\JoinColumn(name="dealer_id", referencedColumnName="id")
+     */
+    private $dealer;    
 
     /**
      * @var int
@@ -524,5 +530,28 @@ class Vehicle
     public function getAccidentCases()
     {
         return $this->accidentCases;
+    }
+
+    /**
+     * Set dealer
+     *
+     * @param \TruckBundle\Entity\Dealer $dealer
+     * @return Vehicle
+     */
+    public function setDealer(\TruckBundle\Entity\Dealer $dealer = null)
+    {
+        $this->dealer = $dealer;
+
+        return $this;
+    }
+
+    /**
+     * Get dealer
+     *
+     * @return \TruckBundle\Entity\Dealer 
+     */
+    public function getDealer()
+    {
+        return $this->dealer;
     }
 }
