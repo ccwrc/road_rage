@@ -1,9 +1,25 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}truck - strona główna{% endblock %}
+{% block title %}truck - main{% endblock %}
 
-{#{% block body %} 
+{% block body %} 
 
-    <div class="test">test div</div>
+    <a href='{{ path("fos_user_security_login") }}' ><button>login</button> </a>
 
-{% endblock %}#}
+    <a href='{{ path("fos_user_security_logout") }}' ><button>logout</button> </a>
+
+    <a href='{{ path("fos_user_profile_show") }}' ><button>profile</button> </a>
+
+    <a href='{{ path("fos_user_profile_edit") }}' ><button>edit profile</button> </a>
+
+    <a href='{{ path("fos_user_registration_register") }}' ><button>register</button> </a>
+
+    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+
+    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+
+    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+
+    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+
+{% endblock %}
