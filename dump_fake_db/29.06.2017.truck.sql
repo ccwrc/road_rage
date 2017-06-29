@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2017 at 02:29 PM
+-- Generation Time: Jun 29, 2017 at 12:45 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -147,8 +147,8 @@ CREATE TABLE `vehicle` (
   `zip_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `registration_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `guarantee_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_dealer` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `name_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `name_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dealer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -192,7 +192,8 @@ ALTER TABLE `monitoring`
 --
 ALTER TABLE `vehicle`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_1B80E486B1085141` (`vin`);
+  ADD UNIQUE KEY `UNIQ_1B80E486B1085141` (`vin`),
+  ADD KEY `IDX_1B80E486249E6EA1` (`dealer_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -239,6 +240,12 @@ ALTER TABLE `accident_case`
 ALTER TABLE `monitoring`
   ADD CONSTRAINT `FK_BA4F975DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `fos_user` (`id`),
   ADD CONSTRAINT `FK_BA4F975DE7C7236B` FOREIGN KEY (`accident_case_id`) REFERENCES `accident_case` (`id`);
+
+--
+-- Constraints for table `vehicle`
+--
+ALTER TABLE `vehicle`
+  ADD CONSTRAINT `FK_1B80E486249E6EA1` FOREIGN KEY (`dealer_id`) REFERENCES `dealer` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
