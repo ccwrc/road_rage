@@ -1,9 +1,14 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}truck - main{% endblock %}
+{% block title %}truck - index{% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+        {% endblock %}
 
 {% block body %} 
 
+    <br/>
     <a href='{{ path("fos_user_security_login") }}' ><button>login</button> </a>
 
     <a href='{{ path("fos_user_security_logout") }}' ><button>logout</button> </a>
@@ -14,7 +19,7 @@
 
     <a href='{{ path("fos_user_registration_register") }}' ><button>register</button> </a>
 
-    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+    <a href='{{ path("truck_operator_operator") }}' ><button>OPERATOR</button> </a>
 
     <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
 

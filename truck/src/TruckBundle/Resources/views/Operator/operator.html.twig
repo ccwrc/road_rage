@@ -1,0 +1,12 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}operator panel{% endblock %}
+
+
+{% block cases %}
+    {% include 'TruckBundle:AccidentCase:test_case.html.twig' %}
+{% endblock %}
+
+{% block logged %}
+    {{ app.user.username }} 
+{% endblock %}
