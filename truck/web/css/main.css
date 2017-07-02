@@ -26,6 +26,7 @@ body {
     width: 20%;
     min-height: 80px;
     height: 10%;
+    overflow: auto;
     float: left;
 }
 
@@ -35,6 +36,7 @@ body {
     width: 80%;
     min-height: 80px;
     height: 10%;
+    overflow: auto;
     float: left;
 }
 
@@ -43,6 +45,7 @@ body {
     width: 20%;
     min-height: 160px;
     height: 85%;
+    overflow: auto;
     float: left;
     text-align: center;
 }
@@ -52,7 +55,7 @@ body {
     width: 80%;
     min-height: 160px;
     height: 85%;
-    overflow: scroll;
+    overflow: auto;
     float: left;
 }
 
@@ -62,6 +65,7 @@ body {
     width: 20%;
     min-height: 18px;
     height: 5%;
+    overflow: auto;
     float: left;
     text-align: center;
 }
@@ -72,6 +76,7 @@ body {
     width: 80%;
     min-height: 18px;
     height: 5%;
+    overflow: auto;
     float: left;
     text-align: center;
 }
