@@ -8,15 +8,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
+ * @Route("/operator")
  */
-class OperatorController extends Controller
-{
+class OperatorController extends Controller {
+    
     /**
-     * @Route("/operator")
+     * @Route("/panel")
      */
-    public function operatorAction()
+    public function panelAction()
     {
-        return $this->render('TruckBundle:Operator:operator.html.twig', array(
+        return $this->render('TruckBundle:Operator:panel.html.twig', array(
             // ...
         ));
     }
