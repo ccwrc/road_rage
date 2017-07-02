@@ -4,11 +4,13 @@ namespace TruckBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use TruckBundle\Entity\Dealer;
 
 /**
  * @Route("/dealer")
+ * @Security("has_role('ROLE_DEALER')")
  */
 class DealerController extends Controller
 {
