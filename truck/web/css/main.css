@@ -22,7 +22,7 @@ body {
 
 .logo {
     border-top-left-radius: .4em;
-    background-color: red;
+    background-color: #FFDFDF;
     width: 20%;
     min-height: 80px;
     height: 10%;
@@ -31,7 +31,7 @@ body {
 
 .menuBar {
     border-top-right-radius: .4em;
-    background-color: yellow;
+    background-color: #E6DBFF;
     width: 80%;
     min-height: 80px;
     height: 10%;
@@ -39,7 +39,7 @@ body {
 }
 
 .cases {
-    background-color: yellowgreen;
+    background-color: #FFFFD7;
     width: 20%;
     min-height: 160px;
     height: 85%;
@@ -48,16 +48,17 @@ body {
 }
 
 .monitoring {
-    background-color: greenyellow;
+    background-color: #D2FFC4;
     width: 80%;
     min-height: 160px;
     height: 85%;
+    overflow: scroll;
     float: left;
 }
 
 .logged {
     border-bottom-left-radius: .4em;
-    background-color: purple;
+    background-color: #C9EAF3;
     width: 20%;
     min-height: 18px;
     height: 5%;
@@ -67,7 +68,7 @@ body {
 
 .infoBar {
     border-bottom-right-radius: .4em;
-    background-color: orange;
+    background-color: #EEBBEE;
     width: 80%;
     min-height: 18px;
     height: 5%;

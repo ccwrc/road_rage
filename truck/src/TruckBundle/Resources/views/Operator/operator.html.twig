@@ -3,10 +3,34 @@
 {% block title %}operator panel{% endblock %}
 
 
-{% block cases %}
-    {% include 'TruckBundle:AccidentCase:test_case.html.twig' %}
+{% block logo %}
+    {{ parent() }} <br/>
+    truck logo
 {% endblock %}
+
+
+{% block menuBar %}
+    {{ parent() }} menu1 menu2
+{% endblock %}
+    
+   
+{% block cases %}
+    {{ parent() }}
+   {# {% render url('truck_dealer_showalldealers') %}#}
+{% endblock %}
+
+
+{% block monitoring %}
+    {{ parent() }} 
+{% endblock %}
+
 
 {% block logged %}
     {{ app.user.username }} 
 {% endblock %}
+
+
+{% block infoBar %}
+    {{ parent() }} info1 messageInfo alarmInfo
+{% endblock %}
+
