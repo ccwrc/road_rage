@@ -13,15 +13,6 @@ use TruckBundle\Entity\Dealer;
  * @Security("has_role('ROLE_DEALER')")
  */
 class DealerController extends Controller {
-    
-    /**
-     * @Route("/testDealer")
-     */
-    public function testDealerAction() {
-        return $this->render('TruckBundle:Dealer:test_dealer.html.twig', array(
-                        // ...
-        ));
-    }
 
     /**
      * @Route("/showAllDealers")
