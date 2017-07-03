@@ -1,0 +1,15 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}show dealer{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %} 
+
+    <h3>show dealer</h3>   
+
+    {{ dump(dealer) }}
+
+{% endblock %}
