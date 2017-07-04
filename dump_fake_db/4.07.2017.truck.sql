@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2017 at 01:22 PM
+-- Generation Time: Jul 04, 2017 at 12:24 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -108,8 +108,8 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-02 16:06:43', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
-(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-03 13:20:37', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-04 12:02:30', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-04 11:14:53', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-02 12:51:01', NULL, NULL, 'a:0:{}');
 
 -- --------------------------------------------------------
