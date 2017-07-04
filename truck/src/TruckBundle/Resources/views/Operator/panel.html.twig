@@ -9,7 +9,23 @@
 
 
 {% block menuBar %}
-    {{ parent() }} menu1 menu2
+    {#for operator#}
+    {% if is_granted('ROLE_OPERATOR') %}
+        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Dealers</a> 
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >Main</a> 
+        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >reserve</a>
+    {% endif %}
+    <br/>
+    {#for control#}
+    {% if is_granted('ROLE_CONTROL') %}
+        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Report panel?</a>
+    {% endif %}
+    <br/>
+    {#for admin?#}
+    {% if is_granted('ROLE_ADMIN') %}
+        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Admin panel?</a>
+    {% endif %}
+    <br/>
 {% endblock %}
     
    
