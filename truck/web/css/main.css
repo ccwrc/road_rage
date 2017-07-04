@@ -28,6 +28,7 @@ body {
     height: 10%;
     overflow: auto;
     float: left;
+    text-align: center;
 }
 
 .menuBar {
