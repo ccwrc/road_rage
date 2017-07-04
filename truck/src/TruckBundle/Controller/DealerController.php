@@ -30,9 +30,11 @@ class DealerController extends Controller {
      */
     public function showDealerAction($id) {
         $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($id);
+        $vehicles = $dealer->getVehicles();
 
         return $this->render('TruckBundle:Dealer:show_dealer.html.twig', [
-                    "dealer" => $dealer
+                    "dealer" => $dealer,
+                    "vehicles" => $vehicles
         ]);
     }
 

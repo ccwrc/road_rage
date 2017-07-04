@@ -15,7 +15,7 @@ class Vehicle
 {
 
     public function __construct() {
-        $this->accidentCase = new ArrayCollection();
+        $this->accidentCases = new ArrayCollection();
     }
 
     /**
@@ -530,5 +530,28 @@ class Vehicle
     public function getAccidentCases()
     {
         return $this->accidentCases;
+    }
+
+    /**
+     * Set dealer
+     *
+     * @param \TruckBundle\Entity\Dealer $dealer
+     * @return Vehicle
+     */
+    public function setDealer(\TruckBundle\Entity\Dealer $dealer = null)
+    {
+        $this->dealer = $dealer;
+
+        return $this;
+    }
+
+    /**
+     * Get dealer
+     *
+     * @return \TruckBundle\Entity\Dealer 
+     */
+    public function getDealer()
+    {
+        return $this->dealer;
     }
 }

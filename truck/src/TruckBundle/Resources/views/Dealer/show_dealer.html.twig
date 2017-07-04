@@ -1,6 +1,6 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}show dealer{% endblock %}
+{% block title %}show dealer details{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
@@ -8,8 +8,36 @@
 
 {% block body %} 
 
-    <h3>show dealer</h3>   
+    <div class="padding7px">
+        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: {{ vehicles | length }}) </span><br/>
+        <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
+        <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
+        <span class="boldText"> Phone:</span> {{ dealer.mainPhone }} (24H: {{ dealer.phone24h }}) <br/>
+        <span class="boldText"> Fax:</span> {{ dealer.mainFax }} <br/>
+        <span class="boldText"> Mail:</span> {{ dealer.mainMail }} <br/>
+        <span class="boldText"> Phone service car:</span> {{ dealer.phoneServiceCar }} <br/>
+        Alternative phones: {{ dealer.altPhone1 }}, {{ dealer.altPhone2 }} <br/>
+        Alternative mails: {{ dealer.altMail1 }}, {{ dealer.altMail2 }} <br/>
+        <span class="boldText"> Comments:</span> {{ dealer.otherComments }} <br/>
+    </div>
 
-    {{ dump(dealer) }}
+    {% for vehicle in vehicles %}
+        <div class="padding7px">
+            <span class="greenBoldText">Company: {{ vehicle.companyname }} VIN: {{ vehicle.vin }} Registration: {{ vehicle.registrationNumber }} </span><br/>
+            <span class="boldText"> Street:</span> {{ vehicle.street }} <br/>
+            <span class="boldText"> City, zip-code:</span> {{ vehicle.city }}, {{ vehicle.zipCode }} <br/>
+            <span class="boldText"> First contact person:</span> {{ vehicle.contactPerson }} <br/>
+            <span class="boldText"> Tax ID number:</span> {{ vehicle.taxIdNumber }} <br/>
+            <span class="boldText"> Phone:</span> {{ vehicle.phone }} <br/>
+            <span class="boldText"> Fax:</span> {{ vehicle.fax }} <br/>
+            <span class="boldText"> Mail:</span> {{ vehicle.mail }} <br/>
+            <span class="boldText"> Last mileage:</span> {{ vehicle.mileage }} <br/>
+            <span class="boldText"> Guarantee Type:</span> {{ vehicle.guaranteeType }} <br/>
+            <span class="boldText"> Purchase Date:</span> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
+            <span class="boldText"> Vehicle type:</span> {{ vehicle.nameType }} <br/>
+        </div>
+    {% else %}
+        <span class="greenBoldText padding7px"> No vehicles. </span>
+    {% endfor %}
 
 {% endblock %}

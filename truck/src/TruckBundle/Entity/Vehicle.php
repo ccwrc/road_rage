@@ -15,7 +15,7 @@ class Vehicle
 {
 
     public function __construct() {
-        $this->accidentCase = new ArrayCollection();
+        $this->accidentCases = new ArrayCollection();
     }
 
     /**

@@ -22,6 +22,15 @@ body {
     font-weight: bold;
 }
 
+.greenBoldText {
+    color: #008000;
+    font-weight: bold;
+}
+
 .boldText {
     font-weight: bold;
+}
+
+.padding7px {
+    padding: 7px;
 }

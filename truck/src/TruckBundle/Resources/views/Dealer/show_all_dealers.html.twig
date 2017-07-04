@@ -10,9 +10,10 @@
 
     <h3>List of dealers</h3>   
 
-    {% for dealer in dealers %}
+    {% for dealer in dealers %} 
 
-        <span class="redBoldText"> {{ dealer.id }}. {{ dealer.name }} ({{ dealer.isActive }}) </span><br/>
+        <span class="redBoldText"> {{ dealer.id }}. {{ dealer.name }} ({{ dealer.isActive }}) </span>
+        <a target="_blank" title="new window" href="{{ path('truck_dealer_showdealer', {"id":dealer.id}) }}" >details</a>  <br/>
         <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
         <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
         <span class="boldText"> Phone:</span> {{ dealer.mainPhone }} (24H: {{ dealer.phone24h }}) <br/>
@@ -26,7 +27,7 @@
         <hr/>
 
     {% else %}
-        Brak d.
+        No dealers.
     {% endfor %}
 
 {% endblock %}
