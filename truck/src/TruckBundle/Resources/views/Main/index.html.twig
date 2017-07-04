@@ -2,16 +2,19 @@
 
 {% block title %}truck - index{% endblock %}
 
-        {% block stylesheets %}
-            <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
-        {% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+{% endblock %}
 
 {% block body %} 
 
     <br/>
-    <a href='{{ path("fos_user_security_login") }}' ><button>login</button> </a>
 
-    <a href='{{ path("fos_user_security_logout") }}' ><button>logout</button> </a>
+    {% if is_granted('ROLE_USER') %}
+        <a href='{{ path("fos_user_security_logout") }}' ><button>Logout</button> </a>
+    {% else %}
+        <a href='{{ path("fos_user_security_login") }}' ><button>Login</button> </a>
+    {% endif %}
 
     <a href='{{ path("fos_user_profile_show") }}' ><button>profile</button> </a>
 
