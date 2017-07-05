@@ -12,17 +12,7 @@ use TruckBundle\Entity\AccidentCase;
  * @Route("/cases")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class AccidentCaseController extends Controller
-{
-    /**
-     * @Route("/testCase")
-     */
-    public function testCaseAction()
-    {
-        return $this->render('TruckBundle:AccidentCase:test_case.html.twig', array(
-            // ...
-        ));
-    }
+class AccidentCaseController extends Controller {
     
     /**
      * @Route("/showAllCases")
