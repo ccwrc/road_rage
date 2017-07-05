@@ -9,30 +9,29 @@
 
 
 {% block menuBar %}
-    {#for operator#}
+    {# for operator #}
     {% if is_granted('ROLE_OPERATOR') %}
         <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Dealers</a> 
         <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >Main</a> 
         <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >reserve</a>
     {% endif %}
     <br/>
-    {#for control#}
+    {# for control #}
     {% if is_granted('ROLE_CONTROL') %}
         <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Report panel?</a>
     {% endif %}
     <br/>
-    {#for admin?#}
+    {# for admin? #}
     {% if is_granted('ROLE_ADMIN') %}
         <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Admin panel?</a>
     {% endif %}
     <br/>
 {% endblock %}
-    
-   
+
+
 {% block cases %}
-    {{ parent() }}
-   {# {% render url('truck_dealer_showalldealers') %}#}
-   {#{% render url('bla', {'id': bla.id}) %}#}
+    {% render url('truck_accidentcase_showallcases') %}
+    {#{% render url('bla', {'id': bla.id}) %}#}
 {% endblock %}
 
 

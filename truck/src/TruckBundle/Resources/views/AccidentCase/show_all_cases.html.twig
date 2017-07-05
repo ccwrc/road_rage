@@ -1,0 +1,9 @@
+
+All cases: <br/>
+
+{% for case in cases %}
+   <a title="{{ case.vehicle.companyName }}" href="" > {{ case.id }} </a> <br/>
+{#   {{ dump(case) }}#}
+{% else %}
+    Empty.
+{% endfor %}
