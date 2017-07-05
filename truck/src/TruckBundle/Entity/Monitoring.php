@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Monitoring
 {
     
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="monitorings")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;    
+//    /**
+//     * @ORM\ManyToOne(targetEntity="User", inversedBy="monitorings")
+//     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+//     */
+//    private $user;    
     
      /**
      * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
@@ -47,6 +47,13 @@ class Monitoring
      * @ORM\Column(name="code_description", type="string", length=600, nullable=true)
      */
     private $codeDescription;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="operator", type="string", length=600, nullable=true)
+     */
+    private $operator;
 
     /**
      * @var \DateTime
@@ -428,26 +435,49 @@ class Monitoring
         return $this->accidentCase;
     }
 
+//    /**
+//     * Set user
+//     *
+//     * @param \TruckBundle\Entity\User $user
+//     * @return Monitoring
+//     */
+//    public function setUser(\TruckBundle\Entity\User $user = null)
+//    {
+//        $this->user = $user;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get user
+//     *
+//     * @return \TruckBundle\Entity\User 
+//     */
+//    public function getUser()
+//    {
+//        return $this->user;
+//    }
+
     /**
-     * Set user
+     * Set operator
      *
-     * @param \TruckBundle\Entity\User $user
+     * @param string $operator
      * @return Monitoring
      */
-    public function setUser(\TruckBundle\Entity\User $user = null)
+    public function setOperator($operator)
     {
-        $this->user = $user;
+        $this->operator = $operator;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get operator
      *
-     * @return \TruckBundle\Entity\User 
+     * @return string 
      */
-    public function getUser()
+    public function getOperator()
     {
-        return $this->user;
+        return $this->operator;
     }
 }
