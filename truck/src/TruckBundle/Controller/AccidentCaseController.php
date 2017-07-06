@@ -25,4 +25,15 @@ class AccidentCaseController extends Controller {
         ]);
     }
 
+    /**
+     * @Route("/showAllActiveCases")
+     */
+    public function showAllActiveCasesAction() {
+        $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAllActiveCases();
+
+        return $this->render('TruckBundle:AccidentCase:show_all_active_cases.html.twig', [
+                    "cases" => $cases
+        ]);
+    }
+
 }

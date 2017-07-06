@@ -30,7 +30,8 @@
 
 
 {% block cases %}
-    {% render url('truck_accidentcase_showallcases') %}
+    {#{% render url('truck_accidentcase_showallcases') %}#}
+    {% render url('truck_accidentcase_showallactivecases') %}
     {#{% render url('bla', {'id': bla.id}) %}#}
 {% endblock %}
 
