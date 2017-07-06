@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 04, 2017 at 12:24 PM
+-- Generation Time: Jul 06, 2017 at 08:25 AM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -45,6 +45,14 @@ CREATE TABLE `accident_case` (
   `report_repair_status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `vehicle_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `accident_case`
+--
+
+INSERT INTO `accident_case` (`id`, `damage_description`, `location`, `driver_contact`, `comment`, `info_sms`, `info_mail`, `status`, `progress`, `report_late`, `report_rs_time`, `report_nrs_time`, `report_repair_total`, `report_arrival_time`, `report_case_total`, `report_repair_status`, `vehicle_id`) VALUES
+(1, 'opis uszkodzenia', 'lokacja w miescie', 'kontakt do kierowcy 444 555 555', 'zwykly komentarza', NULL, NULL, 'active', 'start', 0, 0, 0, 0, 0, 0, NULL, 1),
+(2, 'opis2 uszkodzenia2', 'lokacja w miesci22e', 'kontakt do kie22rowcy 444 555 555', 'zwykly22 komentarza', NULL, NULL, 'active', 'start', 0, 0, 0, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -108,8 +116,8 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-04 12:02:30', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
-(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-04 11:14:53', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-05 13:04:14', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-04 16:00:34', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-02 12:51:01', NULL, NULL, 'a:0:{}');
 
 -- --------------------------------------------------------
@@ -133,7 +141,7 @@ CREATE TABLE `monitoring` (
   `contact_mail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `optional_mails` varchar(600) COLLATE utf8_unicode_ci DEFAULT NULL,
   `accident_case_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `operator` varchar(600) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -203,8 +211,7 @@ ALTER TABLE `fos_user`
 --
 ALTER TABLE `monitoring`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_BA4F975DE7C7236B` (`accident_case_id`),
-  ADD KEY `IDX_BA4F975DA76ED395` (`user_id`);
+  ADD KEY `IDX_BA4F975DE7C7236B` (`accident_case_id`);
 
 --
 -- Indexes for table `vehicle`
@@ -222,7 +229,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `accident_case`
 --
 ALTER TABLE `accident_case`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `dealer`
 --
@@ -257,7 +264,6 @@ ALTER TABLE `accident_case`
 -- Constraints for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  ADD CONSTRAINT `FK_BA4F975DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `fos_user` (`id`),
   ADD CONSTRAINT `FK_BA4F975DE7C7236B` FOREIGN KEY (`accident_case_id`) REFERENCES `accident_case` (`id`);
 
 --
