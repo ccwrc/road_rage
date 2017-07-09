@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2017 at 08:25 AM
+-- Generation Time: Jul 09, 2017 at 12:31 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -116,7 +116,7 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-05 13:04:14', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-08 16:29:13', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
 (2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-04 16:00:34', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-02 12:51:01', NULL, NULL, 'a:0:{}');
 
@@ -143,6 +143,15 @@ CREATE TABLE `monitoring` (
   `accident_case_id` int(11) DEFAULT NULL,
   `operator` varchar(600) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `monitoring`
+--
+
+INSERT INTO `monitoring` (`id`, `code`, `code_description`, `time_save`, `time_set`, `document`, `contact_through`, `comments`, `out_comment`, `home_dealer`, `repair_dealer`, `contact_mail`, `optional_mails`, `accident_case_id`, `operator`) VALUES
+(1, 'START', 'start case', '2017-07-09 01:00:00', NULL, NULL, 'kierowca 122 122 122', 'zgloszenie awarii', NULL, '', NULL, NULL, NULL, 1, 'ccwrcuser'),
+(2, 'PG', 'payment guarantee', '2017-07-09 01:10:00', NULL, NULL, 'dealer 111 111 111', 'przeslanie prosby o potwrierdzenie platnosci', NULL, 'dealer 1', NULL, NULL, NULL, 1, 'ccwrcoperator'),
+(3, 'CPG', 'confirmation payment guarantee', '2017-07-09 01:12:00', NULL, NULL, 'mail od jan kowalski dealer 1', 'zagwarantowal platnosc za klienta', NULL, '', NULL, NULL, NULL, NULL, 'ccwrcoperator');
 
 -- --------------------------------------------------------
 
@@ -244,7 +253,7 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
