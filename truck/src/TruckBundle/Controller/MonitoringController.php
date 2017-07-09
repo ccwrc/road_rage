@@ -23,5 +23,15 @@ class MonitoringController extends Controller
             "id" => $id
         ));
     }
+    
+    /**
+     * @Route("/showAllMonitoringsForCase/{caseId}")
+     */
+    public function showAllMonitoringsForCaseAction($caseId) {
+        
+        return $this->render('TruckBundle:Monitoring:show_all_monitorings_for_case.html.twig', [
+            //
+        ]);        
+    }
 
 }
