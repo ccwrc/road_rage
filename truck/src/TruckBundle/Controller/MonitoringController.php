@@ -9,17 +9,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use TruckBundle\Entity\Monitoring;
 
 /**
+ * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class MonitoringController extends Controller
 {
     /**
-     * @Route("/testMon")
+     * @Route("/testMon/{id}")
      */
-    public function testMonAction()
+    public function testMonAction($id = 54)
     {
         return $this->render('TruckBundle:Monitoring:test_mon.html.twig', array(
-            // ...
+            "id" => $id
         ));
     }
 

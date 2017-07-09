@@ -37,7 +37,7 @@
 
 
 {% block monitoring %}
-    {{ parent() }} 
+    {% render url('truck_monitoring_testmon', {"id":caseId}) %}
 {% endblock %}
 
 
