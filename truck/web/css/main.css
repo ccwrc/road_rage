@@ -81,3 +81,11 @@ body {
     float: left;
     text-align: center;
 }
+
+.textBold {
+    font-weight: bold;
+}
+
+.textItalic {
+    font-style: italic;
+}
