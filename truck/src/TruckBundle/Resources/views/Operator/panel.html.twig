@@ -4,7 +4,11 @@
 
 
 {% block logo %}
-    Bad Truck Logo
+    Bad Truck Logo <br/><br/>
+    
+    {% if caseId != 0 %}
+        Displayed case: {{ caseId }}
+    {% endif %}
 {% endblock %}
 
 
