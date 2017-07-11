@@ -26,6 +26,16 @@
         <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >Admin panel?</a>
     {% endif %}
     <br/>
+    {# case bar for operator #}
+    {% if is_granted('ROLE_OPERATOR') %}
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved-new vehicle</a> 
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >res-new case</a> 
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved</a>
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved</a>
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved</a>
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved</a>
+        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved</a>
+    {% endif %}
 {% endblock %}
 
 
