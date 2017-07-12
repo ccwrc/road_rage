@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block body %} 
-
     <br/>
 
+    {#user panel#}
     {% if is_granted('ROLE_USER') %}
         <a href='{{ path("fos_user_security_logout") }}' ><button>Logout</button> </a>
     {% else %}
@@ -17,18 +17,44 @@
     {% endif %}
 
     <a href='{{ path("fos_user_profile_show") }}' ><button>profile</button> </a>
-
     <a href='{{ path("fos_user_profile_edit") }}' ><button>edit profile</button> </a>
-
     <a href='{{ path("fos_user_registration_register") }}' ><button>register</button> </a>
-
-    <a href='{{ path("truck_operator_panel") }}' ><button>OPERATOR PANEL</button> </a>
-
     <br/><br/>
-    <a href='{{ path("truck_dealer_showalldealers") }}' ><button>all dealers</button> </a>
 
-    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+    {#dealer panel#}
+    {% if is_granted('ROLE_DEALER') %}
+        <a href='{{ path("truck_dealer_showalldealers") }}' ><button>all dealers</button> </a>
+        <a href='{{ path("truck_dealer_showalldealers") }}' ><button>reserved - edit dealer</button> </a>
+        <br/><br/>
+    {% endif %}
 
-    <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+    {#for operator#}  
+    {% if is_granted('ROLE_DEALER') %}
+        <a href='{{ path("truck_operator_panel") }}' ><button>OPERATOR PANEL</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <br/><br/>
+    {% endif %}
+
+    {#for control#}  
+    {% if is_granted('ROLE_CONTROL') %}
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <br/><br/>
+    {% endif %}    
+
+    {#for admin#}  
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <br/><br/>
+    {% endif %}  
+
+    {#for SUPER admin#}  
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <br/><br/>
+    {% endif %}      
 
 {% endblock %}
