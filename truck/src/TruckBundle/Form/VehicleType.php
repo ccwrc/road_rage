@@ -11,7 +11,11 @@ use \DateTime;  // purchase date
 class VehicleType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        //
+        $builder
+        ->add("vin", "text", ["label" => "VIN: "])
+         ->add("companyName", "text", ["label" => "Company name: "])       
+          ->add("taxIdNumber", "text", ["label" => "Tax ID number: "]);      
+                
     }
 
     public function configureOptions(OptionsResolver $resolver) {
