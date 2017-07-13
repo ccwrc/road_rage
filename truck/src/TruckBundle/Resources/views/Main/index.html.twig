@@ -10,6 +10,7 @@
     <br/>
 
     {#user panel#}
+    <p class="boldText"> User bar </p>
     {% if is_granted('ROLE_USER') %}
         <a href='{{ path("fos_user_security_logout") }}' ><button>Logout</button> </a>
     {% else %}
@@ -23,13 +24,15 @@
 
     {#dealer panel#}
     {% if is_granted('ROLE_DEALER') %}
+        <p class="boldText"> Dealer bar </p>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button>all dealers</button> </a>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button>reserved - edit dealer</button> </a>
         <br/><br/>
     {% endif %}
 
     {#for operator#}  
-    {% if is_granted('ROLE_DEALER') %}
+    {% if is_granted('ROLE_OPERATOR') %}
+        <p class="boldText"> Operator bar </p>
         <a href='{{ path("truck_operator_panel") }}' ><button>OPERATOR PANEL</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
@@ -38,6 +41,7 @@
 
     {#for control#}  
     {% if is_granted('ROLE_CONTROL') %}
+        <p class="boldText"> Control bar </p>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <br/><br/>
@@ -45,6 +49,7 @@
 
     {#for admin#}  
     {% if is_granted('ROLE_ADMIN') %}
+        <p class="boldText"> Admin bar </p>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <br/><br/>
@@ -52,6 +57,7 @@
 
     {#for SUPER admin#}  
     {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <p class="boldText"> Super admin bar </p>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <br/><br/>
