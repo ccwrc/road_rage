@@ -15,15 +15,6 @@ use TruckBundle\Form\VehicleType;
 class VehicleController extends Controller {
 
     /**
-     * @Route("/testVehicle")
-     */
-    public function testAction() {
-        return $this->render('TruckBundle:Vehicle:test.html.twig', array(
-                        // ...
-        ));
-    }
-
-    /**
      * @Route("/createVehicle")
      */
     public function createVehicleAction() {
