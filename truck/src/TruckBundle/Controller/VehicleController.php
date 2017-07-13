@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use TruckBundle\Entity\Vehicle;
+use TruckBundle\Form\VehicleType;
 
 /**
  * @Security("has_role('ROLE_DEALER')")
