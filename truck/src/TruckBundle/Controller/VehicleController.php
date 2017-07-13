@@ -12,16 +12,26 @@ use TruckBundle\Form\VehicleType;
 /**
  * @Security("has_role('ROLE_DEALER')")
  */
-class VehicleController extends Controller
-{
+class VehicleController extends Controller {
+
     /**
      * @Route("/testVehicle")
      */
-    public function testAction()
-    {
+    public function testAction() {
         return $this->render('TruckBundle:Vehicle:test.html.twig', array(
-            // ...
+                        // ...
         ));
+    }
+
+    /**
+     * @Route("/createVehicle")
+     */
+    public function createVehicleAction() {
+        //
+
+        return $this->render('TruckBundle:Vehicle:create_vehicle.html.twig', [
+                        //
+        ]);
     }
 
 }
