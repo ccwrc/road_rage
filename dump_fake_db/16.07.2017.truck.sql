@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2017 at 12:31 PM
+-- Generation Time: Jul 16, 2017 at 01:07 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -116,8 +116,8 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-08 16:29:13', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
-(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-04 16:00:34', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-13 12:53:02', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-09 13:06:50', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-02 12:51:01', NULL, NULL, 'a:0:{}');
 
 -- --------------------------------------------------------
@@ -151,7 +151,7 @@ CREATE TABLE `monitoring` (
 INSERT INTO `monitoring` (`id`, `code`, `code_description`, `time_save`, `time_set`, `document`, `contact_through`, `comments`, `out_comment`, `home_dealer`, `repair_dealer`, `contact_mail`, `optional_mails`, `accident_case_id`, `operator`) VALUES
 (1, 'START', 'start case', '2017-07-09 01:00:00', NULL, NULL, 'kierowca 122 122 122', 'zgloszenie awarii', NULL, '', NULL, NULL, NULL, 1, 'ccwrcuser'),
 (2, 'PG', 'payment guarantee', '2017-07-09 01:10:00', NULL, NULL, 'dealer 111 111 111', 'przeslanie prosby o potwrierdzenie platnosci', NULL, 'dealer 1', NULL, NULL, NULL, 1, 'ccwrcoperator'),
-(3, 'CPG', 'confirmation payment guarantee', '2017-07-09 01:12:00', NULL, NULL, 'mail od jan kowalski dealer 1', 'zagwarantowal platnosc za klienta', NULL, '', NULL, NULL, NULL, NULL, 'ccwrcoperator');
+(3, 'CPG', 'confirmation payment guarantee', '2017-07-09 01:12:00', NULL, NULL, 'mail od jan kowalski dealer 1', 'zagwarantowal platnosc za klienta', NULL, '', NULL, NULL, NULL, 1, 'ccwrcoperator');
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,8 @@ CREATE TABLE `vehicle` (
 
 INSERT INTO `vehicle` (`id`, `vin`, `street`, `city`, `phone`, `fax`, `mail`, `mileage`, `purchase_date`, `company_name`, `tax_id_number`, `contact_person`, `zip_code`, `registration_number`, `guarantee_type`, `name_type`, `dealer_id`) VALUES
 (1, 'gyt55', 'car street', 'car city', '22 phone', NULL, NULL, '11', '2015-07-04', 'company 1', '454545454545', 'jan kovalsky', '11-222', 'ws11www', 'FULL', 'Merc Daf11', 1),
-(2, 'gyqt55', 'car street', 'car city', '22 phone', NULL, NULL, '11', '2015-07-04', 'company 1', '454545454545', 'jan kovalsky22', '11-222', 'ws11www', 'NO WARRANTY', 'Merc Daf11', 1);
+(2, 'gyqt55', 'car street', 'car city', '22 phone', NULL, NULL, '11', '2015-07-04', 'company 1', '454545454545', 'jan kovalsky22', '11-222', 'ws11www', 'NO WARRANTY', 'Merc Daf11', 1),
+(3, 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', '22222', '2013-06-24', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'FULL', 'truck 33', 1);
 
 --
 -- Indexes for dumped tables
@@ -258,7 +259,7 @@ ALTER TABLE `monitoring`
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
