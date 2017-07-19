@@ -37,5 +37,17 @@ class VehicleController extends Controller {
                     "form" => $form->createView()
         ]);
     }
+    
+    /**
+     * @Route("/showVehicle/{vehicleId}", requirements={"vehicleId"="\d+"})
+     */
+    public function showVehicleAction($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                ->findById($vehicleId);
+        
+        return $this->render('TruckBundle:Vehicle:show_vehicle.html.twig', [
+            "vehicle" => $vehicle
+        ]);           
+    }
 
 }
