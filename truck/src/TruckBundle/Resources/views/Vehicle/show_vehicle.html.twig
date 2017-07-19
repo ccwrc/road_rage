@@ -7,11 +7,26 @@
 {% endblock %}
 
 {% block body %}
-    <h1>show vehicle</h1>
+    <h1>show vehicle {{ vehicle.id }} </h1>
 
-    {{ dump(vehicle) }} 
-    {{ vehicle.companyName }}
+    {# TODO: add links: new case (operator role), dealer, cases (?) etc.#}
 
+    Home dealer: {{ dealer.name }} <br/>
+    VIN: {{ vehicle.vin }} <br/>
+    Company name: {{ vehicle.companyName }} <br/>
+    Company tax ID number: {{ vehicle.taxIdNumber }} <br/>
+    Company - contact person: {{ vehicle.contactPerson }} <br/>
+    Company - street: {{ vehicle.street }} <br/>
+    Company - zip code, city: {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
+    Phone: {{ vehicle.phone }} <br/>
+    Fax: {{ vehicle.fax }} <br/>
+    Mail: {{ vehicle.mail }} <br/>
+    Vehicle registration number: {{ vehicle.registrationNumber }} <br/>
+    Vehicle mileage: {{ vehicle.mileage }} <br/>
+    Vehicle guarantee type: {{ vehicle.guaranteeType }} <br/>
+    Vehicle purchase date: {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
+    Vehicle name/type: {{ vehicle.nameType }} <br/>
+    Accident cases: {{ cases|length }} <br/>
 
 {% endblock %}
 

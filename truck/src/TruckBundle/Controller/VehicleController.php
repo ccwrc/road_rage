@@ -44,9 +44,13 @@ class VehicleController extends Controller {
     public function showVehicleAction($vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
                 ->find($vehicleId);
+        $dealer = $vehicle->getDealer();
+        $cases = $vehicle->getAccidentCases();
 
         return $this->render('TruckBundle:Vehicle:show_vehicle.html.twig', [
-                    "vehicle" => $vehicle
+                    "vehicle" => $vehicle,
+                    "dealer" => $dealer,
+                    "cases" => $cases
         ]);
     }
 
