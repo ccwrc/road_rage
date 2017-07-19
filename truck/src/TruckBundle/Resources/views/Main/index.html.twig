@@ -26,6 +26,7 @@
     {% if is_granted('ROLE_DEALER') %}
         <p class="boldText"> Dealer bar </p>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button>all dealers</button> </a>
+        <a href='{{ path("truck_vehicle_createvehicle") }}' ><button>New vehicle</button> </a>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button>reserved - edit dealer</button> </a>
         <br/><br/>
     {% endif %}
