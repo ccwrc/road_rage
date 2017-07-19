@@ -30,14 +30,18 @@ class VehicleController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($vehicle);
             $em->flush();
-            return $this->redirectToRoute("truck_main_index"); //TODO route to change
+            $vehicleId = $vehicle->getId();
+
+            return $this->redirectToRoute("truck_vehicle_showvehicle", [
+                        "vehicleId" => $vehicleId
+            ]);
         }
 
         return $this->render('TruckBundle:Vehicle:create_vehicle.html.twig', [
                     "form" => $form->createView()
         ]);
     }
-    
+
     /**
      * @Route("/showVehicle/{vehicleId}", requirements={"vehicleId"="\d+"})
      */
