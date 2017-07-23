@@ -57,5 +57,18 @@ class VehicleController extends Controller {
                     "cases" => $cases
         ]);
     }
+    
+    /**
+     * @Route("/editVehicle/{vehicleId}", requirements={"vehicleId"="\d+"})
+     */
+    public function editVehicleAction($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                ->find($vehicleId);
+        //
+        
+        return $this->render('TruckBundle:Vehicle:edit_vehicle.html.twig', [
+                     //
+        ]);        
+    }
 
 }
