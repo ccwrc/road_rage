@@ -37,5 +37,16 @@ class DealerController extends Controller {
                     "vehicles" => $vehicles
         ]);
     }
+    
+    /**
+     * @Route("/createDealer")
+     */
+    public function createDealerAction() {
+        //
+        
+        return $this->render('TruckBundle:Dealer:create_dealer.html.twig', [
+            //        "form" => $form->createView()
+        ]);        
+    }
 
 }
