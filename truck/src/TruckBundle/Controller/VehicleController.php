@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Vehicle;
 use TruckBundle\Form\VehicleType;
+use TruckBundle\Form\VehicleEditType;
 
 /**
  * @Route("/vehicle")
@@ -61,14 +62,24 @@ class VehicleController extends Controller {
     /**
      * @Route("/editVehicle/{vehicleId}", requirements={"vehicleId"="\d+"})
      */
-    public function editVehicleAction($vehicleId) {
+    public function editVehicleAction(Request $req, $vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
                 ->find($vehicleId);
-        //
-        
+        $form = $this->createForm(VehicleEditType::class, $vehicle);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $vehicle = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("truck_vehicle_showvehicle", [
+                        "vehicleId" => $vehicleId
+            ]);
+        }
+
         return $this->render('TruckBundle:Vehicle:edit_vehicle.html.twig', [
-                     //
-        ]);        
+                    "form" => $form->createView()
+        ]);
     }
 
 }

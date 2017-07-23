@@ -10,6 +10,8 @@
     <h1>show vehicle {{ vehicle.id }} </h1>
 
     {# TODO: add links: new case (operator role), dealer, cases (?) etc.#}
+    <a href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' ><button>edit vehicle</button> </a>
+    <br/><br/>
 
     Home dealer: {{ dealer.name }} <br/>
     VIN: {{ vehicle.vin }} <br/>
@@ -25,7 +27,8 @@
     Vehicle mileage: {{ vehicle.mileage }} <br/>
     Vehicle guarantee type: {{ vehicle.guaranteeType }} <br/>
     Vehicle purchase date: {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
-    Vehicle name/type: {{ vehicle.nameType }} <br/>
+    Vehicle name/type: {{ vehicle.nameType }} <br/><br/>
+
     Accident cases: {{ cases|length }} <br/>
 
 {% endblock %}
