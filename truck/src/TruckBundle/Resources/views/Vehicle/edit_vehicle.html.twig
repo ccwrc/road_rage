@@ -1,0 +1,18 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}TruckBundle:Vehicle:edit{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <h1>edit vehicle</h1>
+
+    {{ form_start(form) }} 
+    {{ form_widget(form) }} 
+    <input type="submit" value="save vehicle"/>
+    {{ form_end(form) }}
+
+{% endblock %}
+
