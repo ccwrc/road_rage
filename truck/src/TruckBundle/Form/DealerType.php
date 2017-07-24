@@ -10,10 +10,10 @@ class DealerType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add("name", "text", ["label" => "Dealer/Service name: "])
-                ->add("street", "text", ["label" => "Localization - street: "])
-                ->add("zipCode", "text", ["label" => "Localization - zip code: "])
-                ->add("city", "text", ["label" => "Localization - city: "])
+                ->add("name", "text", ["label" => "Dealer name: "])
+                ->add("street", "text", ["label" => "Street: "])
+                ->add("zipCode", "text", ["label" => "Zip code: "])
+                ->add("city", "text", ["label" => "City: "])
                 ->add("mainPhone", "text", ["label" => "Main phone: "])
                 ->add("mainFax", "text", ["label" => "Main fax: "])
                 ->add("mainMail", "text", ["label" => "Main mail: "])

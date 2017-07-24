@@ -4,17 +4,22 @@
 
 {% block stylesheets %}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block body %} 
 
-    <h1>new dealer</h1>
+    <div class="pure-form pure-form-aligned">
+        <div class="pure-control-group">
+            
+            <h3>new dealer</h3>
 
-    {{ form_start(form) }} 
-    {{ form_widget(form) }} 
-    <input type="submit" value="add dealer"/>
-    {{ form_end(form) }}
-
+            {{ form_start(form) }} 
+            {{ form_widget(form) }} 
+            <input class="pure-button pure-button-primary pure-button-active" type="submit" value="add dealer"/>
+            {{ form_end(form) }}
+        </div> 
+    </div>
 
 {% endblock %}
 
