@@ -2,11 +2,9 @@
 
 namespace TruckBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType; // for dealer -> del
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use \DateTime;  // purchase date -> del
 
 class DealerType extends AbstractType {
 
@@ -16,27 +14,29 @@ class DealerType extends AbstractType {
                 ->add("street", "text", ["label" => "Localization - street: "])
                 ->add("zipCode", "text", ["label" => "Localization - zip code: "])
                 ->add("city", "text", ["label" => "Localization - city: "])
-                ->add("name", "text", ["label" => "Dealer/Service name: "])
-                ->add("name", "text", ["label" => "Dealer/Service name: "])
-                ->add("name", "text", ["label" => "Dealer/Service name: "])
-                ->add("name", "text", ["label" => "Dealer/Service name: "])
-                ->add("name", "text", ["label" => "Dealer/Service name: "]);
-//                ->add("mail", "text", ["label" => "Mail: "])
-//                ->add("registrationNumber", "text", ["label" => "Vehicle registration number: "])
-//                ->add("mileage", "text", ["label" => "Vehicle mileage: "])
-//                //TODO g type select option ?
-//                ->add("guaranteeType", "text", ["label" => "Vehicle guarantee type and end date: "])
-//                ->add("purchaseDate", "date", ["label" => "Vehicle purchase (sell) date: "])
-//                ->add("nameType", "text", ["label" => "Vehicle name and type: "])
-//                ->add("dealer", EntityType::class, [
-//                    "class" => "TruckBundle:Dealer", "choice_label" => "name",
-//                    "label" => "Home dealer: "]);
+                ->add("mainPhone", "text", ["label" => "Main phone: "])
+                ->add("mainFax", "text", ["label" => "Main fax: "])
+                ->add("mainMail", "text", ["label" => "Main mail: "])
+                ->add("phone24h", "text", ["label" => "Phone - 24h: "])
+                ->add("phoneServiceCar", "text", ["label" => "Phone - service car: "])
+                ->add("altPhone1", "text", ["label" => "Phone - optional 1: "])
+                ->add("altPhone2", "text", ["label" => "Phone - optional 2: "])
+                ->add("altMail1", "text", ["label" => "Mail - optional 1: "])
+                ->add("altMail2", "text", ["label" => "Mail - optional 2: "])
+                ->add("isActive", "choice", [
+                    "choices" => [
+                        "active" => "active",
+                        "inactive" => "inactive",
+                        "suspended" => "suspended"
+                    ],
+                    "choices_as_values" => true, "label" => "Is active: "])
+                ->add("otherComments", "textarea", ["label" => "Other comments: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'TruckBundle\Entity\Dealer',
-        ));
+        $resolver->setDefaults([
+            "data_class" => "TruckBundle\Entity\Dealer"
+        ]);
     }
 
 }

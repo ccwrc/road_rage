@@ -45,14 +45,13 @@ class DealerController extends Controller {
      */
     public function createDealerAction(Request $req) {
         $this->denyAccessUnlessGranted('ROLE_CONTROL', null, 'Access denied.');
-              
+
         $dealer = new Dealer();
         $form = $this->createForm(DealerType::class, $dealer);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $dealer = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($dealer);
             $em->flush();
@@ -62,10 +61,10 @@ class DealerController extends Controller {
                         "id" => $dealerId
             ]);
         }
-        
+
         return $this->render('TruckBundle:Dealer:create_dealer.html.twig', [
-            //        "form" => $form->createView()
-        ]);        
+                    "form" => $form->createView()
+        ]);
     }
 
 }
