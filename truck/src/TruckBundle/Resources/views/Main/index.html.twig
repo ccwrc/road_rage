@@ -43,7 +43,7 @@
     {#for control#}  
     {% if is_granted('ROLE_CONTROL') %}
         <p class="boldText"> Control bar </p>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <a href='{{ path("truck_dealer_createdealer") }}' ><button>Add new dealer</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
         <br/><br/>
     {% endif %}    
