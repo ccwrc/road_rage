@@ -42,7 +42,7 @@ class DealerController extends Controller {
      * @Route("/createDealer")
      */
     public function createDealerAction() {
-        //
+        $this->denyAccessUnlessGranted('ROLE_CONTROL', null, 'Access denied.');
         
         return $this->render('TruckBundle:Dealer:create_dealer.html.twig', [
             //        "form" => $form->createView()
