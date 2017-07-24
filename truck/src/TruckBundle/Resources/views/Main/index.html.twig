@@ -17,9 +17,16 @@
         <a href='{{ path("fos_user_security_login") }}' ><button>Login</button> </a>
     {% endif %}
 
-    <a href='{{ path("fos_user_profile_show") }}' ><button>profile</button> </a>
-    <a href='{{ path("fos_user_profile_edit") }}' ><button>edit profile</button> </a>
-    <a href='{{ path("fos_user_registration_register") }}' ><button>register</button> </a>
+    {% if is_granted('ROLE_USER') %}
+        <a href='{{ path("fos_user_profile_show") }}' ><button>profile</button> </a>
+        <a href='{{ path("fos_user_profile_edit") }}' ><button>edit profile</button> </a>
+    {% endif %}
+
+    {% if is_granted('ROLE_USER') %}
+    {% else %}
+        <a href='{{ path("fos_user_registration_register") }}' ><button>register</button> </a>
+    {% endif %}
+
     <br/><br/>
 
     {#dealer panel#}
