@@ -5,15 +5,16 @@
 {% block stylesheets %} 
     <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block body %} 
     <br/>
-
+    
     {#user panel#}
     <p class="boldText"> User bar </p>
     {% if is_granted('ROLE_USER') %}
-        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-primary">Logout</button> </a>
+        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-active testButton">Logout</button> </a>
     {% else %}
         <a href='{{ path("fos_user_security_login") }}' ><button>Login</button> </a>
     {% endif %}
