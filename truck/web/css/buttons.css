@@ -11,3 +11,15 @@
     background: rgb(223, 117, 20);
     font-size: 90%;
 }
+
+.caseButton {
+    color: black;
+    background: #E6E6E6;
+    font-size: 85%;
+    min-width: 110px;    
+    font-family: inherit;
+    border: 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    text-decoration: none;
+    border-radius: 2px;
+}
