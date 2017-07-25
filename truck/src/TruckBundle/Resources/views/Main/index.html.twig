@@ -12,64 +12,70 @@
     <br/>
     
     {#user panel#}
-    <p class="boldText"> User bar </p>
+    <p class="boldText"> user bar </p>
     {% if is_granted('ROLE_USER') %}
-        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-active testButton">Logout</button> </a>
+        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-active button90green">Logout</button> </a>
     {% else %}
-        <a href='{{ path("fos_user_security_login") }}' ><button>Login</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">Login</button> </a>
     {% endif %}
 
     {% if is_granted('ROLE_USER') %}
-        <a href='{{ path("fos_user_profile_show") }}' ><button>profile</button> </a>
-        <a href='{{ path("fos_user_profile_edit") }}' ><button>edit profile</button> </a>
+        <a href='{{ path("fos_user_profile_show") }}' ><button class="pure-button pure-button-active button90green">profile</button> </a>
+        <a href='{{ path("fos_user_profile_edit") }}' ><button class="pure-button pure-button-active button90green">edit profile</button> </a>
     {% endif %}
 
     {% if is_granted('ROLE_USER') %}
     {% else %}
-        <a href='{{ path("fos_user_registration_register") }}' ><button>register</button> </a>
+        <a href='{{ path("fos_user_registration_register") }}' ><button class="pure-button pure-button-active button90green">register</button> </a>
     {% endif %}
 
     <br/><br/>
 
     {#dealer panel#}
     {% if is_granted('ROLE_DEALER') %}
-        <p class="boldText"> Dealer bar </p>
-        <a href='{{ path("truck_dealer_showalldealers") }}' ><button>all dealers</button> </a>
-        <a href='{{ path("truck_vehicle_createvehicle") }}' ><button>New vehicle</button> </a>
-        <a href='{{ path("truck_dealer_showalldealers") }}' ><button>reserved - edit dealer</button> </a>
+        <hr class="hrStyle"/>
+        <p class="boldText"> dealer </p>
+        <a href='{{ path("truck_dealer_showalldealers") }}' ><button class="pure-button pure-button-active button90green">all dealers</button> </a>
+        <a href='{{ path("truck_vehicle_createvehicle") }}' ><button class="pure-button pure-button-active button90orange">New vehicle</button> </a>
+        <a href='{{ path("truck_dealer_showalldealers") }}' ><button class="pure-button pure-button-active button90green">reserved - edit dealer</button> </a>
         <br/><br/>
     {% endif %}
 
     {#for operator#}  
     {% if is_granted('ROLE_OPERATOR') %}
-        <p class="boldText"> Operator bar </p>
-        <a href='{{ path("truck_operator_panel") }}' ><button>OPERATOR PANEL</button> </a>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <hr class="hrStyle"/>
+        <p class="boldText"> operator </p>
+        <a href='{{ path("truck_operator_panel") }}' ><button class="pure-button pure-button-active button90orange">OPERATOR PANEL</button> </a>
+        <a href='{{ path("truck_vehicle_createvehicle") }}' ><button class="pure-button pure-button-active button90orange">new vehicle & case</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <br/><br/>
     {% endif %}
 
     {#for control#}  
     {% if is_granted('ROLE_CONTROL') %}
-        <p class="boldText"> Control bar </p>
-        <a href='{{ path("truck_dealer_createdealer") }}' ><button>Add new dealer</button> </a>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <hr class="hrStyle"/>
+        <p class="boldText"> control </p>
+        <a href='{{ path("truck_dealer_createdealer") }}' ><button class="pure-button pure-button-active button90green">Add new dealer</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <br/><br/>
     {% endif %}    
 
     {#for admin#}  
     {% if is_granted('ROLE_ADMIN') %}
-        <p class="boldText"> Admin bar </p>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <hr class="hrStyle"/>
+        <p class="boldText"> admin </p>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <br/><br/>
     {% endif %}  
 
     {#for SUPER admin#}  
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <p class="boldText"> Super admin bar </p>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
-        <a href='{{ path("fos_user_security_login") }}' ><button>reserve</button> </a>
+        <hr class="hrStyle"/>
+        <p class="boldText"> super admin </p>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <br/><br/>
     {% endif %}      
 
