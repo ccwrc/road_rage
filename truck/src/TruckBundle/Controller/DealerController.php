@@ -73,11 +73,23 @@ class DealerController extends Controller {
      */
     public function editDealerAction(Request $req, $dealerId) {
         $this->denyAccessUnlessGranted('ROLE_OPERATOR', null, 'Access denied.');
-        //
-        
+        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")
+                ->find($dealerId);
+        $form = $this->createForm(DealerEditType::class, $dealer);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dealer = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("truck_dealer_showdealer", [
+                        "dealerId" => $dealerId
+            ]);
+        }
+
         return $this->render('TruckBundle:Dealer:edit_dealer.html.twig', [
                     "form" => $form->createView()
         ]);
-    }    
+    }
 
 }
