@@ -27,6 +27,17 @@ class DealerController extends Controller {
                     "dealers" => $dealers
         ]);
     }
+    
+    /**
+     * @Route("/showAllActiveDealers")
+     */
+    public function showAllActiveDealersAction() {
+        $dealers = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->findAllActiveDealers();
+
+        return $this->render('TruckBundle:Dealer:show_all_active_dealers.html.twig', [
+                    "dealers" => $dealers
+        ]);
+    }    
 
     /**
      * @Route("/showDealer/{dealerId}", requirements={"dealerId"="\d+"})
