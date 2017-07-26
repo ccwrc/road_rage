@@ -11,7 +11,7 @@
 
     {# TODO: add links: new case (operator role), dealer, cases (?) etc.#}
     <a href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' ><button>edit vehicle</button> </a>
-    <a href='{{ path("truck_dealer_showdealer", {"id":dealer.id}) }}' ><button>show dealer</button> </a>
+    <a href='{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}' ><button>show dealer</button> </a>
     <br/><br/>
 
     Home dealer: {{ dealer.name }} <br/>

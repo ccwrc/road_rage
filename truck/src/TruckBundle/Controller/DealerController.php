@@ -28,10 +28,10 @@ class DealerController extends Controller {
     }
 
     /**
-     * @Route("/showDealer/{id}", requirements={"id"="\d+"})
+     * @Route("/showDealer/{dealerId}", requirements={"dealerId"="\d+"})
      */
-    public function showDealerAction($id) {
-        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($id);
+    public function showDealerAction($dealerId) {
+        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
         $vehicles = $dealer->getVehicles();
 
         return $this->render('TruckBundle:Dealer:show_dealer.html.twig', [
@@ -58,7 +58,7 @@ class DealerController extends Controller {
             $dealerId = $dealer->getId();
 
             return $this->redirectToRoute("truck_dealer_showdealer", [
-                        "id" => $dealerId
+                        "dealerId" => $dealerId
             ]);
         }
 

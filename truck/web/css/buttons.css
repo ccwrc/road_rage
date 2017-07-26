@@ -12,6 +12,20 @@
     font-size: 90%;
 }
 
+.button90red {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(202, 60, 60);
+    font-size: 90%;
+}
+
+.button90blue {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(66, 184, 221);
+    font-size: 90%;
+}
+
 .caseButton {
     color: black;
     background: #E6E6E6;
