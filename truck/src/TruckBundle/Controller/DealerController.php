@@ -66,5 +66,17 @@ class DealerController extends Controller {
                     "form" => $form->createView()
         ]);
     }
+    
+    /**
+     * @Route("/editDealer/{dealerId}", requirements={"dealerId"="\d+"})
+     */
+    public function editDealerAction(Request $req, $dealerId) {
+        $this->denyAccessUnlessGranted('ROLE_OPERATOR', null, 'Access denied.');
+        //
+        
+        return $this->render('TruckBundle:Dealer:edit_dealer.html.twig', [
+                    "form" => $form->createView()
+        ]);
+    }    
 
 }
