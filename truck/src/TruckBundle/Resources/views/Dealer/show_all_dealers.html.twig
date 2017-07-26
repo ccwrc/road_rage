@@ -13,7 +13,11 @@
     {% for dealer in dealers %} 
 
         <span class="redBoldText"> {{ dealer.id }}. {{ dealer.name }} ({{ dealer.isActive }}) </span>
-        <a target="_blank" title="new window" href="{{ path('truck_dealer_showdealer', {"dealerId":dealer.id}) }}" >details</a>  <br/>
+        <a target="_blank" title="new window" href="{{ path('truck_dealer_showdealer', {"dealerId":dealer.id}) }}" >details</a>
+        {% if is_granted('ROLE_OPERATOR') %}
+            <a href='{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}' ><button>edit dealer</button> </a>
+        {% endif %}      
+        <br/>
         <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
         <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
         <span class="boldText"> Phone:</span> {{ dealer.mainPhone }} (24H: {{ dealer.phone24h }}) <br/>
@@ -24,7 +28,7 @@
         Alternative mails: {{ dealer.altMail1 }}, {{ dealer.altMail2 }} <br/>
         <span class="boldText"> Comments:</span> {{ dealer.otherComments }} <br/>
 
-        <hr/>
+        <hr class="hrStyle"/>
 
     {% else %}
         No dealers.

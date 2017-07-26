@@ -9,7 +9,11 @@
 {% block body %} 
 
     <div class="padding7px">
-        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: {{ vehicles | length }}) </span><br/>
+        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: {{ vehicles | length }}) </span> 
+        {% if is_granted('ROLE_OPERATOR') %}
+            <a href='{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}' ><button>edit dealer</button> </a>
+        {% endif %}   
+        <br/>
         <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
         <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
         <span class="boldText"> Phone:</span> {{ dealer.mainPhone }} (24H: {{ dealer.phone24h }}) <br/>
@@ -20,6 +24,8 @@
         Alternative mails: {{ dealer.altMail1 }}, {{ dealer.altMail2 }} <br/>
         <span class="boldText"> Comments:</span> {{ dealer.otherComments }} <br/>
     </div>
+
+    <hr class="hrStyle" />
 
     {% for vehicle in vehicles %}
         <div class="padding7px">
