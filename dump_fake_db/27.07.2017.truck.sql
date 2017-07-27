@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 16, 2017 at 01:07 PM
--- Server version: 5.7.18-0ubuntu0.16.04.1
+-- Generation Time: Jul 27, 2017 at 08:58 PM
+-- Server version: 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -84,11 +84,14 @@ CREATE TABLE `dealer` (
 --
 
 INSERT INTO `dealer` (`id`, `name`, `street`, `zip_code`, `city`, `main_phone`, `main_fax`, `main_mail`, `phone_24h`, `phone_service_car`, `alt_phone_1`, `alt_phone_2`, `alt_mail_1`, `alt_mail_2`, `other_comments`, `is_active`) VALUES
-(1, 'serwis 1', 'ulica', '33-334', 'miasto', '22 3334422', '22 3334422', 'mail@serwis1.elo', '600100600', NULL, '600100900', NULL, NULL, NULL, 'brak numeru telefonu do wozu serwisowego', 'active'),
+(1, 'serwis 1 edit operator', 'ulica', '33-334', 'miasto', '22 3334422', '22 3334422', 'mail@serwis1.elo', '600100600', 'empty', '600100900', 'phone edit', 'empty', 'empty', 'brak numeru telefonu do wozu serwisowego', 'active'),
 (3, 'serwis 2', 'ulica', '33-324', 'miasto2', '22 3334422', '22 3334422', 'mail@serwis2.elo', '600100600', NULL, '600100900', NULL, NULL, NULL, 'brak numeru telefonu do wozu serwisowego', 'active'),
 (4, 'old1', 'old street 11/332', '11-112', 'old city', NULL, NULL, 'old@mail.elo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'inactive'),
 (5, 'old2', 'old street 11/32', '19-112', 'old city', NULL, NULL, 'old2@mail.elo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'suspended'),
-(6, 'AllData', 'super street 1', '11-111', 'super city', '23 1112211', '23 1112211', 'super@mail.elo', '111222333', '333222111', '22 33', '33 22', 'ma1@ma.elo', 'ma2@m.elo', 'wszystkie dane, dealer aktywny od 1.2.2017', 'active');
+(6, 'AllData', 'super street 1', '11-111', 'super city', '23 1112211', '23 1112211', 'super@mail.elo', '111222333', '333222111', '22 33', '33 22', 'ma1@ma.elo', 'ma2@m.elo', 'wszystkie dane, dealer aktywny od 1.2.2017', 'active'),
+(7, 'new form', 'new street', 'zip code', 'city', '909090909', '90909099', '90909@9090.00', '90909009', 'EMPTY', 'empty', 'empty', 'empty', 'empty', 'new dealer, start 24.07.2017', 'active'),
+(8, 'new form 2', 'new street', 'zip code', 'city', '909090909', '90909099', '90909@9090.001', '90909009', 'EMPTY', 'empty', 'empty', 'empty', 'empty', 'new dealer, start 24.07.2017', 'active'),
+(9, 'acive form', 'example', 'example', 'example', 'example', 'example', 'example@example.example', 'example', 'example', 'example', 'example', 'example', 'example', 'exampleexampleexampleexample', 'active');
 
 -- --------------------------------------------------------
 
@@ -116,9 +119,11 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-13 12:53:02', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
-(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-09 13:06:50', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
-(3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-02 12:51:01', NULL, NULL, 'a:0:{}');
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-07-26 17:41:24', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-07-26 13:36:42', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
+(3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-26 14:46:43', NULL, NULL, 'a:0:{}'),
+(4, 'ccwrcdealer', 'ccwrcdealer', 'ccwrcdealer@ccwrcdealer.elo', 'ccwrcdealer@ccwrcdealer.elo', 1, NULL, '$2y$13$garsgYLil1hIyV7yu7dXGuHYGB2TELZgcca/wiUN4WdGN824meA2K', '2017-07-26 14:51:12', NULL, NULL, 'a:1:{i:0;s:11:\"ROLE_DEALER\";}'),
+(5, 'ccwrcsuperadmin', 'ccwrcsuperadmin', 'ccwrcsuperadmin@gmail.elo', 'ccwrcsuperadmin@gmail.elo', 1, NULL, '$2y$13$eFT7Nt2mA3zltKru5pmfJO5RtLGB7SrCgfUIBUcAy.TQFJsjKcNgO', '2017-07-26 14:54:32', NULL, NULL, 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}');
 
 -- --------------------------------------------------------
 
@@ -184,9 +189,14 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`id`, `vin`, `street`, `city`, `phone`, `fax`, `mail`, `mileage`, `purchase_date`, `company_name`, `tax_id_number`, `contact_person`, `zip_code`, `registration_number`, `guarantee_type`, `name_type`, `dealer_id`) VALUES
-(1, 'gyt55', 'car street', 'car city', '22 phone', NULL, NULL, '11', '2015-07-04', 'company 1', '454545454545', 'jan kovalsky', '11-222', 'ws11www', 'FULL', 'Merc Daf11', 1),
+(1, 'gyt55EDIT2', 'car street', 'car city', '22 phone', 'EDIT', 'EDIT', '11', '2015-07-04', 'company 1 EDIT', '454545454545', 'jan kovalsky', '11-222', 'ws11www', 'FULL', 'Merc Daf11', 1),
 (2, 'gyqt55', 'car street', 'car city', '22 phone', NULL, NULL, '11', '2015-07-04', 'company 1', '454545454545', 'jan kovalsky22', '11-222', 'ws11www', 'NO WARRANTY', 'Merc Daf11', 1),
-(3, 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', '22222', '2013-06-24', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'FULL', 'truck 33', 1);
+(3, 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', '22222', '2013-06-24', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'FULL', 'truck 33', 1),
+(4, 'wahfewfewew', 'sadfsaefsf 4/6', 'juyqgfwd', '2134121213', '123123123', '44E@uu.pl', '900', '2016-02-03', 'lkhdsokuqwdokuq', '243234234234', 'janek 8787887', '11-233', 'wi900000', 'FULL, end date: 2020-11-11', 'truck 11 460KM', 6),
+(5, 'zwyklyVIN', 'ulica 1/1', 'miasto', 'tel. 3333', 'fax awaryjnby 3338888', 'brak', '100', '2015-04-06', 'zwykla firma', 'zwykly tax id', 'jenk 3339990000', '11-kod', 'po00000', 'ENGINE ONLY to 3 000 000 km', 'truck 747', 6),
+(6, 'sdfd', 'dfg', 'dfg', 'dfg', 'dfg', 'fdg', 'dfg', '2012-01-01', 'dfg', 'dfg', 'dfg', 'dgf', 'dfg', 'dfg', 'dfg', 1),
+(8, 'sfsfw434', 'qwe', 'qe', 'we', 'qwe', 'qwe', 'qwe', '2012-01-01', 'qwe', 'qwe', 'qwe', 'qwe', 'qwe', 'qwe', 'qwe', 6),
+(10, 'wer444', 'e', 'e', 'e', 'e', 'e', 'e', '2012-01-01', 'wer', 'we', 'e', 'e', 'e', 'e', 'e', 6);
 
 --
 -- Indexes for dumped tables
@@ -244,12 +254,12 @@ ALTER TABLE `accident_case`
 -- AUTO_INCREMENT for table `dealer`
 --
 ALTER TABLE `dealer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `fos_user`
 --
 ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `monitoring`
 --
@@ -259,7 +269,7 @@ ALTER TABLE `monitoring`
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
