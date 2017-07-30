@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\AccidentCase;
+use TruckBundle\Entity\Vehicle;
+use TruckBundle\Form\AccidentCaseType;
 
 /**
  * @Route("/cases")
@@ -16,12 +18,30 @@ use TruckBundle\Entity\AccidentCase;
 class AccidentCaseController extends Controller {
     
     /**
-     * @Route("/createCase/{vehicleId}", requirements={"vehicleId"="\d+"}")
+     * @Route("/createCase/{vehicleId}", requirements={"vehicleId"="\d+"})
      */
     public function createCaseAction(Request $req, $vehicleId) {
-        //
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        $case = new AccidentCase();
+        $case->setVehicle($vehicle);
+        $form = $this->createForm(AccidentCaseType::class, $case);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $case = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($case);
+            $em->flush();
+            $caseId = $case->getId();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
 
         return $this->render('TruckBundle:AccidentCase:create_case.html.twig', [
+                    "vehicleId" => $vehicleId,
                     "form" => $form->createView()
         ]);
     }
