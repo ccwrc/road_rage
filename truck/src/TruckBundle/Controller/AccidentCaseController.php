@@ -16,9 +16,9 @@ use TruckBundle\Entity\AccidentCase;
 class AccidentCaseController extends Controller {
     
     /**
-     * @Route("/createCase")
+     * @Route("/createCase/{vehicleId}", requirements={"vehicleId"="\d+"}")
      */
-    public function createCaseAction(Request $req) {
+    public function createCaseAction(Request $req, $vehicleId) {
         //
 
         return $this->render('TruckBundle:AccidentCase:create_case.html.twig', [
