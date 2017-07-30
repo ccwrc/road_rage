@@ -14,9 +14,9 @@
     {#user panel#}
     <p class="boldText"> user bar </p>
     {% if is_granted('ROLE_USER') %}
-        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-active button90green">Logout</button> </a>
+        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-active button90green">logout</button> </a>
     {% else %}
-        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">Login</button> </a>
+        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">login</button> </a>
     {% endif %}
 
     {% if is_granted('ROLE_USER') %}
@@ -35,8 +35,9 @@
     {% if is_granted('ROLE_DEALER') %}
         <hr class="hrStyle"/>
         <p class="boldText"> dealer </p>
+        <a href='{{ path("truck_dealer_showallactivedealers") }}' ><button class="pure-button pure-button-active button90green">active dealers</button> </a>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button class="pure-button pure-button-active button90green">all dealers</button> </a>
-        <a href='{{ path("truck_vehicle_createvehicle") }}' ><button class="pure-button pure-button-active button90orange">New vehicle</button> </a>
+        <a href='{{ path("truck_vehicle_createvehicle") }}' ><button class="pure-button pure-button-active button90orange">new vehicle</button> </a>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button class="pure-button pure-button-active button90green">reserved - edit dealer</button> </a>
         <br/><br/>
     {% endif %}
@@ -47,6 +48,7 @@
         <p class="boldText"> operator </p>
         <a href='{{ path("truck_operator_panel") }}' ><button class="pure-button pure-button-active button90orange">OPERATOR PANEL</button> </a>
         <a href='{{ path("truck_vehicle_createvehicle") }}' ><button class="pure-button pure-button-active button90orange">new vehicle & case</button> </a>
+        <a href='{{ path("truck_dealer_showallactivedealers") }}' ><button class="pure-button pure-button-active button90green">active dealers</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <br/><br/>
@@ -56,7 +58,7 @@
     {% if is_granted('ROLE_CONTROL') %}
         <hr class="hrStyle"/>
         <p class="boldText"> control </p>
-        <a href='{{ path("truck_dealer_createdealer") }}' ><button class="pure-button pure-button-active button90green">Add new dealer</button> </a>
+        <a href='{{ path("truck_dealer_createdealer") }}' ><button class="pure-button pure-button-active button90green">add new dealer</button> </a>
         <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
         <br/><br/>
     {% endif %}    
