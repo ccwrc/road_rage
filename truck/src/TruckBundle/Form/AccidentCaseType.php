@@ -17,13 +17,13 @@ class AccidentCaseType extends AbstractType {
                 ->add("infoMail", "text", ["label" => "Mail info (optional - mail): "])
                 ->add("status", "text", ["label" => "Status: "])
                 ->add("progress", "text", ["label" => "progress: "])
-//                ->add("reportLate", "text", ["label" => "reportLate: "])
-//                ->add("reportRsTime", "text", ["label" => "reportRsTime: "])
-//                ->add("reportNrsTime", "text", ["label" => "reportNrsTime: "])
-//                ->add("reportRepairTotal", "text", ["label" => "reportRepairTotal: "])
-//                ->add("reportArrivalTime", "text", ["label" => "reportArrivalTime: "])
-//                ->add("reportCaseTotal", "text", ["label" => "reportCaseTotal: "])
-//                ->add("reportRepairStatus", "text", ["label" => "reportRepairStatus: "])
+                ->add("reportLate", "text", ["label" => "reportLate: "])
+                ->add("reportRsTime", "text", ["label" => "reportRsTime: "])
+                ->add("reportNrsTime", "text", ["label" => "reportNrsTime: "])
+                ->add("reportRepairTotal", "text", ["label" => "reportRepairTotal: "])
+                ->add("reportArrivalTime", "text", ["label" => "reportArrivalTime: "])
+                ->add("reportCaseTotal", "text", ["label" => "reportCaseTotal: "])
+                ->add("reportRepairStatus", "text", ["label" => "reportRepairStatus: "])
                 ->add("comment", "textarea", ["label" => "Other comments: "]);
     }
 
