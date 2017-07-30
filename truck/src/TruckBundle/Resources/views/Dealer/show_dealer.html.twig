@@ -33,6 +33,9 @@
             <br/>
             <a target="_blank" title="new window" href="{{ path('truck_vehicle_showvehicle', {"vehicleId":vehicle.id}) }}" ><button>details</button></a>  
             <a target="_blank" title="new window" href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' ><button>edit vehicle</button> </a>
+            {% if is_granted('ROLE_OPERATOR') %}
+                <a href='{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}' ><button>new case</button> </a>
+            {% endif %}
             <br/>
             {#TODO add link to new case#}
             <span class="boldText"> Street:</span> {{ vehicle.street }} <br/>
