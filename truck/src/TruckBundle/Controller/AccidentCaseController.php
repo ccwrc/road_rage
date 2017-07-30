@@ -18,10 +18,14 @@ class AccidentCaseController extends Controller {
     /**
      * @Route("/createCase")
      */
-    public function createCaseAction() {
+    public function createCaseAction(Request $req) {
         //
+
+        return $this->render('TruckBundle:AccidentCase:create_case.html.twig', [
+                    "form" => $form->createView()
+        ]);
     }
-    
+
     /**
      * @Route("/showAllCases")
      */

@@ -1,0 +1,18 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}TruckBundle:Case:create{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <h1>create case</h1>
+
+    {{ form_start(form) }} 
+    {{ form_widget(form) }} 
+    <input type="submit" value="add case"/>
+    {{ form_end(form) }}
+
+{% endblock %}
+
