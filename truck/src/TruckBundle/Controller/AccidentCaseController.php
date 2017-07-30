@@ -15,6 +15,13 @@ use TruckBundle\Entity\AccidentCase;
 class AccidentCaseController extends Controller {
     
     /**
+     * @Route("/createCase")
+     */
+    public function createCaseAction() {
+        //
+    }
+    
+    /**
      * @Route("/showAllCases")
      */
     public function showAllCasesAction() {
