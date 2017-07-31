@@ -89,5 +89,16 @@ class AccidentCaseController extends Controller {
                     "cases" => $cases
         ]);
     }
+    
+    /**
+     * @Route("/showStartCase/{caseId}", requirements={"caseId"="\d+"})
+     */
+    public function showStartCaseAction($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+
+        return $this->render('TruckBundle:AccidentCase:show_start_case.html.twig', [
+                    "case" => $case
+        ]);
+    }
 
 }
