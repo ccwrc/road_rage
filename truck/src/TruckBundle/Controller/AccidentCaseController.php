@@ -29,7 +29,6 @@ class AccidentCaseController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $case = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($case);
             $em->flush();
@@ -41,10 +40,25 @@ class AccidentCaseController extends Controller {
         }
 
         return $this->render('TruckBundle:AccidentCase:create_case.html.twig', [
-                    "vehicleId" => $vehicleId,
                     "form" => $form->createView()
         ]);
     }
+    
+    /**
+     * @Route("/editCase/{caseId}", requirements={"caseId"="\d+"})
+     */
+    public function editCaseAction(Request $req, $caseId) {
+        //
+        
+        return $this->render('TruckBundle:AccidentCase:edit_case.html.twig', [
+                    "form" => $form->createView()
+        ]);        
+    }
+
+
+    
+    
+    
 
     /**
      * @Route("/showAllCases")
