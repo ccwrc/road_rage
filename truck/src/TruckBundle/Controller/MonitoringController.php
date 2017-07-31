@@ -13,17 +13,17 @@ use TruckBundle\Entity\Monitoring;
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class MonitoringController extends Controller {
-    
+
     /**
      * @Route("/showAllMonitoringsForCase/{caseId}", requirements={"caseId"="\d+"})
      */
     public function showAllMonitoringsForCaseAction($caseId) {
         $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->findMonitoringsByCaseId($caseId);
-        
+
         return $this->render('TruckBundle:Monitoring:show_all_monitorings_for_case.html.twig', [
-            "monitorings" => $monitorings
-        ]);        
+                    "monitorings" => $monitorings
+        ]);
     }
 
 }

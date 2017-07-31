@@ -11,14 +11,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/operator")
  */
 class OperatorController extends Controller {
-    
+
     /**
      * @Route("/panel/{caseId}", requirements={"caseId"="\d+"})
      */
-    public function panelAction($caseId = 0)
-    {
+    public function panelAction($caseId = 0) {
+
         return $this->render('TruckBundle:Operator:panel.html.twig', [
-            "caseId" => $caseId
+                    "caseId" => $caseId
         ]);
     }
 
