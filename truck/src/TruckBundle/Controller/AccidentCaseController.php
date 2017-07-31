@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Vehicle;
 use TruckBundle\Form\AccidentCaseType;
+use TruckBundle\Form\AccidentCaseEditType;
 
 /**
  * @Route("/cases")
