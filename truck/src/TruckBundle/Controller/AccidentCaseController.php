@@ -49,17 +49,24 @@ class AccidentCaseController extends Controller {
      * @Route("/editCase/{caseId}", requirements={"caseId"="\d+"})
      */
     public function editCaseAction(Request $req, $caseId) {
-        //
-        
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->find($caseId);
+        $form = $this->createForm(AccidentCaseEditType::class, $case);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $case = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
         return $this->render('TruckBundle:AccidentCase:edit_case.html.twig', [
                     "form" => $form->createView()
-        ]);        
+        ]);
     }
-
-
-    
-    
-    
 
     /**
      * @Route("/showAllCases")
