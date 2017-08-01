@@ -1,6 +1,6 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}create dealer{% endblock %}
+{% block title %}new dealer{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
@@ -13,12 +13,16 @@
     <div class="pure-form pure-form-aligned">
         <div class="pure-control-group">
 
-            <h3>new dealer</h3>
+            <center>
+                <h3 class="formTitle">new dealer</h3>
+            </center>
 
             {{ form_start(form) }} 
             {{ form_widget(form) }} 
 
-            <input class="pure-button pure-button-active button90red" type="submit" value="add dealer"/>
+            <center>
+                <input class="pure-button pure-button-active button90red" type="submit" value="add dealer"/>
+            </center>
 
             {{ form_end(form) }}
         </div> 

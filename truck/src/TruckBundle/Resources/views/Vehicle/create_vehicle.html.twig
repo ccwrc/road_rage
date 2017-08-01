@@ -1,17 +1,31 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:Vehicle:create{% endblock %}
+{% block title %}new vehicle{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
 {% endblock %}
 
-{% block body %}
-    <h1>new vehicle</h1>
+{% block body %} 
 
-    {{ form_start(form) }} 
-    {{ form_widget(form) }} 
-    <input type="submit" value="add vehicle"/>
-    {{ form_end(form) }}
+    <div class="pure-form pure-form-aligned">
+        <div class="pure-control-group">
+
+            <center>
+                <h3 class="formTitle">new vehicle</h3>
+            </center>
+
+            {{ form_start(form) }} 
+            {{ form_widget(form) }} 
+
+            <center>
+                <input class="pure-button pure-button-active button90red" type="submit" value="add vehicle"/>
+            </center>
+
+            {{ form_end(form) }}
+        </div> 
+    </div>
 
 {% endblock %}
