@@ -1,23 +1,17 @@
 
-{% if case is not empty %}
-{#    <hr class="hrStyle"/>
-    {{ dump(case) }}#}
-    <span class="textBold textItalic">Data for the report </span>(generated automatically when case end): <br/> 
+{% if case is not empty %}  
+    {% if case.progress == "end" %}
+        {#TODO add edit#}
+        <span class="textBold textItalic">Data for the report </span><br/> 
 
-{#    <span class="textBold textItalic">Truck: </span> {{ case.vehicle.nameType }}, 
-    {{ case.vehicle.registrationNumber }}, Guarantee: 
-    {{ case.vehicle.guaranteeType }}, Dealer: {{ case.vehicle.dealer.name }} <br/>
+        <span class="textBold textItalic">Late service:</span> {{ case.reportLate }} minutes <br/>
+        <span class="textBold textItalic">Road service time:</span> {{ case.reportRsTime }} minutes <br/>
+        <span class="textBold textItalic">No road service time:</span> {{ case.reportNrsTime }} minutes <br/>
+        <span class="textBold textItalic">Repair total time:</span> {{ case.reportRepairTotal }} minutes <br/>
+        <span class="textBold textItalic">Arrival time:</span> {{ case.reportArrivalTime }} minutes <br/>
+        <span class="textBold textItalic">Case total time:</span> {{ case.reportCaseTotal }} minutes <br/>
+        <span class="textBold textItalic">Repair status (completed/incomplete/canceled):</span> {{ case.reportRepairStatus }} <br/>
 
-    <span class="textBold textItalic">Company: </span> {{ case.vehicle.companyName }}, Contact: 
-    {{ case.vehicle.contactPerson }}. 
-    <a target="_blank" title="new window" href="{{ path('truck_vehicle_showvehicle', {"vehicleId":case.vehicle.id}) }}" >vehicle/company details</a>
-    <br/>
-
-    <span class="textBold textItalic">Damage description: </span> {{ case.damageDescription }} <br/>
-    <span class="textBold textItalic">Location: </span> {{ case.location }} <br/>
-    <span class="textBold textItalic">Contact to driver: </span> {{ case.driverContact }} 
-    <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcase', {"caseId":case.id}) }}" >case edit/details</a>#}
-
-    
+    {% endif %}  
 {% else %}
 {% endif %}
