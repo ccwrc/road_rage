@@ -67,6 +67,17 @@ class AccidentCaseController extends Controller {
                     "form" => $form->createView()
         ]);
     }
+    
+     /**
+     * @Route("/editCaseEnd/{caseId}", requirements={"caseId"="\d+"})
+     */
+    public function editCaseEndAction(Request $req, $caseId) {
+         //
+
+        return $this->render('TruckBundle:AccidentCase:edit_case_end.html.twig', [
+                    "form" => $form->createView()
+        ]);
+    }
 
     /**
      * @Route("/showAllCases")
