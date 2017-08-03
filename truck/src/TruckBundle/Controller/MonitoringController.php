@@ -15,7 +15,7 @@ use TruckBundle\Entity\Monitoring;
 class MonitoringController extends Controller {
 
     /**
-     * @Route("/showAllMonitoringsForCase/{caseId}", requirements={"caseId"="\d+"})
+     * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
      */
     public function showAllMonitoringsForCaseAction($caseId) {
         $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
@@ -27,7 +27,7 @@ class MonitoringController extends Controller {
     }
     
     /**
-     * @Route("/createMonitoring/{caseId}", requirements={"caseId"="\d+"})
+     * @Route("/{caseId}/createMonitoring", requirements={"caseId"="\d+"})
      */
     public function createMonitoringAction(Request $req, $caseId) {
         // form !
