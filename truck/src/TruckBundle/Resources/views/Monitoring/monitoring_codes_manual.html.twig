@@ -1,0 +1,33 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}monitoring codes manual{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %} 
+
+    <center>
+        <h3 class="formTitle">monitoring codes manual</h3>
+    </center>
+
+    <span class="boldText"> START:</span> START new case (automatic code) <br/>
+    <span class="boldText"> PG:</span> Payment Guarantee (request) <br/>
+    <span class="boldText"> CPG:</span> Confirmation Payment Guarantee <br/>
+    <span class="boldText"> RO:</span> Repair Order <br/>
+    <span class="boldText"> ETA:</span> Estimated Arrival Time (dealer->client or client->dealer) <br/>
+    <span class="boldText"> STRR:</span> STaRt Repair <br/>
+    <span class="boldText"> END:</span> END case <br/> <br/>
+
+    <span class="boldText"> WPG:</span> Withdrawal Payment Guarantee <br/>
+    <span class="boldText"> WCPG:</span> Withdrawal Confirmation Payment Guarantee <br/>
+    <span class="boldText"> WRO:</span> Withdrawal Repair Order <br/> <br/>
+
+    <span class="boldText"> Incoming:</span> General purpose code. Incoming phone call/fax/mail/etc. <br/>
+    <span class="boldText"> Out:</span> General purpose code Outgoing phone call/fax/mail/etc. <br/>
+
+{% endblock %}
+
