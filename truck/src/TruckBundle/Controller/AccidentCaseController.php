@@ -11,6 +11,7 @@ use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Vehicle;
 use TruckBundle\Form\AccidentCaseType;
 use TruckBundle\Form\AccidentCaseEditType;
+use TruckBundle\Form\AccidentCaseEditEndType;
 
 /**
  * @Route("/cases")
@@ -68,11 +69,23 @@ class AccidentCaseController extends Controller {
         ]);
     }
     
-     /**
+    /**
      * @Route("/editCaseEnd/{caseId}", requirements={"caseId"="\d+"})
      */
     public function editCaseEndAction(Request $req, $caseId) {
-         //
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->find($caseId);
+        $form = $this->createForm(AccidentCaseEditEndType::class, $case);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $case = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
 
         return $this->render('TruckBundle:AccidentCase:edit_case_end.html.twig', [
                     "form" => $form->createView()

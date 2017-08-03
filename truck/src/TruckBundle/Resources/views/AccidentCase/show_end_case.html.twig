@@ -1,8 +1,11 @@
 
 {% if case is not empty %}  
-    {% if case.progress == "end" %}
-        {#TODO add edit#}
-        <span class="textBold textItalic">Data for the report </span><br/> 
+    {#TODO change for end after tests#}
+    {% if case.progress == "start" %}
+     
+        <span class="textBold textItalic">Data for the report </span> 
+        <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}" >edit</a>
+        <br/> 
 
         <span class="textBold textItalic">Arrival time:</span> {{ case.reportArrivalTime }} minutes <br/>
         <span class="textBold textItalic">Service car late:</span> {{ case.reportLate }} minutes <br/>

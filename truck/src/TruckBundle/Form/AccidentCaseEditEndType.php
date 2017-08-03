@@ -10,13 +10,14 @@ class AccidentCaseEditEndType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add("reportLate", "hidden", ["label" => "Service car late: "])
-                ->add("reportRsTime", "hidden", ["label" => "Road service time: "])
-                ->add("reportNrsTime", "hidden", ["label" => "No road service time: "])
-                ->add("reportRepairTotal", "hidden", ["label" => "Repair total time: "])
-                ->add("reportArrivalTime", "hidden", ["label" => "Arrival time: "])
-                ->add("reportCaseTotal", "hidden", ["label" => "Case total time: "])
-                ->add("reportRepairStatus", "hidden", ["label" => "Repair status: "]);
+                ->add("reportLate", "number", ["label" => "Service car late: "])
+                ->add("reportRsTime", "number", ["label" => "Road service time: "])
+                ->add("reportNrsTime", "number", ["label" => "No road service time: "])
+                ->add("reportRepairTotal", "number", ["label" => "Repair total time: "])
+                ->add("reportArrivalTime", "number", ["label" => "Arrival time: "])
+                ->add("reportCaseTotal", "number", ["label" => "Case total time: "])
+                //TODO choice completed/incomplete/canceled
+                ->add("reportRepairStatus", "text", ["label" => "Repair status: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
