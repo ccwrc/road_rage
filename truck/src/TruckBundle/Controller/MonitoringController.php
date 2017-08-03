@@ -27,6 +27,16 @@ class MonitoringController extends Controller {
     }
     
     /**
+     * @Route("/monitoringCodesManual")
+     */
+    public function monitoringCodesManualAction() {
+
+        return $this->render('TruckBundle:Monitoring:monitoring_codes_manual.html.twig', [
+                        //...
+        ]);
+    }
+
+    /**
      * @Route("/{caseId}/createMonitoring", requirements={"caseId"="\d+"})
      */
     public function createMonitoringAction(Request $req, $caseId) {
