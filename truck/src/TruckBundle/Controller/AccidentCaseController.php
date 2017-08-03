@@ -20,7 +20,7 @@ use TruckBundle\Form\AccidentCaseEditEndType;
 class AccidentCaseController extends Controller {
     
     /**
-     * @Route("/createCase/{vehicleId}", requirements={"vehicleId"="\d+"})
+     * @Route("/{vehicleId}/createCase", requirements={"vehicleId"="\d+"})
      */
     public function createCaseAction(Request $req, $vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
@@ -47,7 +47,7 @@ class AccidentCaseController extends Controller {
     }
     
     /**
-     * @Route("/editCase/{caseId}", requirements={"caseId"="\d+"})
+     * @Route("/{caseId}/editCase", requirements={"caseId"="\d+"})
      */
     public function editCaseAction(Request $req, $caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
@@ -70,7 +70,7 @@ class AccidentCaseController extends Controller {
     }
     
     /**
-     * @Route("/editCaseEnd/{caseId}", requirements={"caseId"="\d+"})
+     * @Route("/{caseId}/editCaseEnd", requirements={"caseId"="\d+"})
      */
     public function editCaseEndAction(Request $req, $caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
@@ -115,7 +115,7 @@ class AccidentCaseController extends Controller {
     }
     
     /**
-     * @Route("/showStartCase/{caseId}", requirements={"caseId"="\d+"})
+     * @Route("/{caseId}/showStartCase", requirements={"caseId"="\d+"})
      */
     public function showStartCaseAction($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
@@ -126,7 +126,7 @@ class AccidentCaseController extends Controller {
     }
     
     /**
-     * @Route("/showEndCase/{caseId}", requirements={"caseId"="\d+"})
+     * @Route("/{caseId}/showEndCase", requirements={"caseId"="\d+"})
      */
     public function showEndCaseAction($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
