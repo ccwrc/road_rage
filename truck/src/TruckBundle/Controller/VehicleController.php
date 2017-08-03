@@ -44,7 +44,7 @@ class VehicleController extends Controller {
     }
 
     /**
-     * @Route("/showVehicle/{vehicleId}", requirements={"vehicleId"="\d+"})
+     * @Route("/{vehicleId}/showVehicle", requirements={"vehicleId"="\d+"})
      */
     public function showVehicleAction($vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
@@ -60,7 +60,7 @@ class VehicleController extends Controller {
     }
     
     /**
-     * @Route("/editVehicle/{vehicleId}", requirements={"vehicleId"="\d+"})
+     * @Route("/{vehicleId}/editVehicle", requirements={"vehicleId"="\d+"})
      */
     public function editVehicleAction(Request $req, $vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
