@@ -40,7 +40,7 @@ class DealerController extends Controller {
     }    
 
     /**
-     * @Route("/showDealer/{dealerId}", requirements={"dealerId"="\d+"})
+     * @Route("/{dealerId}/showDealer", requirements={"dealerId"="\d+"})
      */
     public function showDealerAction($dealerId) {
         $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
@@ -80,7 +80,7 @@ class DealerController extends Controller {
     }
     
     /**
-     * @Route("/editDealer/{dealerId}", requirements={"dealerId"="\d+"})
+     * @Route("/{dealerId}/editDealer", requirements={"dealerId"="\d+"})
      */
     public function editDealerAction(Request $req, $dealerId) {
         $this->denyAccessUnlessGranted('ROLE_OPERATOR', null, 'Access denied.');
