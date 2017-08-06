@@ -8,8 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Dealer;
-use TruckBundle\Form\DealerType;
-use TruckBundle\Form\DealerEditType;
+use TruckBundle\Form\Dealer\DealerType;
+use TruckBundle\Form\Dealer\DealerEditType;
 
 /**
  * @Route("/dealer")
