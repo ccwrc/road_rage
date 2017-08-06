@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringType;
-// use TruckBundle\Entity\User;
 
 /**
  * @Route("/monitoring")
@@ -44,10 +43,14 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoring", requirements={"caseId"="\d+"})
      */
     public function createMonitoringAction(Request $req, $caseId) {
-        // $user = $this->container->get("security.context")->getToken()->getUser();
-        $monitoring = new Monitoring();
+        // only for tests (testCode)
+        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                ->getUsername();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+
+        $monitoring = new Monitoring();
         $monitoring->setAccidentCase($case);
+        $monitoring->setOperator($operatorName);
         $form = $this->createForm(MonitoringType::class, $monitoring);
 
         $form->handleRequest($req);
