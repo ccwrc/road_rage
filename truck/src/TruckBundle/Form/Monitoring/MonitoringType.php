@@ -12,6 +12,7 @@ class MonitoringType extends AbstractType {
         $builder
                 ->add("code", "text", ["label" => "Code: ", "data" => "testCode"])
                 ->add("codeDescription", "text", ["label" => "code description: "])
+                // TODO timeSave -> auto in controller
                 ->add("timeSave", "datetime", ["label" => "time save: "])
                 ->add("timeSet", "datetime", ["label" => "time set: "])
                 ->add("document", "hidden", ["label" => "document: "])

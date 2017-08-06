@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Vehicle;
-use TruckBundle\Form\AccidentCaseType;
-use TruckBundle\Form\AccidentCaseEditType;
-use TruckBundle\Form\AccidentCaseEditEndType;
+use TruckBundle\Form\AccidentCase\AccidentCaseType;
+use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
+use TruckBundle\Form\AccidentCase\AccidentCaseEditEndType;
 
 /**
  * @Route("/cases")

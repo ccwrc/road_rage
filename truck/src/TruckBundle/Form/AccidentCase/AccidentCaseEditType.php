@@ -1,6 +1,6 @@
 <?php
 
-namespace TruckBundle\Form;
+namespace TruckBundle\Form\AccidentCase;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
