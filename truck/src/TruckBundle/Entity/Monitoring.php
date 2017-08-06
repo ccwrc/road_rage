@@ -100,7 +100,7 @@ class Monitoring
     /**
      * @var string
      *
-     * @ORM\Column(name="home_dealer", type="string", length=255)
+     * @ORM\Column(name="home_dealer", type="string", length=255, nullable=true)
      */
     private $homeDealer;
 

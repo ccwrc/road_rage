@@ -1,6 +1,6 @@
 
 {% for monitoring in monitorings %}
-    {# {{ dump(monitoring) }}#}
+     {{ dump(monitoring) }}
     <span class="textBold textItalic"> {{ monitoring.code }} </span>
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span><br/>

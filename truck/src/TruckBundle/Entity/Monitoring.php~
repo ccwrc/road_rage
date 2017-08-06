@@ -100,7 +100,7 @@ class Monitoring
     /**
      * @var string
      *
-     * @ORM\Column(name="home_dealer", type="string", length=255)
+     * @ORM\Column(name="home_dealer", type="string", length=255, nullable=true)
      */
     private $homeDealer;
 
@@ -457,4 +457,27 @@ class Monitoring
 //    {
 //        return $this->user;
 //    }
+
+    /**
+     * Set operator
+     *
+     * @param string $operator
+     * @return Monitoring
+     */
+    public function setOperator($operator)
+    {
+        $this->operator = $operator;
+
+        return $this;
+    }
+
+    /**
+     * Get operator
+     *
+     * @return string 
+     */
+    public function getOperator()
+    {
+        return $this->operator;
+    }
 }
