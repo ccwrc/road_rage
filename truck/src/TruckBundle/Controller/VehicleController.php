@@ -8,8 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Vehicle;
-use TruckBundle\Form\VehicleType;
-use TruckBundle\Form\VehicleEditType;
+use TruckBundle\Form\Vehicle\VehicleType;
+use TruckBundle\Form\Vehicle\VehicleEditType;
 
 /**
  * @Route("/vehicle")

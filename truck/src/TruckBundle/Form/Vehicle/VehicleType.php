@@ -1,6 +1,6 @@
 <?php
 
-namespace TruckBundle\Form;
+namespace TruckBundle\Form\Vehicle;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType; // for dealer
 use Symfony\Component\Form\AbstractType;
