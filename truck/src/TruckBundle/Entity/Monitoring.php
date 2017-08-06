@@ -98,18 +98,18 @@ class Monitoring
     private $outComment;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="home_dealer", type="string", length=255, nullable=true)
+     * @ORM\Column(name="home_dealer", type="integer", nullable=true)
      */
-    private $homeDealer;
+    private $homeDealerId;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="repair_dealer", type="string", length=255, nullable=true)
+     * @ORM\Column(name="repair_dealer", type="integer", nullable=true)
      */
-    private $repairDealer;
+    private $repairDealerId;
 
     /**
      * @var string
@@ -320,51 +320,51 @@ class Monitoring
         return $this->outComment;
     }
 
-    /**
-     * Set homeDealer
-     *
-     * @param string $homeDealer
-     * @return Monitoring
-     */
-    public function setHomeDealer($homeDealer)
-    {
-        $this->homeDealer = $homeDealer;
+//    /**
+//     * Set homeDealer
+//     *
+//     * @param string $homeDealer
+//     * @return Monitoring
+//     */
+//    public function setHomeDealer($homeDealer)
+//    {
+//        $this->homeDealer = $homeDealer;
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
+//    /**
+//     * Get homeDealer
+//     *
+//     * @return string 
+//     */
+//    public function getHomeDealer()
+//    {
+//        return $this->homeDealer;
+//    }
 
-    /**
-     * Get homeDealer
-     *
-     * @return string 
-     */
-    public function getHomeDealer()
-    {
-        return $this->homeDealer;
-    }
+//    /**
+//     * Set repairDealer
+//     *
+//     * @param string $repairDealer
+//     * @return Monitoring
+//     */
+//    public function setRepairDealer($repairDealer)
+//    {
+//        $this->repairDealer = $repairDealer;
+//
+//        return $this;
+//    }
 
-    /**
-     * Set repairDealer
-     *
-     * @param string $repairDealer
-     * @return Monitoring
-     */
-    public function setRepairDealer($repairDealer)
-    {
-        $this->repairDealer = $repairDealer;
-
-        return $this;
-    }
-
-    /**
-     * Get repairDealer
-     *
-     * @return string 
-     */
-    public function getRepairDealer()
-    {
-        return $this->repairDealer;
-    }
+//    /**
+//     * Get repairDealer
+//     *
+//     * @return string 
+//     */
+//    public function getRepairDealer()
+//    {
+//        return $this->repairDealer;
+//    }
 
     /**
      * Set contactMail
@@ -479,5 +479,51 @@ class Monitoring
     public function getOperator()
     {
         return $this->operator;
+    }
+
+    /**
+     * Set homeDealerId
+     *
+     * @param integer $homeDealerId
+     * @return Monitoring
+     */
+    public function setHomeDealerId($homeDealerId)
+    {
+        $this->homeDealerId = $homeDealerId;
+
+        return $this;
+    }
+
+    /**
+     * Get homeDealerId
+     *
+     * @return integer 
+     */
+    public function getHomeDealerId()
+    {
+        return $this->homeDealerId;
+    }
+
+    /**
+     * Set repairDealerId
+     *
+     * @param integer $repairDealerId
+     * @return Monitoring
+     */
+    public function setRepairDealerId($repairDealerId)
+    {
+        $this->repairDealerId = $repairDealerId;
+
+        return $this;
+    }
+
+    /**
+     * Get repairDealerId
+     *
+     * @return integer 
+     */
+    public function getRepairDealerId()
+    {
+        return $this->repairDealerId;
     }
 }

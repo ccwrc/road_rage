@@ -98,18 +98,18 @@ class Monitoring
     private $outComment;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="home_dealer", type="string", length=255, nullable=true)
+     * @ORM\Column(name="home_dealer", type="integer", nullable=true)
      */
-    private $homeDealer;
+    private $homeDealerId;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="repair_dealer", type="string", length=255, nullable=true)
+     * @ORM\Column(name="repair_dealer", type="integer", nullable=true)
      */
-    private $repairDealer;
+    private $repairDealerId;
 
     /**
      * @var string
