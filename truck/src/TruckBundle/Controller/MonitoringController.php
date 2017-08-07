@@ -70,5 +70,16 @@ class MonitoringController extends Controller {
                     "form" => $form->createView()
         ]);
     }
+    
+    /**
+     * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
+     */
+    public function createMonitoringPgAction(Request $req, $caseId) {
+        //
+        
+        return $this->render('TruckBundle:Monitoring:create_monitoring_pg.html.twig', [
+                    "form" => $form->createView()
+        ]);        
+    }
 
 }
