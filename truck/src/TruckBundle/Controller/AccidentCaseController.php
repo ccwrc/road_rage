@@ -9,9 +9,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Vehicle;
+use TruckBundle\Entity\Monitoring; //for createCaseAction
 use TruckBundle\Form\AccidentCase\AccidentCaseType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditEndType;
+use \DateTime;
 
 /**
  * @Route("/cases")
@@ -33,6 +35,14 @@ class AccidentCaseController extends Controller {
             $case = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($case);
+           
+            $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                    ->getUsername();
+            $startMonitoring = new Monitoring();
+            $startMonitoring->setAccidentCase($case)->setCode("START")->setOperator($operatorName)
+                    ->setComments($case->getComment())->setContactThrough($case->getDriverContact())
+                    ->setTimeSave(new DateTime("now"));
+            $em->persist($startMonitoring);
             $em->flush();
             $caseId = $case->getId();
 
@@ -45,7 +55,7 @@ class AccidentCaseController extends Controller {
                     "form" => $form->createView()
         ]);
     }
-    
+
     /**
      * @Route("/{caseId}/editCase", requirements={"caseId"="\d+"})
      */
