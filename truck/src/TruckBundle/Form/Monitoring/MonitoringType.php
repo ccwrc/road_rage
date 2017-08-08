@@ -19,8 +19,8 @@ class MonitoringType extends AbstractType {
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "comments: "])
                 ->add("outComment", "hidden", ["label" => "outComment: "])
-                ->add("homeDealerId", "hidden", ["label" => "homeDealerId: "])
-                ->add("repairDealerId", "hidden", ["label" => "repairDealerId: "])
+                //->add("homeDealerId", "hidden", ["label" => "homeDealerId: "])
+                //->add("repairDealerId", "hidden", ["label" => "repairDealerId: "])
                 ->add("contactMail", "hidden", ["label" => "contactMail: "])
                 ->add("optionalMails", "text", ["label" => "optionalMails: "]);
     }

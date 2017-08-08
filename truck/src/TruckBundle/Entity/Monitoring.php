@@ -24,6 +24,16 @@ class Monitoring
      * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
      */
     private $accidentCase;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Dealer")
+     */
+    private $homeDealer;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Dealer")
+     */
+    private $repairDealer;    
 
     /**
      * @var int
@@ -97,19 +107,19 @@ class Monitoring
      */
     private $outComment;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="home_dealer", type="integer", nullable=true)
-     */
-    private $homeDealerId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="repair_dealer", type="integer", nullable=true)
-     */
-    private $repairDealerId;
+//    /**
+//     * @var int
+//     *
+//     * @ORM\Column(name="home_dealer", type="integer", nullable=true)
+//     */
+//    private $homeDealerId;
+//
+//    /**
+//     * @var int
+//     *
+//     * @ORM\Column(name="repair_dealer", type="integer", nullable=true)
+//     */
+//    private $repairDealerId;
 
     /**
      * @var string
@@ -481,49 +491,95 @@ class Monitoring
         return $this->operator;
     }
 
+//    /**
+//     * Set homeDealerId
+//     *
+//     * @param integer $homeDealerId
+//     * @return Monitoring
+//     */
+//    public function setHomeDealerId($homeDealerId)
+//    {
+//        $this->homeDealerId = $homeDealerId;
+//
+//        return $this;
+//    }
+
+//    /**
+//     * Get homeDealerId
+//     *
+//     * @return integer 
+//     */
+//    public function getHomeDealerId()
+//    {
+//        return $this->homeDealerId;
+//    }
+
+//    /**
+//     * Set repairDealerId
+//     *
+//     * @param integer $repairDealerId
+//     * @return Monitoring
+//     */
+//    public function setRepairDealerId($repairDealerId)
+//    {
+//        $this->repairDealerId = $repairDealerId;
+//
+//        return $this;
+//    }
+
+//    /**
+//     * Get repairDealerId
+//     *
+//     * @return integer 
+//     */
+//    public function getRepairDealerId()
+//    {
+//        return $this->repairDealerId;
+//    }
+
     /**
-     * Set homeDealerId
+     * Set homeDealer
      *
-     * @param integer $homeDealerId
+     * @param \TruckBundle\Entity\Dealer $homeDealer
      * @return Monitoring
      */
-    public function setHomeDealerId($homeDealerId)
+    public function setHomeDealer(\TruckBundle\Entity\Dealer $homeDealer = null)
     {
-        $this->homeDealerId = $homeDealerId;
+        $this->homeDealer = $homeDealer;
 
         return $this;
     }
 
     /**
-     * Get homeDealerId
+     * Get homeDealer
      *
-     * @return integer 
+     * @return \TruckBundle\Entity\Dealer 
      */
-    public function getHomeDealerId()
+    public function getHomeDealer()
     {
-        return $this->homeDealerId;
+        return $this->homeDealer;
     }
 
     /**
-     * Set repairDealerId
+     * Set repairDealer
      *
-     * @param integer $repairDealerId
+     * @param \TruckBundle\Entity\Dealer $repairDealer
      * @return Monitoring
      */
-    public function setRepairDealerId($repairDealerId)
+    public function setRepairDealer(\TruckBundle\Entity\Dealer $repairDealer = null)
     {
-        $this->repairDealerId = $repairDealerId;
+        $this->repairDealer = $repairDealer;
 
         return $this;
     }
 
     /**
-     * Get repairDealerId
+     * Get repairDealer
      *
-     * @return integer 
+     * @return \TruckBundle\Entity\Dealer 
      */
-    public function getRepairDealerId()
+    public function getRepairDealer()
     {
-        return $this->repairDealerId;
+        return $this->repairDealer;
     }
 }
