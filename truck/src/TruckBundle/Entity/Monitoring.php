@@ -13,12 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Monitoring
 {
     
-//    /**
-//     * @ORM\ManyToOne(targetEntity="User", inversedBy="monitorings")
-//     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-//     */
-//    private $user;    
-    
      /**
      * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
      * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
@@ -106,20 +100,6 @@ class Monitoring
      * @ORM\Column(name="out_comment", type="text", nullable=true)
      */
     private $outComment;
-
-//    /**
-//     * @var int
-//     *
-//     * @ORM\Column(name="home_dealer", type="integer", nullable=true)
-//     */
-//    private $homeDealerId;
-//
-//    /**
-//     * @var int
-//     *
-//     * @ORM\Column(name="repair_dealer", type="integer", nullable=true)
-//     */
-//    private $repairDealerId;
 
     /**
      * @var string
@@ -330,52 +310,6 @@ class Monitoring
         return $this->outComment;
     }
 
-//    /**
-//     * Set homeDealer
-//     *
-//     * @param string $homeDealer
-//     * @return Monitoring
-//     */
-//    public function setHomeDealer($homeDealer)
-//    {
-//        $this->homeDealer = $homeDealer;
-//
-//        return $this;
-//    }
-
-//    /**
-//     * Get homeDealer
-//     *
-//     * @return string 
-//     */
-//    public function getHomeDealer()
-//    {
-//        return $this->homeDealer;
-//    }
-
-//    /**
-//     * Set repairDealer
-//     *
-//     * @param string $repairDealer
-//     * @return Monitoring
-//     */
-//    public function setRepairDealer($repairDealer)
-//    {
-//        $this->repairDealer = $repairDealer;
-//
-//        return $this;
-//    }
-
-//    /**
-//     * Get repairDealer
-//     *
-//     * @return string 
-//     */
-//    public function getRepairDealer()
-//    {
-//        return $this->repairDealer;
-//    }
-
     /**
      * Set contactMail
      *
@@ -445,29 +379,6 @@ class Monitoring
         return $this->accidentCase;
     }
 
-//    /**
-//     * Set user
-//     *
-//     * @param \TruckBundle\Entity\User $user
-//     * @return Monitoring
-//     */
-//    public function setUser(\TruckBundle\Entity\User $user = null)
-//    {
-//        $this->user = $user;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get user
-//     *
-//     * @return \TruckBundle\Entity\User 
-//     */
-//    public function getUser()
-//    {
-//        return $this->user;
-//    }
-
     /**
      * Set operator
      *
@@ -490,52 +401,6 @@ class Monitoring
     {
         return $this->operator;
     }
-
-//    /**
-//     * Set homeDealerId
-//     *
-//     * @param integer $homeDealerId
-//     * @return Monitoring
-//     */
-//    public function setHomeDealerId($homeDealerId)
-//    {
-//        $this->homeDealerId = $homeDealerId;
-//
-//        return $this;
-//    }
-
-//    /**
-//     * Get homeDealerId
-//     *
-//     * @return integer 
-//     */
-//    public function getHomeDealerId()
-//    {
-//        return $this->homeDealerId;
-//    }
-
-//    /**
-//     * Set repairDealerId
-//     *
-//     * @param integer $repairDealerId
-//     * @return Monitoring
-//     */
-//    public function setRepairDealerId($repairDealerId)
-//    {
-//        $this->repairDealerId = $repairDealerId;
-//
-//        return $this;
-//    }
-
-//    /**
-//     * Get repairDealerId
-//     *
-//     * @return integer 
-//     */
-//    public function getRepairDealerId()
-//    {
-//        return $this->repairDealerId;
-//    }
 
     /**
      * Set homeDealer
