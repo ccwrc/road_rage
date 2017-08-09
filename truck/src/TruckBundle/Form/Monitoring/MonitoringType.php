@@ -13,7 +13,6 @@ class MonitoringType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add("code", "text", ["label" => "Code: ", "data" => "testCode"])
-                // ->add("codeDescription", "text", ["label" => "code description: "])
                 // TODO timeSave -> auto in controller
                 ->add("timeSave", "datetime", ["label" => "time save: "])
                 ->add("timeSet", "datetime", ["label" => "time set: "])
@@ -21,8 +20,6 @@ class MonitoringType extends AbstractType {
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "comments: "])
                 ->add("outComment", "hidden", ["label" => "outComment: "])
-                //->add("homeDealerId", "hidden", ["label" => "homeDealerId: "])
-                //->add("repairDealerId", "hidden", ["label" => "repairDealerId: "])
                 ->add("contactMail", "hidden", ["label" => "contactMail: "])
                 ->add("optionalMails", "text", ["label" => "optionalMails: "]);
     }
