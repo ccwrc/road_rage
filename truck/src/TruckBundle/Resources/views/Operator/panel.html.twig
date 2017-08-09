@@ -44,12 +44,15 @@
 {% block cases %}
     {#{% render url('truck_accidentcase_showallcases') %}#}
     {% render url('truck_accidentcase_showallactivecases') %}
-    {#{% render url('bla', {'id': bla.id}) %}#}
 {% endblock %}
 
 
 {% block monitoring %}
     {% render url('truck_accidentcase_showstartcase', {"caseId":caseId}) %}
+    {#TODO links RO, END, OUT, tec.#}
+    <a title="Payment Guarantee (request)" href="{{ path('truck_monitoring_createmonitoringpg', {"caseId":caseId}) }}">PG</a> 
+    <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoring_createmonitoringpg', {"caseId":caseId}) }}">CPG dummy</a>
+    <br/>
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
 {% endblock %}

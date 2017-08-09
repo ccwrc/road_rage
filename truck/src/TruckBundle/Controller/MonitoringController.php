@@ -51,8 +51,8 @@ class MonitoringController extends Controller {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case);
-        $monitoring->setOperator($operatorName);
+        $monitoring->setAccidentCase($case)->setOperator($operatorName)
+                ->setTimeSave(new DateTime("now"));
         $form = $this->createForm(MonitoringType::class, $monitoring);
 
         $form->handleRequest($req);
@@ -79,10 +79,11 @@ class MonitoringController extends Controller {
         $operatorName = $this->container->get("security.context")->getToken()->getUser()
                 ->getUsername();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $homeDealer = $case->getVehicle()->getDealer();
 
         $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case);
-        $monitoring->setOperator($operatorName);
+        $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+                ->setTimeSave(new DateTime("now"))->setCode("PG");
         $form = $this->createForm(MonitoringPgType::class, $monitoring);
 
         $form->handleRequest($req);
@@ -98,7 +99,29 @@ class MonitoringController extends Controller {
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_pg.html.twig', [
-                    "form" => $form->createView()
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
+    
+    /**
+     * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
+     */
+    public function createMonitoringCpgAction(Request $req, $caseId) {
+        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                ->getUsername();
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $homeDealer = $case->getVehicle()->getDealer();
+
+        $monitoring = new Monitoring();
+        $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+                ->setTimeSave(new DateTime("now"))->setCode("CPG");
+        $form = $this->createForm(MonitoringCpgType::class, $monitoring);
+        // later...
+
+        return $this->render('TruckBundle:Monitoring:create_monitoring_cpg.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
         ]);
     }
 

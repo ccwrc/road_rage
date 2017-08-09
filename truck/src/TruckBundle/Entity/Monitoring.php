@@ -20,12 +20,12 @@ class Monitoring
     private $accidentCase;
     
     /**
-     * @ORM\OneToOne(targetEntity="Dealer")
+     * @ORM\ManyToOne(targetEntity="Dealer")
      */
     private $homeDealer;
     
     /**
-     * @ORM\OneToOne(targetEntity="Dealer")
+     * @ORM\ManyToOne(targetEntity="Dealer")
      */
     private $repairDealer;    
 

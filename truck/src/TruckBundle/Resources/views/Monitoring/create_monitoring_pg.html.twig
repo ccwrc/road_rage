@@ -1,6 +1,6 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}new monitoring pg{% endblock %}
+{% block title %}new pg{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
@@ -14,7 +14,7 @@
         <div class="pure-control-group">
 
             <center>
-                <h3 class="formTitle">new payment guarantee</h3>
+                <h3 class="formTitle">case {{ caseId }} - new payment guarantee </h3>
             </center>
 
             {{ form_start(form) }} 

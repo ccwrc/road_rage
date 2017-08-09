@@ -10,11 +10,6 @@ class MonitoringPgType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add("code", "hidden", ["data" => "PG"])
-                // TODO timeSave -> auto in controller
-                // ->add("timeSave", "datetime", ["label" => "time save: "])
-                // ->add("timeSet", "datetime", ["label" => "time set: "])
-                // ->add("document", "hidden", ["label" => "document: "])
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
                 //TODO out comment for document
