@@ -1,5 +1,7 @@
 <?php
 
+// form pattern only for final tests
+
 namespace TruckBundle\Form\Monitoring;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,7 +13,7 @@ class MonitoringType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add("code", "text", ["label" => "Code: ", "data" => "testCode"])
-                ->add("codeDescription", "text", ["label" => "code description: "])
+                // ->add("codeDescription", "text", ["label" => "code description: "])
                 // TODO timeSave -> auto in controller
                 ->add("timeSave", "datetime", ["label" => "time save: "])
                 ->add("timeSet", "datetime", ["label" => "time set: "])

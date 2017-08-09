@@ -1,7 +1,7 @@
 
 {% for monitoring in monitorings %}
     {# {{ dump(monitoring) }} {{ monitoring.accidentCase.vehicle.dealer.id }}#}
-    <span class="textBold textItalic" title="{{ monitoring.codeDescription }}"> {{ monitoring.code }} </span>
+    <span class="textBold textItalic"> {{ monitoring.code }} </span>
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span><br/>
 
