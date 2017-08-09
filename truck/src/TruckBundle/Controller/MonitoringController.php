@@ -11,6 +11,7 @@ use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringType;
 use TruckBundle\Form\Monitoring\MonitoringPgType;
+use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -57,7 +58,6 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoring);
             $em->flush();
@@ -79,15 +79,27 @@ class MonitoringController extends Controller {
         $operatorName = $this->container->get("security.context")->getToken()->getUser()
                 ->getUsername();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        
+
         $monitoring = new Monitoring();
         $monitoring->setAccidentCase($case);
         $monitoring->setOperator($operatorName);
-        $form = $this->createForm(MonitoringPgType::class, $monitoring);        
-        
+        $form = $this->createForm(MonitoringPgType::class, $monitoring);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoring = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($monitoring);
+            $em->flush();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
         return $this->render('TruckBundle:Monitoring:create_monitoring_pg.html.twig', [
                     "form" => $form->createView()
-        ]);        
+        ]);
     }
 
 }
