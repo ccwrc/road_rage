@@ -44,13 +44,6 @@ class Monitoring
      * @ORM\Column(name="code", type="string", length=255)
      */
     private $code;
-
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="code_description", type="string", length=600, nullable=true)
-//     */
-//    private $codeDescription;
     
     /**
      * @var string
@@ -148,29 +141,6 @@ class Monitoring
     {
         return $this->code;
     }
-
-//    /**
-//     * Set codeDescription
-//     *
-//     * @param string $codeDescription
-//     * @return Monitoring
-//     */
-//    public function setCodeDescription($codeDescription)
-//    {
-//        $this->codeDescription = $codeDescription;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get codeDescription
-//     *
-//     * @return string 
-//     */
-//    public function getCodeDescription()
-//    {
-//        return $this->codeDescription;
-//    }
 
     /**
      * Set timeSave
