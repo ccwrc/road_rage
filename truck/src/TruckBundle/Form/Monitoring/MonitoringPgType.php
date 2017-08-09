@@ -16,9 +16,9 @@ class MonitoringPgType extends AbstractType {
                 // ->add("timeSet", "datetime", ["label" => "time set: "])
                 // ->add("document", "hidden", ["label" => "document: "])
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
-                ->add("comments", "textarea", ["label" => "comments: "])
+                ->add("comments", "textarea", ["label" => "Comments: "])
                 //TODO out comment for document
-                ->add("outComment", "hidden", ["label" => "outComment: "]);
+                ->add("outComment", "textarea", ["label" => "Comment for dealer: "]);
                 //TODO contact mail/opt mail for document
                 // ->add("contactMail", "hidden", ["label" => "contactMail: "])
                 //->add("optionalMails", "text", ["label" => "optionalMails: "]);
