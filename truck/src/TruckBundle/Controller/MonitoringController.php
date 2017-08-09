@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringType;
+use TruckBundle\Form\Monitoring\MonitoringPgType;
 
 /**
  * @Route("/monitoring")
@@ -75,7 +76,14 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringPgAction(Request $req, $caseId) {
-        //
+        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                ->getUsername();
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        
+        $monitoring = new Monitoring();
+        $monitoring->setAccidentCase($case);
+        $monitoring->setOperator($operatorName);
+        $form = $this->createForm(MonitoringPgType::class, $monitoring);        
         
         return $this->render('TruckBundle:Monitoring:create_monitoring_pg.html.twig', [
                     "form" => $form->createView()
