@@ -109,7 +109,10 @@ class MonitoringController extends Controller {
      * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringPgAction(Request $req, $monitoringId)  {
-        //
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        $caseId = $monitoring->getAccidentCase()->getId(); 
+        // $form = $this->createForm(EditType::class, $monitoring);
         
     }
     
