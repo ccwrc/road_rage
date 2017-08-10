@@ -11,6 +11,7 @@ use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringType;
 use TruckBundle\Form\Monitoring\MonitoringPgType;
+use TruckBundle\Form\Monitoring\MonitoringCpgType;
 use \DateTime;
 
 /**
@@ -117,7 +118,18 @@ class MonitoringController extends Controller {
         $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
                 ->setTimeSave(new DateTime("now"))->setCode("CPG");
         $form = $this->createForm(MonitoringCpgType::class, $monitoring);
-        // later...
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoring = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($monitoring);
+            $em->flush();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_cpg.html.twig', [
                     "form" => $form->createView(),
