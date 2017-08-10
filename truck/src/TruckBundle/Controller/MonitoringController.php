@@ -11,6 +11,7 @@ use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringType;
 use TruckBundle\Form\Monitoring\MonitoringPgType;
+use TruckBundle\Form\Monitoring\MonitoringPgEditType;
 use TruckBundle\Form\Monitoring\MonitoringCpgType;
 use \DateTime;
 
