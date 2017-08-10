@@ -106,6 +106,14 @@ class MonitoringController extends Controller {
     }
     
     /**
+     * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
+     */
+    public function editMonitoringPgAction(Request $req, $monitoringId)  {
+        //
+        
+    }
+    
+    /**
      * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringCpgAction(Request $req, $caseId) {

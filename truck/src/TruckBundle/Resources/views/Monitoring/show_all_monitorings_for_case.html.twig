@@ -2,6 +2,13 @@
 {% for monitoring in monitorings %}
     {# {{ dump(monitoring) }} {{ monitoring.accidentCase.vehicle.dealer.id }}#}
     <span class="textBold textItalic"> {{ monitoring.code }} </span>
+
+{#    {% if monitoring.code == "PG" %} 
+        sukces
+    {% elseif monitoring.code == "CPG" %}
+        porazka
+    {% endif %}#}
+
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span><br/>
 
