@@ -2,15 +2,14 @@
 {% for monitoring in monitorings %}
     {# {{ dump(monitoring) }} {{ monitoring.accidentCase.vehicle.dealer.id }}#}
     <span class="textBold textItalic"> {{ monitoring.code }} </span>
-
-{#    {% if monitoring.code == "PG" %} 
-        sukces
-    {% elseif monitoring.code == "CPG" %}
-        porazka
-    {% endif %}#}
-
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
-    <span class="textBold textItalic">  {{ monitoring.operator }} </span><br/>
+    <span class="textBold textItalic">  {{ monitoring.operator }} </span>
+    {% if monitoring.code == "PG" %} 
+        <a title="PG edit" href="{{ path('truck_monitoring_editmonitoringpg', {"monitoringId":monitoring.id}) }}">edit</a> 
+    {% elseif monitoring.code == "CPG" %}
+        later... {#TODO...#}
+    {% endif %}
+    <br/>
 
     <span class="textBold textItalic">contact through:  </span> {{ monitoring.contactThrough }} <br/>
     <span class="textBold textItalic">comments:  </span> {{ monitoring.comments }}

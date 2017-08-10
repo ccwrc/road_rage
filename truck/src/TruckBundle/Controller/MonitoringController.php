@@ -110,6 +110,7 @@ class MonitoringController extends Controller {
      * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringPgAction(Request $req, $monitoringId) {
+        //TODO protection->check PG code, check if id exist
         $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoring->getAccidentCase()->getId();
