@@ -109,14 +109,28 @@ class MonitoringController extends Controller {
     /**
      * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
      */
-    public function editMonitoringPgAction(Request $req, $monitoringId)  {
+    public function editMonitoringPgAction(Request $req, $monitoringId) {
         $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId(); 
-        // $form = $this->createForm(EditType::class, $monitoring);
-        
+        $caseId = $monitoring->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringPgEditType::class, $monitoring);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoring = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:edit_monitoring_pg.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
     }
-    
+
     /**
      * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
      */
