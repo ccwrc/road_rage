@@ -163,5 +163,17 @@ class MonitoringController extends Controller {
                     "caseId" => $caseId
         ]);
     }
+    
+    /**
+     * @Route("/{caseId}/editMonitoringCpg", requirements={"caseId"="\d+"})
+     */
+    public function editMonitoringCpgAction(Request $req, $monitoringId) {
+        //
+
+        return $this->render('TruckBundle:Monitoring:edit_monitoring_cpg.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
 
 }
