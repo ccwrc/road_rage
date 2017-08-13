@@ -7,7 +7,7 @@
     {% if monitoring.code == "PG" %} 
         <a title="PG edit" href="{{ path('truck_monitoring_editmonitoringpg', {"monitoringId":monitoring.id}) }}">edit</a> 
     {% elseif monitoring.code == "CPG" %}
-        later... {#TODO...#}
+        <a title="PG edit" href="{{ path('truck_monitoring_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">edit</a>
     {% endif %}
     <br/>
 

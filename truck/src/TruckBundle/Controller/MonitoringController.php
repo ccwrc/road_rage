@@ -166,7 +166,7 @@ class MonitoringController extends Controller {
     }
     
     /**
-     * @Route("/{caseId}/editMonitoringCpg", requirements={"caseId"="\d+"})
+     * @Route("/{monitoringId}/editMonitoringCpg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringCpgAction(Request $req, $monitoringId) {
         $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
