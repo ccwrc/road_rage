@@ -286,5 +286,33 @@ class MonitoringController extends Controller {
                     "caseId" => $caseId
         ]);
     }
+    
+    /**
+     * @Route("/{monitoringId}/editMonitoringRo", requirements={"monitoringId"="\d+"})
+     */
+    public function editMonitoringRoAction(Request $req, $monitoringId) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        $caseId = $monitoring->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringRoEditType::class, $monitoring);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoring = $form->getData();
+            $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                    ->getUsername();
+            $monitoring->setOperator($operatorName);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:edit_monitoring_ro.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
 
 }
