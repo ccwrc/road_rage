@@ -1,0 +1,31 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}new ro{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %} 
+
+    <div class="pure-form pure-form-aligned">
+        <div class="pure-control-group">
+
+            <center>
+                <h3 class="formTitle">case {{ caseId }} - new repair order </h3>
+            </center>
+
+            {{ form_start(form) }} 
+            {{ form_widget(form) }} 
+            <center>
+                <input class="pure-button pure-button-active button90red" type="submit" value="add RO"/>
+            </center>
+
+            {{ form_end(form) }}
+        </div> 
+    </div>
+
+{% endblock %}
+
