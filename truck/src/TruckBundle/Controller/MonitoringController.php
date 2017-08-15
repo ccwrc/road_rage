@@ -17,6 +17,7 @@ use TruckBundle\Form\Monitoring\MonitoringCpgEditType;
 use TruckBundle\Form\Monitoring\MonitoringIncomingType;
 use TruckBundle\Form\Monitoring\MonitoringIncomingEditType;
 use TruckBundle\Form\Monitoring\MonitoringRoType;
+use TruckBundle\Form\Monitoring\MonitoringRoEditType;
 use \DateTime;
 
 /**
