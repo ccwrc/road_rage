@@ -18,7 +18,7 @@ class MonitoringRoType extends AbstractType {
                 //TODO contact mail/opt mail for document
                 // ->add("contactMail", "hidden", ["label" => "contactMail: "])
                 //->add("optionalMails", "text", ["label" => "optionalMails: "]);
-                ->add("dealer", EntityType::class, [
+                ->add("repairDealer", EntityType::class, [
                     "class" => "TruckBundle:Dealer", "choice_label" => "name",
                     "label" => "Repair dealer: "]);
     }
