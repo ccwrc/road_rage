@@ -18,6 +18,7 @@ use TruckBundle\Form\Monitoring\MonitoringIncomingType;
 use TruckBundle\Form\Monitoring\MonitoringIncomingEditType;
 use TruckBundle\Form\Monitoring\MonitoringRoType;
 use TruckBundle\Form\Monitoring\MonitoringRoEditType;
+//use TruckBundle\Form\Monitoring\MonitoringEtaType;
 use \DateTime;
 
 /**
@@ -326,7 +327,7 @@ class MonitoringController extends Controller {
 
         $monitoring = new Monitoring();
         $monitoring->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"))->setCode("ETA");
+                ->setTimeSave(new DateTime("now"))->setCode("ETA")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringEtaType::class, $monitoring);
 
         $form->handleRequest($req);
