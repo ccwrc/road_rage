@@ -13,7 +13,9 @@
         <a title="Incoming edit" href="{{ path('truck_monitoring_editmonitoringincoming', {"monitoringId":monitoring.id}) }}">edit</a>    
     {% elseif monitoring.code == "RO" %}
         <a title="RO edit" href="{{ path('truck_monitoring_editmonitoringro', {"monitoringId":monitoring.id}) }}">edit</a>    
-
+    {% elseif monitoring.code == "ETA" %}
+        <a title="ETA edit" href="{{ path('truck_monitoring_editmonitoringeta', {"monitoringId":monitoring.id}) }}">edit</a>   
+        
     {% endif %}
     <br/>
     {% if monitoring.code == "ETA" %} 
