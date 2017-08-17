@@ -1,6 +1,6 @@
 
 {% for monitoring in monitorings %}
-    {# {{ dump(monitoring) }}#}
+   {# {{ dump(monitoring) }}#}
     {# {{ monitoring.accidentCase.vehicle.dealer.id }}#}
     <span class="textBold textItalic"> {{ monitoring.code }} </span>
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
@@ -18,6 +18,8 @@
     <br/>
     {% if monitoring.code == "ETA" %} 
         saved ETA: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
+    {% elseif monitoring.code == "RO" %}
+        repair dealer: {{ monitoring.repairDealer.name }} <br/>
     {% endif %}    
 
     <span class="textBold textItalic">contact through:  </span> {{ monitoring.contactThrough }} <br/>
