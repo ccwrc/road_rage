@@ -18,6 +18,10 @@
     <br/>
     {% if monitoring.code == "ETA" %} 
         saved ETA: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
+    {% elseif monitoring.code == "PG" %} 
+        home dealer: {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }}) <br/>
+    {% elseif monitoring.code == "CPG" %} 
+        dealer confirmed: {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }}) <br/>        
     {% elseif monitoring.code == "RO" %}
         repair dealer: {{ monitoring.repairDealer.name }} ({{ monitoring.repairDealer.city }}) <br/>
     {% endif %}    
