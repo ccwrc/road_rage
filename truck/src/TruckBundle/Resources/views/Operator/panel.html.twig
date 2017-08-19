@@ -2,6 +2,11 @@
 
 {% block title %}operator panel{% endblock %}
 
+{% block stylesheets %}  
+    <link href="{{ asset('/css/operator.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
+{% endblock %}
+
 
 {% block logo %}
     Bad Truck Logo <br/><br/>
@@ -54,7 +59,7 @@
     <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoring_createmonitoringcpg', {"caseId":caseId}) }}">CPG</a>
     <a title="Repair Order" href="{{ path('truck_monitoring_createmonitoringro', {"caseId":caseId}) }}">RO</a>
     <a title="Estimated Arrival Time" href="{{ path('truck_monitoring_createmonitoringeta', {"caseId":caseId}) }}">ETA</a>
-    
+
     &nbsp;
     <a title="General. Incoming phone call/fax/mail/etc. " href="{{ path('truck_monitoring_createmonitoringincoming', {"caseId":caseId}) }}">Incoming</a>
     <br/>
