@@ -1,12 +1,6 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}edit incoming{% endblock %}
-
-{% block stylesheets %}
-    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
-{% endblock %}
+{% block title %}edit incoming monitoring{% endblock %}
 
 {% block body %} 
 
@@ -14,7 +8,7 @@
         <div class="pure-control-group">
 
             <center>
-                <h3 class="formTitle">case {{ caseId }} - edit monitoring incoming </h3>
+                <h3 class="formTitle">case {{ caseId }} - edit incoming monitoring</h3>
             </center>
 
             {{ form_start(form) }} 
