@@ -50,7 +50,7 @@ class MonitoringController extends Controller {
         ]);
     }
 
-    //TODO to delete 21.08.2017
+    //TODO delete after 21.08.2017
 //    /**
 //     * @Route("/{caseId}/createMonitoring", requirements={"caseId"="\d+"})
 //     */
