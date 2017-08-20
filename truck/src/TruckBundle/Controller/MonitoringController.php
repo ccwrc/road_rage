@@ -50,36 +50,37 @@ class MonitoringController extends Controller {
         ]);
     }
 
-    /**
-     * @Route("/{caseId}/createMonitoring", requirements={"caseId"="\d+"})
-     */
-    public function createMonitoringAction(Request $req, $caseId) {
-        // only for tests (testCode)
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"));
-        $form = $this->createForm(MonitoringType::class, $monitoring);
-
-        $form->handleRequest($req);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
-            $em->flush();
-
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
-            ]);
-        }
-
-        return $this->render('TruckBundle:Monitoring:create_monitoring.html.twig', [
-                    "form" => $form->createView()
-        ]);
-    }
+    //TODO to delete 21.08.2017
+//    /**
+//     * @Route("/{caseId}/createMonitoring", requirements={"caseId"="\d+"})
+//     */
+//    public function createMonitoringAction(Request $req, $caseId) {
+//        // only for tests (testCode)
+//        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+//                ->getUsername();
+//        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+//
+//        $monitoring = new Monitoring();
+//        $monitoring->setAccidentCase($case)->setOperator($operatorName)
+//                ->setTimeSave(new DateTime("now"));
+//        $form = $this->createForm(MonitoringType::class, $monitoring);
+//
+//        $form->handleRequest($req);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $monitoring = $form->getData();
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($monitoring);
+//            $em->flush();
+//
+//            return $this->redirectToRoute("truck_operator_panel", [
+//                        "caseId" => $caseId
+//            ]);
+//        }
+//
+//        return $this->render('TruckBundle:Monitoring:create_monitoring.html.twig', [
+//                    "form" => $form->createView()
+//        ]);
+//    }
     
     /**
      * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
