@@ -107,6 +107,20 @@ class Monitoring
      * @ORM\Column(name="optional_mails", type="string", length=600, nullable=true)
      */
     private $optionalMails;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="amount", type="integer", nullable=true)
+     */
+    private $amount;   
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="currency", type="string", length=100, nullable=true)
+     */
+    private $currency;    
 
 
     /**
@@ -416,5 +430,51 @@ class Monitoring
     public function getRepairDealer()
     {
         return $this->repairDealer;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param integer $amount
+     * @return Monitoring
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return integer 
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param string $currency
+     * @return Monitoring
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return string 
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }
