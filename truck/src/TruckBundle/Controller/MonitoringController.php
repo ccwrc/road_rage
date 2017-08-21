@@ -20,6 +20,7 @@ use TruckBundle\Form\Monitoring\MonitoringRoType;
 use TruckBundle\Form\Monitoring\MonitoringRoEditType;
 use TruckBundle\Form\Monitoring\MonitoringEtaType;
 use TruckBundle\Form\Monitoring\MonitoringEtaEditType;
+use TruckBundle\Form\Monitoring\MonitoringStrrType;
 use \DateTime;
 
 /**
