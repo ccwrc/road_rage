@@ -423,7 +423,7 @@ class MonitoringController extends Controller {
         $monitoring = new Monitoring();
         $monitoring->setAccidentCase($case)->setOperator($operatorName)
                 ->setTimeSave(new DateTime("now"))->setCode("Out");
-        $form = $this->createForm(MonitoringIncomingType::class, $monitoring);
+        $form = $this->createForm(MonitoringOutType::class, $monitoring);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
