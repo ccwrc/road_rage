@@ -21,6 +21,7 @@ use TruckBundle\Form\Monitoring\MonitoringStrrType;
 use TruckBundle\Form\Monitoring\MonitoringStrrEditType;
 use TruckBundle\Form\Monitoring\MonitoringIncomingType;
 use TruckBundle\Form\Monitoring\MonitoringIncomingEditType;
+use TruckBundle\Form\Monitoring\MonitoringOutType;
 use \DateTime;
 
 /**
