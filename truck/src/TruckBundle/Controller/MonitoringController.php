@@ -473,5 +473,36 @@ class MonitoringController extends Controller {
                     "caseId" => $caseId
         ]);
     }
+    
+    /**
+     * @Route("/{caseId}/createMonitoringEnd", requirements={"caseId"="\d+"})
+     */
+    public function createMonitoringEndAction(Request $req, $caseId) {
+        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                ->getUsername();
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+
+        $monitoring = new Monitoring();
+        $monitoring->setAccidentCase($case)->setOperator($operatorName)
+                ->setTimeSave(new DateTime("now"))->setCode("END")->setTimeSet(new DateTime("now"));
+        $form = $this->createForm(MonitoringEndType::class, $monitoring);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoring = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($monitoring);
+            $em->flush();
+            // TODO change redirect -> edit case end
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:create_monitoring_end.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
 
 }
