@@ -62,6 +62,7 @@
     <a title="STaRt Repair Time" href="{{ path('truck_monitoring_createmonitoringstrr', {"caseId":caseId}) }}">STRR</a>
     
     &nbsp;
+    <a title="General. Outgoing phone call/fax/mail/etc. " href="{{ path('truck_monitoring_createmonitoringout', {"caseId":caseId}) }}">Out</a>
     <a title="General. Incoming phone call/fax/mail/etc. " href="{{ path('truck_monitoring_createmonitoringincoming', {"caseId":caseId}) }}">Incoming</a>
     <br/>
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}

@@ -16,7 +16,7 @@ class AccidentCaseEditEndType extends AbstractType {
                 ->add("reportRepairTotal", "number", ["label" => "Repair total time: "])
                 ->add("reportArrivalTime", "number", ["label" => "Arrival time: "])
                 ->add("reportCaseTotal", "number", ["label" => "Case total time: "])
-                //TODO choice completed/incomplete/canceled
+                //TODO choice completed/incompleted/canceled
                 ->add("reportRepairStatus", "text", ["label" => "Repair status: "]);
     }
 
