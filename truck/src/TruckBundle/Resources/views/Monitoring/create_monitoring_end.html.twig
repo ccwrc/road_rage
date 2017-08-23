@@ -1,0 +1,26 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}end case{% endblock %}
+
+{% block body %} 
+
+    <div class="pure-form pure-form-aligned">
+        <div class="pure-control-group">
+
+            <center>
+                <h3 class="formTitle">case {{ caseId }} - end case  </h3>
+            </center>
+
+            {{ form_start(form) }} 
+            {{ form_widget(form) }} 
+            <center>
+                <input class="pure-button pure-button-active button90red" type="submit" value="save END case"/>
+            </center>
+
+            {{ form_end(form) }}
+        </div> 
+    </div>
+
+{% endblock %}
+
+
