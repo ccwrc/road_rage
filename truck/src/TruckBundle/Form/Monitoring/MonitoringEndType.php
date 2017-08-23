@@ -13,7 +13,7 @@ class MonitoringEndType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
-                ->add("timeSet", "datetime", ["label" => "Enter the time to complete the repair: "]);
+                ->add("timeSet", "datetime", ["label" => "End of repair: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
