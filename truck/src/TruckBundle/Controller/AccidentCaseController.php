@@ -177,6 +177,6 @@ class AccidentCaseController extends Controller {
         return $this->render('TruckBundle:AccidentCase:case_status_color_manual.html.twig', [
                         //...
         ]);
-    }    
+    }
 
 }
