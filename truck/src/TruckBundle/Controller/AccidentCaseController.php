@@ -167,6 +167,16 @@ class AccidentCaseController extends Controller {
         return $this->render('TruckBundle:AccidentCase:show_end_case.html.twig', [
                     "case" => $case
         ]);
+    }  
+    
+    /**
+     * @Route("/caseStatusColorManual")
+     */
+    public function caseStatusColorManualAction() {
+
+        return $this->render('TruckBundle:AccidentCase:bla.html.twig', [
+                        //...
+        ]);
     }    
 
 }
