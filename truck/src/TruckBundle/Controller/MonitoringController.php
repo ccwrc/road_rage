@@ -32,9 +32,9 @@ use \DateTime;
  */
 class MonitoringController extends Controller {
     
-    // redirectIfMonitoringHasWrongCode
+    //TODO redirectIfMonitoringHasWrongCode
     
-    private function getOperatorName() {
+    protected function getOperatorName() {
         $operatorName = $this->container->get("security.context")->getToken()->getUser()
                 ->getUsername();
         return $operatorName;
@@ -495,6 +495,34 @@ class MonitoringController extends Controller {
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_end.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
+      
+    /**
+     * @Route("/{monitoringId}/editMonitoringEnd", requirements={"monitoringId"="\d+"})
+     */
+    public function editMonitoringEndAction(Request $req, $monitoringId) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        $caseId = $monitoring->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringEndEditType::class, $monitoring);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoring = $form->getData();
+            $operatorName = $this->getOperatorName();
+            $monitoring->setOperator($operatorName);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:edit_monitoring_end.html.twig', [
                     "form" => $form->createView(),
                     "caseId" => $caseId
         ]);
