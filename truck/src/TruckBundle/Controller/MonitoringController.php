@@ -518,7 +518,7 @@ class MonitoringController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
+            return $this->redirectToRoute("truck_accidentcase_editcaseend", [
                         "caseId" => $caseId
             ]);
         }

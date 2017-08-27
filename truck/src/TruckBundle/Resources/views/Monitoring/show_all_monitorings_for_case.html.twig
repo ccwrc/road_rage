@@ -33,6 +33,8 @@
         repair dealer: {{ monitoring.repairDealer.name }} ({{ monitoring.repairDealer.city }}) <br/>
     {% elseif monitoring.code == "STRR" %}    
         time of start repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
+    {% elseif monitoring.code == "END" %}    
+        time of end repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>        
     {% endif %}    
 
     <span class="textBold textItalic">contact through:  </span> {{ monitoring.contactThrough }} <br/>
