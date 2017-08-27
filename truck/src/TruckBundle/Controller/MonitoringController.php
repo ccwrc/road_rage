@@ -31,6 +31,14 @@ use \DateTime;
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class MonitoringController extends Controller {
+    
+    // redirectIfMonitoringHasWrongCode
+    
+    private function getOperatorName() {
+        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+                ->getUsername();
+        return $operatorName;
+    }
 
     /**
      * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
@@ -479,8 +487,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringEnd", requirements={"caseId"="\d+"})
      */
     public function createMonitoringEndAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoring = new Monitoring();
