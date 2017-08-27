@@ -66,8 +66,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringPgAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
 
@@ -125,8 +124,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringCpgAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
 
@@ -165,8 +163,7 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
+            $operatorName = $this->getOperatorName();
             $monitoring->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -186,8 +183,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringRo", requirements={"caseId"="\d+"})
      */
     public function createMonitoringRoAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
 
@@ -226,8 +222,7 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
+            $operatorName = $this->getOperatorName();
             $monitoring->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -247,8 +242,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringEta", requirements={"caseId"="\d+"})
      */
     public function createMonitoringEtaAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoring = new Monitoring();
@@ -286,8 +280,7 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
+            $operatorName = $this->getOperatorName();
             $monitoring->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -307,8 +300,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringStrr", requirements={"caseId"="\d+"})
      */
     public function createMonitoringStrrAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoring = new Monitoring();
@@ -346,8 +338,7 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
+            $operatorName = $this->getOperatorName();
             $monitoring->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -367,8 +358,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringIncoming", requirements={"caseId"="\d+"})
      */
     public function createMonitoringIncomingAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoring = new Monitoring();
@@ -406,8 +396,7 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
+            $operatorName = $this->getOperatorName();
             $monitoring->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -427,8 +416,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/createMonitoringOut", requirements={"caseId"="\d+"})
      */
     public function createMonitoringOutAction(Request $req, $caseId) {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+        $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoring = new Monitoring();
@@ -466,8 +454,7 @@ class MonitoringController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoring = $form->getData();
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
+            $operatorName = $this->getOperatorName();
             $monitoring->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
