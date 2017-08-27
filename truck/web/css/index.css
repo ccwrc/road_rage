@@ -50,3 +50,19 @@ body {
 .formTitle {
     background-color: #E6E6E6;
 }
+
+.statusRed {
+    background-color: #FF7575;
+}
+
+.statusOrange {
+    background-color: #FF9C42;
+}
+
+.statusGreen {
+    background-color: #93EEAA;
+}
+
+.statusGrey {
+    background-color: #FFFFD7;
+}
