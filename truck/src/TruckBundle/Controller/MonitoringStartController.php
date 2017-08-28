@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
-// use TruckBundle\Form\Monitoring\MonitoringStartEditType;
+use TruckBundle\Form\Monitoring\MonitoringStartEditType;
 
 /**
  * @Route("/monitoring")
