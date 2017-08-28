@@ -11,8 +11,8 @@ use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase;
 //use TruckBundle\Form\Monitoring\MonitoringPgType;
 //use TruckBundle\Form\Monitoring\MonitoringPgEditType;
-use TruckBundle\Form\Monitoring\MonitoringCpgType;
-use TruckBundle\Form\Monitoring\MonitoringCpgEditType;
+//use TruckBundle\Form\Monitoring\MonitoringCpgType;
+//use TruckBundle\Form\Monitoring\MonitoringCpgEditType;
 use TruckBundle\Form\Monitoring\MonitoringRoType;
 use TruckBundle\Form\Monitoring\MonitoringRoEditType;
 use TruckBundle\Form\Monitoring\MonitoringEtaType;
@@ -25,7 +25,7 @@ use TruckBundle\Form\Monitoring\MonitoringOutType;
 use TruckBundle\Form\Monitoring\MonitoringOutEditType;
 use TruckBundle\Form\Monitoring\MonitoringEndType;
 use TruckBundle\Form\Monitoring\MonitoringEndEditType;
-use \DateTime;
+use \DateTime;  // to delete
 
 /**
  * @Route("/monitoring")
@@ -120,64 +120,64 @@ class MonitoringController extends Controller {
 //        ]);
 //    }
 
-    /**
-     * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
-     */
-    public function createMonitoringCpgAction(Request $req, $caseId) {
-        $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        $homeDealer = $case->getVehicle()->getDealer();
-
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("CPG");
-        $form = $this->createForm(MonitoringCpgType::class, $monitoring);
-
-        $form->handleRequest($req);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
-            $em->flush();
-
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
-            ]);
-        }
-
-        return $this->render('TruckBundle:Monitoring:create_monitoring_cpg.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
-        ]);
-    }
+//    /**
+//     * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
+//     */
+//    public function createMonitoringCpgAction(Request $req, $caseId) {
+//        $operatorName = $this->getOperatorName();
+//        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+//        $homeDealer = $case->getVehicle()->getDealer();
+//
+//        $monitoring = new Monitoring();
+//        $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+//                ->setTimeSave(new DateTime("now"))->setCode("CPG");
+//        $form = $this->createForm(MonitoringCpgType::class, $monitoring);
+//
+//        $form->handleRequest($req);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $monitoring = $form->getData();
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($monitoring);
+//            $em->flush();
+//
+//            return $this->redirectToRoute("truck_operator_panel", [
+//                        "caseId" => $caseId
+//            ]);
+//        }
+//
+//        return $this->render('TruckBundle:Monitoring:create_monitoring_cpg.html.twig', [
+//                    "form" => $form->createView(),
+//                    "caseId" => $caseId
+//        ]);
+//    }
     
-    /**
-     * @Route("/{monitoringId}/editMonitoringCpg", requirements={"monitoringId"="\d+"})
-     */
-    public function editMonitoringCpgAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringCpgEditType::class, $monitoring);
-
-        $form->handleRequest($req);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoring->setOperator($operatorName);
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-            
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
-            ]);
-        }
-
-        return $this->render('TruckBundle:Monitoring:edit_monitoring_cpg.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
-        ]);
-    }
+//    /**
+//     * @Route("/{monitoringId}/editMonitoringCpg", requirements={"monitoringId"="\d+"})
+//     */
+//    public function editMonitoringCpgAction(Request $req, $monitoringId) {
+//        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+//                ->find($monitoringId);
+//        $caseId = $monitoring->getAccidentCase()->getId();
+//        $form = $this->createForm(MonitoringCpgEditType::class, $monitoring);
+//
+//        $form->handleRequest($req);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $monitoring = $form->getData();
+//            $operatorName = $this->getOperatorName();
+//            $monitoring->setOperator($operatorName);
+//            $em = $this->getDoctrine()->getManager();
+//            $em->flush();
+//            
+//            return $this->redirectToRoute("truck_operator_panel", [
+//                        "caseId" => $caseId
+//            ]);
+//        }
+//
+//        return $this->render('TruckBundle:Monitoring:edit_monitoring_cpg.html.twig', [
+//                    "form" => $form->createView(),
+//                    "caseId" => $caseId
+//        ]);
+//    }
        
     /**
      * @Route("/{caseId}/createMonitoringRo", requirements={"caseId"="\d+"})
