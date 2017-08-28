@@ -55,7 +55,7 @@
 {% block monitoring %}
     {% render url('truck_accidentcase_showstartcase', {"caseId":caseId}) %}
     <a title="Payment Guarantee (request)" href="{{ path('truck_monitoringpg_createmonitoringpg', {"caseId":caseId}) }}">PG</a> 
-    <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoring_createmonitoringcpg', {"caseId":caseId}) }}">CPG</a>
+    <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">CPG</a>
     <a title="Repair Order" href="{{ path('truck_monitoring_createmonitoringro', {"caseId":caseId}) }}">RO</a>
     <a title="Estimated Arrival Time" href="{{ path('truck_monitoring_createmonitoringeta', {"caseId":caseId}) }}">ETA</a>
     <a title="STaRt Repair Time" href="{{ path('truck_monitoring_createmonitoringstrr', {"caseId":caseId}) }}">STRR</a>
