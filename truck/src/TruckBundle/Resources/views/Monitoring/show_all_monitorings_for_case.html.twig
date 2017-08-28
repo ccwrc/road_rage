@@ -8,7 +8,7 @@
     {% if monitoring.code == "START" %} 
         <a title="START edit" href="{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}">edit</a>  
     {% elseif monitoring.code == "PG" %}
-        <a title="PG edit" href="{{ path('truck_monitoring_editmonitoringpg', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="PG edit" href="{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}">edit</a>
     {% elseif monitoring.code == "CPG" %}
         <a title="CPG edit" href="{{ path('truck_monitoring_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">edit</a>
     {% elseif monitoring.code == "RO" %}
