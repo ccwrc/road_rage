@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringWpgType;
+use TruckBundle\Form\Monitoring\MonitoringWpgEditType;
 use \DateTime;
 
 /**
@@ -57,7 +58,7 @@ class MonitoringWpgController extends MonitoringController {
         $monitoringWpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoringWpg->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringPgEditType::class, $monitoringWpg);
+        $form = $this->createForm(MonitoringWpgEditType::class, $monitoringWpg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
