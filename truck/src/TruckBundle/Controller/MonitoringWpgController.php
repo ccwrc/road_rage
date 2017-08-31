@@ -14,15 +14,15 @@ use \DateTime;
  * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class MonitoringEndController extends MonitoringController {
+class MonitoringWpgController extends MonitoringController {
 
     /**
      * @Route("/{monitoringPgId}/createMonitoringWpg", requirements={"monitoringPgId"="\d+"})
      */
-    public function createMonitoringWpgAction(Request $req, $monitoringId) {
+    public function createMonitoringWpgAction(Request $req, $monitoringPgId) {
         $operatorName = $this->getOperatorName();
         $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+                ->find($monitoringPgId);
         $case = $monitoringPg->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringPg->getHomeDealer();
