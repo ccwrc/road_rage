@@ -49,5 +49,31 @@ class MonitoringWpgController extends MonitoringController {
                     "caseId" => $caseId
         ]);
     }
+    
+    /**
+     * @Route("/{monitoringId}/editMonitoringWpg", requirements={"monitoringId"="\d+"})
+     */
+    public function editMonitoringWpgAction(Request $req, $monitoringId) {
+        $monitoringWpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        $caseId = $monitoringWpg->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringPgEditType::class, $monitoringWpg);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoringWpg = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:edit_monitoring_wpg.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
 
 }
