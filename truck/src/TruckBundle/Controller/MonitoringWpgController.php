@@ -22,7 +22,7 @@ class MonitoringEndController extends MonitoringController {
     public function createMonitoringWpgAction(Request $req, $monitoringId) {
         $operatorName = $this->getOperatorName();
         $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringPgId);
+                ->find($monitoringId);
         $case = $monitoringPg->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringPg->getHomeDealer();
