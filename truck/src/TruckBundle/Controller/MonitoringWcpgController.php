@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Monitoring;
-
+use TruckBundle\Form\Monitoring\MonitoringWcpgType;
 use \DateTime;
 
 /**
