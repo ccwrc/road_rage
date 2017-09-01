@@ -10,6 +10,8 @@
     {% elseif monitoring.code == "PG" %}
         <a title="PG edit" href="{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}">edit</a>
         <a title="Withdrawal PG" href="{{ path('truck_monitoringwpg_createmonitoringwpg', {"monitoringPgId":monitoring.id}) }}">WPG</a>
+    {% elseif monitoring.code == "WPG" %}
+        <a title="WPG edit" href="{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}">edit</a>
     {% elseif monitoring.code == "CPG" %}
         <a title="CPG edit" href="{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">edit</a>
     {% elseif monitoring.code == "RO" %}
@@ -28,7 +30,7 @@
     <br/>
     {% if monitoring.code == "ETA" %} 
         saved ETA: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
-    {% elseif monitoring.code == "PG" %} 
+    {% elseif monitoring.code == "PG" or monitoring.code == "WPG" %} 
         home dealer: {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }}) <br/>
     {% elseif monitoring.code == "CPG" %} 
         dealer confirmed: {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }}) <br/>        
