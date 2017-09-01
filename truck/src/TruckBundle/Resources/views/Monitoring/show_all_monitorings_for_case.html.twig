@@ -14,6 +14,7 @@
         <a title="WPG edit" href="{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}">edit</a>
     {% elseif monitoring.code == "CPG" %}
         <a title="CPG edit" href="{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="Withdrawal CPG" href="{{ path('truck_monitoringwcpg_createmonitoringwcpg', {"monitoringCpgId":monitoring.id}) }}">WCPG</a>   
     {% elseif monitoring.code == "RO" %}
         <a title="RO edit" href="{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}">edit</a>    
     {% elseif monitoring.code == "ETA" %}
