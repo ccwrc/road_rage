@@ -16,7 +16,38 @@ use \DateTime;
  */
 class MonitoringWcpgController extends MonitoringController {
 
+    /**
+     * @Route("/{monitoringCpgId}/createMonitoringWcpg", requirements={"monitoringCpgId"="\d+"})
+     */
+    public function createMonitoringWcpgAction(Request $req, $monitoringCpgId) {
+        $operatorName = $this->getOperatorName();
+        $monitoringCpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringCpgId);
+        $case = $monitoringCpg->getAccidentCase();
+        $caseId = $case->getId();
+        $homeDealer = $monitoringCpg->getHomeDealer();
 
+        $monitoringWcpg = new Monitoring();
+        $monitoringWcpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+                ->setTimeSave(new DateTime("now"))->setCode("WCPG");
+        $form = $this->createForm(MonitoringWcpgType::class, $monitoringWcpg);
 
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoringWcpg = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($monitoringWcpg);
+            $em->flush();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:create_monitoring_wcpg.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
 
 }
