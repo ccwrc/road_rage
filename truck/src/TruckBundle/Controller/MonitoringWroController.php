@@ -16,7 +16,39 @@ use \DateTime;
  */
 class MonitoringWroController extends MonitoringController {
 
+    /**
+     * @Route("/{monitoringRoId}/createMonitoringWro", requirements={"monitoringRoId"="\d+"})
+     */
+    public function createMonitoringWroAction(Request $req, $monitoringRoId) {
+        $operatorName = $this->getOperatorName();
+        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringRoId);
+        $case = $monitoringRo->getAccidentCase();
+        $caseId = $case->getId();
+        $homeDealer = $monitoringRo->getHomeDealer();
+        $repairDealer = $monitoringRo->getRepairDealer();
 
-    
+        $monitoringWro = new Monitoring();
+        $monitoringWro->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+                ->setTimeSave(new DateTime("now"))->setCode("WRO")->setRepairDealer($repairDealer);
+        $form = $this->createForm(MonitoringWroType::class, $monitoringWro);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monitoringWro = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($monitoringWro);
+            $em->flush();
+
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $caseId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Monitoring:create_monitoring_wro.html.twig', [
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
+        ]);
+    }
 
 }
