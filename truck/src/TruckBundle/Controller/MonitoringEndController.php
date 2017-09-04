@@ -24,16 +24,16 @@ class MonitoringEndController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringEnd = new Monitoring();
+        $monitoringEnd->setAccidentCase($case)->setOperator($operatorName)
                 ->setTimeSave(new DateTime("now"))->setCode("END")->setTimeSet(new DateTime("now"));
-        $form = $this->createForm(MonitoringEndType::class, $monitoring);
+        $form = $this->createForm(MonitoringEndType::class, $monitoringEnd);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringEnd = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
+            $em->persist($monitoringEnd);
             $em->flush();
 
             return $this->redirectToRoute("truck_accidentcase_firsteditcaseend", [
@@ -51,19 +51,19 @@ class MonitoringEndController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringEnd", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringEndAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringEndEditType::class, $monitoring);
+        $caseId = $monitoringEnd->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringEndEditType::class, $monitoringEnd);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringEnd = $form->getData();
             $operatorName = $this->getOperatorName();
-            $monitoring->setOperator($operatorName);
+            $monitoringEnd->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-
+        //TODO case end -> make calculations
             return $this->redirectToRoute("truck_accidentcase_editcaseend", [
                         "caseId" => $caseId
             ]);
