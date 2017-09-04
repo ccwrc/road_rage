@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringWroType;
+use TruckBundle\Form\Monitoring\MonitoringWroEditType;
 use \DateTime;
 
 /**
