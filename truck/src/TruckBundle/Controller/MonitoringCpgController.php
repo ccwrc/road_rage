@@ -25,16 +25,16 @@ class MonitoringCpgController extends MonitoringController {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
 
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+        $monitoringCpg = new Monitoring();
+        $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
                 ->setTimeSave(new DateTime("now"))->setCode("CPG");
-        $form = $this->createForm(MonitoringCpgType::class, $monitoring);
+        $form = $this->createForm(MonitoringCpgType::class, $monitoringCpg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringCpg = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
+            $em->persist($monitoringCpg);
             $em->flush();
 
             return $this->redirectToRoute("truck_operator_panel", [
@@ -52,16 +52,16 @@ class MonitoringCpgController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringCpg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringCpgAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+        $monitoringCpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringCpgEditType::class, $monitoring);
+        $caseId = $monitoringCpg->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringCpgEditType::class, $monitoringCpg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringCpg = $form->getData();
             $operatorName = $this->getOperatorName();
-            $monitoring->setOperator($operatorName);
+            $monitoringCpg->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
