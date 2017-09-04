@@ -20,6 +20,8 @@
     {% elseif monitoring.code == "RO" %}
         <a title="RO edit" href="{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}">edit</a>    
         <a title="Withdrawal RO" href="{{ path('truck_monitoringwro_createmonitoringwro', {"monitoringRoId":monitoring.id}) }}">WRO</a> 
+    {% elseif monitoring.code == "WRO" %}
+        <a title="WRO edit" href="{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}">edit</a>
     {% elseif monitoring.code == "ETA" %}
         <a title="ETA edit" href="{{ path('truck_monitoringeta_editmonitoringeta', {"monitoringId":monitoring.id}) }}">edit</a>   
     {% elseif monitoring.code == "STRR" %}
