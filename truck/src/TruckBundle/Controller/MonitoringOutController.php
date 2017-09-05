@@ -24,16 +24,16 @@ class MonitoringOutController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringOut = new Monitoring();
+        $monitoringOut->setAccidentCase($case)->setOperator($operatorName)
                 ->setTimeSave(new DateTime("now"))->setCode("Out");
-        $form = $this->createForm(MonitoringOutType::class, $monitoring);
+        $form = $this->createForm(MonitoringOutType::class, $monitoringOut);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringOut = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
+            $em->persist($monitoringOut);
             $em->flush();
 
             return $this->redirectToRoute("truck_operator_panel", [
@@ -51,16 +51,16 @@ class MonitoringOutController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringOut", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringOutAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+        $monitoringOut = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringOutEditType::class, $monitoring);
+        $caseId = $monitoringOut->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringOutEditType::class, $monitoringOut);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringOut = $form->getData();
             $operatorName = $this->getOperatorName();
-            $monitoring->setOperator($operatorName);
+            $monitoringOut->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
