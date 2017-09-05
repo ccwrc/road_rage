@@ -13,19 +13,23 @@ use TruckBundle\Form\Monitoring\MonitoringStartEditType;
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class MonitoringStartController extends MonitoringController {
+    
+    // START: START new case (automatic code) 
+    // created automatically when the case starts in AccidentCaseController
+    // look -> createCaseAction
 
     /**
      * @Route("/{monitoringId}/editMonitoringStart", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringStartAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+        $monitoringStart = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringStartEditType::class, $monitoring);
+        $caseId = $monitoringStart->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringStartEditType::class, $monitoringStart);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringStart = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
