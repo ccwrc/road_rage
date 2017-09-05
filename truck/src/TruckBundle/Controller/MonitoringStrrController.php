@@ -24,16 +24,16 @@ class MonitoringStrrController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringStrr = new Monitoring();
+        $monitoringStrr->setAccidentCase($case)->setOperator($operatorName)
                 ->setTimeSave(new DateTime("now"))->setCode("STRR")->setTimeSet(new DateTime("now"));
-        $form = $this->createForm(MonitoringStrrType::class, $monitoring);
+        $form = $this->createForm(MonitoringStrrType::class, $monitoringStrr);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringStrr = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
+            $em->persist($monitoringStrr);
             $em->flush();
 
             return $this->redirectToRoute("truck_operator_panel", [
@@ -51,16 +51,16 @@ class MonitoringStrrController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringStrr", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringStrrAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringStrrEditType::class, $monitoring);
+        $caseId = $monitoringStrr->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringStrrEditType::class, $monitoringStrr);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringStrr = $form->getData();
             $operatorName = $this->getOperatorName();
-            $monitoring->setOperator($operatorName);
+            $monitoringStrr->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
