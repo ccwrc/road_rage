@@ -2,12 +2,11 @@
 
 {% block title %}TruckBundle:Vehicle:show{% endblock %}
 
-{% block stylesheets %}
-    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
-{% endblock %}
-
 {% block body %}
-    <h1>show vehicle {{ vehicle.id }} </h1>
+
+    <center>
+        <h3 class="formTitle">show vehicle {{ vehicle.id }}</h3>
+    </center>
 
     {# TODO: add links: new case (operator role), dealer, cases (?) etc.#}
     <a href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' ><button>edit vehicle</button> </a>
@@ -26,14 +25,15 @@
     Company - zip code, city: {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
     Phone: {{ vehicle.phone }} <br/>
     Fax: {{ vehicle.fax }} <br/>
-    Mail: {{ vehicle.mail }} <br/>
+    Mail: {{ vehicle.mail }} <br/><br/>
+    
     Vehicle registration number: {{ vehicle.registrationNumber }} <br/>
     Vehicle mileage: {{ vehicle.mileage }} <br/>
     Vehicle guarantee type: {{ vehicle.guaranteeType }} <br/>
     Vehicle purchase date: {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
     Vehicle name/type: {{ vehicle.nameType }} <br/><br/>
 
-    Accident cases: {{ cases|length }} <br/>
+    Number of accident cases: {{ cases|length }} <br/>
 
 {% endblock %}
 
