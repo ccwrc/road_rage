@@ -27,7 +27,7 @@ class AccidentCaseController extends Controller {
     public function createCaseAction(Request $req, $vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         $case = new AccidentCase();
-        $case->setVehicle($vehicle);
+        $case->setVehicle($vehicle)->setProgress("#FF7575"); //Progress color -> look manual
         $form = $this->createForm(AccidentCaseType::class, $case);
 
         $form->handleRequest($req);
