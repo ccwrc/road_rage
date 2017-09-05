@@ -25,6 +25,26 @@ class MonitoringController extends Controller {
         return $operatorName;
     }
 
+    protected function setColorProgressRedForCase($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case->setProgress("#FF7575");
+    }
+
+    protected function setColorProgressOrangeForCase($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case->setProgress("#FF9C42");
+    }
+    
+    protected function setColorProgressGreenForCase($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case->setProgress("#93EEAA");
+    }    
+
+    protected function setColorProgressGreyForCase($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case->setProgress("#E6E6E6");
+    }      
+   
     /**
      * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
      */
