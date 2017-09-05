@@ -16,7 +16,7 @@ class AccidentCaseType extends AbstractType {
                 ->add("infoSms", "text", ["label" => "SMS info (optional - phone): "])
                 ->add("infoMail", "text", ["label" => "Mail info (optional - mail): "])
                 ->add("status", "hidden", ["label" => "Status: ", "data" => "active"])
-                ->add("progress", "hidden", ["label" => "progress: ", "data" => "start"])
+              //  ->add("progress", "hidden", ["label" => "progress: ", "data" => "start"])
                 ->add("reportLate", "hidden", ["label" => "Service car late: ", "data" => 0])
                 ->add("reportRsTime", "hidden", ["label" => "Road service time: ", "data" => 0])
                 ->add("reportNrsTime", "hidden", ["label" => "No road service time: ", "data" => 0])
