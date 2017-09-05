@@ -25,16 +25,16 @@ class MonitoringPgController extends MonitoringController {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
 
-        $monitoring = new Monitoring();
-        $monitoring->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+        $monitoringPg = new Monitoring();
+        $monitoringPg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
                 ->setTimeSave(new DateTime("now"))->setCode("PG");
-        $form = $this->createForm(MonitoringPgType::class, $monitoring);
+        $form = $this->createForm(MonitoringPgType::class, $monitoringPg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringPg = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($monitoring);
+            $em->persist($monitoringPg);
             $em->flush();
 
             return $this->redirectToRoute("truck_operator_panel", [
@@ -52,14 +52,14 @@ class MonitoringPgController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringPgAction(Request $req, $monitoringId) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
-        $caseId = $monitoring->getAccidentCase()->getId();
-        $form = $this->createForm(MonitoringPgEditType::class, $monitoring);
+        $caseId = $monitoringPg->getAccidentCase()->getId();
+        $form = $this->createForm(MonitoringPgEditType::class, $monitoringPg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoring = $form->getData();
+            $monitoringPg = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
