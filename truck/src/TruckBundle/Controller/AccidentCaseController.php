@@ -74,8 +74,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/editCase", requirements={"caseId"="\d+"})
      */
     public function editCaseAction(Request $req, $caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-                ->find($caseId);
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $form = $this->createForm(AccidentCaseEditType::class, $case);
 
         $form->handleRequest($req);
@@ -87,7 +86,7 @@ class AccidentCaseController extends Controller {
                         "caseId" => $caseId
             ]);
         }
-
+        // TODO add caseId + info in view
         return $this->render('TruckBundle:AccidentCase:edit_case.html.twig', [
                     "form" => $form->createView()
         ]);
@@ -110,7 +109,7 @@ class AccidentCaseController extends Controller {
                         "caseId" => $caseId
             ]);
         }
-
+       // TODO add caseId + info in view
         return $this->render('TruckBundle:AccidentCase:first_edit_case_end.html.twig', [
                     "form" => $form->createView()
         ]);
@@ -133,7 +132,7 @@ class AccidentCaseController extends Controller {
                         "caseId" => $caseId
             ]);
         }
-
+       // TODO add caseId + info in view
         return $this->render('TruckBundle:AccidentCase:edit_case_end.html.twig', [
                     "form" => $form->createView()
         ]);
