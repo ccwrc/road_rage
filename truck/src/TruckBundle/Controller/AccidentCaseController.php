@@ -26,15 +26,18 @@ class AccidentCaseController extends Controller {
      */
     public function caseProgressColorManualAction() {
         return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig');
-    }
-
+    }  
+    
     /**
      * @Route("/{vehicleId}/createCase", requirements={"vehicleId"="\d+"})
      */
     public function createCaseAction(Request $req, $vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         $case = new AccidentCase();
-        $case->setVehicle($vehicle)->setProgressColor("#FF7575"); 
+        $case->setVehicle($vehicle)->setProgressColor("#FF7575")->setStatus("active")
+                ->setReportLate(0)->setReportRsTime(0)->setReportNrsTime(0)
+                ->setReportRepairTotal(0)->setReportArrivalTime(0)->setReportCaseTotal(0)
+                ->setReportRepairStatus("initialization"); 
         $form = $this->createForm(AccidentCaseType::class, $case);
 
         $form->handleRequest($req);
