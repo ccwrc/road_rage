@@ -37,3 +37,8 @@
     text-decoration: none;
     border-radius: 2px;
 }
+
+.caseButton:hover {  
+    color: white;
+    text-shadow: 2px 2px 2px #000000;
+}
