@@ -1,8 +1,8 @@
 
 {% if case is not empty %}  
-    {#TODO change for end after tests#}
-    {% if case.progress == "start" %}
-     
+
+    {% if case.progressColor == "#E6E6E6" %}
+
         <span class="textBold textItalic">Data for the report </span> 
         <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}" >edit</a>
         <br/> 
@@ -16,5 +16,5 @@
         <span class="textBold textItalic">Repair status (completed/incompleted/canceled):</span> {{ case.reportRepairStatus }} <br/>
 
     {% endif %}  
-{% else %}
+
 {% endif %}

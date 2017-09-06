@@ -93,9 +93,9 @@ class AccidentCase
     /**
      * @var string
      *
-     * @ORM\Column(name="progress", type="string", length=255)
+     * @ORM\Column(name="progress_color", type="string", length=255)
      */
-    private $progress;
+    private $progressColor;
 
     /**
      * @var int

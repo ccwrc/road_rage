@@ -431,4 +431,50 @@ class Monitoring
     {
         return $this->repairDealer;
     }
+
+    /**
+     * Set amount
+     *
+     * @param integer $amount
+     * @return Monitoring
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return integer 
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param string $currency
+     * @return Monitoring
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return string 
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
 }

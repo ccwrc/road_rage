@@ -22,12 +22,19 @@ use \DateTime;
 class AccidentCaseController extends Controller {
     
     /**
+     * @Route("/caseProgressColorManual")
+     */
+    public function caseProgressColorManualAction() {
+        return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig');
+    }
+
+    /**
      * @Route("/{vehicleId}/createCase", requirements={"vehicleId"="\d+"})
      */
     public function createCaseAction(Request $req, $vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         $case = new AccidentCase();
-        $case->setVehicle($vehicle)->setProgress("#FF7575"); //Progress color -> look manual
+        $case->setVehicle($vehicle)->setProgressColor("#FF7575"); 
         $form = $this->createForm(AccidentCaseType::class, $case);
 
         $form->handleRequest($req);
@@ -168,15 +175,5 @@ class AccidentCaseController extends Controller {
                     "case" => $case
         ]);
     }  
-    
-    /**
-     * @Route("/caseProgressColorManual")
-     */
-    public function caseProgressColorManualAction() {
-
-        return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig', [
-                        //...
-        ]);
-    }
 
 }

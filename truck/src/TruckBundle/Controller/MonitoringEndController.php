@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Monitoring;
+//use TruckBundle\EntityAccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringEndType;
 use TruckBundle\Form\Monitoring\MonitoringEndEditType;
 use \DateTime;
@@ -31,6 +32,7 @@ class MonitoringEndController extends MonitoringController {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
+         //   $this->setColorProgressGreyForCase($case);
             $monitoringEnd = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEnd);

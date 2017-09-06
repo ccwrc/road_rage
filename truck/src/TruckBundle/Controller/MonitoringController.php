@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 // use Symfony\Component\HttpFoundation\Request; // to delete after refactor
 
 //use TruckBundle\Entity\Monitoring;
-//use TruckBundle\Entity\AccidentCase; // to delete after refactor
+use TruckBundle\Entity\AccidentCase; 
 //use \DateTime;  // to delete after refactor
 
 /**
@@ -25,24 +25,20 @@ class MonitoringController extends Controller {
         return $operatorName;
     }
 
-    protected function setColorProgressRedForCase($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        $case->setProgress("#FF7575");
+    protected function setColorProgressRedForCase(AccidentCase $case) {
+        $case->setProgressColor("#FF7575");
     }
 
-    protected function setColorProgressOrangeForCase($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        $case->setProgress("#FF9C42");
+    protected function setColorProgressOrangeForCase(AccidentCase $case) {
+        $case->setProgressColor("#FF9C42");
     }
     
-    protected function setColorProgressGreenForCase($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        $case->setProgress("#93EEAA");
+    protected function setColorProgressGreenForCase(AccidentCase $case) {
+        $case->setProgressColor("#93EEAA");
     }    
 
-    protected function setColorProgressGreyForCase($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        $case->setProgress("#E6E6E6");
+    protected function setColorProgressGreyForCase(AccidentCase $case) {
+        $case->setProgressColor("#E6E6E6");
     }      
    
     /**

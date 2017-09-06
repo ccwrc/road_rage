@@ -93,9 +93,9 @@ class AccidentCase
     /**
      * @var string
      *
-     * @ORM\Column(name="progress", type="string", length=255)
+     * @ORM\Column(name="progress_color", type="string", length=255)
      */
-    private $progress;
+    private $progressColor;
 
     /**
      * @var int
@@ -318,28 +318,28 @@ class AccidentCase
         return $this->status;
     }
 
-    /**
-     * Set progress
-     *
-     * @param string $progress
-     * @return AccidentCase
-     */
-    public function setProgress($progress)
-    {
-        $this->progress = $progress;
-
-        return $this;
-    }
-
-    /**
-     * Get progress
-     *
-     * @return string 
-     */
-    public function getProgress()
-    {
-        return $this->progress;
-    }
+//    /**
+//     * Set progress
+//     *
+//     * @param string $progress
+//     * @return AccidentCase
+//     */
+//    public function setProgress($progress)
+//    {
+//        $this->progress = $progress;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get progress
+//     *
+//     * @return string 
+//     */
+//    public function getProgress()
+//    {
+//        return $this->progress;
+//    }
 
     /**
      * Set reportLate
@@ -556,5 +556,28 @@ class AccidentCase
     public function getMonitorings()
     {
         return $this->monitorings;
+    }
+
+    /**
+     * Set progressColor
+     *
+     * @param string $progressColor
+     * @return AccidentCase
+     */
+    public function setProgressColor($progressColor)
+    {
+        $this->progressColor = $progressColor;
+
+        return $this;
+    }
+
+    /**
+     * Get progressColor
+     *
+     * @return string 
+     */
+    public function getProgressColor()
+    {
+        return $this->progressColor;
     }
 }
