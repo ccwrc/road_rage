@@ -48,7 +48,7 @@
 
 {% block cases %}
     {#{% render url('truck_accidentcase_showallcases') %}#}
-    {% render url('truck_accidentcase_showallactivecases') %}
+    {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
 {% endblock %}
 
 
