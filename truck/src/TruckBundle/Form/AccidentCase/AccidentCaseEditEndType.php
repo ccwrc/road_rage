@@ -16,8 +16,13 @@ class AccidentCaseEditEndType extends AbstractType {
                 ->add("reportRepairTotal", "number", ["label" => "Repair total time: "])
                 ->add("reportArrivalTime", "number", ["label" => "Arrival time: "])
                 ->add("reportCaseTotal", "number", ["label" => "Case total time: "])
-                //TODO choice completed/incompleted/canceled
-                ->add("reportRepairStatus", "text", ["label" => "Repair status: "]);
+                ->add("reportRepairStatus", "choice", [
+                    "choices" => [
+                        "completed" => "completed",
+                        "incompleted" => "incompleted",
+                        "canceled" => "canceled"
+                    ],
+                    "choices_as_values" => true, "label" => "Repair status: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {

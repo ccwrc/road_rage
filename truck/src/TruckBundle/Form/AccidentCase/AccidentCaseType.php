@@ -15,15 +15,6 @@ class AccidentCaseType extends AbstractType {
                 ->add("driverContact", "text", ["label" => "Driver/dispatcher name & phone: "])
                 ->add("infoSms", "text", ["label" => "SMS info (optional - phone): "])
                 ->add("infoMail", "text", ["label" => "Mail info (optional - mail): "])
-               // ->add("status", "hidden", ["label" => "Status: ", "data" => "active"])
-              //  ->add("progress", "hidden", ["label" => "progress: ", "data" => "start"])
-               // ->add("reportLate", "hidden", ["label" => "Service car late: ", "data" => 0])
-               // ->add("reportRsTime", "hidden", ["label" => "Road service time: ", "data" => 0])
-               // ->add("reportNrsTime", "hidden", ["label" => "No road service time: ", "data" => 0])
-               // ->add("reportRepairTotal", "hidden", ["label" => "Repair total time: ", "data" => 0])
-              //  ->add("reportArrivalTime", "hidden", ["label" => "Arrival time: ", "data" => 0])
-               // ->add("reportCaseTotal", "hidden", ["label" => "Case total time: ", "data" => 0])
-               // ->add("reportRepairStatus", "hidden", ["label" => "Repair status: ", "data" => "notification"])
                 ->add("comment", "textarea", ["label" => "Other comments: "]);
     }
 
