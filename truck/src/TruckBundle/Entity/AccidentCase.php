@@ -318,29 +318,6 @@ class AccidentCase
         return $this->status;
     }
 
-//    /**
-//     * Set progress
-//     *
-//     * @param string $progress
-//     * @return AccidentCase
-//     */
-//    public function setProgress($progress)
-//    {
-//        $this->progress = $progress;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get progress
-//     *
-//     * @return string 
-//     */
-//    public function getProgress()
-//    {
-//        return $this->progress;
-//    }
-
     /**
      * Set reportLate
      *
