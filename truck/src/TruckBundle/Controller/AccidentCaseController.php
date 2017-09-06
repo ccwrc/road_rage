@@ -21,6 +21,11 @@ use \DateTime;
  */
 class AccidentCaseController extends Controller {
     
+    protected function getOperatorName() {
+        return $this->container->get("security.context")->getToken()->getUser()
+                ->getUsername();
+    }    
+    
     /**
      * @Route("/caseProgressColorManual")
      */
@@ -46,13 +51,12 @@ class AccidentCaseController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($case);
            
-            $operatorName = $this->container->get("security.context")->getToken()->getUser()
-                    ->getUsername();
-            $startMonitoring = new Monitoring();
-            $startMonitoring->setAccidentCase($case)->setCode("START")->setOperator($operatorName)
+            $operatorName = $this->getOperatorName();
+            $monitoringStart = new Monitoring();
+            $monitoringStart->setAccidentCase($case)->setCode("START")->setOperator($operatorName)
                     ->setComments($case->getComment())->setContactThrough($case->getDriverContact())
                     ->setTimeSave(new DateTime("now"));
-            $em->persist($startMonitoring);
+            $em->persist($monitoringStart);
             $em->flush();
             $caseId = $case->getId();
 
