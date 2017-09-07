@@ -189,9 +189,8 @@ class AccidentCaseController extends Controller {
     public function deactivateCaseAction($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $case->setStatus("inactive");
-
-//                    $em = $this->getDoctrine()->getManager();
-//            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
         return $this->redirectToRoute("truck_operator_panel", [
                     "caseId" => 0
         ]);

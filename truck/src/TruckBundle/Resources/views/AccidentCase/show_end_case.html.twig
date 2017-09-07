@@ -15,6 +15,11 @@
         <span class="textBold textItalic">Case total time:</span> {{ case.reportCaseTotal }} minutes <br/>
         <span class="textBold textItalic">Repair status (completed/incompleted/canceled):</span> {{ case.reportRepairStatus }} <br/>
 
+        {% if case.status == "active" %}
+            <center>
+            <a title="deactivate case" href="{{ path('truck_accidentcase_deactivatecase', {"caseId":case.id}) }}" >close case</a>
+            </center>
+        {% endif %}
     {% endif %}  
 
 {% endif %}
