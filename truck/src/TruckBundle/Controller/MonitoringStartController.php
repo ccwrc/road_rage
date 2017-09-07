@@ -14,9 +14,9 @@ use TruckBundle\Form\Monitoring\MonitoringStartEditType;
  */
 class MonitoringStartController extends MonitoringController {
     
-    // START: START new case (automatic code) 
-    // created automatically when the case starts in AccidentCaseController
-    // look -> createCaseAction
+    /* START: START new case (automatic code) 
+       created automatically when the case starts in AccidentCaseController
+       look -> createCaseAction */
 
     /**
      * @Route("/{monitoringId}/editMonitoringStart", requirements={"monitoringId"="\d+"})

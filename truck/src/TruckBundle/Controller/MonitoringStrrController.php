@@ -31,6 +31,7 @@ class MonitoringStrrController extends MonitoringController {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->setColorProgressGreenForCase($case);
             $monitoringStrr = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringStrr);
