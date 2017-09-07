@@ -17,7 +17,11 @@
 
         {% if case.status == "active" %}
             <center>
-            <a title="deactivate case" href="{{ path('truck_accidentcase_deactivatecase', {"caseId":case.id}) }}" >close case</a>
+                <a title="deactivate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >close case</a>
+            </center>
+        {% else%}    
+            <center>
+                <a title="activate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >open case</a>
             </center>
         {% endif %}
     {% endif %}  
