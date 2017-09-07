@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Monitoring;
-// use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Form\Monitoring\MonitoringEtaType;
 use TruckBundle\Form\Monitoring\MonitoringEtaEditType;
 use \DateTime;
@@ -32,8 +31,8 @@ class MonitoringEtaController extends MonitoringController {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoringEta = $form->getData();
             $this->setColorProgressOrangeForCase($case);
+            $monitoringEta = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEta);
             $em->flush();
