@@ -181,6 +181,20 @@ class AccidentCaseController extends Controller {
         return $this->render('TruckBundle:AccidentCase:show_end_case.html.twig', [
                     "case" => $case
         ]);
-    }  
+    } 
+    
+    /**
+     * @Route("/{caseId}/deactivateCase", requirements={"caseId"="\d+"})
+     */
+    public function deactivateCaseAction($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case->setStatus("inactive");
+
+//                    $em = $this->getDoctrine()->getManager();
+//            $em->flush();
+        return $this->redirectToRoute("truck_operator_panel", [
+                    "caseId" => 0
+        ]);
+    }
 
 }
