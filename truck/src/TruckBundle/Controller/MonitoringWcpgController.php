@@ -35,6 +35,7 @@ class MonitoringWcpgController extends MonitoringController {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->setColorProgressRedForCase($case);
             $monitoringWcpg = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringWcpg);
