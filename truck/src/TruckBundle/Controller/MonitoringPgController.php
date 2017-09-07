@@ -32,6 +32,7 @@ class MonitoringPgController extends MonitoringController {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->setColorProgressRedForCase($case);
             $monitoringPg = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringPg);
