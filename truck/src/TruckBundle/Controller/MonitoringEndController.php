@@ -28,7 +28,7 @@ class MonitoringEndController extends MonitoringController {
         $monitoringEnd->setAccidentCase($case)->setOperator($operatorName)
                 ->setTimeSave(new DateTime("now"))->setCode("END")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringEndType::class, $monitoringEnd);
-
+     
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setColorProgressGreyForCase($case);
@@ -36,7 +36,7 @@ class MonitoringEndController extends MonitoringController {
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEnd);
             $em->flush();
-
+        //TODO case end -> make calculations
             return $this->redirectToRoute("truck_accidentcase_firsteditcaseend", [
                         "caseId" => $caseId
             ]);
@@ -64,7 +64,7 @@ class MonitoringEndController extends MonitoringController {
             $monitoringEnd->setOperator($operatorName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-        //TODO case end -> make calculations
+
             return $this->redirectToRoute("truck_accidentcase_editcaseend", [
                         "caseId" => $caseId
             ]);
