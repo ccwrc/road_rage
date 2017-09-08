@@ -1,0 +1,16 @@
+
+Inactive cases: <br/>
+
+{% for case in cases %} 
+
+    {% if caseId == case.id %}
+        <a title="{{ case.vehicle.companyName }}" href="{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "inactive"}) }}"> 
+        <button class="caseButton" style="background-color:{{ case.progressColor }}">&rarr; {{ case.id }} &larr;</button> </a> <br/>
+    {% else %}
+        <a title="{{ case.vehicle.companyName }}" href="{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "inactive"}) }}"> 
+        <button class="caseButton" style="background-color:{{ case.progressColor }}">{{ case.id }}</button> </a> <br/>
+    {% endif %}
+
+{% else %}
+    Empty.
+{% endfor %}
