@@ -13,10 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class OperatorController extends Controller {
 
     /**
-     * @Route("/panel/{caseId}/{casesStatus}", requirements={"caseId"="\d+"})
+     * @Route("/panel/{caseId}/{casesStatus}", requirements={"caseId"="\d+", "casesStatus"="[a-z]{0,9}"})
      */
     public function panelAction($caseId = 0, $casesStatus = "active") {
-        //TODO add requir for cas Stat
         return $this->render('TruckBundle:Operator:panel.html.twig', [
                     "caseId" => $caseId,
                     "casesStatus" => $casesStatus
