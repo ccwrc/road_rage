@@ -47,8 +47,8 @@
 
 
 {% block cases %}
-    {% if casesStatus == "inactive" %}  {#TODO inactive render url#}
-        {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
+    {% if casesStatus == "inactive" %}  
+        {% render url('truck_accidentcase_showallinactivecases', {"caseId":caseId}) %}
     {% elseif casesStatus == "all" %}
         {% render url('truck_accidentcase_showallcases', {"caseId":caseId}) %}
     {% else %}    

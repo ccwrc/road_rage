@@ -1,7 +1,10 @@
 
 {#TODO add active switch: active/all/inactive#}
 
+<a title="switch to inactive cases" href="{{ path('truck_operator_panel', {'caseId': "0", 'casesStatus': "inactive"}) }}">
 Active cases: <br/>
+</a>
+{#Active cases: <br/>#}
 
 {% for case in cases %} 
 
