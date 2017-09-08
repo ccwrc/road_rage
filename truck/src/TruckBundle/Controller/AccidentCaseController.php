@@ -161,6 +161,19 @@ class AccidentCaseController extends Controller {
                     "caseId" => $caseId
         ]);
     }
+    
+    /**
+     * @Route("/{caseId}/showAllInactiveCases", requirements={"caseId"="\d+"})
+     */
+    public function showAllInactiveCasesAction($caseId = 0) {
+        $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->findAllInactiveCases();
+
+        return $this->render('TruckBundle:AccidentCase:show_all_inactive_cases.html.twig', [
+                    "cases" => $cases,
+                    "caseId" => $caseId
+        ]);
+    }
 
     /**
      * @Route("/{caseId}/showStartCase", requirements={"caseId"="\d+"})
