@@ -20,9 +20,8 @@ class MonitoringController extends Controller {
     //TODO redirectIfMonitoringHasWrongCodeOrCaseId
 
     protected function getOperatorName() {
-        $operatorName = $this->container->get("security.context")->getToken()->getUser()
+        return $this->container->get("security.context")->getToken()->getUser()
                 ->getUsername();
-        return $operatorName;
     }
 
     protected function setColorProgressRedForCase(AccidentCase $case) {
