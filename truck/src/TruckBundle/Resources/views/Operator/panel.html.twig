@@ -59,16 +59,18 @@
 
 {% block monitoring %}
     {% render url('truck_accidentcase_showstartcase', {"caseId":caseId}) %}
-    <a title="Payment Guarantee (request)" href="{{ path('truck_monitoringpg_createmonitoringpg', {"caseId":caseId}) }}">PG</a> 
-    <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">CPG</a>
-    <a title="Repair Order" href="{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}">RO</a>
-    <a title="Estimated Arrival Time" href="{{ path('truck_monitoringeta_createmonitoringeta', {"caseId":caseId}) }}">ETA</a>
-    <a title="STaRt Repair Time" href="{{ path('truck_monitoringstrr_createmonitoringstrr', {"caseId":caseId}) }}">STRR</a>
-    <a title="END case" href="{{ path('truck_monitoringend_createmonitoringend', {"caseId":caseId}) }}">END</a>
-    &nbsp;
-    <a title="General. Outgoing phone call/fax/mail/etc. " href="{{ path('truck_monitoringout_createmonitoringout', {"caseId":caseId}) }}">Out</a>
-    <a title="General. Incoming phone call/fax/mail/etc. " href="{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}">Incoming</a>
-    <br/>
+    {% if caseId != 0 %}
+        <a title="Payment Guarantee (request)" href="{{ path('truck_monitoringpg_createmonitoringpg', {"caseId":caseId}) }}">PG</a> 
+        <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">CPG</a>
+        <a title="Repair Order" href="{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}">RO</a>
+        <a title="Estimated Arrival Time" href="{{ path('truck_monitoringeta_createmonitoringeta', {"caseId":caseId}) }}">ETA</a>
+        <a title="STaRt Repair Time" href="{{ path('truck_monitoringstrr_createmonitoringstrr', {"caseId":caseId}) }}">STRR</a>
+        <a title="END case" href="{{ path('truck_monitoringend_createmonitoringend', {"caseId":caseId}) }}">END</a>
+        &nbsp;
+        <a title="General. Outgoing phone call/fax/mail/etc. " href="{{ path('truck_monitoringout_createmonitoringout', {"caseId":caseId}) }}">Out</a>
+        <a title="General. Incoming phone call/fax/mail/etc. " href="{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}">Incoming</a>
+        <br/>
+    {% endif %}
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
 {% endblock %}
