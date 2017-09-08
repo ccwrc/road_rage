@@ -43,3 +43,13 @@
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
 }
+
+.casesSwitch {  /*TODO top/bottom distance*/
+    color: black;
+    text-decoration: none;
+}
+
+.casesSwitch:hover {  
+    color: white;
+    text-shadow: 1px 1px 1px #000000;
+}
