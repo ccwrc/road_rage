@@ -139,20 +139,21 @@ class AccidentCaseController extends Controller {
     }
 
     /**
-     * @Route("/showAllCases")
+     * @Route("/{caseId}/showAllCases", requirements={"caseId"="\d+"})
      */
-    public function showAllCasesAction() {
+    public function showAllCasesAction($caseId = 0) {
         $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAll();
 
         return $this->render('TruckBundle:AccidentCase:show_all_cases.html.twig', [
                     "cases" => $cases,
+                    "caseId" => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/showAllActiveCases", requirements={"caseId"="\d+"})
      */
-    public function showAllActiveCasesAction($caseId) {
+    public function showAllActiveCasesAction($caseId = 0) {
         $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAllActiveCases();
 
         return $this->render('TruckBundle:AccidentCase:show_all_active_cases.html.twig', [
@@ -188,7 +189,7 @@ class AccidentCaseController extends Controller {
      */
     public function activateDeactivateCaseAction($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        if ($case->getStatus() === "active") {
+        if ($case->getStatus() === "active" && $case->getProgressColor() === "#E6E6E6") {
             $case->setStatus("inactive");
             $em = $this->getDoctrine()->getManager();
             $em->flush();

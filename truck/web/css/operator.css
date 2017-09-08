@@ -31,6 +31,10 @@ body {
     text-align: center;
 }
 
+/*.logo:hover {  
+    box-shadow: 1px 1px 10px 1px white inset;
+}*/
+
 .menuBar {
     border-top-right-radius: .4em;
     background-color: #E6DBFF;
@@ -40,6 +44,10 @@ body {
     overflow: auto;
     float: left;
 }
+
+/*.menuBar:hover {  
+    box-shadow: 1px 1px 10px 1px white inset;
+}*/
 
 .cases {
     background-color: #FFFFD7;
@@ -51,6 +59,10 @@ body {
     text-align: center;
 }
 
+/*.cases:hover {  
+    box-shadow: 1px 1px 10px 1px white inset;
+}*/
+
 .monitoring {
     background-color: #D2FFC4;
     width: 80%;
@@ -59,6 +71,10 @@ body {
     overflow: auto;
     float: left;
 }
+
+/*.monitoring:hover {  
+    box-shadow: 1px 1px 10px 1px white inset;
+}*/
 
 .logged {
     border-bottom-left-radius: .4em;

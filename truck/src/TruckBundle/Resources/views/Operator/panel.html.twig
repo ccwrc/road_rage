@@ -47,8 +47,13 @@
 
 
 {% block cases %}
-    {#{% render url('truck_accidentcase_showallcases') %}#}
-    {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
+    {% if casesStatus == "inactive" %}  {#TODO inactive render url#}
+        {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
+    {% elseif casesStatus == "all" %}
+        {% render url('truck_accidentcase_showallcases', {"caseId":caseId}) %}
+    {% else %}    
+        {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
+    {% endif %} 
 {% endblock %}
 
 
