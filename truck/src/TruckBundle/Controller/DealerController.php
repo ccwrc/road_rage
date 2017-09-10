@@ -50,6 +50,7 @@ class DealerController extends Controller {
      * @Route("/{dealerId}/showDealer", requirements={"dealerId"="\d+"})
      */
     public function showDealerAction($dealerId) {
+        $this->throwExceptionIfDealerIdIsWrong($dealerId);
         $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
         $vehicles = $dealer->getVehicles();
 
