@@ -135,6 +135,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/editCaseEnd", requirements={"caseId"="\d+"})
      */
     public function editCaseEndAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
                 ->find($caseId);
         $form = $this->createForm(AccidentCaseEditEndType::class, $case);
