@@ -16,6 +16,13 @@ use TruckBundle\Form\Dealer\DealerEditType;
  * @Security("has_role('ROLE_DEALER')")
  */
 class DealerController extends Controller {
+    
+    protected function throwExceptionIfDealerIdIsWrong($dealerId) {
+        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($dealerId);
+        if ($dealer === null) {
+            throw $this->createNotFoundException("Wrong dealer ID");
+        }
+    }    
 
     /**
      * @Route("/showAllDealers")

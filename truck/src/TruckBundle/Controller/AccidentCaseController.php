@@ -28,7 +28,7 @@ class AccidentCaseController extends Controller {
     protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         if ($vehicle === null) {
-            throw $this->createNotFoundException("Wrong Vehicle ID");
+            throw $this->createNotFoundException("Wrong vehicle ID");
         }
     }
     
