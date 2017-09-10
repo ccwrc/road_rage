@@ -91,6 +91,7 @@ class DealerController extends Controller {
      * @Route("/{dealerId}/editDealer", requirements={"dealerId"="\d+"})
      */
     public function editDealerAction(Request $req, $dealerId) {
+        $this->throwExceptionIfDealerIdIsWrong($dealerId);
         $this->denyAccessUnlessGranted('ROLE_OPERATOR', null, 'Access denied.');
         $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")
                 ->find($dealerId);
