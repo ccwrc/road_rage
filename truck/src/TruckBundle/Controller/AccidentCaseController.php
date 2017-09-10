@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Vehicle;
 use TruckBundle\Entity\Monitoring; //for createCaseAction
 use TruckBundle\Form\AccidentCase\AccidentCaseType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
