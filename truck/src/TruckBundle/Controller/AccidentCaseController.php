@@ -31,6 +31,13 @@ class AccidentCaseController extends Controller {
             throw $this->createNotFoundException("Wrong Vehicle ID");
         }
     }
+    
+    protected function throwExceptionIfCaseIdIsWrong($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        if ($case === null) {
+            throw $this->createNotFoundException("Wrong case ID");
+        }
+    }    
 
     /**
      * @Route("/caseProgressColorManual")
@@ -81,6 +88,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/editCase", requirements={"caseId"="\d+"})
      */
     public function editCaseAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $form = $this->createForm(AccidentCaseEditType::class, $case);
 
