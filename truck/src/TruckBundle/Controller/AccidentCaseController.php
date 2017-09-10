@@ -218,6 +218,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/activateDeactivateCase", requirements={"caseId"="\d+"})
      */
     public function activateDeactivateCaseAction($caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         if ($case->getStatus() === "active" && $case->getProgressColor() === "#E6E6E6") {
             $case->setStatus("inactive");
