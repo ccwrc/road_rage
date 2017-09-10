@@ -25,6 +25,13 @@ class AccidentCaseController extends Controller {
                 ->getUsername();
     }    
     
+    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        if ($vehicle === null) {
+            throw $this->createNotFoundException("Wrong Vehicle ID");
+        }
+    }
+
     /**
      * @Route("/caseProgressColorManual")
      */
@@ -36,6 +43,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{vehicleId}/createCase", requirements={"vehicleId"="\d+"})
      */
     public function createCaseAction(Request $req, $vehicleId) {
+        $this->throwExceptionIfVehicleIdIsWrong($vehicleId);
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         $case = new AccidentCase();
         $case->setVehicle($vehicle)->setProgressColor("#FF7575")->setStatus("active")
