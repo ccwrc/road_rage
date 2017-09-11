@@ -21,6 +21,7 @@ class MonitoringEtaController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringEta", requirements={"caseId"="\d+"})
      */
     public function createMonitoringEtaAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
