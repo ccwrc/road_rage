@@ -40,14 +40,14 @@ class MonitoringController extends Controller {
         $case->setProgressColor("#E6E6E6");
     }     
     
-    protected function throwExceptionIfCaseIdIsWrong($caseId) {
+    protected function throwExceptionIfCaseIdIsWrongExcludingZero($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         if ($case === null && $caseId != 0) { //0 is default for operator panel
             throw $this->createNotFoundException("Wrong case ID");
         }
     }
     
-    protected function throwExceptionIfCaseIdIsWrongIncludeZero($caseId) {
+    protected function throwExceptionIfCaseIdIsWrong($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         if ($case === null) {
             throw $this->createNotFoundException("Wrong case ID");
@@ -58,7 +58,7 @@ class MonitoringController extends Controller {
      * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
      */
     public function showAllMonitoringsForCaseAction($caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $this->throwExceptionIfCaseIdIsWrongExcludingZero($caseId);
         $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->findMonitoringsByCaseId($caseId);
 
