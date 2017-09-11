@@ -42,11 +42,18 @@ class MonitoringController extends Controller {
     
     protected function throwExceptionIfCaseIdIsWrong($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        if ($case === null && $caseId != 0) {
+        if ($case === null && $caseId != 0) { //0 is default for operator panel
             throw $this->createNotFoundException("Wrong case ID");
         }
-    }       
-   
+    }
+    
+    protected function throwExceptionIfCaseIdIsWrongIncludeZero($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        if ($case === null) {
+            throw $this->createNotFoundException("Wrong case ID");
+        }
+    }
+
     /**
      * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
      */
