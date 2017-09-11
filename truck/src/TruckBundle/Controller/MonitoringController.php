@@ -38,12 +38,20 @@ class MonitoringController extends Controller {
 
     protected function setColorProgressGreyForCase(AccidentCase $case) {
         $case->setProgressColor("#E6E6E6");
-    }      
+    }     
+    
+    protected function throwExceptionIfCaseIdIsWrong($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        if ($case === null && $caseId != 0) {
+            throw $this->createNotFoundException("Wrong case ID");
+        }
+    }       
    
     /**
      * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
      */
     public function showAllMonitoringsForCaseAction($caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->findMonitoringsByCaseId($caseId);
 
