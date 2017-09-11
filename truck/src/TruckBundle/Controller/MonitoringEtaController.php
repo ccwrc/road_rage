@@ -53,6 +53,7 @@ class MonitoringEtaController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringEta", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringEtaAction(Request $req, $monitoringId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "ETA");
         $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoringEta->getAccidentCase()->getId();
