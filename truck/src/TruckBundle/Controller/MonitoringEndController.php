@@ -53,6 +53,7 @@ class MonitoringEndController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringEnd", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringEndAction(Request $req, $monitoringId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "END");
         $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoringEnd->getAccidentCase()->getId();
