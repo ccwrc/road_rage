@@ -17,7 +17,13 @@ use TruckBundle\Entity\AccidentCase;
  */
 class MonitoringController extends Controller {
 
-    //TODO redirectIfMonitoringHasWrongCodeOrCaseId
+    protected function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        if ($monitoring === null || $monitoring->getCode() != $code) { 
+            throw $this->createNotFoundException("Wrong monitoring data");
+        }
+    }
 
     protected function getOperatorName() {
         return $this->container->get("security.context")->getToken()->getUser()
