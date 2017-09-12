@@ -21,6 +21,7 @@ class MonitoringPgController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringPgAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
