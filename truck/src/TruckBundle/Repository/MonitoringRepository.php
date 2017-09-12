@@ -4,6 +4,8 @@ namespace TruckBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+//use Doctrine\ORM\Query\ResultSetMapping; //trainer
+
 /**
  * MonitoringRepository
  *
@@ -18,5 +20,13 @@ class MonitoringRepository extends EntityRepository {
                 . ' = :caseId')->setParameter("caseId", $caseId);
         return $query->getResult();
     }    
+    
+//    public function findTimestampFirstStartMonitoringByCaseId($caseId) {
+//        $em = $this->getEntityManager();
+//        $rsm = new ResultSetMapping();
+//        $query = $em->createNativeQuery('SELECT UNIX_TIMESTAMP(time_save) FROM monitoring WHERE accident_case_id'
+//                . ' = ?', $rsm)->setParameter(1, $caseId);
+//        return $query->getResult();
+//    }       
     
 }

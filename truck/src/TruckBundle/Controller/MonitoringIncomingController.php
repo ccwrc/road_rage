@@ -49,9 +49,10 @@ class MonitoringIncomingController extends MonitoringController {
     }
 
     /**
-     * @Route("/{monitoringId}/editMonitoringIncomig", requirements={"monitoringId"="\d+"})
+     * @Route("/{monitoringId}/editMonitoringIncoming", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringIncomingAction(Request $req, $monitoringId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "Incoming");
         $monitoringIncoming = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoringIncoming->getAccidentCase()->getId();
