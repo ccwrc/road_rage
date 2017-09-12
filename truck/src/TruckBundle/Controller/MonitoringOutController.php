@@ -21,6 +21,7 @@ class MonitoringOutController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringOut", requirements={"caseId"="\d+"})
      */
     public function createMonitoringOutAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
