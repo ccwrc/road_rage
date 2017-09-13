@@ -21,6 +21,7 @@ class MonitoringRoController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringRo", requirements={"caseId"="\d+"})
      */
     public function createMonitoringRoAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
