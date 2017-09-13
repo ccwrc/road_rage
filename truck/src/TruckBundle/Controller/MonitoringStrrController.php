@@ -21,6 +21,7 @@ class MonitoringStrrController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringStrr", requirements={"caseId"="\d+"})
      */
     public function createMonitoringStrrAction(Request $req, $caseId) {
+        $this->throwExceptionIfCaseIdIsWrong($caseId);
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
