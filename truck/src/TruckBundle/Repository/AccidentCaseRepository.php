@@ -26,4 +26,14 @@ class AccidentCaseRepository extends EntityRepository {
         return $query->getResult();
     }    
     
+    public function findFirstMonitoringStartByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave ASC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "START");
+        return $query->getResult();
+    }      
+    
 }
