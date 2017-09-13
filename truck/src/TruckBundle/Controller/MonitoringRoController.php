@@ -54,6 +54,7 @@ class MonitoringRoController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringRo", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringRoAction(Request $req, $monitoringId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "RO");
         $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoringRo->getAccidentCase()->getId();
