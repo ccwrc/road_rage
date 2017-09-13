@@ -14,12 +14,24 @@ use \DateTime;
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class AccidentCaseReportController extends AccidentCaseController {
+    
+    /**
+     * @Route("/{caseId}/testEcho", requirements={"caseId"="\d+"})
+     */
+    public function testEcho($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+
+        return $this->render('TruckBundle:AccidentCase:test_echo.html.twig', [
+                        //...
+        ]);
+    }
 
     protected function getDateDifferenceInMinutesOrReturnZero($earlierDate, $laterDate) {
         $diff = date_diff($earlierDate, $laterDate, false);
         if ($diff->invert == 1) {
             return 0;
         }
+        // https://stackoverflow.com/questions/365191/how-to-get-time-difference-in-minutes-in-php
         // http://php.net/manual/pl/class.dateinterval.php
 //        $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 
 //                + $diff->i + $diff->s / 60;
