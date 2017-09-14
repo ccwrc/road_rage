@@ -19,7 +19,7 @@ class AccidentCaseReportController extends AccidentCaseController {
      * @Route("/{caseId}/testEcho", requirements={"caseId"="\d+"})
      */
     public function testEcho($caseId) {
-        $case = $this->calculateNoRoadServiceTimeOrReturnZero($caseId);
+        $case = $this->calculateRepairTotalTimeOrReturnZero($caseId);
 //        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
 //                ->findLastMonitoringEndByCaseId($caseId);
         $res = $case;
@@ -35,7 +35,8 @@ class AccidentCaseReportController extends AccidentCaseController {
             return 0;
         }
         // http://php.net/manual/pl/class.dateinterval.php
-        $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i;
+        $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60
+                + $diff->i;
         return (int) $totalInMinutes;
     }
 
@@ -104,5 +105,20 @@ class AccidentCaseReportController extends AccidentCaseController {
 
         return $this->getDateDifferenceInMinutesOrReturnZero($startRepairTime, $endRepairTime);
     }    
+    
+    protected function calculateRepairTotalTimeOrReturnZero($caseId) {
+        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringEndByCaseId($caseId);
+
+        if (!$monitoringStrr || !$monitoringEnd) {
+            return 0;
+        }
+        $startRepairTime = $monitoringStrr->getTimeSet();
+        $endRepairTime = $monitoringEnd->getTimeSet();
+
+        return $this->getDateDifferenceInMinutesOrReturnZero($startRepairTime, $endRepairTime);
+    }      
     
 }
