@@ -19,8 +19,9 @@ class AccidentCaseReportController extends AccidentCaseController {
      * @Route("/{caseId}/testEcho", requirements={"caseId"="\d+"})
      */
     public function testEcho($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-                ->findLastMonitoringEndByCaseId($caseId);
+        $case = $this->calculateArrivalTimeOrReturnZero($caseId);
+//        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+//                ->findLastMonitoringEndByCaseId($caseId);
         $res = $case;
 
         return $this->render('TruckBundle:AccidentCase:test_echo.html.twig', [
@@ -40,6 +41,23 @@ class AccidentCaseReportController extends AccidentCaseController {
         $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 
                 + $diff->i;        
         return (int) $totalInMinutes;
+    }
+    
+    protected function calculateArrivalTimeOrReturnZero($caseId) {
+        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringRoByCaseId($caseId);
+        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringStrrByCaseId($caseId);
+
+        if (!$monitoringEta || !$monitoringRo || !$monitoringStrr) {
+            return 0;
+        }
+        $departureTime = $monitoringRo->getTimeSave();
+        $timeOfArrival = $monitoringStrr->getTimeSet();
+
+        return $this->getDateDifferenceInMinutesOrReturnZero($departureTime, $timeOfArrival);
     }
 
 }

@@ -4,8 +4,6 @@ namespace TruckBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-//use Doctrine\ORM\Query\ResultSetMapping; //trainer
-
 /**
  * MonitoringRepository
  *
@@ -19,14 +17,58 @@ class MonitoringRepository extends EntityRepository {
         $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
                 . ' = :caseId')->setParameter("caseId", $caseId);
         return $query->getResult();
-    }    
+    }     
     
-//    public function findTimestampFirstStartMonitoringByCaseId($caseId) {
-//        $em = $this->getEntityManager();
-//        $rsm = new ResultSetMapping();
-//        $query = $em->createNativeQuery('SELECT UNIX_TIMESTAMP(time_save) FROM monitoring WHERE accident_case_id'
-//                . ' = ?', $rsm)->setParameter(1, $caseId);
-//        return $query->getResult();
-//    }       
+    // all below to the end case report
+    
+    public function findFirstMonitoringStartByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave ASC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "START");
+        return $query->getOneOrNullResult();
+    }   
+    
+    public function findLastMonitoringEtaByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave DESC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "ETA");
+        return $query->getOneOrNullResult();
+    }       
+    
+    public function findLastMonitoringStrrByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave DESC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "STRR");
+        return $query->getOneOrNullResult();
+    }      
+    
+    public function findLastMonitoringEndByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave DESC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "END");
+        return $query->getOneOrNullResult();
+    }      
+    
+    public function findLastMonitoringRoByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave DESC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "RO");
+        return $query->getOneOrNullResult();
+    }      
     
 }
