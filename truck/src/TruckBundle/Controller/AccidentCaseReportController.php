@@ -19,7 +19,7 @@ class AccidentCaseReportController extends AccidentCaseController {
      * @Route("/{caseId}/testEcho", requirements={"caseId"="\d+"})
      */
     public function testEcho($caseId) {
-        $case = $this->calculateRoadServiceTimeOrReturnZero($caseId);
+        $case = $this->calculateNoRoadServiceTimeOrReturnZero($caseId);
 //        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
 //                ->findLastMonitoringEndByCaseId($caseId);
         $res = $case;
@@ -88,4 +88,21 @@ class AccidentCaseReportController extends AccidentCaseController {
         return $this->getDateDifferenceInMinutesOrReturnZero($startRepairTime, $endRepairTime);
     }
 
+    protected function calculateNoRoadServiceTimeOrReturnZero($caseId) {
+        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringEndByCaseId($caseId);
+
+        if ($monitoringEta || !$monitoringStrr || !$monitoringEnd) {
+            return 0;
+        }
+        $startRepairTime = $monitoringStrr->getTimeSet();
+        $endRepairTime = $monitoringEnd->getTimeSet();
+
+        return $this->getDateDifferenceInMinutesOrReturnZero($startRepairTime, $endRepairTime);
+    }    
+    
 }
