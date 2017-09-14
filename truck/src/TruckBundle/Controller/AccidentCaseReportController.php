@@ -20,7 +20,7 @@ class AccidentCaseReportController extends AccidentCaseController {
      */
     public function testEcho($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-                ->findLastMonitoringStrrByCaseId($caseId);
+                ->findLastMonitoringEndByCaseId($caseId);
         $res = $case;
 
         return $this->render('TruckBundle:AccidentCase:test_echo.html.twig', [
