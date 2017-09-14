@@ -19,7 +19,7 @@ class AccidentCaseReportController extends AccidentCaseController {
      * @Route("/{caseId}/testEcho", requirements={"caseId"="\d+"})
      */
     public function testEcho($caseId) {
-        $case = $this->calculateArrivalTimeOrReturnZero($caseId);
+        $case = $this->calculateServiceCarLateOrReturnZero($caseId);
 //        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
 //                ->findLastMonitoringEndByCaseId($caseId);
         $res = $case;
@@ -34,15 +34,11 @@ class AccidentCaseReportController extends AccidentCaseController {
         if ($diff->invert == 1) {
             return 0;
         }
-        // https://stackoverflow.com/questions/365191/how-to-get-time-difference-in-minutes-in-php
         // http://php.net/manual/pl/class.dateinterval.php
-//        $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 
-//                + $diff->i + $diff->s / 60;
-        $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 
-                + $diff->i;        
+        $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i;
         return (int) $totalInMinutes;
     }
-    
+
     protected function calculateArrivalTimeOrReturnZero($caseId) {
         $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->findLastMonitoringEtaByCaseId($caseId);
@@ -58,6 +54,21 @@ class AccidentCaseReportController extends AccidentCaseController {
         $timeOfArrival = $monitoringStrr->getTimeSet();
 
         return $this->getDateDifferenceInMinutesOrReturnZero($departureTime, $timeOfArrival);
+    }
+    
+    protected function calculateServiceCarLateOrReturnZero($caseId) {
+        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringStrrByCaseId($caseId);
+
+        if (!$monitoringEta || !$monitoringStrr) {
+            return 0;
+        }
+        $estimateTimeOfArrival = $monitoringEta->getTimeSet();
+        $timeOfArrival = $monitoringStrr->getTimeSet();
+
+        return $this->getDateDifferenceInMinutesOrReturnZero($estimateTimeOfArrival, $timeOfArrival);
     }
 
 }
