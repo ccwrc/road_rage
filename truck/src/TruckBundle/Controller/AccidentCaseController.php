@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Monitoring; //for createCaseAction
+use TruckBundle\Entity\Monitoring; //for createCaseAction (monitoringStart)
 use TruckBundle\Form\AccidentCase\AccidentCaseType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditEndType;
@@ -101,9 +101,10 @@ class AccidentCaseController extends Controller {
                         "caseId" => $caseId
             ]);
         }
-        // TODO add caseId + info in view
+
         return $this->render('TruckBundle:AccidentCase:edit_case.html.twig', [
-                    "form" => $form->createView()
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
         ]);
     }
 
@@ -346,7 +347,7 @@ class AccidentCaseController extends Controller {
         return $this->getDateDifferenceInMinutesOrReturnZero($startCaseTime, $endCaseTime);
     }
 
-    public function generateAndSaveEndCaseReport($caseId) {
+    protected function generateAndSaveEndCaseReport($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $arrivalTime = $this->calculateArrivalTimeOrReturnZero($caseId);
