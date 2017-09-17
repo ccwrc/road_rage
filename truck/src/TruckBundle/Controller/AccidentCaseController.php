@@ -241,6 +241,7 @@ class AccidentCaseController extends Controller {
         }
     }
 
+    
     // functions for generate end case report
 
     protected function getDateDifferenceInMinutesOrReturnZero($earlierDate, $laterDate) {

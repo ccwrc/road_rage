@@ -21,6 +21,7 @@ class MonitoringWcpgController extends MonitoringController {
      * @Route("/{monitoringCpgId}/createMonitoringWcpg", requirements={"monitoringCpgId"="\d+"})
      */
     public function createMonitoringWcpgAction(Request $req, $monitoringCpgId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringCpgId, "CPG");
         $operatorName = $this->getOperatorName();
         $monitoringCpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringCpgId);
