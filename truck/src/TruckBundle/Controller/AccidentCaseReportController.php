@@ -22,13 +22,13 @@ class AccidentCaseReportController extends AccidentCaseController {
      */
     public function testEcho($caseId) {
         $case = $this->generateAndSaveEndCaseReport($caseId);
-//        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-//                ->findLastMonitoringEndByCaseId($caseId);
+
         $res = $case;
 
         return $this->render('TruckBundle:AccidentCase:test_echo.html.twig', [
                         "res" => $res
         ]);
+
     }
 
     protected function getDateDifferenceInMinutesOrReturnZero($earlierDate, $laterDate) {
@@ -137,10 +137,10 @@ class AccidentCaseReportController extends AccidentCaseController {
 
         return $this->getDateDifferenceInMinutesOrReturnZero($startCaseTime, $endCaseTime);
     }
-    
+ 
     public function generateAndSaveEndCaseReport($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-      
+
         $arrivalTime = $this->calculateArrivalTimeOrReturnZero($caseId);
         $serviceCarLate = $this->calculateServiceCarLateOrReturnZero($caseId);
         $roadServiceTime = $this->calculateRoadServiceTimeOrReturnZero($caseId);

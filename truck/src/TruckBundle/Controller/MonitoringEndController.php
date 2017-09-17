@@ -37,7 +37,6 @@ class MonitoringEndController extends MonitoringController {
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEnd);
             $em->flush();
-        //TODO case end -> make calculations
             
             return $this->redirectToRoute("truck_accidentcase_firsteditcaseend", [
                         "caseId" => $caseId
