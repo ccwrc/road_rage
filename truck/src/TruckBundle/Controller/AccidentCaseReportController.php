@@ -2,12 +2,14 @@
 
 namespace TruckBundle\Controller;
 
+// use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+// use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Monitoring;
-use \DateTime;
+// use TruckBundle\Entity\Monitoring; 
+// use \DateTime;
 
 /**
  * @Route("/cases")
@@ -19,7 +21,7 @@ class AccidentCaseReportController extends AccidentCaseController {
      * @Route("/{caseId}/testEcho", requirements={"caseId"="\d+"})
      */
     public function testEcho($caseId) {
-        $case = $this->calculateRepairTotalTimeOrReturnZero($caseId);
+        $case = $this->generateAndSaveEndCaseReport($caseId);
 //        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
 //                ->findLastMonitoringEndByCaseId($caseId);
         $res = $case;
@@ -134,6 +136,24 @@ class AccidentCaseReportController extends AccidentCaseController {
         $endCaseTime = $monitoringEnd->getTimeSave();
 
         return $this->getDateDifferenceInMinutesOrReturnZero($startCaseTime, $endCaseTime);
+    }
+    
+    public function generateAndSaveEndCaseReport($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+      
+        $arrivalTime = $this->calculateArrivalTimeOrReturnZero($caseId);
+        $serviceCarLate = $this->calculateServiceCarLateOrReturnZero($caseId);
+        $roadServiceTime = $this->calculateRoadServiceTimeOrReturnZero($caseId);
+        $noRoadServiceTime = $this->calculateNoRoadServiceTimeOrReturnZero($caseId);
+        $repairTotalTime = $this->calculateRepairTotalTimeOrReturnZero($caseId);
+        $caseTotalTime = $this->calculateCaseTotalTimeOrReturnZero($caseId);
+
+        $case->setReportArrivalTime($arrivalTime)->setReportLate($serviceCarLate)
+                ->setReportRsTime($roadServiceTime)->setReportNrsTime($noRoadServiceTime)
+                ->setReportRepairTotal($repairTotalTime)->setReportCaseTotal($caseTotalTime);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
     }
 
 }
