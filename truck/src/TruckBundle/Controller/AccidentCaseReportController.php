@@ -121,4 +121,19 @@ class AccidentCaseReportController extends AccidentCaseController {
         return $this->getDateDifferenceInMinutesOrReturnZero($startRepairTime, $endRepairTime);
     }      
     
+    protected function calculateCaseTotalTimeOrReturnZero($caseId) {
+        $monitoringStart = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findFirstMonitoringStartByCaseId($caseId);
+        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringEndByCaseId($caseId);
+
+        if (!$monitoringStart || !$monitoringEnd) {
+            return 0;
+        }
+        $startCaseTime = $monitoringStart->getTimeSave();
+        $endCaseTime = $monitoringEnd->getTimeSave();
+
+        return $this->getDateDifferenceInMinutesOrReturnZero($startCaseTime, $endCaseTime);
+    }
+
 }
