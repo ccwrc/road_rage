@@ -127,9 +127,10 @@ class AccidentCaseController extends Controller {
                         "caseId" => $caseId
             ]);
         }
-        // TODO add caseId + info in view
+
         return $this->render('TruckBundle:AccidentCase:first_edit_case_end.html.twig', [
-                    "form" => $form->createView()
+                    "form" => $form->createView(),
+                    "caseId" => $caseId
         ]);
     }
 
