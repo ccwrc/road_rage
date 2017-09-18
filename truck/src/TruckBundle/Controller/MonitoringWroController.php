@@ -21,6 +21,7 @@ class MonitoringWroController extends MonitoringController {
      * @Route("/{monitoringRoId}/createMonitoringWro", requirements={"monitoringRoId"="\d+"})
      */
     public function createMonitoringWroAction(Request $req, $monitoringRoId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringRoId, "RO");
         $operatorName = $this->getOperatorName();
         $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringRoId);
