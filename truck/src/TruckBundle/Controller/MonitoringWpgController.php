@@ -57,6 +57,7 @@ class MonitoringWpgController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringWpg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringWpgAction(Request $req, $monitoringId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "WPG");
         $monitoringWpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         $caseId = $monitoringWpg->getAccidentCase()->getId();
