@@ -16,6 +16,13 @@ use TruckBundle\Form\Vehicle\VehicleEditType;
  * @Security("has_role('ROLE_DEALER')")
  */
 class VehicleController extends Controller {
+    
+    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        if ($vehicle === null) {
+            throw $this->createNotFoundException("Wrong vehicle ID");
+        }
+    }    
 
     /**
      * @Route("/createVehicle")
