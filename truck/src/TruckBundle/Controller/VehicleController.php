@@ -71,6 +71,7 @@ class VehicleController extends Controller {
      * @Route("/{vehicleId}/editVehicle", requirements={"vehicleId"="\d+"})
      */
     public function editVehicleAction(Request $req, $vehicleId) {
+        $this->throwExceptionIfVehicleIdIsWrong($vehicleId);
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
                 ->find($vehicleId);
         $form = $this->createForm(VehicleEditType::class, $vehicle);
