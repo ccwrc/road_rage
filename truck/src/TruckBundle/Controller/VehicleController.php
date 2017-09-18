@@ -54,6 +54,7 @@ class VehicleController extends Controller {
      * @Route("/{vehicleId}/showVehicle", requirements={"vehicleId"="\d+"})
      */
     public function showVehicleAction($vehicleId) {
+        $this->throwExceptionIfVehicleIdIsWrong($vehicleId);
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
                 ->find($vehicleId);
         $dealer = $vehicle->getDealer();
