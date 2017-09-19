@@ -87,7 +87,8 @@ class VehicleController extends Controller {
         }
 
         return $this->render('TruckBundle:Vehicle:edit_vehicle.html.twig', [
-                    "form" => $form->createView()
+                    "form" => $form->createView(),
+                    "vehicleId" => $vehicleId
         ]);
     }
 

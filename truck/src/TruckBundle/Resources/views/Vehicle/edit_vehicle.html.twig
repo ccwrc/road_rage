@@ -1,6 +1,6 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}edit vehicle{% endblock %}
+{% block title %}edit vehicle {{ vehicleId }}{% endblock %}
 
 {% block body %} 
 
@@ -8,7 +8,7 @@
         <div class="pure-control-group">
 
             <center>
-                <h3 class="formTitle">edit vehicle</h3>
+                <h3 class="formTitle">edit vehicle {{ vehicleId }}</h3>
             </center>
 
             {{ form_start(form) }} 
