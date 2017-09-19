@@ -96,6 +96,13 @@ class AccidentCase
      * @ORM\Column(name="progress_color", type="string", length=255)
      */
     private $progressColor;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_start", type="datetime", nullable=true)
+     */
+    private $timeStart;    
 
     /**
      * @var int
@@ -556,5 +563,29 @@ class AccidentCase
     public function getProgressColor()
     {
         return $this->progressColor;
+    }
+
+
+    /**
+     * Set timeStart
+     *
+     * @param \DateTime $timeStart
+     * @return AccidentCase
+     */
+    public function setTimeStart($timeStart)
+    {
+        $this->timeStart = $timeStart;
+
+        return $this;
+    }
+
+    /**
+     * Get timeStart
+     *
+     * @return \DateTime 
+     */
+    public function getTimeStart()
+    {
+        return $this->timeStart;
     }
 }

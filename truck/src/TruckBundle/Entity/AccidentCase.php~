@@ -96,6 +96,13 @@ class AccidentCase
      * @ORM\Column(name="progress_color", type="string", length=255)
      */
     private $progressColor;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_start", type="datetime", nullable=true)
+     */
+    private $timeStart;    
 
     /**
      * @var int
@@ -319,29 +326,6 @@ class AccidentCase
     }
 
     /**
-     * Set progress
-     *
-     * @param string $progress
-     * @return AccidentCase
-     */
-    public function setProgress($progress)
-    {
-        $this->progress = $progress;
-
-        return $this;
-    }
-
-    /**
-     * Get progress
-     *
-     * @return string 
-     */
-    public function getProgress()
-    {
-        return $this->progress;
-    }
-
-    /**
      * Set reportLate
      *
      * @param integer $reportLate
@@ -556,5 +540,52 @@ class AccidentCase
     public function getMonitorings()
     {
         return $this->monitorings;
+    }
+
+    /**
+     * Set progressColor
+     *
+     * @param string $progressColor
+     * @return AccidentCase
+     */
+    public function setProgressColor($progressColor)
+    {
+        $this->progressColor = $progressColor;
+
+        return $this;
+    }
+
+    /**
+     * Get progressColor
+     *
+     * @return string 
+     */
+    public function getProgressColor()
+    {
+        return $this->progressColor;
+    }
+
+
+    /**
+     * Set timeStart
+     *
+     * @param \DateTime $timeStart
+     * @return AccidentCase
+     */
+    public function setTimeStart($timeStart)
+    {
+        $this->timeStart = $timeStart;
+
+        return $this;
+    }
+
+    /**
+     * Get timeStart
+     *
+     * @return \DateTime 
+     */
+    public function getTimeStart()
+    {
+        return $this->timeStart;
     }
 }
