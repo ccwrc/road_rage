@@ -6,32 +6,56 @@
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span>
     {% if monitoring.code == "START" %} 
-        <a title="START edit" href="{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}">edit</a>  
+        <a title="START edit" href="{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>  
     {% elseif monitoring.code == "PG" %}
-        <a title="PG edit" href="{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="PG edit" href="{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>
         <a title="Withdrawal PG" href="{{ path('truck_monitoringwpg_createmonitoringwpg', {"monitoringPgId":monitoring.id}) }}">WPG</a>
     {% elseif monitoring.code == "WPG" %}
-        <a title="WPG edit" href="{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="WPG edit" href="{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>
     {% elseif monitoring.code == "CPG" %}
-        <a title="CPG edit" href="{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="CPG edit" href="{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>
         <a title="Withdrawal CPG" href="{{ path('truck_monitoringwcpg_createmonitoringwcpg', {"monitoringCpgId":monitoring.id}) }}">WCPG</a>   
     {% elseif monitoring.code == "WCPG" %}
-        <a title="WCPG edit" href="{{ path('truck_monitoringwcpg_editmonitoringwcpg', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="WCPG edit" href="{{ path('truck_monitoringwcpg_editmonitoringwcpg', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>
     {% elseif monitoring.code == "RO" %}
-        <a title="RO edit" href="{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}">edit</a>    
+        <a title="RO edit" href="{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>    
         <a title="Withdrawal RO" href="{{ path('truck_monitoringwro_createmonitoringwro', {"monitoringRoId":monitoring.id}) }}">WRO</a> 
     {% elseif monitoring.code == "WRO" %}
-        <a title="WRO edit" href="{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}">edit</a>
+        <a title="WRO edit" href="{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>
     {% elseif monitoring.code == "ETA" %}
-        <a title="ETA edit" href="{{ path('truck_monitoringeta_editmonitoringeta', {"monitoringId":monitoring.id}) }}">edit</a>   
+        <a title="ETA edit" href="{{ path('truck_monitoringeta_editmonitoringeta', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>   
     {% elseif monitoring.code == "STRR" %}
-        <a title="STRR edit" href="{{ path('truck_monitoringstrr_editmonitoringstrr', {"monitoringId":monitoring.id}) }}">edit</a>   
+        <a title="STRR edit" href="{{ path('truck_monitoringstrr_editmonitoringstrr', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>   
     {% elseif monitoring.code == "END" %}
-        <a title="END edit" href="{{ path('truck_monitoringend_editmonitoringend', {"monitoringId":monitoring.id}) }}">edit</a>  
+        <a title="END edit" href="{{ path('truck_monitoringend_editmonitoringend', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>  
     {% elseif monitoring.code == "Out" %}
-        <a title="Out edit" href="{{ path('truck_monitoringout_editmonitoringout', {"monitoringId":monitoring.id}) }}">edit</a>   
+        <a title="Out edit" href="{{ path('truck_monitoringout_editmonitoringout', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>   
     {% elseif monitoring.code == "Incoming" %}
-        <a title="Incoming edit" href="{{ path('truck_monitoringincoming_editmonitoringincoming', {"monitoringId":monitoring.id}) }}">edit</a>  
+        <a title="Incoming edit" href="{{ path('truck_monitoringincoming_editmonitoringincoming', {"monitoringId":monitoring.id}) }}">
+            <button class="panelGreyButton">edit</button>
+        </a>  
     {% endif %}
     <br/>
     {% if monitoring.code == "ETA" %} 
