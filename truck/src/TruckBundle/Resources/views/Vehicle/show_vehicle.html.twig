@@ -8,7 +8,6 @@
         <h3 class="formTitle">show vehicle {{ vehicle.id }}</h3>
     </center>
 
-    {# TODO: add links to cases (?) etc.#}
     <a href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' >
         <button class="pure-button pure-button-active button90blue" >edit vehicle</button> </a>
     <a href='{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}' >
@@ -37,15 +36,19 @@
     Vehicle name/type: {{ vehicle.nameType }} <br/><br/>
 
     Number of accident cases: {{ cases|length }} <br/>
-    
+
     {% if is_granted('ROLE_OPERATOR') %}
         {% for case in cases %} 
             <a target="_blank" title="new window" href='{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}' >
                 <button class="pure-button pure-button-active button70noBackground" 
-                        style="background-color:{{ case.progressColor }}" >case {{ case.id }}</button> </a>
-            {% else %}
-            {% endfor %}
-        {% endif %}    
+                        style="background-color:{{ case.progressColor }}" >case {{ case.id }} 
+                    {% if case.timeStart is not null %}
+                        ({{ case.timeStart | date('Y.m.d') }})
+                    {% endif %}
+                </button> </a>
+        {% else %}
+        {% endfor %}
+    {% endif %}    
 
 {% endblock %}
 
