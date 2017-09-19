@@ -56,7 +56,7 @@ class AccidentCaseController extends Controller {
         $case->setVehicle($vehicle)->setProgressColor("#FF7575")->setStatus("active")
                 ->setReportLate(0)->setReportRsTime(0)->setReportNrsTime(0)
                 ->setReportRepairTotal(0)->setReportArrivalTime(0)->setReportCaseTotal(0)
-                ->setReportRepairStatus("initialization");
+                ->setReportRepairStatus("initialization")->setTimeStart(new DateTime("now"));
         $form = $this->createForm(AccidentCaseType::class, $case);
 
         $form->handleRequest($req);
