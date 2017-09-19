@@ -38,12 +38,14 @@
 
     Number of accident cases: {{ cases|length }} <br/>
     
-    {% for case in cases %}
-       {#  {{ dump(case) }}#}
-                <a href='{{ path("truck_operator_panel", {"caseId":case.id}) }}' >
-            <button class="pure-button pure-button-active button90red" >case {{ case.id }}</button> </a>
-    {% else %}
-    {% endfor %}
+    {% if is_granted('ROLE_OPERATOR') %}
+        {% for case in cases %} 
+            <a target="_blank" title="new window" href='{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}' >
+                <button class="pure-button pure-button-active button70noBackground" 
+                        style="background-color:{{ case.progressColor }}" >case {{ case.id }}</button> </a>
+            {% else %}
+            {% endfor %}
+        {% endif %}    
 
 {% endblock %}
 

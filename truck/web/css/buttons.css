@@ -26,6 +26,12 @@
     font-size: 90%;
 }
 
+.button70noBackground {
+    color: black;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    font-size: 70%;
+}
+
 .caseButton {
     color: black;
     background: #E6E6E6;
