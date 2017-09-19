@@ -4,7 +4,9 @@
     {% if case.progressColor == "#E6E6E6" %}
 
         <span class="textBold textItalic">Data for the report </span> 
-        <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}" >edit</a>
+        <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}" >
+            <button class="panelGreyButton">edit</button>
+        </a>
         <br/> 
 
         <span class="textBold textItalic">Arrival time:</span> {{ case.reportArrivalTime }} minutes <br/>
@@ -17,11 +19,15 @@
 
         {% if case.status == "active" %}
             <center>
-                <a title="deactivate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >close case</a>
+                <a title="deactivate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >
+                    <button class="panelRedButton">close case</button>
+                </a>
             </center>
         {% else%}    
             <center>
-                <a title="activate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >open case</a>
+                <a title="activate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >
+                    <button class="panelRedButton">open case</button>
+                </a>
             </center>
         {% endif %}
     {% endif %}  

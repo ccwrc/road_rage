@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 06 Wrz 2017, 16:12
+-- Czas generowania: 19 Wrz 2017, 17:10
 -- Wersja serwera: 5.7.19-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -43,29 +43,34 @@ CREATE TABLE `accident_case` (
   `report_arrival_time` int(11) NOT NULL,
   `report_case_total` int(11) NOT NULL,
   `report_repair_status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vehicle_id` int(11) DEFAULT NULL
+  `vehicle_id` int(11) DEFAULT NULL,
+  `time_start` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `accident_case`
 --
 
-INSERT INTO `accident_case` (`id`, `damage_description`, `location`, `driver_contact`, `comment`, `info_sms`, `info_mail`, `status`, `progress_color`, `report_late`, `report_rs_time`, `report_nrs_time`, `report_repair_total`, `report_arrival_time`, `report_case_total`, `report_repair_status`, `vehicle_id`) VALUES
-(1, 'opis uszkodzenia edit', 'lokacja w miescie edit', 'kontakt do kierowcy 444 555 555', 'zwykly komentarza', 'edit', 'edit', 'active', '#FF9C42', 11, 0, 666, 0, 0, 0, 'completed', 1),
-(2, 'opis2 uszkodzenia2', 'lokacja w miesci22e', 'kontakt do kie22rowcy 444 555 555', 'zwykly22 komentarza', NULL, NULL, 'active', 'start', 123, 0, 0, 0, 0, 0, 'dfg', 1),
-(3, 'sdfsfd', 'sdfs', 'sdf', 'empty comment', 'sdfs', 'dsf', 'active', 'start', 0, 1111, 0, 0, 0, 0, '0', 1),
-(4, 'damage description', 'warsaw', 'jan99999999', 'start case', 'empty', 'empty', 'active', 'start', 0, 0, 0, 0, 0, 0, '0', 3),
-(6, 'po prostu awarisa', '333w mieście', 'jan jankowski 123 456 789', 'zgloszenie awarii', 'brak', 'brak', 'active', 'start', 0, 0, 0, 33, 33, 33, 'notification', 11),
-(7, 'sagds', 'sd', 'sdg', 'sdg', 'sdg', 'sdg', 'active', 'start', 0, 0, 11, 0, 0, 0, 'notification', 2),
-(15, 'wer', 'wer', 'wer', 'werwerwrewrr', 'wer', 'wer', 'active', 'start', 0, 0, 0, 0, 0, 0, 'notification', 13),
-(16, 'new date test', 'new date test', 'new date test', 'new date test', 'new date test', 'new date test', 'active', 'start', 0, 0, 0, 0, 0, 0, 'notification', 6),
-(17, 'sedg', 'dsfg', 'dfg', 'dfg', 'dfg', 'dgf', 'active', 'start', 0, 0, 0, 0, 0, 0, 'notification', 1),
-(18, 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'active', 'start', 0, 0, 0, 0, 0, 0, 'notification', 1),
-(19, 'sfds', 'sdfsfd', 'sdfsdf', 'asdasd', '2222', 'asfdasdf', 'active', 'start', 0, 0, 0, 0, 0, 0, 'notification', 14),
-(20, 'dsgt', 'ert', 'ert', 'ert', 'ert', 'ert', 'active', 'start', 0, 0, 0, 0, 0, 0, 'notification', 1),
-(21, 'sdfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'active', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'notification', 1),
-(22, 'new', 'n', 'n edit', 'n case edit detal', 'n', 'n', 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 13),
-(23, 'r', 'r', 'r', 'r', 'r', 'r', 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 1);
+INSERT INTO `accident_case` (`id`, `damage_description`, `location`, `driver_contact`, `comment`, `info_sms`, `info_mail`, `status`, `progress_color`, `report_late`, `report_rs_time`, `report_nrs_time`, `report_repair_total`, `report_arrival_time`, `report_case_total`, `report_repair_status`, `vehicle_id`, `time_start`) VALUES
+(1, 'opis uszkodzenia edit', 'lokacja w miescie edit', 'kontakt do kierowcy 444 555 555', 'zwykly komentarza', 'edit', 'edit', 'inactive', '#E6E6E6', 11, 0, 666, 0, 0, 0, 'completed', 1, NULL),
+(2, 'opis2 uszkodzenia2', 'lokacja w miesci22e', 'kontakt do kie22rowcy 444 555 555', 'zwykly22 komentarza', NULL, NULL, 'inactive', '#E6E6E6', 123, 0, 0, 0, 0, 0, 'completed', 1, NULL),
+(3, 'sdfsfd', 'sdfs', 'sdf', 'empty comment', 'sdfs', 'dsf', 'inactive', '#E6E6E6', 0, 1111, 0, 0, 0, 0, 'completed', 1, NULL),
+(4, 'damage description', 'warsaw', 'jan99999999', 'start case', 'empty', 'empty', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'completed', 3, NULL),
+(6, 'po prostu awarisa', '333w mieście', 'jan jankowski 123 456 789', 'zgloszenie awarii', 'brak', 'brak', 'inactive', '#E6E6E6', 0, 0, 0, 33, 33, 33, 'completed', 11, NULL),
+(7, 'sagds', 'sd', 'sdg', 'sdg', 'sdg', 'sdg', 'inactive', '#E6E6E6', 0, 0, 11, 0, 0, 0, 'completed', 2, NULL),
+(15, 'wer', 'wer', 'wer', 'werwerwrewrr', 'wer', 'wer', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'completed', 13, NULL),
+(16, 'new date test', 'new date test', 'new date test', 'new date test', 'new date test', 'new date test', 'inactive', '#E6E6E6', 0, 0, 14335, 14335, 0, 57625, 'completed', 6, NULL),
+(17, 'sedg', 'dsfg', 'dfg', 'dfg', 'dfg', 'dgf', 'inactive', '#E6E6E6', 0, 4834, 0, 4834, 0, 57645, 'completed', 1, NULL),
+(18, 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'inactive', '#E6E6E6', 0, 14365, 0, 14365, 0, 54611, 'completed', 1, NULL),
+(19, 'sfds', 'sdfsfd', 'sdfsdf', 'asdasd', '2222', 'asfdasdf', 'inactive', '#E6E6E6', 8512, 6012, 0, 6012, 12887, 18902, 'completed', 14, NULL),
+(20, 'dsgt', 'ert', 'ert', 'ert', 'ert', 'ert', 'inactive', '#E6E6E6', 90, 4321, 0, 4321, 116, 17263, 'incompleted', 1, NULL),
+(21, 'sdfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'active', '#FF9C42', 12561, 4769, 0, 4769, 0, 17378, 'completed', 1, NULL),
+(22, 'new', 'n', 'n edit', 'n case edit detal', 'n', 'n', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'completed', 13, NULL),
+(23, 'r', 'r', 'r', 'r', 'r', 'r', 'active', '#93EEAA', 0, 840, 0, 840, 0, 16024, 'completed', 1, NULL),
+(27, 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'active', '#FF9C42', 0, 0, 0, 0, 0, 0, 'completed', 13, NULL),
+(28, 'ff', 'f', 'f', 'f', 'f', 'f', 'active', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'completed', 1, NULL),
+(29, 'new', 'locat', 'ker 44', 'comment', 'brak', 'brak', 'active', '#E6E6E6', 15, 3, 2, 5, 27, 34, 'completed', 12, NULL),
+(30, 'time start', 'time start', 'time start', 'time start', 'time start', 'time start', 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 1, '2017-09-19 13:23:33');
 
 -- --------------------------------------------------------
 
@@ -132,10 +137,10 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-09-06 14:23:09', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-09-19 14:32:58', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
 (2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-09-04 12:20:37', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-26 14:46:43', NULL, NULL, 'a:0:{}'),
-(4, 'ccwrcdealer', 'ccwrcdealer', 'ccwrcdealer@ccwrcdealer.elo', 'ccwrcdealer@ccwrcdealer.elo', 1, NULL, '$2y$13$garsgYLil1hIyV7yu7dXGuHYGB2TELZgcca/wiUN4WdGN824meA2K', '2017-07-26 14:51:12', NULL, NULL, 'a:1:{i:0;s:11:\"ROLE_DEALER\";}'),
+(4, 'ccwrcdealer', 'ccwrcdealer', 'ccwrcdealer@ccwrcdealer.elo', 'ccwrcdealer@ccwrcdealer.elo', 1, NULL, '$2y$13$garsgYLil1hIyV7yu7dXGuHYGB2TELZgcca/wiUN4WdGN824meA2K', '2017-09-19 13:32:32', NULL, NULL, 'a:1:{i:0;s:11:\"ROLE_DEALER\";}'),
 (5, 'ccwrcsuperadmin', 'ccwrcsuperadmin', 'ccwrcsuperadmin@gmail.elo', 'ccwrcsuperadmin@gmail.elo', 1, NULL, '$2y$13$eFT7Nt2mA3zltKru5pmfJO5RtLGB7SrCgfUIBUcAy.TQFJsjKcNgO', '2017-07-26 14:54:32', NULL, NULL, 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}');
 
 -- --------------------------------------------------------
@@ -172,7 +177,7 @@ INSERT INTO `monitoring` (`id`, `code`, `time_save`, `time_set`, `document`, `co
 (12, 'START', '2017-08-07 14:54:51', NULL, NULL, 'wer ed', 'wer ed', NULL, NULL, NULL, 15, 'ccwrcadmin', NULL, NULL, NULL, NULL),
 (13, 'START', '2017-08-07 14:57:23', NULL, NULL, 'edit new date test', 'edit new date test', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
 (14, 'START', '2017-08-07 14:58:42', NULL, NULL, 'dfg', 'dfg', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
-(27, 'START', '2017-08-09 16:57:52', NULL, NULL, 'new chrome case', 'new chrome case', NULL, NULL, NULL, 18, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(27, 'START', '2017-08-09 16:57:52', NULL, NULL, 'ed', 'ed', NULL, NULL, NULL, 18, 'ccwrcoperator', NULL, NULL, NULL, NULL),
 (32, 'Incoming', '2017-08-13 17:16:27', NULL, NULL, 'inc', 'inc', NULL, NULL, NULL, 18, 'ccwrcadmin', NULL, NULL, NULL, NULL),
 (33, 'Incoming', '2017-08-14 11:27:14', NULL, NULL, 'incoming edit', 'incoming edit', NULL, NULL, NULL, 1, 'ccwrcadmin', NULL, NULL, NULL, NULL),
 (34, 'Incoming', '2017-08-14 12:18:34', NULL, NULL, 'fd ed', 'dfhg', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
@@ -240,7 +245,114 @@ INSERT INTO `monitoring` (`id`, `code`, `time_save`, `time_set`, `document`, `co
 (96, 'CPG', '2017-09-06 14:23:24', NULL, NULL, 'dxfg', 'dfg', NULL, NULL, NULL, 1, 'ccwrcadmin', 1, NULL, NULL, NULL),
 (97, 'CPG', '2017-09-06 14:24:49', NULL, NULL, 'werfts', 'sdf', NULL, NULL, NULL, 1, 'ccwrcadmin', 1, NULL, NULL, NULL),
 (98, 'END', '2017-09-06 14:31:02', '2017-09-06 14:30:00', NULL, 'dfh', 'dgf', NULL, NULL, NULL, 1, 'ccwrcadmin', NULL, NULL, NULL, NULL),
-(99, 'ETA', '2017-09-06 14:36:15', '2017-09-06 14:36:00', NULL, 'sdeg', 'dfg', NULL, NULL, NULL, 1, 'ccwrcadmin', NULL, NULL, NULL, NULL);
+(99, 'ETA', '2017-09-06 14:36:15', '2017-09-06 14:36:00', NULL, 'sdeg', 'dfg', NULL, NULL, NULL, 1, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(100, 'PG', '2017-09-07 12:27:10', NULL, NULL, 'dd', 'dd', 'dd', NULL, NULL, 7, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(101, 'RO', '2017-09-07 12:50:37', NULL, NULL, 'dd', 'dd', 'dd', NULL, NULL, 15, 'ccwrcadmin', 3, 1, NULL, NULL),
+(102, 'STRR', '2017-09-07 13:01:57', '2017-09-07 13:01:00', NULL, 'dd', 'dd', NULL, NULL, NULL, 4, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(103, 'ETA', '2017-09-07 13:02:14', '2017-09-07 13:02:00', NULL, 'ff', 'ff', NULL, NULL, NULL, 7, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(104, 'END', '2017-09-07 13:02:35', '2017-09-07 13:02:00', NULL, 'rr', 'rr', NULL, NULL, NULL, 15, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(105, 'CPG', '2017-09-07 13:11:24', NULL, NULL, 'fcgh', 'fg', NULL, NULL, NULL, 18, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(106, 'ETA', '2017-09-07 13:13:08', '2017-09-07 13:13:00', NULL, 'rr', 'rr', NULL, NULL, NULL, 19, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(107, 'STRR', '2017-09-07 13:19:06', '2017-09-07 13:19:00', NULL, 'dfg', 'dfg', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(108, 'CPG', '2017-09-07 13:22:18', NULL, NULL, 'wer', 'wer', NULL, NULL, NULL, 7, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(109, 'RO', '2017-09-07 13:22:26', NULL, NULL, 'er', 'er', 'er', NULL, NULL, 7, 'ccwrcadmin', 1, 1, NULL, NULL),
+(110, 'WCPG', '2017-09-07 13:22:39', NULL, NULL, 'fg', 'fg', NULL, NULL, NULL, 7, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(111, 'WPG', '2017-09-07 13:32:22', NULL, NULL, 'dfg', 'dfg', 'dfg', NULL, NULL, 3, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(112, 'PG', '2017-09-07 13:35:27', NULL, NULL, 'sdf', 'sdf', 'sdf', NULL, NULL, 4, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(113, 'ETA', '2017-09-07 13:35:36', '2017-09-07 13:35:00', NULL, 'd', 'd', NULL, NULL, NULL, 4, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(114, 'WPG', '2017-09-07 13:35:46', NULL, NULL, 'd', 'd', 'd', NULL, NULL, 4, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(115, 'WRO', '2017-09-07 13:40:35', NULL, NULL, 'wer', 'wer', 'wer', NULL, NULL, 16, 'ccwrcadmin', 1, 5, NULL, NULL),
+(116, 'END', '2017-09-07 14:59:34', '2017-09-07 14:59:00', NULL, 'deg', 'dfg', NULL, NULL, NULL, 1, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(117, 'END', '2017-09-07 15:01:10', '2017-09-07 15:01:00', NULL, 'cv', 'cx', NULL, NULL, NULL, 2, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(118, 'END', '2017-09-07 15:05:49', '2017-09-07 15:05:00', NULL, 'rr', 'r', NULL, NULL, NULL, 3, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(119, 'END', '2017-09-07 15:24:18', '2017-09-07 15:24:00', NULL, 'r', 'd', NULL, NULL, NULL, 4, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(120, 'END', '2017-09-07 15:26:30', '2017-09-07 15:26:00', NULL, 'dsg', 'dfg', NULL, NULL, NULL, 7, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(121, 'STRR', '2017-09-07 15:37:45', '2017-09-07 15:37:00', NULL, 'r', 'r', NULL, NULL, NULL, 18, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(122, 'STRR', '2017-09-07 16:27:09', '2017-09-07 16:27:00', NULL, 'hh', 'hh', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(123, 'END', '2017-09-07 17:52:59', '2017-09-07 17:52:00', NULL, 'gg', 'gg', NULL, NULL, NULL, 22, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(124, 'END', '2017-09-08 14:50:58', '2017-09-08 14:50:00', NULL, 'cc', 'cc', NULL, NULL, NULL, 6, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(125, 'START', '2017-09-10 12:31:23', NULL, NULL, 'dd', 'dd', NULL, NULL, NULL, 24, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(126, 'START', '2017-09-10 12:46:33', NULL, NULL, '33', '33', NULL, NULL, NULL, 25, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(128, 'START', '2017-09-10 13:30:12', NULL, NULL, 'dfg', 'dfg', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(129, 'END', '2017-09-10 15:55:18', '2017-09-10 15:55:00', NULL, 'dgt', 'dfg', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(130, 'CPG', '2017-09-11 13:17:13', NULL, NULL, 'dfg', 'dfgxx', NULL, NULL, NULL, 20, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(131, 'END', '2017-09-11 13:48:45', '2017-09-11 13:48:00', NULL, 'dfgcc', 'dfgcc', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(132, 'ETA', '2017-09-11 13:59:21', '2017-09-11 13:59:00', NULL, 'tt22', 'tt22', NULL, NULL, NULL, 18, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(133, 'Incoming', '2017-09-11 14:46:43', NULL, NULL, 'ee', 'ee', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(134, 'Incoming', '2017-09-11 16:00:25', NULL, NULL, 'ert', 'df', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(135, 'ETA', '2017-09-11 16:06:48', '2017-09-11 16:16:00', NULL, '44', '44', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(136, 'ETA', '2017-09-11 16:15:05', '2017-09-11 16:04:00', NULL, 'tt', 'tt', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(137, 'ETA', '2017-09-11 16:56:22', '2017-11-11 16:56:00', NULL, 'r', 'r', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(138, 'Incoming', '2017-09-12 15:14:00', NULL, NULL, 'g x f', 'f', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(139, 'Out', '2017-09-12 15:36:45', NULL, NULL, 'fr', 'fr', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(140, 'PG', '2017-09-12 16:17:46', NULL, NULL, 'rre', 'rre', 'rrr', NULL, NULL, 17, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(141, 'RO', '2017-09-13 10:34:14', NULL, NULL, 'er', 'er', 'e', NULL, NULL, 18, 'ccwrcadmin', 1, 1, NULL, NULL),
+(142, 'STRR', '2017-09-13 11:06:01', '2017-09-13 11:05:00', NULL, '44e', '44e', NULL, NULL, NULL, 19, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(143, 'ETA', '2017-09-13 12:28:45', '2017-09-13 12:38:00', NULL, 'rrr', 'r', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(144, 'ETA', '2017-09-13 12:44:45', '2018-09-13 12:44:00', NULL, '4', '4', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(145, 'ETA', '2017-09-13 12:47:05', '2017-09-20 12:46:00', NULL, 'gf', 'f', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(146, 'ETA', '2017-09-13 12:47:52', '2017-09-02 12:47:00', NULL, 'd', 'd', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(147, 'ETA', '2017-09-13 15:16:00', '2017-09-13 15:15:00', NULL, 'last', 'last', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(148, 'STRR', '2017-09-14 12:43:46', '2017-09-14 12:43:00', NULL, 'd', 'd', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(149, 'END', '2017-09-14 12:58:39', '2017-09-14 12:58:00', NULL, 'dd', 'dd', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(150, 'RO', '2017-09-14 13:33:46', NULL, NULL, 'dd', 'dd', 'dd', NULL, NULL, 20, 'ccwrcadmin', 1, 1, NULL, NULL),
+(151, 'ETA', '2017-09-14 13:34:04', '2017-09-14 14:00:00', NULL, 'dd', 'dd', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(152, 'STRR', '2017-09-14 13:34:37', '2017-09-14 15:30:00', NULL, 'dd', 'dd', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(153, 'STRR', '2017-09-14 16:01:10', '2017-09-14 10:00:00', NULL, 'rr', 'rr', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(154, 'END', '2017-09-14 16:01:27', '2017-09-14 14:00:00', NULL, 'r', 'r', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(155, 'STRR', '2017-09-14 16:06:20', '2017-09-14 07:10:00', NULL, '3', '3', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(156, 'END', '2017-09-14 16:06:40', '2017-09-14 09:30:00', NULL, '3', '3', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(157, 'START', '2017-09-17 12:38:56', NULL, NULL, 'f', 'f', NULL, NULL, NULL, 28, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(158, 'END', '2017-09-17 12:39:08', '2017-09-17 12:39:00', NULL, 'f', 'f', NULL, NULL, NULL, 28, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(159, 'CPG', '2017-09-17 12:39:38', NULL, NULL, 'e', 'e', NULL, NULL, NULL, 28, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(160, 'ETA', '2017-09-17 12:39:44', '2017-09-17 12:39:00', NULL, 'e', 'e', NULL, NULL, NULL, 28, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(161, 'END', '2017-09-17 12:39:51', '2017-09-17 12:39:00', NULL, 'end op', 'e', NULL, NULL, NULL, 28, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(162, 'END', '2017-09-17 12:41:04', '2017-09-17 12:40:00', NULL, 'f', 'f', NULL, NULL, NULL, 28, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(163, 'END', '2017-09-17 13:10:16', '2017-09-17 13:10:00', NULL, 'degd', 'd', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(164, 'END', '2017-09-17 13:11:03', '2017-09-17 13:10:00', NULL, 'degd', 'd', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(165, 'END', '2017-09-17 13:13:43', '2017-09-17 13:13:00', NULL, 'r', 'r', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(166, 'END', '2017-09-17 13:16:43', '2017-09-17 13:13:00', NULL, 'r', 'r', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(167, 'END', '2017-09-17 13:18:04', '2017-09-17 13:13:00', NULL, 'r', 'r', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(168, 'END', '2017-09-17 13:23:56', '2017-09-17 13:13:00', NULL, 'r', 'r', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(169, 'END', '2017-09-17 13:25:33', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(170, 'END', '2017-09-17 13:26:11', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(171, 'END', '2017-09-17 13:29:10', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(172, 'END', '2017-09-17 13:32:26', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(173, 'END', '2017-09-17 13:33:00', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(174, 'END', '2017-09-17 13:34:22', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(175, 'END', '2017-09-17 13:41:57', '2017-09-17 13:25:00', NULL, '3', '3', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(176, 'END', '2017-09-17 15:02:43', '2017-09-17 15:02:00', NULL, 'e', 'e', NULL, NULL, NULL, 18, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(177, 'END', '2017-09-17 15:04:50', '2017-09-17 15:02:00', NULL, 'e', 'e', NULL, NULL, NULL, 18, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(178, 'END', '2017-09-17 15:09:17', '2017-09-17 15:02:00', NULL, 'e', 'e', NULL, NULL, NULL, 18, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(179, 'END', '2017-09-17 15:17:25', '2017-09-17 15:17:00', NULL, 'e', 'e', NULL, NULL, NULL, 19, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(180, 'END', '2017-09-17 15:22:44', '2017-09-17 15:22:00', NULL, 'degf', 'g', NULL, NULL, NULL, 16, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(181, 'END', '2017-09-17 15:31:28', '2017-09-17 15:31:00', NULL, 'rr', 'rr', NULL, NULL, NULL, 20, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(182, 'END', '2017-09-17 15:34:46', '2017-09-17 15:34:00', NULL, 'end', 'e', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(183, 'ETA', '2017-09-17 15:40:06', '2017-09-17 15:40:00', NULL, 'ee', 'e', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(184, 'STRR', '2017-09-17 15:40:20', '2017-09-17 01:40:00', NULL, '3', '3', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(185, 'END', '2017-09-17 15:40:26', '2017-09-17 15:40:00', NULL, '3', '3', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(186, 'ETA', '2017-09-17 15:44:09', '2017-09-17 15:44:00', NULL, 'r', 'r', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(187, 'END', '2017-09-17 15:44:22', '2017-09-17 15:44:00', NULL, 'r', 'r', NULL, NULL, NULL, 17, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(188, 'CPG', '2017-09-17 15:49:57', NULL, NULL, 'r', 'r', NULL, NULL, NULL, 21, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(189, 'STRR', '2017-09-17 15:50:11', '2017-09-17 15:50:00', NULL, 'dd', 'd', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(190, 'END', '2017-09-17 16:55:15', '2017-09-17 16:55:00', NULL, 'end', 'e', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(191, 'START', '2017-09-17 16:57:20', NULL, NULL, 'ker 44', 'comment', NULL, NULL, NULL, 29, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(192, 'PG', '2017-09-17 16:57:31', NULL, NULL, 'ee', 'eee', 'ee', NULL, NULL, 29, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(193, 'CPG', '2017-09-17 16:57:41', NULL, NULL, 'ee', 'ee', NULL, NULL, NULL, 29, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(194, 'RO', '2017-09-17 16:57:51', NULL, NULL, 'ee', 'ee', 'ee', NULL, NULL, 29, 'ccwrcadmin', 1, 8, NULL, NULL),
+(195, 'ETA', '2017-09-17 16:58:13', '2017-09-17 17:10:00', NULL, 'ee', 'ee', NULL, NULL, NULL, 29, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(196, 'END', '2017-09-17 16:58:31', '2017-09-17 16:58:00', NULL, 'degd', 'd', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(197, 'END', '2017-09-17 17:29:52', '2017-09-17 17:29:00', NULL, 'r', 'r', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(198, 'STRR', '2017-09-17 17:31:30', '2017-09-17 17:25:00', NULL, 'e', 'e', NULL, NULL, NULL, 29, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(199, 'END', '2017-09-17 17:31:53', '2017-09-17 17:30:00', NULL, 'e', 'e', NULL, NULL, NULL, 29, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(200, 'CPG', '2017-09-17 17:50:11', NULL, NULL, 'r', 'r', NULL, NULL, NULL, 21, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(201, 'WCPG', '2017-09-17 17:50:35', NULL, NULL, 'w ed', 'w ed', NULL, NULL, NULL, 21, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(202, 'PG', '2017-09-18 11:52:54', NULL, NULL, 'e', 'e', 'e', NULL, NULL, 21, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(203, 'WPG', '2017-09-18 11:53:14', NULL, NULL, '2e', '2e', '2', NULL, NULL, 21, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(204, 'RO', '2017-09-18 12:12:25', NULL, NULL, 'e', 'e', 'e', NULL, NULL, 21, 'ccwrcadmin', 1, 1, NULL, NULL),
+(205, 'WRO', '2017-09-18 12:13:07', NULL, NULL, 'wwr', 'wr', 'w', NULL, NULL, 21, 'ccwrcadmin', 1, 1, NULL, NULL),
+(206, 'ETA', '2017-09-18 16:53:48', '2017-09-18 16:53:00', NULL, 'ff', 'f', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(207, 'START', '2017-09-19 13:23:34', NULL, NULL, 'time start', 'time start', NULL, NULL, NULL, 30, 'ccwrcadmin', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -339,7 +451,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT dla tabeli `accident_case`
 --
 ALTER TABLE `accident_case`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT dla tabeli `dealer`
 --
@@ -354,7 +466,7 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT dla tabeli `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 --
 -- AUTO_INCREMENT dla tabeli `vehicle`
 --

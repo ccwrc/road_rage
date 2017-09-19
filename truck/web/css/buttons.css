@@ -77,3 +77,57 @@
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
 }
+
+.panelRedButton {
+    color: black;
+    background: #FF7575;
+    font-size: 85%;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  /* IE 6/7/8 */
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.panelRedButton:hover {  
+    color: white;
+    text-shadow: 1px 1px 1px #000000;
+    box-shadow: 1px 1px 1px 1px grey;
+}
+
+.panelOrangeButton {
+    color: black;
+    background: #FF9C42;
+    font-size: 85%;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  /* IE 6/7/8 */
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.panelOrangeButton:hover {  
+    color: white;
+    text-shadow: 1px 1px 1px #000000;
+    box-shadow: 1px 1px 1px 1px grey;
+}
+
+.panelGreenButton {
+    color: black;
+    background: #93EEAA;
+    font-size: 85%;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  /* IE 6/7/8 */
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.panelGreenButton:hover {  
+    color: white;
+    text-shadow: 1px 1px 1px #000000;
+    box-shadow: 1px 1px 1px 1px grey;
+}
