@@ -64,30 +64,67 @@
                 onclick="window.location = '{{ path('truck_monitoringpg_createmonitoringpg', {"caseId":caseId}) }}';">
             PG  
         </button>
-         {#TODO make buttons like button above#}
-        <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">
+        {# old type button below #}
+        {#  <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">
+            <button class="panelRedButton">CPG</button> </a>#}
+        <button title="Confirmation Payment Guarantee" class="panelRedButton"
+                onclick="window.location = '{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}';">
+            CPG  
+        </button>        
+        <button title="Repair Order" class="panelOrangeButton" 
+                onclick="window.location = '{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}';">
+            RO  
+        </button>     
+        <button title="Estimated Arrival Time" class="panelOrangeButton" 
+                onclick="window.location = '{{ path('truck_monitoringeta_createmonitoringeta', {"caseId":caseId}) }}';">
+            ETA
+        </button>       
+        <button title="STaRt Repair Time" class="panelGreenButton" 
+                onclick="window.location = '{{ path('truck_monitoringstrr_createmonitoringstrr', {"caseId":caseId}) }}';">
+            STRR
+        </button>     
+        <button title="END case" class="panelGreenButton" 
+                onclick="window.location = '{{ path('truck_monitoringend_createmonitoringend', {"caseId":caseId}) }}';">
+            END
+        </button>  
+        &nbsp;    
+        <button title="General. Outgoing phone call/fax/mail/etc." class="panelGreenButton" 
+                onclick="window.location = '{{ path('truck_monitoringout_createmonitoringout', {"caseId":caseId}) }}';">
+            Out
+        </button>       
+        <button title="General. Incoming phone call/fax/mail/etc." class="panelGreenButton" 
+                onclick="window.location = '{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}';">
+            Incoming
+        </button>   
+        <br/>    
+        
+{# new window!  <button title="Repair Order" class="panelOrangeButton" 
+                onclick="window.open('{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}');">
+            new window !
+        </button>  #}              
+        
+{#        <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">
             <button class="panelRedButton">CPG</button>
-        </a>
-        <a title="Repair Order" href="{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}">
+        </a>#}
+{#        <a title="Repair Order" href="{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}">
             <button class="panelOrangeButton">RO</button>
-        </a>
-        <a title="Estimated Arrival Time" href="{{ path('truck_monitoringeta_createmonitoringeta', {"caseId":caseId}) }}">
+        </a>#}
+{#        <a title="Estimated Arrival Time" href="{{ path('truck_monitoringeta_createmonitoringeta', {"caseId":caseId}) }}">
             <button class="panelOrangeButton">ETA</button>
-        </a>
-        <a title="STaRt Repair Time" href="{{ path('truck_monitoringstrr_createmonitoringstrr', {"caseId":caseId}) }}">
+        </a>#}
+{#        <a title="STaRt Repair Time" href="{{ path('truck_monitoringstrr_createmonitoringstrr', {"caseId":caseId}) }}">
             <button class="panelGreenButton">STRR</button>
-        </a>
-        <a title="END case" href="{{ path('truck_monitoringend_createmonitoringend', {"caseId":caseId}) }}">
+        </a>#}
+{#        <a title="END case" href="{{ path('truck_monitoringend_createmonitoringend', {"caseId":caseId}) }}">
             <button class="panelGreyButton">END</button>
         </a>
-        &nbsp;
-        <a title="General. Outgoing phone call/fax/mail/etc. " href="{{ path('truck_monitoringout_createmonitoringout', {"caseId":caseId}) }}">
+        &nbsp;#}
+{#        <a title="General. Outgoing phone call/fax/mail/etc. " href="{{ path('truck_monitoringout_createmonitoringout', {"caseId":caseId}) }}">
             <button class="panelGreyButton">Out</button>
-        </a>
-        <a title="General. Incoming phone call/fax/mail/etc. " href="{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}">
+        </a>#}
+{#        <a title="General. Incoming phone call/fax/mail/etc. " href="{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}">
             <button class="panelGreyButton">Incoming</button>
-        </a>
-        <br/>
+        </a>#}
     {% endif %}
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
