@@ -22,7 +22,8 @@ body {
 
 .logo {
     border-top-left-radius: .4em;
-    background-color: #FFDFDF;
+/*    background-color: #FFDFDF;*/
+    background-color: #DDFED1;
     width: 20%;
     min-height: 80px;
     height: 10%;
@@ -31,13 +32,10 @@ body {
     text-align: center;
 }
 
-.logo:hover, .menuBar:hover, .cases:hover, .monitoring:hover, .logged:hover, .infoBar:hover {  
-    box-shadow: 1px 1px 5px 1px white inset;
-}
-
 .menuBar {
     border-top-right-radius: .4em;
     background-color: #E6DBFF;
+/*    background-color: #F7F9D0;*/
     width: 80%;
     min-height: 80px;
     height: 10%;
@@ -46,7 +44,8 @@ body {
 }
 
 .cases {
-    background-color: #FFFFD7;
+/*    background-color: #FFFFD7;*/
+    background-color: #F7F9D0;
     width: 20%;
     min-height: 160px;
     height: 85%;
@@ -56,7 +55,8 @@ body {
 }
 
 .monitoring {
-    background-color: #D2FFC4;
+/*    background-color: #D2FFC4;*/
+    background-color: #DDFED1;
     width: 80%;
     min-height: 160px;
     height: 85%;
@@ -66,7 +66,8 @@ body {
 
 .logged {
     border-bottom-left-radius: .4em;
-    background-color: #C9EAF3;
+/*    background-color: #C9EAF3;*/
+    background-color: #DDFED1;
     width: 20%;
     min-height: 18px;
     height: 5%;
@@ -77,13 +78,19 @@ body {
 
 .infoBar {
     border-bottom-right-radius: .4em;
-    background-color: #EEBBEE;
+/*    background-color: #EEBBEE;*/
+/*    background-color: #F7F9D0;*/
+    background-color: #E6DBFF;
     width: 80%;
     min-height: 18px;
     height: 5%;
     overflow: auto;
     float: left;
     text-align: center;
+}
+
+.logo:hover, .menuBar:hover, .cases:hover, .monitoring:hover, .logged:hover, .infoBar:hover {  
+    box-shadow: 1px 1px 5px 1px white inset;
 }
 
 .textBold {
