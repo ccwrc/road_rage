@@ -20,28 +20,58 @@
 {% block menuBar %}
     {# for operator (overall) #}
     {% if is_granted('ROLE_OPERATOR') %}
-        <a target="_blank" title="new window" href="{{ path('truck_dealer_showallactivedealers') }}" >active dealers</a> 
-        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >main page</a> 
-        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >reserve</a>
+        &nbsp;
+        <button title="new window" class="panelGreenButton" 
+                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+            active dealers
+        </button>      
+        <button title="new window" class="panelGreenButton" 
+                onclick="window.open('{{ path('truck_main_index') }}');">
+            main page
+        </button>          
+        <button title="new window" class="panelGreenButton" 
+                onclick="window.open('{{ path('truck_main_index') }}');">
+            reserve
+        </button>    
+        <br/>    
     {% endif %}
-    <br/>
     {# for control #}
     {% if is_granted('ROLE_CONTROL') %}
-        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >report panel?</a>
+        &nbsp;
+        <button title="new window" class="panelYellowButton" 
+                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+            report panel?
+        </button>          
+        <br/>
     {% endif %}
-    <br/>
     {# for admin? #}
     {% if is_granted('ROLE_ADMIN') %}
-        <a target="_blank" title="new window" href="{{ path('truck_dealer_showalldealers') }}" >admin panel?</a>
+        &nbsp;
+        <button title="new window" class="panelGreenButton" 
+                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+            admin panel?
+        </button>          
+        <br/>
     {% endif %}
-    <br/>
     {# case bar for operator #}
     {% if is_granted('ROLE_OPERATOR') %}
-        <a target="_blank" title="new window" href="{{ path('truck_vehicle_createvehicle') }}" >new vehicle</a> 
-        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >res-new case</a> 
-        <a target="_blank" title="new window" href="{{ path('truck_monitoring_monitoringcodesmanual') }}" >monitoring-codes</a>
-        <a target="_blank" title="new window" href="{{ path('truck_accidentcase_caseprogresscolormanual') }}" >cases-colors</a>
-        <a target="_blank" title="new window" href="{{ path('truck_main_index') }}" >reserved</a>
+        &nbsp;
+        <button title="new window" class="panelYellowButton" 
+                onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
+            new vehicle
+        </button>          
+        <button title="new window" class="panelYellowButton" 
+                onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
+            search vehicle - reserved
+        </button>    
+        <button title="new window" class="panelYellowButton" 
+                onclick="window.open('{{ path('truck_monitoring_monitoringcodesmanual') }}');">
+            monitoring manual
+        </button>        
+        <button title="new window" class="panelYellowButton" 
+                onclick="window.open('{{ path('truck_accidentcase_caseprogresscolormanual') }}');">
+            cases-color manual
+        </button>               
     {% endif %}
 {% endblock %}
 
@@ -97,11 +127,11 @@
             Incoming
         </button>   
         <br/>    
-        
-{# new window!  <button title="Repair Order" class="panelOrangeButton" 
-                onclick="window.open('{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}');">
-            new window !
-        </button>  #}              
+
+        {# new window!  <button title="Repair Order" class="panelOrangeButton" 
+                        onclick="window.open('{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}');">
+                    new window !
+                </button>  #}              
     {% endif %}
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
