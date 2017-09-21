@@ -26,6 +26,7 @@
     font-size: 90%;
 }
 
+/* for show_vehicle - cases */
 .button70noBackground {
     color: black;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -44,11 +45,11 @@
     border-radius: 2px;
 }
 
-.caseButton:hover {  
+/*.caseButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
-}
+}*/
 
 .casesSwitch {  /*TODO top/bottom distance*/
     color: black;
@@ -72,11 +73,11 @@
     border-radius: 2px;
 }
 
-.panelGreyButton:hover {  
+/*.panelGreyButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
-}
+}*/
 
 .panelRedButton {
     color: black;
@@ -90,11 +91,11 @@
     border-radius: 2px;
 }
 
-.panelRedButton:hover {  
+/*.panelRedButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
-}
+}*/
 
 .panelOrangeButton {
     color: black;
@@ -120,17 +121,17 @@
     border-radius: 2px;
 }
 
-.panelYellowButton:hover {  
+/*.panelYellowButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
-}
+}*/
 
-.panelOrangeButton:hover {  
+/*.panelOrangeButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
-}
+}*/
 
 .panelGreenButton {
     color: black;
@@ -144,7 +145,8 @@
     border-radius: 2px;
 }
 
-.panelGreenButton:hover {  
+.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, .panelYellowButton:hover, 
+.panelOrangeButton:hover, .panelGreenButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
