@@ -9,29 +9,45 @@
     </center>
 
     {#user panel#}
-    <p class="boldText"> user bar </p>
     {% if is_granted('ROLE_USER') %}
-        <a href='{{ path("fos_user_security_logout") }}' ><button class="pure-button pure-button-active button90green">logout</button> </a>
+        <button title="logout" class="pure-button pure-button-active button90red"
+                onclick="window.location = '{{ path("fos_user_security_logout") }}';">
+            logout
+        </button>
     {% else %}
-        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">login</button> </a>
+        <button title="login" class="pure-button pure-button-active button90red"
+                onclick="window.location = '{{ path("fos_user_security_login") }}';">
+            login
+        </button>
     {% endif %}
 
     {% if is_granted('ROLE_USER') %}
-        <a href='{{ path("fos_user_profile_show") }}' ><button class="pure-button pure-button-active button90green">profile</button> </a>
-        <a href='{{ path("fos_user_profile_edit") }}' ><button class="pure-button pure-button-active button90green">edit profile</button> </a>
+        <button title="show profile" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("fos_user_profile_show") }}';">
+            profile
+        </button>
+        <button title="edit profile" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("fos_user_profile_edit") }}';">
+            edit profile
+        </button>
     {% endif %}
 
     {% if is_granted('ROLE_USER') %}
     {% else %}
-        <a href='{{ path("fos_user_registration_register") }}' ><button class="pure-button pure-button-active button90green">register</button> </a>
+        <button title="register" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("fos_user_registration_register") }}';">
+            register
+        </button>
     {% endif %}
-
-    <br/><br/>
+    <br/>
 
     {#dealer panel#}
     {% if is_granted('ROLE_DEALER') %}
-        <hr class="hrStyle"/>
-        <p class="boldText"> dealer </p>
+        {#        <hr class="hrStyle"/>
+                <p class="boldText"> dealer </p>#}
+        <center>
+            <h3 class="formTitle">dealer</h3>
+        </center>
         <a href='{{ path("truck_dealer_showallactivedealers") }}' ><button class="pure-button pure-button-active button90green">active dealers</button> </a>
         <a href='{{ path("truck_dealer_showalldealers") }}' ><button class="pure-button pure-button-active button90green">all dealers</button> </a>
         <a href='{{ path("truck_vehicle_createvehicle") }}' ><button class="pure-button pure-button-active button90orange">new vehicle</button> </a>
