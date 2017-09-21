@@ -26,8 +26,7 @@
     font-size: 90%;
 }
 
-/* for show_vehicle - cases */
-.button70noBackground {
+.button70noBackground { /* for show_vehicle - cases */
     color: black;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     font-size: 70%;
@@ -45,13 +44,7 @@
     border-radius: 2px;
 }
 
-/*.caseButton:hover {  
-    color: white;
-    text-shadow: 1px 1px 1px #000000;
-    box-shadow: 1px 1px 1px 1px grey;
-}*/
-
-.casesSwitch {  /*TODO top/bottom distance*/
+.casesSwitch {  /* active/inactive/all */
     color: black;
     text-decoration: none;
 }
@@ -73,12 +66,6 @@
     border-radius: 2px;
 }
 
-/*.panelGreyButton:hover {  
-    color: white;
-    text-shadow: 1px 1px 1px #000000;
-    box-shadow: 1px 1px 1px 1px grey;
-}*/
-
 .panelRedButton {
     color: black;
     background: #FF7575;
@@ -90,12 +77,6 @@
     text-decoration: none;
     border-radius: 2px;
 }
-
-/*.panelRedButton:hover {  
-    color: white;
-    text-shadow: 1px 1px 1px #000000;
-    box-shadow: 1px 1px 1px 1px grey;
-}*/
 
 .panelOrangeButton {
     color: black;
@@ -121,18 +102,6 @@
     border-radius: 2px;
 }
 
-/*.panelYellowButton:hover {  
-    color: white;
-    text-shadow: 1px 1px 1px #000000;
-    box-shadow: 1px 1px 1px 1px grey;
-}*/
-
-/*.panelOrangeButton:hover {  
-    color: white;
-    text-shadow: 1px 1px 1px #000000;
-    box-shadow: 1px 1px 1px 1px grey;
-}*/
-
 .panelGreenButton {
     color: black;
     background: #93EEAA;
@@ -145,8 +114,8 @@
     border-radius: 2px;
 }
 
-.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, .panelYellowButton:hover, 
-.panelOrangeButton:hover, .panelGreenButton:hover {  
+.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, 
+.panelYellowButton:hover, .panelOrangeButton:hover, .panelGreenButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
