@@ -17,14 +17,4 @@ class MainController extends Controller {
         ]);
     }
 
-    /**
-     * @Route("wrongParameterInfo")
-     */
-    public function wrongParameterInfoAction() {
-
-        return $this->render('TruckBundle:Main:wrong_parameter_info.html.twig', [
-                        //...
-        ]);
-    }
-
 }
