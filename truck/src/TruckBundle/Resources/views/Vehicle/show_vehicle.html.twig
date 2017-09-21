@@ -8,14 +8,20 @@
         <h3 class="formTitle">show vehicle {{ vehicle.id }}</h3>
     </center>
 
-    <a href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' >
-        <button class="pure-button pure-button-active button90blue" >edit vehicle</button> </a>
-    <a href='{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}' >
-        <button class="pure-button pure-button-active button90blue" >show dealer</button> </a>
-        {% if is_granted('ROLE_OPERATOR') %}
-        <a href='{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}' >
-            <button class="pure-button pure-button-active button90red" >new case</button> </a>
-        {% endif %}
+    <button title="edit vehicle" class="pure-button pure-button-active button90blue"
+            onclick="window.location = '{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}';">
+        edit vehicle
+    </button>
+    <button title="new window" class="pure-button pure-button-active button90blue" 
+            onclick="window.open('{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}');">
+        show dealer
+    </button> 
+    {% if is_granted('ROLE_OPERATOR') %}
+        <button title="start new case" class="pure-button pure-button-active button90red"
+                onclick="window.location = '{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}';">
+            new case
+        </button>      
+    {% endif %}
     <br/><br/>
 
     Home dealer: {{ dealer.name }} <br/>
@@ -38,14 +44,15 @@
     Number of accident cases: {{ cases|length }} <br/>
 
     {% if is_granted('ROLE_OPERATOR') %}
-        {% for case in cases %} 
-            <a target="_blank" title="new window" href='{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}' >
-                <button class="pure-button pure-button-active button70noBackground" 
-                        style="background-color:{{ case.progressColor }}" >case {{ case.id }} 
-                    {% if case.timeStart is not null %}
-                        ({{ case.timeStart | date('Y.m.d') }})
-                    {% endif %}
-                </button> </a>
+        {% for case in cases %}            
+            <button title="new window" class="pure-button pure-button-active button70noBackground" 
+                    onclick="window.open('{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}');"
+                    style="background-color:{{ case.progressColor }}" >
+                case {{ case.id }} 
+                {% if case.timeStart is not null %}
+                    ({{ case.timeStart | date('Y.m.d') }})
+                {% endif %}
+            </button>
         {% else %}
         {% endfor %}
     {% endif %}    

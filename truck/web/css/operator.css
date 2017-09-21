@@ -105,8 +105,8 @@ body {
     width: 99%;
     border: 0; 
     height: 1px; 
-    background-image: -webkit-linear-gradient(left, #D2FFC4, #8c8b8b, #D2FFC4);
-    background-image: -moz-linear-gradient(left, #D2FFC4, #8c8b8b, #D2FFC4);
-    background-image: -ms-linear-gradient(left, #D2FFC4, #8c8b8b, #D2FFC4);
-    background-image: -o-linear-gradient(left, #D2FFC4, #8c8b8b, #D2FFC4); 
+    background-image: -webkit-linear-gradient(left, #DDFED1, #8c8b8b, #DDFED1);
+    background-image: -moz-linear-gradient(left, #DDFED1, #8c8b8b, #DDFED1);
+    background-image: -ms-linear-gradient(left, #DDFED1, #8c8b8b, #DDFED1);
+    background-image: -o-linear-gradient(left, #DDFED1, #8c8b8b, #DDFED1); 
 }
