@@ -133,8 +133,14 @@
         <center>
             <h3 class="formTitle">super admin</h3>
         </center>
-        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
-        <a href='{{ path("fos_user_security_login") }}' ><button class="pure-button pure-button-active button90green">reserve</button> </a>
+        <button title="res" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+            reserved 
+        </button>  
+        <button title="res" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+            reserved 
+        </button>  
         <br/><br/>
     {% endif %}      
 
