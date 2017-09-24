@@ -4,9 +4,10 @@
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span>
     {% if monitoring.code == "START" %} 
-        <a title="START edit" href="{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}">
-            <button class="panelGreyButton">edit</button>
-        </a>  
+        <button title="START edit" class="panelGreyButton"
+                onclick="window.location = '{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}';">
+            edit 
+        </button>
     {% elseif monitoring.code == "PG" %}
         <a title="Withdrawal PG" href="{{ path('truck_monitoringwpg_createmonitoringwpg', {"monitoringPgId":monitoring.id}) }}">
             <button class="panelRedButton">WPG</button>
@@ -81,6 +82,6 @@
 
     <hr class="hrStyle"/>
 {% else %}
-    Empty.
-    <hr class="hrStyle"/>
+    {#  Empty.#}
+    {#   <hr class="hrStyle"/>#}
 {% endfor %}
