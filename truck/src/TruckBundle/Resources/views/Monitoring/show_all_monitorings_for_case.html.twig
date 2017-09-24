@@ -9,16 +9,20 @@
             edit 
         </button>
     {% elseif monitoring.code == "PG" %}
-        <a title="Withdrawal PG" href="{{ path('truck_monitoringwpg_createmonitoringwpg', {"monitoringPgId":monitoring.id}) }}">
-            <button class="panelRedButton">WPG</button>
-        </a>        
-        <a title="PG edit" href="{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}">
-            <button class="panelGreyButton">edit</button>
-        </a>
+        <button title="Withdrawal PG" class="panelRedButton"
+                onclick="window.location = '{{ path('truck_monitoringwpg_createmonitoringwpg', {"monitoringPgId":monitoring.id}) }}';">
+            WPG
+        </button>
+
+        <button title="PG edit" class="panelGreyButton"
+                onclick="window.location = '{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}';">
+            edit
+        </button>
     {% elseif monitoring.code == "WPG" %}
-        <a title="WPG edit" href="{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}">
-            <button class="panelGreyButton">edit</button>
-        </a>
+        <button title="WPG edit" class="panelGreyButton"
+                onclick="window.location = '{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}';">
+            edit
+        </button>
     {% elseif monitoring.code == "CPG" %}
         <a title="Withdrawal CPG" href="{{ path('truck_monitoringwcpg_createmonitoringwcpg', {"monitoringCpgId":monitoring.id}) }}">
             <button class="panelRedButton">WCPG</button>
