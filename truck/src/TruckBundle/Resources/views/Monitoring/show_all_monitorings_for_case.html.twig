@@ -32,31 +32,36 @@
                 onclick="window.location = '{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}';">
             edit
         </button> 
-{#        <a title="Withdrawal CPG" href="{{ path('truck_monitoringwcpg_createmonitoringwcpg', {"monitoringCpgId":monitoring.id}) }}">
-            <button class="panelRedButton">WCPG</button>
-        </a>           
-        <a title="CPG edit" href="{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}">
-            <button class="panelGreyButton">edit</button>
-        </a>#}
     {% elseif monitoring.code == "WCPG" %}
         <button title="WCPG edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringwcpg_editmonitoringwcpg', {"monitoringId":monitoring.id}) }}';">
             edit
         </button> 
-{#        <a title="WCPG edit" href="{{ path('truck_monitoringwcpg_editmonitoringwcpg', {"monitoringId":monitoring.id}) }}">
-            <button class="panelGreyButton">edit</button>
-        </a>#}
     {% elseif monitoring.code == "RO" %}
+        <button title="Withdrawal RO" class="panelRedButton"
+                onclick="window.location = '{{ path('truck_monitoringwro_createmonitoringwro', {"monitoringRoId":monitoring.id}) }}';">
+            WRO
+        </button>
+        <button title="RO edit" class="panelGreyButton"
+                onclick="window.location = '{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}';">
+            edit
+        </button> 
+{#        
         <a title="Withdrawal RO" href="{{ path('truck_monitoringwro_createmonitoringwro', {"monitoringRoId":monitoring.id}) }}">
             <button class="panelRedButton">WRO</button>
         </a>         
         <a title="RO edit" href="{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}">
             <button class="panelGreyButton">edit</button>
-        </a>    
+        </a>  #}  
     {% elseif monitoring.code == "WRO" %}
+        <button title="WRO edit" class="panelGreyButton"
+                onclick="window.location = '{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}';">
+            edit
+        </button>       
+{#        
         <a title="WRO edit" href="{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}">
             <button class="panelGreyButton">edit</button>
-        </a>
+        </a>#}
     {% elseif monitoring.code == "ETA" %}
         <a title="ETA edit" href="{{ path('truck_monitoringeta_editmonitoringeta', {"monitoringId":monitoring.id}) }}">
             <button class="panelGreyButton">edit</button>
