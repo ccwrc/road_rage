@@ -13,10 +13,17 @@ body {
     width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    border-left: 1px dashed gray;
-    border-right: 1px dashed gray;
-    border-top: 1px dashed gray;
+    border-left: 1px dashed #c0b2b2;
+    border-right: 1px dashed #c0b2b2;
+    border-top: 1px dashed #c0b2b2;
     border-radius: .4em;
+    min-height: 99%;
+    background-image: url("../images/testLogo.jpg");
+    background-repeat: no-repeat;
+    background-position: center; 
+/* https://www.fourkitchens.com/blog/article/fix-scrolling-performance-css-will-change-property/ */    
+/*  background-attachment: fixed;*/
+    background-position-y: top 100px;
 }
 
 .redBoldText {
