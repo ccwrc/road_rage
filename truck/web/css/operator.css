@@ -30,6 +30,9 @@ body {
     overflow: auto;
     float: left;
     text-align: center;
+    background-image: url("../images/miniBadLogo.png");
+    background-repeat: no-repeat;
+    background-position-x: 43px;
 }
 
 .menuBar {

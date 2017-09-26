@@ -18,15 +18,11 @@ body {
     border-top: 1px dashed #c0b2b2;
     border-radius: .4em;
     min-height: 99%;
-/*  background-image: url("../images/testLogo.jpg");*/
-    background-repeat: no-repeat;
-    background-position: center; 
-/* https://www.fourkitchens.com/blog/article/fix-scrolling-performance-css-will-change-property/ */    
-/*  background-attachment: fixed;*/
+    /* https://www.fourkitchens.com/blog/article/fix-scrolling-performance-css-will-change-property/ */    
+    /*  background-attachment: fixed;*/
     background-position-y: top 100px;
-    
-      overflow: hidden; 
-  position: relative; 
+    /*    overflow: hidden; 
+        position: relative; */
 }
 .container::before {
     content: ' ';
@@ -35,7 +31,7 @@ body {
     height: 40%;
     top: 50px;
     left: 400px;
-    background: url("../images/badBigLogo.png") no-repeat center center;
+    background: url("../images/bigBadLogo.png") no-repeat center center;
     z-index: -1;
 }
 
