@@ -90,11 +90,11 @@
     border-radius: 2px;
 }
 
-.panelYellowButton {
+.panelMenuYellowButton {
     color: black;
     background: #F7F9D0;
     font-size: 85%;
-    min-width: 50px;    
+    min-width: 130px;    
     font-family: inherit;
     border: 1px solid #999;  /* IE 6/7/8 */
     border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
@@ -114,8 +114,20 @@
     border-radius: 2px;
 }
 
-.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, 
-.panelYellowButton:hover, .panelOrangeButton:hover, .panelGreenButton:hover {  
+.panelMenuGreenButton {
+    color: black;
+    background: #93EEAA;
+    font-size: 85%;
+    min-width: 130px;    
+    font-family: inherit;
+    border: 1px solid #999;  
+    border: none rgba(0, 0, 0, 0); 
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, .panelMenuGreenButton:hover, 
+.panelMenuYellowButton:hover, .panelOrangeButton:hover, .panelGreenButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
