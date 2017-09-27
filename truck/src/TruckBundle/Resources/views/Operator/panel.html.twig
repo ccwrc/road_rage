@@ -138,7 +138,9 @@
 
 
 {% block logged %}
-    {{ app.user.username }} 
+    <a title="Logout" class="casesSwitch" href="{{ path("fos_user_security_logout") }}">
+        {{ app.user.username }} 
+    </a>
 {% endblock %}
 
 
