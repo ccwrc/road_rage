@@ -18,7 +18,7 @@ use TruckBundle\Form\Dealer\DealerEditType;
 class DealerController extends Controller {
     
     protected function throwExceptionIfDealerIdIsWrong($dealerId) {
-        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($dealerId);
+        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
         if ($dealer === null) {
             throw $this->createNotFoundException("Wrong dealer ID");
         }

@@ -19,6 +19,8 @@ class MonitoringRoType extends AbstractType {
                 // ->add("contactMail", "hidden", ["label" => "contactMail: "])
                 //->add("optionalMails", "text", ["label" => "optionalMails: "]);
                 ->add("repairDealer", EntityType::class, [
+                    //TODO
+                    // http://symfony.com/doc/2.8/reference/forms/types/entity.html#using-a-custom-query-for-the-entities
                     "class" => "TruckBundle:Dealer", "choice_label" => "name",
                     "label" => "Repair dealer: "]);
     }
