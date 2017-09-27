@@ -13,8 +13,14 @@ class AccidentCaseType extends AbstractType {
                 ->add("damageDescription", "textarea", ["label" => "Damage/fault description: "])
                 ->add("location", "textarea", ["label" => "Truck location: "])
                 ->add("driverContact", "text", ["label" => "Driver/dispatcher name & phone: "])
-                ->add("infoSms", "text", ["label" => "SMS info (optional - phone): "])
-                ->add("infoMail", "text", ["label" => "Mail info (optional - mail): "])
+                ->add("infoSms", "text", [
+                    "label" => "SMS info (optional - phone): ",
+                    "required" => false
+                ])
+                ->add("infoMail", "text", [
+                    "label" => "Mail info (optional - mail): ",
+                    "required" => false
+                ])
                 ->add("comment", "textarea", ["label" => "Other comments: "]);
     }
 
