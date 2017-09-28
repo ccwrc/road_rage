@@ -88,14 +88,14 @@ class AccidentCase
     /**
      * @Assert\Type("string")
      * @Assert\Length(
-     * min = 0,
+     * min = 1,
      * max = 65000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
      * )       
      * @var string
      *
-     * @ORM\Column(name="comment", type="text", length=65000, nullable=true)
+     * @ORM\Column(name="comment", type="text", length=65000)
      */
     private $comment;
 

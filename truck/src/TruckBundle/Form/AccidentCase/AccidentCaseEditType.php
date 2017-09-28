@@ -22,8 +22,7 @@ class AccidentCaseEditType extends AbstractType {
                     "required" => false
                 ])
                 ->add("comment", "textarea", [
-                    "label" => "Other comments: ",
-                    "required" => false
+                    "label" => "Other comments: "
                 ]);
     }
 
