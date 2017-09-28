@@ -131,6 +131,7 @@ class AccidentCase
     private $infoMail;
 
     /**
+     * @Assert\Choice({"active", "inactive"})
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255)
@@ -138,6 +139,7 @@ class AccidentCase
     private $status;
 
     /**
+     * @Assert\Choice({"#FF7575", "#FF9C42", "#93EEAA", "#E6E6E6"})
      * @var string
      *
      * @ORM\Column(name="progress_color", type="string", length=255)
@@ -145,6 +147,7 @@ class AccidentCase
     private $progressColor;
     
     /**
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_start", type="datetime", nullable=true)
@@ -152,6 +155,10 @@ class AccidentCase
     private $timeStart;    
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )
      * @var int
      *
      * @ORM\Column(name="report_late", type="integer")
@@ -159,6 +166,10 @@ class AccidentCase
     private $reportLate;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_rs_time", type="integer")
@@ -166,6 +177,10 @@ class AccidentCase
     private $reportRsTime;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_nrs_time", type="integer")
@@ -173,6 +188,10 @@ class AccidentCase
     private $reportNrsTime;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )
      * @var int
      *
      * @ORM\Column(name="report_repair_total", type="integer")
@@ -180,6 +199,10 @@ class AccidentCase
     private $reportRepairTotal;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_arrival_time", type="integer")
@@ -187,6 +210,10 @@ class AccidentCase
     private $reportArrivalTime;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_case_total", type="integer")
@@ -194,9 +221,10 @@ class AccidentCase
     private $reportCaseTotal;
 
     /**
+     * @Assert\Choice({"initialization", "completed", "incompleted", "canceled"})
      * @var string
      *
-     * @ORM\Column(name="report_repair_status", type="string", length=255, nullable=true)
+     * @ORM\Column(name="report_repair_status", type="string", length=255)
      */
     private $reportRepairStatus;
 
