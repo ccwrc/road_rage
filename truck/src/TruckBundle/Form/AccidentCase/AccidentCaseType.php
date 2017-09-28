@@ -21,7 +21,10 @@ class AccidentCaseType extends AbstractType {
                     "label" => "Mail info (optional - mail): ",
                     "required" => false
                 ])
-                ->add("comment", "textarea", ["label" => "Other comments: "]);
+                ->add("comment", "textarea", [
+                    "label" => "Other comments: ",
+                    "required" => false
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {

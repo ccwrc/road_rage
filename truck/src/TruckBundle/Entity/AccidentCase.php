@@ -17,6 +17,8 @@ class AccidentCase
 {
     
     public function __construct() {
+        //TODO add default report values
+        // and del them from controller...
         $this->monitorings = new ArrayCollection();
     }
 
@@ -42,6 +44,13 @@ class AccidentCase
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 30100,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )    
      * @var string
      *
      * @ORM\Column(name="damage_description", type="text", length=30100)
@@ -49,6 +58,13 @@ class AccidentCase
     private $damageDescription;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 30100,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="location", type="text", length=30100)
@@ -56,6 +72,13 @@ class AccidentCase
     private $location;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
      * @ORM\Column(name="driver_contact", type="string", length=255)
@@ -63,6 +86,13 @@ class AccidentCase
     private $driverContact;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 0,
+     * max = 65000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="comment", type="text", length=65000, nullable=true)
@@ -70,6 +100,13 @@ class AccidentCase
     private $comment;
 
     /**
+     * @Assert\Type("numeric")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="info_sms", type="string", length=255, nullable=true)
@@ -77,6 +114,16 @@ class AccidentCase
     private $infoSms;
 
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )             
      * @var string
      *
      * @ORM\Column(name="info_mail", type="string", length=255, nullable=true)
