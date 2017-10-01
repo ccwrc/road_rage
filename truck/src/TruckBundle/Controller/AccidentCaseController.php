@@ -362,7 +362,8 @@ class AccidentCaseController extends Controller {
 
         $case->setReportArrivalTime($arrivalTime)->setReportLate($serviceCarLate)
                 ->setReportRsTime($roadServiceTime)->setReportNrsTime($noRoadServiceTime)
-                ->setReportRepairTotal($repairTotalTime)->setReportCaseTotal($caseTotalTime);
+                ->setReportRepairTotal($repairTotalTime)->setReportCaseTotal($caseTotalTime)
+                ->setReportRepairStatus("canceled");
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
