@@ -24,22 +24,22 @@
     {% endif %}
     <br/><br/>
 
-    Home dealer: {{ dealer.name }} <br/>
-    VIN: {{ vehicle.vin }} <br/>
-    Company name: {{ vehicle.companyName }} <br/>
-    Company tax ID number: {{ vehicle.taxIdNumber }} <br/>
-    Company - contact person: {{ vehicle.contactPerson }} <br/>
-    Company - street: {{ vehicle.street }} <br/>
-    Company - zip code, city: {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
-    Phone: {{ vehicle.phone }} <br/>
-    Fax: {{ vehicle.fax }} <br/>
-    Mail: {{ vehicle.mail }} <br/><br/>
+    <span class="boldText">Home dealer:</span> {{ dealer.name }} <br/>
+    <span class="boldText">VIN:</span> {{ vehicle.vin }} <br/>
+    <span class="boldText">Company name:</span> {{ vehicle.companyName }} <br/>
+    <span class="boldText">Company tax ID number:</span> {{ vehicle.taxIdNumber }} <br/>
+    <span class="boldText">Company - contact person:</span> {{ vehicle.contactPerson }} <br/>
+    <span class="boldText">Company - street:</span> {{ vehicle.street }} <br/>
+    <span class="boldText">Company - zip code, city:</span> {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
+    <span class="boldText">Phone:</span> {{ vehicle.phone }} <br/>
+    <span class="boldText">Fax:</span> {{ vehicle.fax }} <br/>
+    <span class="boldText">Mail:</span> {{ vehicle.mail }} <br/><br/>
 
-    Vehicle registration number: {{ vehicle.registrationNumber }} <br/>
-    Vehicle mileage: {{ vehicle.mileage }} <br/>
-    Vehicle guarantee type: {{ vehicle.guaranteeType }} <br/>
-    Vehicle purchase date: {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
-    Vehicle name/type: {{ vehicle.nameType }} <br/><br/>
+    <span class="boldText">Vehicle registration number:</span> {{ vehicle.registrationNumber }} <br/>
+    <span class="boldText">Vehicle mileage:</span> {{ vehicle.mileage }} <br/>
+    <span class="boldText">Vehicle guarantee type:</span> {{ vehicle.guaranteeType }} <br/>
+    <span class="boldText">Vehicle purchase date:</span> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
+    <span class="boldText">Vehicle name/type:</span> {{ vehicle.nameType }} <br/><br/>
 
     Number of accident cases: {{ cases|length }} <br/>
 
