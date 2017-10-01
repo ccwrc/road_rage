@@ -63,9 +63,14 @@ class Dealer
     private $street;
 
     /**
+     * @Assert\Regex(
+     *     pattern="/[0-9][0-9]-[0-9][0-9][0-9]/",
+     *     match=true,
+     *     message="The right pattern is the DD-DDD (D as digit)"
+     * )      
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=50, nullable=true)
+     * @ORM\Column(name="zip_code", type="string", length=50)
      */
     private $zipCode;
 
