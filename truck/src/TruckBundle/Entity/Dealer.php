@@ -75,16 +75,30 @@ class Dealer
     private $zipCode;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
-     * @ORM\Column(name="main_phone", type="string", length=255, nullable=true)
+     * @ORM\Column(name="main_phone", type="string", length=255)
      */
     private $mainPhone;
 
