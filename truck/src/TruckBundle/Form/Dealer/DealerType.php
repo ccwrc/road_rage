@@ -15,7 +15,10 @@ class DealerType extends AbstractType {
                 ->add("zipCode", "text", ["label" => "Zip code: "])
                 ->add("city", "text", ["label" => "City: "])
                 ->add("mainPhone", "text", ["label" => "Main phone: "])
-                ->add("mainFax", "text", ["label" => "Main fax: "])
+                ->add("mainFax", "text", [
+                    "label" => "Main fax: ",
+                    "required" => false
+                    ])
                 ->add("mainMail", "text", ["label" => "Main mail: "])
                 ->add("phone24h", "text", ["label" => "Phone - 24h: "])
                 ->add("phoneServiceCar", "text", ["label" => "Phone - service car: "])
