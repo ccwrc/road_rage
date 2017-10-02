@@ -41,6 +41,11 @@ class Monitoring
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 2,
+     * max = 255
+     * )      
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
@@ -48,9 +53,14 @@ class Monitoring
     private $code;
     
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 600
+     * )        
      * @var string
      *
-     * @ORM\Column(name="operator", type="string", length=600, nullable=true)
+     * @ORM\Column(name="operator", type="string", length=600)
      */
     private $operator;
 
