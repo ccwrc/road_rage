@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Dealer
 {
+    //TODO
+    // https://symfony.com/doc/2.8/reference/constraints/UniqueEntity.html
     
     public function __construct() {
         $this->vehicles = new ArrayCollection();
@@ -116,10 +118,11 @@ class Dealer
      */
     private $mainFax;
 
+    //TODO change checkMX val -> true
     /**
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     checkMX = false
      * )    
      * @Assert\Length(
      * min = 5,
@@ -224,6 +227,13 @@ class Dealer
     private $altMail2;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 65000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="other_comments", type="text", length=65000, nullable=true)
@@ -231,6 +241,7 @@ class Dealer
     private $otherComments;
 
     /**
+     * @Assert\Choice({"active", "inactive", "suspended"})   
      * @var string
      *
      * @ORM\Column(name="is_active", type="string", length=100)
