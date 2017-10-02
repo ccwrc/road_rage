@@ -20,6 +20,15 @@ class AccidentCase
         //TODO add default report values
         // and del them from controller...
         $this->monitorings = new ArrayCollection();
+        $this->reportArrivalTime = 0;
+        $this->reportCaseTotal = 0;
+        $this->reportLate = 0;
+        $this->reportNrsTime = 0;
+        $this->reportRepairStatus = "initialization";
+        $this->reportRepairTotal = 0;
+        $this->reportRsTime = 0;
+        $this->status = "active";
+        $this->progressColor = "#FF7575";
     }
 
     /**
