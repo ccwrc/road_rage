@@ -65,6 +65,7 @@ class Monitoring
     private $operator;
 
     /**
+     * @Assert\DateTime()     
      * @var \DateTime
      *
      * @ORM\Column(name="time_save", type="datetime")
@@ -72,6 +73,7 @@ class Monitoring
     private $timeSave;
 
     /**
+     * @Assert\DateTime()    
      * @var \DateTime
      *
      * @ORM\Column(name="time_set", type="datetime", nullable=true)
