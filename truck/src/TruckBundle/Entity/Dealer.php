@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="dealer")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\DealerRepository")
+ * @UniqueEntity("name")
  */
 class Dealer
 {
