@@ -13,12 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="accident_case")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\AccidentCaseRepository")
  */
-class AccidentCase
-{
+class AccidentCase {
     
     public function __construct() {
-        //TODO add default report values
-        // and del them from controller...
         $this->monitorings = new ArrayCollection();
         $this->reportArrivalTime = 0;
         $this->reportCaseTotal = 0;
