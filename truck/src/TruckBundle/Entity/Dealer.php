@@ -14,11 +14,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="dealer")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\DealerRepository")
  * @UniqueEntity("name")
+ * @UniqueEntity("mainMail")
  */
-class Dealer
-{
-    //TODO
-    // https://symfony.com/doc/2.8/reference/constraints/UniqueEntity.html
+class Dealer {
     
     public function __construct() {
         $this->vehicles = new ArrayCollection();
