@@ -12,7 +12,10 @@ class MonitoringWroType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
-                ->add("outComment", "textarea", ["label" => "Comment for dealer: "]);
+                ->add("outComment", "textarea", [
+                    "label" => "Comment for dealer: ",
+                    "required" => false
+                    ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
