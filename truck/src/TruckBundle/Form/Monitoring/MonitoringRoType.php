@@ -13,16 +13,18 @@ class MonitoringRoType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
-                //TODO out comment for document
-                ->add("outComment", "textarea", ["label" => "Comment for repair dealer: "])
-                //TODO contact mail/opt mail for document
-                // ->add("contactMail", "hidden", ["label" => "contactMail: "])
+                ->add("outComment", "textarea", [
+                    "label" => "Comment for repair dealer: ",
+                    "required" => false
+                    ])
+                //TODO opt mail for document
                 //->add("optionalMails", "text", ["label" => "optionalMails: "]);
                 ->add("repairDealer", EntityType::class, [
                     //TODO
                     // http://symfony.com/doc/2.8/reference/forms/types/entity.html#using-a-custom-query-for-the-entities
                     "class" => "TruckBundle:Dealer", "choice_label" => "name",
-                    "label" => "Repair dealer: "]);
+                    "label" => "Repair dealer: "
+                    ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
