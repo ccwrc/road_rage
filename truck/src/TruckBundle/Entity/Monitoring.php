@@ -148,7 +148,15 @@ class Monitoring
      */
     private $contactMail;
 
+    //TODO add regex in controller
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 5,
+     * max = 600,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="optional_mails", type="string", length=600, nullable=true)
@@ -156,13 +164,21 @@ class Monitoring
     private $optionalMails;
     
     /**
+     * @Assert\Type("numeric")
+     * @Assert\Length(
+     * min = 1,
+     * max = 10,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var int
      *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
-    private $amount;   
-    
+    private $amount;
+
     /**
+     * @Assert\Choice({"PLN", "USD", "EUR"})     
      * @var string
      *
      * @ORM\Column(name="currency", type="string", length=100, nullable=true)
