@@ -12,8 +12,10 @@ class MonitoringWpgType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
-                ->add("outComment", "textarea", ["label" => "Comment for dealer: "]);
-        //TODO contact mail/opt mail for document same as a PG
+                ->add("outComment", "textarea", [
+                    "label" => "Comment for dealer: ",
+                    "required" => false
+                    ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {

@@ -11,9 +11,11 @@ class MonitoringWpgEditType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
-                ->add("comments", "textarea", ["label" => "Comments: "]);
-        //TODO out comment for document
-        //out comment -> sorry, document already sent
+                ->add("comments", "textarea", ["label" => "Comments: "])
+                ->add("outComment", "textarea", [
+                    "label" => "Comment for dealer (the document has already been sent): ",
+                    "read_only" => true
+                    ]);                       
     }
 
     public function configureOptions(OptionsResolver $resolver) {
