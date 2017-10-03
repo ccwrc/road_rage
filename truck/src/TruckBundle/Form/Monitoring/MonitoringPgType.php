@@ -12,8 +12,10 @@ class MonitoringPgType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
-                //TODO out comment for document
-                ->add("outComment", "textarea", ["label" => "Comment for dealer: "]);
+                ->add("outComment", "textarea", [
+                    "label" => "Comment for dealer: ",
+                    "required" => false
+                    ]);
                 //TODO contact mail/opt mail for document
                 // ->add("contactMail", "hidden", ["label" => "contactMail: "])
                 //->add("optionalMails", "text", ["label" => "optionalMails: "]);

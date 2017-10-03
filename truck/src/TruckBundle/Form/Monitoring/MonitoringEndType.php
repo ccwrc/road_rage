@@ -5,7 +5,7 @@ namespace TruckBundle\Form\Monitoring;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use \DateTime;  // timeSet
+use \DateTime;  // for timeSet
 
 class MonitoringEndType extends AbstractType {
 
