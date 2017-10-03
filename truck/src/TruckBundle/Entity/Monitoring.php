@@ -117,13 +117,31 @@ class Monitoring
     private $comments;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 9000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="out_comment", type="text", nullable=true)
      */
     private $outComment;
 
+    // TODO auto field for document
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="contact_mail", type="string", length=255, nullable=true)
