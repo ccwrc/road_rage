@@ -80,6 +80,7 @@ class Monitoring
      */
     private $timeSet;
 
+    //TODO - for document entity. Later...
     /**
      * @var string
      *
@@ -88,16 +89,30 @@ class Monitoring
     private $document;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 5000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
-     * @ORM\Column(name="contact_through", type="text", nullable=true)
+     * @ORM\Column(name="contact_through", type="text")
      */
     private $contactThrough;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 65000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="comments", type="text", nullable=true)
+     * @ORM\Column(name="comments", type="text")
      */
     private $comments;
 
