@@ -12,10 +12,6 @@ class MonitoringCpgEditType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "]);
-        //TODO out comment for document
-        //TODO contact mail/opt mail for document
-        // ->add("contactMail", "hidden", ["label" => "contactMail: "])
-        //->add("optionalMails", "text", ["label" => "optionalMails: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
