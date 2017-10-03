@@ -28,7 +28,7 @@ class MonitoringPgController extends MonitoringController {
 
         $monitoringPg = new Monitoring();
         $monitoringPg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("PG");
+                ->setTimeSave(new DateTime("now"))->setCode("PG")->setAmount(2000)->setCurrency("EUR");
         $form = $this->createForm(MonitoringPgType::class, $monitoringPg);
 
         $form->handleRequest($req);
