@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="vehicle")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\VehicleRepository")
+ * @UniqueEntity("vin") 
  */
 class Vehicle
 {
@@ -42,7 +43,14 @@ class Vehicle
     private $id;
 
     // https://pl.wikipedia.org/wiki/Vehicle_Identification_Number
+    // Last 8 characters
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 8,
+     * max = 8,
+     * exactMessage = "Enter last 8 characters from vin"
+     * )        
      * @var string
      *
      * @ORM\Column(name="vin", type="string", length=255, unique=true)
