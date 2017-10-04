@@ -24,10 +24,11 @@ class MonitoringPgType extends AbstractType {
                 ->add("outComment", "textarea", [
                     "label" => "Comment for dealer: ",
                     "required" => false
+                ])
+                ->add("optionalMails", "textarea", [
+                    "label" => "Optional mails to send the document: ",
+                    "required" => false
         ]);
-        //TODO contact mail/opt mail for document
-        // ->add("contactMail", "hidden", ["label" => "contactMail: "])
-        //->add("optionalMails", "text", ["label" => "optionalMails: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {

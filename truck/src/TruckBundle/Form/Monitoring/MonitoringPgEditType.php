@@ -23,10 +23,11 @@ class MonitoringPgEditType extends AbstractType {
                 ->add("outComment", "textarea", [
                     "label" => "Comment for dealer (the document has already been sent): ",
                     "read_only" => true
+                ])
+                ->add("optionalMails", "textarea", [
+                    "label" => "Optional mails to send the document: ",
+                    "read_only" => true
         ]);
-        //TODO contact mail/opt mail for document
-        // ->add("contactMail", "hidden", ["label" => "contactMail: "])
-        //->add("optionalMails", "text", ["label" => "optionalMails: "]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
