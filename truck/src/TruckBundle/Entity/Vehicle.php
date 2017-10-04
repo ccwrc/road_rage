@@ -114,16 +114,28 @@ class Vehicle
     private $street;
 
     /**
+     * @Assert\Regex(
+     *     pattern="/[0-9][0-9]-[0-9][0-9][0-9]/",
+     *     match=true,
+     *     message="The right pattern is the DD-DDD (D as digit)"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
+     * @ORM\Column(name="zip_code", type="string", length=50)
      */
     private $zipCode;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
 
