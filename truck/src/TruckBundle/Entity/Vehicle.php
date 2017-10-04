@@ -58,16 +58,30 @@ class Vehicle
     private $vin;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="company_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="company_name", type="string", length=255)
      */
     private $companyName;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="tax_id_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tax_id_number", type="string", length=255)
      */
     private $taxIdNumber;
 
