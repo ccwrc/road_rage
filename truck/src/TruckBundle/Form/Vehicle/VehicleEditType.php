@@ -19,7 +19,10 @@ class VehicleEditType extends AbstractType {
                 ->add("street", "text", ["label" => "Street: "])
                 ->add("zipCode", "text", ["label" => "Zip code: "])
                 ->add("city", "text", ["label" => "City: "])
-                ->add("phone", "text", ["label" => "Phone: "])
+                ->add("phone", "text", [
+                    "label" => "Phone: ",
+                    "required" => false
+                ])
                 ->add("fax", "text", ["label" => "Fax: "])
                 ->add("mail", "text", ["label" => "Mail: "])
                 ->add("registrationNumber", "text", ["label" => "Vehicle registration number: "])
