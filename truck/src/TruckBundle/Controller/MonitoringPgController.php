@@ -25,10 +25,12 @@ class MonitoringPgController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
+        $contactMailForSendDocument = $homeDealer->getMainMail();
 
         $monitoringPg = new Monitoring();
         $monitoringPg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("PG")->setAmount(2000)->setCurrency("EUR");
+                ->setTimeSave(new DateTime("now"))->setCode("PG")->setAmount(2000)
+                ->setCurrency("EUR")->setContactMail($contactMailForSendDocument);
         $form = $this->createForm(MonitoringPgType::class, $monitoringPg);
 
         $form->handleRequest($req);
