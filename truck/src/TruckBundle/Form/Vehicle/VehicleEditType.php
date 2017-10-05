@@ -27,7 +27,10 @@ class VehicleEditType extends AbstractType {
                     "label" => "Fax: ",
                     "required" => false
                 ])
-                ->add("mail", "text", ["label" => "Mail: "])
+                ->add("mail", "text", [
+                    "label" => "Mail: ",
+                    "required" => false
+                ])
                 ->add("registrationNumber", "text", ["label" => "Vehicle registration number: "])
                 ->add("mileage", "text", ["label" => "Vehicle mileage: "])
                 //TODO guarantee type select option ?
