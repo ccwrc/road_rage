@@ -182,16 +182,30 @@ class Vehicle
     private $mail;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="registration_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="registration_number", type="string", length=255)
      */
     private $registrationNumber;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )      
      * @var string
      *
-     * @ORM\Column(name="mileage", type="string", length=255, nullable=true)
+     * @ORM\Column(name="mileage", type="string", length=255)
      */
     private $mileage;
 
