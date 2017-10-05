@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 26 Wrz 2017, 19:50
+-- Czas generowania: 05 Paź 2017, 11:07
 -- Wersja serwera: 5.7.19-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -67,14 +67,27 @@ INSERT INTO `accident_case` (`id`, `damage_description`, `location`, `driver_con
 (21, 'sdfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'active', '#FF9C42', 12561, 4769, 0, 4769, 0, 17378, 'completed', 1, NULL),
 (22, 'new', 'n', 'n edit', 'n case edit detal', 'n', 'n', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'completed', 13, NULL),
 (23, 'r', 'r', 'r', 'r', 'r', 'r', 'active', '#93EEAA', 0, 840, 0, 840, 0, 16024, 'completed', 1, NULL),
-(27, 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'active', '#FF9C42', 0, 0, 0, 0, 0, 0, 'completed', 13, NULL),
+(27, 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 30176, 'canceled', 13, NULL),
 (28, 'ff', 'f', 'f', 'f', 'f', 'f', 'inactive', '#E6E6E6', 5, 4, 0, 4, 18, 4432, 'incompleted', 1, NULL),
-(29, 'new', 'locat', 'ker 44', 'comment', 'brak', 'brak', 'active', '#E6E6E6', 15, 3, 2, 5, 27, 34, 'completed', 12, NULL),
-(30, 'time start', 'time start', 'time start', 'time start', 'time start', 'time start', 'active', '#E6E6E6', 10, 10, 0, 10, 45, 1709, 'completed', 1, '2017-09-19 13:23:33'),
-(31, 'r', 'r', 'r', 'r', 'r', 'r', 'active', '#93EEAA', 0, 0, 0, 0, 0, 0, 'initialization', 1, '2017-09-21 12:08:01'),
-(32, 'e', 'e', 'e', 'e', 'ert', 'empty', 'active', '#E6E6E6', 0, 0, 0, 0, 0, 1, 'canceled', 1, '2017-09-21 12:08:32'),
+(29, 'new', 'locat', 'ker 44', 'comment', 'brak', 'brak', 'inactive', '#E6E6E6', 15, 3, 2, 5, 27, 34, 'completed', 12, NULL),
+(30, 'time start', 'time start', 'time start', 'time start', NULL, NULL, 'inactive', '#E6E6E6', 11, 10, 0, 10, 45, 1709, 'completed', 1, '2017-09-19 13:23:33'),
+(31, 'r', 'r', 'r', 'r', 'r', 'r', 'inactive', '#E6E6E6', 2, 9816, 0, 9816, 31, 14417, 'canceled', 1, '2017-09-21 12:08:01'),
+(32, 'e', 'e', 'e', 'e', 'ert', 'empty', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 1, 'canceled', 1, '2017-09-21 12:08:32'),
 (33, 'd', 'd', 'dd', 'd', 'dfg', 'dgf', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'canceled', 1, '2017-09-21 12:08:56'),
-(34, 'r', 'r', 'r', 'r', 'r', 'r', 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 2, '2017-09-21 13:21:24');
+(34, 'rrr', 'rrrrr', 'rrrr', NULL, NULL, 'dfgdfgdfg@pp.pl', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 10180, 'canceled', 2, '2017-09-21 13:21:24'),
+(35, 'sdfsdf', 'sdfdsf', 'sdfsdf', 'sdf', NULL, 'sdf', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 15, 'canceled', 2, '2017-09-27 15:37:57'),
+(36, 'eee', 'eeu', 'e33', 'e', NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 444, 0, 0, 1241, 'completed', 13, '2017-09-27 18:57:19'),
+(37, 'ewr', 'wer', 'wer', NULL, NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 5353, 'completed', 1, '2017-09-27 19:08:52'),
+(38, 'dgfdf', 'gdfg', 'dfgdfg', NULL, NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 4146, 'completed', 2, '2017-09-28 14:56:07'),
+(39, 'wer', 'wer', 'wer', NULL, NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 2, 'completed', 2, '2017-09-28 14:56:51'),
+(40, 'esgt', 'ert', 'ert', NULL, NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'incompleted', 3, '2017-09-28 14:58:12'),
+(41, 'dsdf', 'sdf', 'sdf', 'sdf', NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 33, 0, 'completed', 2, '2017-09-28 16:32:42'),
+(42, 'dfsdf', 'sdf', 'sdf', 'sdf', NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 33, 0, 'completed', 6, '2017-09-28 16:38:04'),
+(43, 'dsgf', 'dfg', 'dfg', 'dfg', NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 12, 'completed', 12, '2017-09-28 16:40:55'),
+(44, 'dsgf', 'sdg', 'fff', 'ff', NULL, NULL, 'inactive', '#E6E6E6', 22, 0, 0, 0, 0, 0, 'canceled', 12, '2017-09-28 16:46:43'),
+(45, 'USTERKA CHŁODNICY - LEJE SIĘ PŁYN.', 'ZWYKŁE MIASTO, UL. ZWYKŁA 1', 'KIEROWCA JAN 123123', 'OD GODZ. 18:00 POD NUMEREM KIEROWCY DOSTĘPNY BĘDZIE DYSPOZYTOR FIRMY', NULL, NULL, 'active', '#E6E6E6', 40, 180, 0, 180, 94, 3998, 'completed', 15, '2017-09-28 17:22:31'),
+(46, 'fault desc', 'tr loc', 'tymek 123123123', 'zgloszenie nowe', NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 4123, 'canceled', 2, '2017-10-02 12:27:21'),
+(47, 'damage', 'location', 'driver 99999999', 'yuyuyyuuyyy other comments', NULL, NULL, 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 18, '2017-10-05 10:42:56');
 
 -- --------------------------------------------------------
 
@@ -113,7 +126,10 @@ INSERT INTO `dealer` (`id`, `name`, `street`, `zip_code`, `city`, `main_phone`, 
 (6, 'AllData', 'super street 1', '11-111', 'super city', '23 1112211', '23 1112211', 'super@mail.elo', '111222333', '333222111', '22 33', '33 22', 'ma1@ma.elo', 'ma2@m.elo', 'wszystkie dane, dealer aktywny od 1.2.2017', 'active'),
 (7, 'new form', 'new street', 'zip code', 'city', '909090909', '90909099', '90909@9090.00', '90909009', 'EMPTY', 'empty', 'empty', 'empty', 'empty', 'new dealer, start 24.07.2017', 'active'),
 (8, 'new form 2', 'new street', 'zip code', 'city', '909090909', '90909099', '90909@9090.001', '90909009', 'EMPTY', 'empty', 'empty', 'empty', 'empty', 'new dealer, start 24.07.2017', 'active'),
-(9, 'acive form', 'example', 'example', 'example', 'example', 'example', 'example@example.example', 'example', 'example', 'example', 'example', 'example', 'example', 'exampleexampleexampleexample', 'active');
+(9, 'acive form', 'example', 'example', 'example', 'example', 'example', 'example@example.example', 'example', 'example', 'example', 'example', 'example', 'example', 'exampleexampleexampleexample', 'active'),
+(10, 'new dealer 1.10', 'zwykła street', '11-233', 'zwykłe city', '123123123', NULL, 'truck11@o2.pl', '123123123', NULL, NULL, NULL, NULL, NULL, NULL, 'active'),
+(11, 'new dealer 1.10-2', 'zwykła', '11-234', 'zwykłe', '123123123', NULL, '11111@99.pl0', '000999000', NULL, NULL, NULL, NULL, NULL, NULL, 'active'),
+(13, 'AllDataBis', 'wwww', '11-233', 'qwdaq', '123123123', NULL, 'super@mail.elobis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -141,11 +157,11 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-09-26 19:27:49', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
-(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-09-25 16:34:02', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-10-05 09:46:31', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-10-04 14:40:09', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-26 14:46:43', NULL, NULL, 'a:0:{}'),
 (4, 'ccwrcdealer', 'ccwrcdealer', 'ccwrcdealer@ccwrcdealer.elo', 'ccwrcdealer@ccwrcdealer.elo', 1, NULL, '$2y$13$garsgYLil1hIyV7yu7dXGuHYGB2TELZgcca/wiUN4WdGN824meA2K', '2017-09-19 13:32:32', NULL, NULL, 'a:1:{i:0;s:11:\"ROLE_DEALER\";}'),
-(5, 'ccwrcsuperadmin', 'ccwrcsuperadmin', 'ccwrcsuperadmin@gmail.elo', 'ccwrcsuperadmin@gmail.elo', 1, NULL, '$2y$13$eFT7Nt2mA3zltKru5pmfJO5RtLGB7SrCgfUIBUcAy.TQFJsjKcNgO', '2017-09-25 13:45:28', NULL, NULL, 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}');
+(5, 'ccwrcsuperadmin', 'ccwrcsuperadmin', 'ccwrcsuperadmin@gmail.elo', 'ccwrcsuperadmin@gmail.elo', 1, NULL, '$2y$13$eFT7Nt2mA3zltKru5pmfJO5RtLGB7SrCgfUIBUcAy.TQFJsjKcNgO', '2017-10-02 11:21:30', NULL, NULL, 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}');
 
 -- --------------------------------------------------------
 
@@ -387,7 +403,63 @@ INSERT INTO `monitoring` (`id`, `code`, `time_save`, `time_set`, `document`, `co
 (235, 'ETA', '2017-09-24 16:47:06', '2017-09-24 16:47:00', NULL, 'rr t', 'rr t', NULL, NULL, NULL, 31, 'ccwrcadmin', NULL, NULL, NULL, NULL),
 (236, 'STRR', '2017-09-24 16:49:29', '2017-09-24 16:49:00', NULL, 'rr d', 'r d', NULL, NULL, NULL, 31, 'ccwrcadmin', NULL, NULL, NULL, NULL),
 (237, 'Incoming', '2017-09-26 19:41:23', NULL, NULL, 'sdf tt', 'sdf tt', NULL, NULL, NULL, 30, 'ccwrcadmin', NULL, NULL, NULL, NULL),
-(238, 'Incoming', '2017-09-26 19:46:58', NULL, NULL, 'ert ff', 'e ff', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL);
+(238, 'Incoming', '2017-09-26 19:46:58', NULL, NULL, 'ert ff', 'e ff', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(239, 'START', '2017-09-27 15:37:57', NULL, NULL, 'sdfsdf', 'sdf', NULL, NULL, NULL, 35, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(240, 'END', '2017-09-27 15:53:45', '2017-09-27 15:53:00', NULL, 'f', 'f', NULL, NULL, NULL, 35, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(241, 'START', '2017-09-27 18:57:19', NULL, NULL, 'e', 'e', NULL, NULL, NULL, 36, 'ccwrcsuperadmin', NULL, NULL, NULL, NULL),
+(242, 'START', '2017-09-27 19:08:52', NULL, NULL, 'wer', NULL, NULL, NULL, NULL, 37, 'ccwrcsuperadmin', NULL, NULL, NULL, NULL),
+(243, 'START', '2017-09-28 14:56:08', NULL, NULL, 'dfgdfg', NULL, NULL, NULL, NULL, 38, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(244, 'START', '2017-09-28 14:56:51', NULL, NULL, 'wer', NULL, NULL, NULL, NULL, 39, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(245, 'START', '2017-09-28 14:58:12', NULL, NULL, 'ert', NULL, NULL, NULL, NULL, 40, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(246, 'END', '2017-09-28 14:58:40', '2017-09-28 14:58:00', NULL, '5', '5', NULL, NULL, NULL, 40, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(247, 'END', '2017-09-28 14:59:01', '2017-09-28 14:58:00', NULL, '5', '5', NULL, NULL, NULL, 39, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(248, 'END', '2017-09-28 15:01:35', '2017-09-28 15:01:00', NULL, 'f', 'f', NULL, NULL, NULL, 34, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(249, 'END', '2017-09-28 15:38:50', '2017-09-28 15:38:00', NULL, 'dg', 'dfg', NULL, NULL, NULL, 36, 'ccwrcoperator', NULL, NULL, NULL, NULL),
+(250, 'START', '2017-09-28 16:32:43', NULL, NULL, 'sdf', 'sdf', NULL, NULL, NULL, 41, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(251, 'END', '2017-09-28 16:32:51', '2017-09-28 16:32:00', NULL, 'sdf', 'dsf', NULL, NULL, NULL, 41, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(252, 'START', '2017-09-28 16:38:05', NULL, NULL, 'sdf', 'sdf', NULL, NULL, NULL, 42, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(253, 'RO', '2017-09-28 16:38:14', NULL, NULL, 'ewr', 'wer', 'wer', NULL, NULL, 42, 'ccwrcadmin', 1, 1, NULL, NULL),
+(254, 'STRR', '2017-09-28 16:38:31', '2017-09-28 16:38:00', NULL, 'qwe', 'qwe', NULL, NULL, NULL, 42, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(255, 'END', '2017-09-28 16:38:51', '2017-09-28 16:38:00', NULL, 'defr', 'sdf', NULL, NULL, NULL, 42, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(256, 'START', '2017-09-28 16:40:56', NULL, NULL, 'dfg', 'dfg', NULL, NULL, NULL, 43, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(257, 'START', '2017-09-28 16:46:43', NULL, NULL, 'fff', 'ff', NULL, NULL, NULL, 44, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(258, 'END', '2017-09-28 16:46:56', '2017-09-28 16:46:00', NULL, 'dsg', 'dfg', NULL, NULL, NULL, 44, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(259, 'END', '2017-09-28 16:53:19', '2017-09-28 16:53:00', NULL, 'r', 'r', NULL, NULL, NULL, 43, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(260, 'START', '2017-09-28 17:22:31', NULL, NULL, 'KIEROWCA JAN 123123', 'OD GODZ. 18:00 POD NUMEREM KIEROWCY DOSTĘPNY BĘDZIE DYSPOZYTOR FIRMY', NULL, NULL, NULL, 45, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(261, 'PG', '2017-09-28 17:23:33', NULL, NULL, 'SERWIS 123123123', 'PRZESYŁAM PROŚBĘ O POTWIERDZENIE PŁATNOŚCI DLA KLIENTA', NULL, NULL, NULL, 45, 'ccwrcadmin', 6, NULL, NULL, NULL),
+(262, 'CPG', '2017-09-28 17:24:42', NULL, NULL, 'JAN SERWISOWY 123123123', 'KLIENT JEST WYPŁACALNY, ZAGWARANTOWAŁ 3000PLN NA START', NULL, NULL, NULL, 45, 'ccwrcadmin', 6, NULL, NULL, NULL),
+(263, 'RO', '2017-09-28 17:25:34', NULL, NULL, 'KUBA SERWISOWY 123123123', 'PRZEKAZAŁEM ZLECENIE NAPRAWY', NULL, NULL, NULL, 45, 'ccwrcadmin', 6, 5, NULL, NULL),
+(264, 'ETA', '2017-09-28 17:27:14', '2017-09-28 18:20:00', NULL, 'KUBA SERWISOWY 123123', 'MAJA POTRZEBNE CZĘŚCI, BĘDĄ NA MIEJSCU OKOŁO GODZ. 18:20.', NULL, NULL, NULL, 45, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(265, 'Out', '2017-09-28 17:27:54', NULL, NULL, 'KIEROWCA JAN 123123', 'POINFORMOWAŁEM O CZASIE DOJAZDU WOZU SERWISOWEGO.', NULL, NULL, NULL, 45, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(266, 'STRR', '2017-10-01 12:00:03', '2017-09-28 19:00:00', NULL, 'MECHANIK JAN 234234123', 'DOJECHALI OKOŁO GODZ. 19:00, NAPRAWA W TOKU.', NULL, NULL, NULL, 45, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(267, 'END', '2017-10-01 12:01:11', '2017-09-28 22:00:00', NULL, 'MECHANIK JAN', 'NAPRAWA CAŁKOWITA ZAKOŃCZONA O GODZ. 22:00 - WYMIANA CHŁODNICY.', NULL, NULL, NULL, 45, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(268, 'Out', '2017-10-01 12:01:44', NULL, NULL, 'KIEROWCA JAN 123123', 'JEST W TRASIE, WSZYSTKO OK.', NULL, NULL, NULL, 45, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(269, 'END', '2017-10-01 12:02:36', '2017-10-01 12:02:00', NULL, 'RR', 'RR', NULL, NULL, NULL, 38, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(270, 'END', '2017-10-01 12:22:50', '2017-10-01 12:22:00', NULL, 'rer', 'rr', NULL, NULL, NULL, 37, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(271, 'END', '2017-10-01 12:25:40', '2017-10-01 12:25:00', NULL, 'swf', 'sdf', NULL, NULL, NULL, 31, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(272, 'END', '2017-10-01 12:26:59', '2017-10-01 12:26:00', NULL, 'dfg', 'dfg', NULL, NULL, NULL, 27, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(273, 'START', '2017-10-02 12:27:21', NULL, NULL, 'tymek 123123123', 'zgloszenie nowe', NULL, NULL, NULL, 46, 'ccwrcsuperadmin', NULL, NULL, NULL, NULL),
+(274, 'END', '2017-10-02 12:27:36', '2017-10-02 12:27:00', NULL, 'dfg', 'dfg', NULL, NULL, NULL, 46, 'ccwrcsuperadmin', NULL, NULL, NULL, NULL),
+(275, 'END', '2017-10-02 14:27:30', '2017-10-02 14:27:00', NULL, 'RR', 'rr', NULL, NULL, NULL, 46, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(276, 'PG', '2017-10-02 14:45:25', NULL, NULL, 'ff', 'ff', 'ff', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(277, 'PG', '2017-10-02 14:56:44', NULL, NULL, 'er', 'wer', 'wer', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(278, 'Out', '2017-10-02 14:58:38', NULL, NULL, 'rr', 'rr', NULL, NULL, NULL, 46, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(279, 'ETA', '2017-10-02 15:02:10', '2017-10-02 15:02:00', NULL, 'ee', 'ee', NULL, NULL, NULL, 46, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(280, 'PG', '2017-10-02 15:24:28', NULL, NULL, 'rrr', 'rrrrr', 'rr', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(281, 'PG', '2017-10-02 15:26:43', NULL, NULL, 'rrr', 'r', 'r', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(282, 'PG', '2017-10-03 13:43:44', NULL, NULL, 'eee', 'ee', 'comment fo dealer', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(283, 'PG', '2017-10-03 13:57:30', NULL, NULL, 'dsfds', 'sdf', 'sdfsfs iiiiiiiiiiiiiiiiiiiiiii 0000', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(284, 'PG', '2017-10-03 13:59:45', NULL, NULL, 'dfg', 'dfg', NULL, NULL, NULL, 46, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(285, 'RO', '2017-10-03 14:53:25', NULL, NULL, 'fdde', 'sdf', NULL, NULL, NULL, 46, 'ccwrcadmin', 1, 1, NULL, NULL),
+(286, 'PG', '2017-10-03 16:13:18', NULL, NULL, '333', '333', NULL, NULL, NULL, 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
+(287, 'PG', '2017-10-03 16:16:53', NULL, NULL, 'dfg', 'dfg', 'dfg', NULL, NULL, 46, 'ccwrcadmin', 1, NULL, 2000, 'PLN'),
+(288, 'PG', '2017-10-03 16:20:02', NULL, NULL, 'sfdw', 'sdf', NULL, NULL, NULL, 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
+(289, 'PG', '2017-10-04 13:12:04', NULL, NULL, 'ert', 'e', NULL, NULL, NULL, 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
+(290, 'PG', '2017-10-04 13:14:02', NULL, NULL, 'erft', 'wer', 'werwe', NULL, 'werwr wetrwerwer werwerwr werwerwre werwerwr werwerwr werwerw ewrwre', 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
+(291, 'PG', '2017-10-04 13:24:05', NULL, NULL, 'dfg', 'dfg', NULL, 'mail@serwis1.elo', NULL, 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
+(292, 'PG', '2017-10-04 14:28:38', NULL, NULL, 'new pg', 'n', 'dealer comment', 'mail@serwis1.elo', 'opt mail', 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
+(293, 'END', '2017-10-05 09:10:22', '2017-10-05 09:10:00', NULL, 'sfd', 'sd', NULL, NULL, NULL, 46, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(294, 'START', '2017-10-05 10:42:56', NULL, NULL, 'driver 99999999', 'yuyuyyuuyyy other comments', NULL, NULL, NULL, 47, 'ccwrcadmin', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -431,7 +503,11 @@ INSERT INTO `vehicle` (`id`, `vin`, `street`, `city`, `phone`, `fax`, `mail`, `m
 (11, 'nowyVINNN', 'ulica', 'miasto', '9090909909', '9090900909', 'brak', '898', '2014-01-01', 'nowa firma', 'tax id', 'osoba kontaktowa 123 123 123', 'kod-999', 'uuuuu99', 'pełna do 2018.01.09', 'truck 555', 6),
 (12, 'newvinform', '123', 'qwsdf', 'sdf', 'sdf', 'sdf', '4444', '2014-02-01', 'qwe', 'qwe', 'qwe 333333', 'sdf', 'sdf5555', 'empty', 'weerwrwer', 1),
 (13, 'newvin12300', 'szcsd 2', 'wdeaxasx', '23423424', '121231', 'uyftdhtrd@uuu7.pl', '12333', '2017-01-01', 'sadfsEDIT', '234243', 'jukiu  4444444', '11-233', 'www1223e', 'empty', 'type 1 name 2', 3),
-(14, '3243424', 'qweq', 'qwe', 'qwe', 'wer', 'qwe', 'qwe', '2012-01-01', 'qwe', 'qweqe', 'qweqwe', 'qwe', 'qwe', 'full', 'merc 11', 6);
+(14, '3243424', 'qweq', 'qwe', 'qwe', 'wer', 'qwe', 'qwe', '2012-01-01', 'qwe', 'qweqe', 'qweqwe', 'qwe', 'qwe', 'full', 'merc 11', 6),
+(15, '1234567VV', 'ZWYKŁA ULICA', 'ZWYKŁE MIASTO', '22 123123', '22 123123', 'ZWYKLY@MAIL.PL', '12334', '2012-01-01', 'ZWYKŁA FIRMA', 'NIP123', 'JAN KOWALSKI 123123123', '11-233', 'WW123', 'BRAK', 'ZWYKŁA CIĘŻARÓWKA', 6),
+(16, 'ww123456', 'www', 'ww', 'www', 'www', 'wwww', 'ww', '2012-01-01', '1', 'wwwww', 'wwww', 'ww', 'www', 'wwww', 'ww', 1),
+(17, '12345678', 'qq', 'qqq', NULL, 'qq', 'qq', 'qq', '2012-01-01', 'qq', 'qq', 'qq', '11-234', 'qq', 'qq', 'qq', 1),
+(18, '1234567p', 'xcv', 'xcv', NULL, NULL, NULL, '1', '2012-01-01', 'xcvx', 'xcvxc', 'p', '11-121', 'w22', 'w', 'w', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -486,12 +562,12 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT dla tabeli `accident_case`
 --
 ALTER TABLE `accident_case`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT dla tabeli `dealer`
 --
 ALTER TABLE `dealer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT dla tabeli `fos_user`
 --
@@ -501,12 +577,12 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT dla tabeli `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
 --
 -- AUTO_INCREMENT dla tabeli `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Ograniczenia dla zrzutów tabel
 --
