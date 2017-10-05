@@ -154,6 +154,13 @@ class Vehicle
     private $phone;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="fax", type="string", length=255, nullable=true)

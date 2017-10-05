@@ -23,7 +23,10 @@ class VehicleEditType extends AbstractType {
                     "label" => "Phone: ",
                     "required" => false
                 ])
-                ->add("fax", "text", ["label" => "Fax: "])
+                ->add("fax", "text", [
+                    "label" => "Fax: ",
+                    "required" => false
+                ])
                 ->add("mail", "text", ["label" => "Mail: "])
                 ->add("registrationNumber", "text", ["label" => "Vehicle registration number: "])
                 ->add("mileage", "text", ["label" => "Vehicle mileage: "])
