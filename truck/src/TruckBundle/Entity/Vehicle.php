@@ -210,13 +210,21 @@ class Vehicle
     private $mileage;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="guarantee_type", type="string", length=255, nullable=true)
+     * @ORM\Column(name="guarantee_type", type="string", length=255)
      */
     private $guaranteeType;
 
     /**
+     * @Assert\DateTime()       
      * @var \DateTime
      *
      * @ORM\Column(name="purchase_date", type="date", nullable=true)
@@ -224,9 +232,16 @@ class Vehicle
     private $purchaseDate;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="name_type", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name_type", type="string", length=255)
      */
     private $nameType;
 
