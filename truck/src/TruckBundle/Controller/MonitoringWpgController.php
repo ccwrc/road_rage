@@ -28,10 +28,13 @@ class MonitoringWpgController extends MonitoringController {
         $case = $monitoringPg->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringPg->getHomeDealer();
+        $mailForDocument = $monitoringPg->getContactMail();
+        $stringWithOptionalMails = $monitoringPg->getOptionalMails();
 
         $monitoringWpg = new Monitoring();
         $monitoringWpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("WPG");
+                ->setTimeSave(new DateTime("now"))->setCode("WPG")->setContactMail($mailForDocument)
+                ->setOptionalMails($stringWithOptionalMails);
         $form = $this->createForm(MonitoringWpgType::class, $monitoringWpg);
 
         $form->handleRequest($req);
