@@ -24,6 +24,7 @@ class MonitoringCpgController extends MonitoringController {
         $this->throwExceptionIfCaseIdIsWrong($caseId);
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        //TODO block CPG if dealer is not active
         $homeDealer = $case->getVehicle()->getDealer();
 
         $monitoringCpg = new Monitoring();
