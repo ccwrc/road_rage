@@ -22,9 +22,14 @@ class MonitoringRoType extends AbstractType {
                     "required" => false
                 ])
                 ->add("repairDealer", EntityType::class, [
-                    //TODO
-                    // http://symfony.com/doc/2.8/reference/forms/types/entity.html#using-a-custom-query-for-the-entities
-                    "class" => "TruckBundle:Dealer", "choice_label" => "name",
+                    "class" => "TruckBundle:Dealer",
+                    "query_builder" => function (\TruckBundle\Repository\DealerRepository $er) {
+                        return $er->createQueryBuilder('u')
+                                ->where('u.isActive = :active')
+                                ->orderBy('u.name', 'ASC')
+                                ->setParameter("active", "active");
+                    },
+                    "choice_label" => "name",
                     "label" => "Repair dealer: "
         ]);
     }
