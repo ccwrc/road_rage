@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use TruckBundle\Repository\DealerRepository; // for query_builder
+
 class MonitoringRoType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -23,10 +25,10 @@ class MonitoringRoType extends AbstractType {
                 ])
                 ->add("repairDealer", EntityType::class, [
                     "class" => "TruckBundle:Dealer",
-                    "query_builder" => function (\TruckBundle\Repository\DealerRepository $er) {
-                        return $er->createQueryBuilder('u')
-                                ->where('u.isActive = :active')
-                                ->orderBy('u.name', 'ASC')
+                    "query_builder" => function (DealerRepository $dr) {
+                        return $dr->createQueryBuilder('dealer')
+                                ->where('dealer.isActive = :active')
+                                ->orderBy('dealer.name', 'ASC')
                                 ->setParameter("active", "active");
                     },
                     "choice_label" => "name",
