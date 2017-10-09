@@ -132,7 +132,7 @@ class Dealer {
      * )         
      * @var string
      *
-     * @ORM\Column(name="main_mail", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="main_mail", type="string", length=255, unique=true)
      */
     private $mainMail;
 
