@@ -29,10 +29,13 @@ class MonitoringWroController extends MonitoringController {
         $caseId = $case->getId();
         $homeDealer = $monitoringRo->getHomeDealer();
         $repairDealer = $monitoringRo->getRepairDealer();
+        $mailForDocument = $repairDealer->getMainMail();
+        $stringWithOptionalMails = $monitoringRo->getOptionalMails();
 
         $monitoringWro = new Monitoring();
         $monitoringWro->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("WRO")->setRepairDealer($repairDealer);
+                ->setTimeSave(new DateTime("now"))->setCode("WRO")->setRepairDealer($repairDealer)
+                ->setContactMail($mailForDocument)->setOptionalMails($stringWithOptionalMails);
         $form = $this->createForm(MonitoringWroType::class, $monitoringWro);
 
         $form->handleRequest($req);
