@@ -73,3 +73,9 @@ fos_user:
     from_email:
         address: fake@mail.fake
         sender_name: fake_user   
+        
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     %kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386
+        options:    []     
