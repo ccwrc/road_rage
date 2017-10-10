@@ -21,6 +21,7 @@
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
         "friendsofsymfony/user-bundle": "~2.0@dev",
+        "h4cc/wkhtmltopdf-i386": "0.12.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
