@@ -19,7 +19,7 @@ class MainController extends Controller {
     }
     
     /**
-     * @Route("/warningInformation/{message}", requirements={"message"="[\w\.\,]{0,5000}"})
+     * @Route("/warningInformation/{message}", requirements={"message"="[\s\w\.\,]{0,5000}"})
      */
     public function warningInformationAction($message = "No warnings.") {
 
