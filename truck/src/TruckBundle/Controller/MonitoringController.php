@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 //use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase; 
+use TruckBundle\Entity\Dealer;
 //use \DateTime;  // to delete after refactor
 
 /**
@@ -16,14 +17,6 @@ use TruckBundle\Entity\AccidentCase;
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class MonitoringController extends Controller {
-
-    protected function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
-        if ($monitoring === null || $monitoring->getCode() != $code) { 
-            throw $this->createNotFoundException("Wrong monitoring data");
-        }
-    }
 
     protected function getOperatorName() {
         return $this->container->get("security.context")->getToken()->getUser()
@@ -44,7 +37,15 @@ class MonitoringController extends Controller {
 
     protected function setColorProgressGreyForCase(AccidentCase $case) {
         $case->setProgressColor("#E6E6E6");
-    }     
+    }  
+    
+    protected function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        if ($monitoring === null || $monitoring->getCode() != $code) { 
+            throw $this->createNotFoundException("Wrong monitoring data");
+        }
+    }    
     
     protected function throwExceptionIfCaseIdIsWrongExcludingZero($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
@@ -58,6 +59,13 @@ class MonitoringController extends Controller {
         if ($case === null) {
             throw $this->createNotFoundException("Wrong case ID");
         }
+    }
+    
+    protected function checkIfDealerIsActive(Dealer $dealer) {
+        if($dealer->getIsActive() === "active") {
+            return true;
+        }
+        return false;
     }
 
     /**
