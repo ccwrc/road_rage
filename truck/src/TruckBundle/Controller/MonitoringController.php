@@ -61,6 +61,12 @@ class MonitoringController extends Controller {
         }
     }
     
+    protected function throwExceptionIfDealerIsNotActive(Dealer $dealer) {
+        if ($dealer->getIsActive() !== "active") {
+            throw $this->createNotFoundException("Dealer is not active!");
+        }
+    }
+
     protected function checkIfDealerIsActive(Dealer $dealer) {
         if($dealer->getIsActive() === "active") {
             return true;

@@ -33,8 +33,9 @@ class MonitoringRoController extends MonitoringController {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->setColorProgressOrangeForCase($case);
             $monitoringRo = $form->getData();
+            $this->throwExceptionIfDealerIsNotActive($monitoringRo->getRepairDealer());
+            $this->setColorProgressOrangeForCase($case);
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringRo);
             $em->flush();
