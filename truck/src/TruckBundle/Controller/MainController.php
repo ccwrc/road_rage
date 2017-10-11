@@ -19,6 +19,17 @@ class MainController extends Controller {
     }
     
     /**
+     * @Route("/warningInformation/{message}", requirements={"message"="[\w\.\,]{0,5000}"}")
+     */
+    public function warningInformationAction($message = "No warnings.") {
+
+        return $this->render('TruckBundle:Main:warnig_information.html.twig', [
+                    "message" => $message
+        ]);
+    }
+
+    //TODO pdfTestAction - to delete with view pdf_test
+    /**
      * @Route("/pdfTest")
      */
     public function pdfTestAction() {
