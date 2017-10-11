@@ -4,17 +4,28 @@
 
 {% block body %} 
 
+    <center>
+        <h3 class="formTitle">warning information</h3>
+    </center>
 
-            <center>
-                <h3 class="formTitle">warning information</h3>
-            </center>
-    
-            <p>{{ message }}</p>
+    <br/>
+    <p class="redBoldText">
+        {{ message }}
+    </p>
+    <br/>
 
-            <center>
-                <input class="pure-button pure-button-active button90red" type="submit" value="save END case"/>
-            </center>
+    <center>    
+        <button title="back to main page" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("truck_main_index") }}';">
+            back to MAIN
+        </button>    
 
-
+        {% if is_granted('ROLE_OPERATOR') %}
+            <button title="back to operator panel" class="pure-button pure-button-active button90red"
+                    onclick="window.location = '{{ path("truck_operator_panel") }}';">
+                Operator Panel
+            </button>    
+        {% endif %}
+    </center>
 
 {% endblock %}
