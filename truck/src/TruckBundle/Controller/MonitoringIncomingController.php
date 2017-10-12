@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringIncomingType;
 use TruckBundle\Form\Monitoring\MonitoringIncomingEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -27,7 +26,7 @@ class MonitoringIncomingController extends MonitoringController {
 
         $monitoringIncoming = new Monitoring();
         $monitoringIncoming->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"))->setCode("Incoming");
+                ->setCode("Incoming");
         $form = $this->createForm(MonitoringIncomingType::class, $monitoringIncoming);
 
         $form->handleRequest($req);
