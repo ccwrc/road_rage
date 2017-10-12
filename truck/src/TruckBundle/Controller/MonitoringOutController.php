@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringOutType;
 use TruckBundle\Form\Monitoring\MonitoringOutEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -26,8 +25,7 @@ class MonitoringOutController extends MonitoringController {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoringOut = new Monitoring();
-        $monitoringOut->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"))->setCode("Out");
+        $monitoringOut->setAccidentCase($case)->setOperator($operatorName)->setCode("Out");
         $form = $this->createForm(MonitoringOutType::class, $monitoringOut);
 
         $form->handleRequest($req);
