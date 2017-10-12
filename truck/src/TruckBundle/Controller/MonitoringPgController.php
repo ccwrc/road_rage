@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringPgType;
 use TruckBundle\Form\Monitoring\MonitoringPgEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -28,8 +27,8 @@ class MonitoringPgController extends MonitoringController {
         $contactMailForSendDocument = $homeDealer->getMainMail();
 
         $monitoringPg = new Monitoring();
-        $monitoringPg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("PG")->setAmount(2000)
+        $monitoringPg->setAccidentCase($case)->setOperator($operatorName)
+                ->setHomeDealer($homeDealer)->setCode("PG")->setAmount(2000)
                 ->setCurrency("EUR")->setContactMail($contactMailForSendDocument);
         $form = $this->createForm(MonitoringPgType::class, $monitoringPg);
 
