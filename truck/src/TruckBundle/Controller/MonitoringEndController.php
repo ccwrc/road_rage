@@ -27,7 +27,7 @@ class MonitoringEndController extends MonitoringController {
 
         $monitoringEnd = new Monitoring();
         $monitoringEnd->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"))->setCode("END")->setTimeSet(new DateTime("now"));
+                ->setCode("END")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringEndType::class, $monitoringEnd);
      
         $form->handleRequest($req);
