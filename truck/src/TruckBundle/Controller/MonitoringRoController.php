@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringRoType;
 use TruckBundle\Form\Monitoring\MonitoringRoEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -27,8 +26,8 @@ class MonitoringRoController extends MonitoringController {
         $homeDealer = $case->getVehicle()->getDealer();
 
         $monitoringRo = new Monitoring();
-        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("RO");
+        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)
+                ->setHomeDealer($homeDealer)->setCode("RO");
         $form = $this->createForm(MonitoringRoType::class, $monitoringRo);
 
         $form->handleRequest($req);
