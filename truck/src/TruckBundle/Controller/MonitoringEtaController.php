@@ -27,7 +27,7 @@ class MonitoringEtaController extends MonitoringController {
 
         $monitoringEta = new Monitoring();
         $monitoringEta->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"))->setCode("ETA")->setTimeSet(new DateTime("now"));
+                ->setCode("ETA")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringEtaType::class, $monitoringEta);
 
         $form->handleRequest($req);
