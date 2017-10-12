@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringCpgType;
 use TruckBundle\Form\Monitoring\MonitoringCpgEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -32,8 +31,8 @@ class MonitoringCpgController extends MonitoringController {
         }
 
         $monitoringCpg = new Monitoring();
-        $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("CPG");
+        $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)
+                ->setHomeDealer($homeDealer)->setCode("CPG");
         $form = $this->createForm(MonitoringCpgType::class, $monitoringCpg);
 
         $form->handleRequest($req);
