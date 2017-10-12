@@ -66,7 +66,6 @@ class AccidentCaseController extends Controller {
             $monitoringStart = new Monitoring();
             $monitoringStart->setAccidentCase($case)->setCode("START")->setOperator($operatorName)
                     ->setComments($case->getComment())->setContactThrough($case->getDriverContact());
-                    // ->setTimeSave(new DateTime("now"));
             $em->persist($monitoringStart);
             $em->flush();
             $caseId = $case->getId();
