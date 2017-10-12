@@ -5,6 +5,7 @@ namespace TruckBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use \DateTime;
 
 /**
  * Monitoring
@@ -12,10 +13,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="monitoring")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\MonitoringRepository")
  */
-class Monitoring
-{
+class Monitoring {
     
-     /**
+    public function __construct() {
+        $this->timeSave = new DateTime("now");
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
      * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
      */
@@ -148,7 +152,7 @@ class Monitoring
      */
     private $contactMail;
 
-    //TODO add regex in controller
+    //TODO add regex in controller (document?)
     /**
      * @Assert\Type("string")
      * @Assert\Length(
