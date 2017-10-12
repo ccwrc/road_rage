@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringWroType;
 use TruckBundle\Form\Monitoring\MonitoringWroEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -33,8 +32,8 @@ class MonitoringWroController extends MonitoringController {
         $stringWithOptionalMails = $monitoringRo->getOptionalMails();
 
         $monitoringWro = new Monitoring();
-        $monitoringWro->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("WRO")->setRepairDealer($repairDealer)
+        $monitoringWro->setAccidentCase($case)->setOperator($operatorName)
+                ->setHomeDealer($homeDealer)->setCode("WRO")->setRepairDealer($repairDealer)
                 ->setContactMail($mailForDocument)->setOptionalMails($stringWithOptionalMails);
         $form = $this->createForm(MonitoringWroType::class, $monitoringWro);
 

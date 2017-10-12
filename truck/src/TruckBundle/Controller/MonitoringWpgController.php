@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringWpgType;
 use TruckBundle\Form\Monitoring\MonitoringWpgEditType;
-use \DateTime;
 
 /**
  * @Route("/monitoring")
@@ -32,8 +31,8 @@ class MonitoringWpgController extends MonitoringController {
         $stringWithOptionalMails = $monitoringPg->getOptionalMails();
 
         $monitoringWpg = new Monitoring();
-        $monitoringWpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setTimeSave(new DateTime("now"))->setCode("WPG")->setContactMail($mailForDocument)
+        $monitoringWpg->setAccidentCase($case)->setOperator($operatorName)
+                ->setHomeDealer($homeDealer)->setCode("WPG")->setContactMail($mailForDocument)
                 ->setOptionalMails($stringWithOptionalMails);
         $form = $this->createForm(MonitoringWpgType::class, $monitoringWpg);
 

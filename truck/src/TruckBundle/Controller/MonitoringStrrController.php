@@ -27,7 +27,7 @@ class MonitoringStrrController extends MonitoringController {
 
         $monitoringStrr = new Monitoring();
         $monitoringStrr->setAccidentCase($case)->setOperator($operatorName)
-                ->setTimeSave(new DateTime("now"))->setCode("STRR")->setTimeSet(new DateTime("now"));
+                ->setCode("STRR")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringStrrType::class, $monitoringStrr);
 
         $form->handleRequest($req);
