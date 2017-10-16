@@ -10,8 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="document")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\DocumentRepository")
  */
-class Document
-{
+class Document {
+    
+    public function __construct() {
+        $this->timeSave = new DateTime("now");
+    }
+
     /**
      * @var int
      *
