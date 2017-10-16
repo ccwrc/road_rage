@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 05 Paź 2017, 11:07
+-- Czas generowania: 16 Paź 2017, 17:11
 -- Wersja serwera: 5.7.19-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -64,7 +64,7 @@ INSERT INTO `accident_case` (`id`, `damage_description`, `location`, `driver_con
 (18, 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'new chrome case', 'inactive', '#E6E6E6', 0, 14365, 0, 14365, 0, 54611, 'completed', 1, NULL),
 (19, 'sfds', 'sdfsfd', 'sdfsdf', 'asdasd', '2222', 'asfdasdf', 'inactive', '#E6E6E6', 8512, 6012, 0, 6012, 12887, 18902, 'completed', 14, NULL),
 (20, 'dsgt', 'ert', 'ert', 'ert', 'ert', 'ert', 'inactive', '#E6E6E6', 90, 4321, 0, 4321, 116, 17263, 'incompleted', 1, NULL),
-(21, 'sdfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'active', '#FF9C42', 12561, 4769, 0, 4769, 0, 17378, 'completed', 1, NULL),
+(21, 'sdfg', 'dfg', 'dfg', 'dfg', NULL, NULL, 'inactive', '#E6E6E6', 0, 18712, 0, 18712, 0, 59079, 'completed', 1, NULL),
 (22, 'new', 'n', 'n edit', 'n case edit detal', 'n', 'n', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 0, 'completed', 13, NULL),
 (23, 'r', 'r', 'r', 'r', 'r', 'r', 'active', '#93EEAA', 0, 840, 0, 840, 0, 16024, 'completed', 1, NULL),
 (27, 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'dfg', 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 30176, 'canceled', 13, NULL),
@@ -87,7 +87,8 @@ INSERT INTO `accident_case` (`id`, `damage_description`, `location`, `driver_con
 (44, 'dsgf', 'sdg', 'fff', 'ff', NULL, NULL, 'inactive', '#E6E6E6', 22, 0, 0, 0, 0, 0, 'canceled', 12, '2017-09-28 16:46:43'),
 (45, 'USTERKA CHŁODNICY - LEJE SIĘ PŁYN.', 'ZWYKŁE MIASTO, UL. ZWYKŁA 1', 'KIEROWCA JAN 123123', 'OD GODZ. 18:00 POD NUMEREM KIEROWCY DOSTĘPNY BĘDZIE DYSPOZYTOR FIRMY', NULL, NULL, 'active', '#E6E6E6', 40, 180, 0, 180, 94, 3998, 'completed', 15, '2017-09-28 17:22:31'),
 (46, 'fault desc', 'tr loc', 'tymek 123123123', 'zgloszenie nowe', NULL, NULL, 'inactive', '#E6E6E6', 0, 0, 0, 0, 0, 4123, 'canceled', 2, '2017-10-02 12:27:21'),
-(47, 'damage', 'location', 'driver 99999999', 'yuyuyyuuyyy other comments', NULL, NULL, 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 18, '2017-10-05 10:42:56');
+(47, 'damage', 'location', 'driver 99999999', 'yuyuyyuuyyy other comments', NULL, NULL, 'active', '#FF9C42', 0, 0, 0, 0, 0, 0, 'initialization', 18, '2017-10-05 10:42:56'),
+(48, 'sdfsdfsdf', 'sdfsdfs', 'sdfsfdsf', 'dfdf', NULL, NULL, 'active', '#FF7575', 0, 0, 0, 0, 0, 0, 'initialization', 2, '2017-10-12 15:14:01');
 
 -- --------------------------------------------------------
 
@@ -129,7 +130,9 @@ INSERT INTO `dealer` (`id`, `name`, `street`, `zip_code`, `city`, `main_phone`, 
 (9, 'acive form', 'example', 'example', 'example', 'example', 'example', 'example@example.example', 'example', 'example', 'example', 'example', 'example', 'example', 'exampleexampleexampleexample', 'active'),
 (10, 'new dealer 1.10', 'zwykła street', '11-233', 'zwykłe city', '123123123', NULL, 'truck11@o2.pl', '123123123', NULL, NULL, NULL, NULL, NULL, NULL, 'active'),
 (11, 'new dealer 1.10-2', 'zwykła', '11-234', 'zwykłe', '123123123', NULL, '11111@99.pl0', '000999000', NULL, NULL, NULL, NULL, NULL, NULL, 'active'),
-(13, 'AllDataBis', 'wwww', '11-233', 'qwdaq', '123123123', NULL, 'super@mail.elobis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active');
+(13, 'AllDataBis', 'wwww', '11-233', 'qwdaq', '123123123', NULL, 'super@mail.elobis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active'),
+(14, 'NIEAKTYWNY', 'street', '11-233', 'tytyytyt', '22123123123', NULL, 'nieaktywny@gmail.elo', '67676766767', '676767667', '67676767667', NULL, NULL, NULL, 'nieaktywny', 'inactive'),
+(15, 'AKTYWNY', 'yuyuyuyuy', '11-233', 'jkjkjkjkj', '99123123123', NULL, 'aktywny@gmail.elo', '909099099', NULL, NULL, NULL, NULL, NULL, 'aktywny', 'active');
 
 -- --------------------------------------------------------
 
@@ -157,7 +160,7 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-10-05 09:46:31', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(1, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@gmail.elo', 'ccwrcadmin@gmail.elo', 1, NULL, '$2y$13$mdUZimf2vJ/q5o1SqQSRh.m6ldO29NGHlCcCuIsFjU1bdWNAT9w8u', '2017-10-16 15:46:50', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
 (2, 'ccwrcoperator', 'ccwrcoperator', 'ccwrcoperator@gmail.elo', 'ccwrcoperator@gmail.elo', 1, NULL, '$2y$13$NPahNgRTTcYYeafyiKg0x.RS35r6nAu79N4pzKUj8ajLc5fH2EB4W', '2017-10-04 14:40:09', NULL, NULL, 'a:1:{i:0;s:13:\"ROLE_OPERATOR\";}'),
 (3, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@gmail.elo', 'ccwrcuser@gmail.elo', 1, NULL, '$2y$13$85Y1dC2YeX05aYoxrLAgOOmjsHKCaObP1t7c08ympJGrufzmX6lGe', '2017-07-26 14:46:43', NULL, NULL, 'a:0:{}'),
 (4, 'ccwrcdealer', 'ccwrcdealer', 'ccwrcdealer@ccwrcdealer.elo', 'ccwrcdealer@ccwrcdealer.elo', 1, NULL, '$2y$13$garsgYLil1hIyV7yu7dXGuHYGB2TELZgcca/wiUN4WdGN824meA2K', '2017-09-19 13:32:32', NULL, NULL, 'a:1:{i:0;s:11:\"ROLE_DEALER\";}'),
@@ -459,7 +462,40 @@ INSERT INTO `monitoring` (`id`, `code`, `time_save`, `time_set`, `document`, `co
 (291, 'PG', '2017-10-04 13:24:05', NULL, NULL, 'dfg', 'dfg', NULL, 'mail@serwis1.elo', NULL, 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
 (292, 'PG', '2017-10-04 14:28:38', NULL, NULL, 'new pg', 'n', 'dealer comment', 'mail@serwis1.elo', 'opt mail', 46, 'ccwrcadmin', 1, NULL, 2000, 'EUR'),
 (293, 'END', '2017-10-05 09:10:22', '2017-10-05 09:10:00', NULL, 'sfd', 'sd', NULL, NULL, NULL, 46, 'ccwrcadmin', NULL, NULL, NULL, NULL),
-(294, 'START', '2017-10-05 10:42:56', NULL, NULL, 'driver 99999999', 'yuyuyyuuyyy other comments', NULL, NULL, NULL, 47, 'ccwrcadmin', NULL, NULL, NULL, NULL);
+(294, 'START', '2017-10-05 10:42:56', NULL, NULL, 'driver 99999999', 'yuyuyyuuyyy other comments', NULL, NULL, NULL, 47, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(295, 'PG', '2017-10-08 13:33:56', NULL, NULL, 'kontakt ed', 'koment ed', 'na 4000 pln', 'mail@serwis1.elo', 'brak.', 47, 'ccwrcadmin', 1, NULL, 4000, 'PLN'),
+(296, 'WPG', '2017-10-08 13:35:00', NULL, NULL, 'kontaky ed', 'koment ed', 'dealer', NULL, NULL, 47, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(297, 'WPG', '2017-10-08 13:44:38', NULL, NULL, 'ert tt', 'ert tt', 'ert', 'mail@serwis1.elo', 'brak.', 47, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(298, 'CPG', '2017-10-08 13:53:42', NULL, NULL, 'dgg g', 'dfg g', NULL, NULL, NULL, 47, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(299, 'RO', '2017-10-08 15:38:04', NULL, NULL, 'sdfg', 'dfg', 'dfg', NULL, NULL, 47, 'ccwrcadmin', 1, 1, NULL, NULL),
+(300, 'RO', '2017-10-08 15:42:43', NULL, NULL, 'gcdvd ed', 'fgdgfd ed', 'dfgdfgdfgd', NULL, 'dfgdgfdfgdgf gfrgfgfg', 47, 'ccwrcadmin', 1, 5, NULL, NULL),
+(301, 'RO', '2017-10-08 17:05:36', NULL, NULL, 'sdf', 'sdf', 'sdf', NULL, 'sdfdsf', 23, 'ccwrcadmin', 1, 15, NULL, NULL),
+(302, 'RO', '2017-10-08 17:08:44', NULL, NULL, 'werwe', 'werwerw', NULL, NULL, NULL, 21, 'ccwrcadmin', 1, 15, NULL, NULL),
+(303, 'RO', '2017-10-09 12:43:42', NULL, NULL, 'dgg', 'dfg', 'dfg', NULL, NULL, 21, 'ccwrcadmin', 1, 15, NULL, NULL),
+(304, 'WRO', '2017-10-09 14:12:20', NULL, NULL, 'dgd', 'fgdg', NULL, NULL, NULL, 21, 'ccwrcadmin', 1, 15, NULL, NULL),
+(305, 'WRO', '2017-10-09 14:20:44', NULL, NULL, 'cdfdf', 'gdfgd', 'dfgdfgg', 'aktywny@gmail.elo', NULL, 21, 'ccwrcadmin', 1, 15, NULL, NULL),
+(306, 'WRO', '2017-10-11 12:08:38', NULL, NULL, 'dfgdgf', 'dfgdfg', 'dfgdgfdfg', 'aktywny@gmail.elo', 'sdfdsf', 23, 'ccwrcadmin', 1, 15, NULL, NULL),
+(307, 'ETA', '2017-10-11 12:18:39', '2017-10-11 12:18:00', NULL, 'sdfsdf', 'sdfsfd', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(308, 'STRR', '2017-10-11 12:47:44', '2017-10-11 12:47:00', NULL, 'sdf ed', 'sdfsdf  ed', NULL, NULL, NULL, 23, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(309, 'RO', '2017-10-11 16:51:35', NULL, NULL, 'cggg', 'dfg', 'dfg', NULL, NULL, 21, 'ccwrcadmin', 14, 15, NULL, NULL),
+(310, 'RO', '2017-10-11 16:52:22', NULL, NULL, 'sweserw', 'werwrwer', NULL, NULL, NULL, 21, 'ccwrcadmin', 14, 15, NULL, NULL),
+(311, 'END', '2017-10-11 16:54:34', '2017-10-11 16:54:00', NULL, 'dfs', 'sdgsd', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(312, 'RO', '2017-10-11 16:56:09', NULL, NULL, 'dsgfts', 'dfsdfsdfdfsd', NULL, NULL, NULL, 21, 'ccwrcadmin', 14, 10, NULL, NULL),
+(313, 'END', '2017-10-11 16:57:58', '2017-10-11 16:57:00', NULL, 'xssssfdsf', 'd', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(314, 'START', '2017-10-12 15:14:01', NULL, NULL, 'sdfsfdsf', 'dfdf', NULL, NULL, NULL, 48, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(315, 'CPG', '2017-10-12 15:28:37', NULL, NULL, 'dfg', 'dfg', NULL, NULL, NULL, 48, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(316, 'END', '2017-10-12 15:32:34', '2017-10-12 15:32:00', NULL, 'dfgdg', 'dfgdg', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(317, 'END', '2017-10-12 15:33:09', '2012-01-01 00:00:00', NULL, 'fchgfgh', 'fdgthfdh', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(318, 'ETA', '2017-10-12 15:36:59', '2017-10-12 15:36:00', NULL, 'rrr', 'rrrr', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(319, 'Incoming', '2017-10-12 15:39:19', NULL, NULL, 'dsfg', 'dfgdfg', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(320, 'Out', '2017-10-12 16:03:46', NULL, NULL, 'dfhg', 'fghh', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(321, 'PG', '2017-10-12 16:08:24', NULL, NULL, 'sdfsdf', 'sdfsdfs', NULL, 'nieaktywny@gmail.elo', NULL, 21, 'ccwrcadmin', 14, NULL, 2000, 'EUR'),
+(322, 'RO', '2017-10-12 16:26:00', NULL, NULL, 'dfg', 'dfgdgfdgdgdf rrr', NULL, NULL, NULL, 21, 'ccwrcadmin', 14, 15, NULL, NULL),
+(323, 'STRR', '2017-10-12 16:38:30', '2017-10-03 16:38:00', NULL, 'dfg', 'dfggg', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL),
+(324, 'WCPG', '2017-10-12 16:40:06', NULL, NULL, 'cxv', 'dfgfdgggg', NULL, NULL, NULL, 21, 'ccwrcadmin', 1, NULL, NULL, NULL),
+(325, 'WPG', '2017-10-12 16:42:22', NULL, NULL, 'dfgdfg333333333333333333', 'dfgdfg', NULL, 'nieaktywny@gmail.elo', NULL, 21, 'ccwrcadmin', 14, NULL, NULL, NULL),
+(326, 'WRO', '2017-10-12 16:46:32', NULL, NULL, 'fghfgh333', 'fghfhfgh', NULL, 'aktywny@gmail.elo', NULL, 21, 'ccwrcadmin', 14, 15, NULL, NULL),
+(327, 'END', '2017-10-16 16:30:37', '2017-10-16 16:30:00', NULL, 'sdg', 'dfgdfg', NULL, NULL, NULL, 21, 'ccwrcadmin', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -492,7 +528,7 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`id`, `vin`, `street`, `city`, `phone`, `fax`, `mail`, `mileage`, `purchase_date`, `company_name`, `tax_id_number`, `contact_person`, `zip_code`, `registration_number`, `guarantee_type`, `name_type`, `dealer_id`) VALUES
-(1, 'gyt55EDIT2', 'car street', 'car city', '22 phone', 'EDIT', 'EDIT', '11', '2015-07-04', 'company 1 EDIT2', '454545454545', 'jan kovalsky', '11-222', 'ws11www', 'FULL', 'Merc Daf11', 1),
+(1, 'gyt55EDI', 'car street', 'car city', '22 phone', 'EDIT', 'EDIT6', '11', '2015-07-04', 'company 1 EDIT2', '454545454545', 'jan kovalsky', '11-222', 'ws11www', 'FULL', 'Merc Daf11', 14),
 (2, 'gyqt55', 'car street', 'car city', '22 phone', '324243234', '2342443434', '11', '2015-07-04', 'company 1', '454545454545', 'jan kovalsky22', '11-222', 'ws11www', 'NO WARRANTY', 'Merc Daf11', 1),
 (3, 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', '22222', '2013-06-24', 'new form test', 'new form test', 'new form test', 'new form test', 'new form test', 'FULL', 'truck 33', 1),
 (4, 'wahfewfewew', 'sadfsaefsf 4/6', 'juyqgfwd', '2134121213', '123123123', '44E@uu.pl', '900', '2016-02-03', 'lkhdsokuqwdokuq', '243234234234', 'janek 8787887', '11-233', 'wi900000', 'FULL, end date: 2020-11-11', 'truck 11 460KM', 6),
@@ -562,12 +598,12 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT dla tabeli `accident_case`
 --
 ALTER TABLE `accident_case`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT dla tabeli `dealer`
 --
 ALTER TABLE `dealer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT dla tabeli `fos_user`
 --
@@ -577,7 +613,7 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT dla tabeli `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 --
 -- AUTO_INCREMENT dla tabeli `vehicle`
 --
