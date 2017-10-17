@@ -3,10 +3,11 @@
 
     {% if case.progressColor == "#E6E6E6" %}
 
-        <span class="textBold textItalic">Data for the report </span> 
-        <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}" >
-            <button class="panelGreyButton">edit</button>
-        </a>
+        <span class="textBold textItalic">Data for the report </span>      
+        <button title="new window" class="panelGreyButton" 
+                onclick="window.open('{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}');">
+            edit
+        </button>              
         <br/> 
 
         <span class="textBold textItalic">Arrival time:</span> {{ case.reportArrivalTime }} minutes <br/>
@@ -18,17 +19,21 @@
         <span class="textBold textItalic">Repair status (completed/incompleted/canceled):</span> {{ case.reportRepairStatus }} <br/>
 
         {% if case.status == "active" %}
-            <center>
-                <a title="deactivate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >
-                    <button class="panelRedButton">close case</button>
-                </a>
-            </center>
+            <center>                 
+                <button title="deactivate case" class="panelRedButton" 
+                        onclick="window.location = '{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}';">
+                    close case {{ case.id }}
+                </button>    
+            </center> 
+            <br/>
         {% else%}    
             <center>
-                <a title="activate case" href="{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}" >
-                    <button class="panelRedButton">open case</button>
-                </a>
-            </center>
+                <button title="activate case" class="panelRedButton" 
+                        onclick="window.location = '{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}';">
+                    open case {{ case.id }}
+                </button>    
+            </center> 
+            <br/>
         {% endif %}
     {% endif %}  
 
