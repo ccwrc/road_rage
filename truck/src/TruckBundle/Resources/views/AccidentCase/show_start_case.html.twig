@@ -7,17 +7,20 @@
 
     <span class="textBold textItalic">Company: </span> {{ case.vehicle.companyName }}, Contact: 
     {{ case.vehicle.contactPerson }}. 
-    <a target="_blank" title="new window" href="{{ path('truck_vehicle_showvehicle', {"vehicleId":case.vehicle.id}) }}" >
-        <button class="panelGreyButton">vehicle/company details</button>
-    </a>
+    <button title="new window" class="panelGreyButton" 
+            onclick="window.open('{{ path('truck_vehicle_showvehicle', {"vehicleId":case.vehicle.id}) }}');">
+        vehicle/company details
+    </button>   
     <br/>
 
     <span class="textBold textItalic">Damage description: </span> {{ case.damageDescription }} <br/>
     <span class="textBold textItalic">Location: </span> {{ case.location }} <br/>
     <span class="textBold textItalic">Contact to driver: </span> {{ case.driverContact }} 
-    <a target="_blank" title="new window" href="{{ path('truck_accidentcase_editcase', {"caseId":case.id}) }}" >
-        <button class="panelGreyButton">case edit/details</button>
-    </a>
+
+    <button title="new window" class="panelGreyButton" 
+            onclick="window.open('{{ path('truck_accidentcase_editcase', {"caseId":case.id}) }}');">
+        case edit/details
+    </button>  
 
     <hr class="hrStyle"/>
 {% endif %}
