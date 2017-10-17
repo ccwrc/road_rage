@@ -1,5 +1,6 @@
 
-<a title="switch to all cases" class="casesSwitch" href="{{ path('truck_operator_panel', {'caseId': "0", 'casesStatus': "all"}) }}">
+<a title="switch to all cases" class="casesSwitch" 
+   href="{{ path('truck_operator_panel', {'caseId': "0", 'casesStatus': "all"}) }}">
     Inactive cases:
 </a>
 <br/>
@@ -7,12 +8,18 @@
 {% for case in cases %} 
 
     {% if caseId == case.id %}
-        <a title="{{ case.vehicle.companyName }}" href="{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "inactive"}) }}"> 
-        <button class="caseButton" style="background-color:{{ case.progressColor }}">&rarr; {{ case.id }} &larr;</button> </a> <br/>
+        <button title="{{ case.vehicle.companyName }}" class="caseButton" 
+                style="background-color:{{ case.progressColor }}"
+                onclick="window.location = '{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "inactive"}) }}';">
+            &rarr; {{ case.id }} &larr;
+        </button> <br/>
     {% else %}
-        <a title="{{ case.vehicle.companyName }}" href="{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "inactive"}) }}"> 
-        <button class="caseButton" style="background-color:{{ case.progressColor }}">{{ case.id }}</button> </a> <br/>
-    {% endif %}
+        <button title="{{ case.vehicle.companyName }}" class="caseButton" 
+                style="background-color:{{ case.progressColor }}"
+                onclick="window.location = '{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "inactive"}) }}';">
+            {{ case.id }}
+        </button> <br/>
+    {% endif %}      
 
 {% else %}
     Empty.
