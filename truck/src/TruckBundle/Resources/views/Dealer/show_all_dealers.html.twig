@@ -4,15 +4,23 @@
 
 {% block body %} 
 
-    <h3>List of dealers</h3>   
+    <center>
+        <h3 class="formTitle">list of dealers</h3>
+    </center>
 
     {% for dealer in dealers %} 
-
         <span class="redBoldText"> {{ dealer.id }}. {{ dealer.name }} ({{ dealer.isActive }}) </span>
-        <a target="_blank" title="new window" href="{{ path('truck_dealer_showdealer', {"dealerId":dealer.id}) }}" >details</a>
+        <button title="new window" class="pure-button pure-button-active button90blue" 
+                onclick="window.open('{{ path('truck_dealer_showdealer', {"dealerId":dealer.id}) }}');">
+            details/vehicle list
+        </button>          
         {% if is_granted('ROLE_OPERATOR') %}
-            <a href='{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}' ><button>edit dealer</button> </a>
-        {% endif %}      
+            <button title="edit dealer" 
+                    class="pure-button pure-button-active button90red" 
+                    onclick="window.location = '{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}';">
+                edit dealer
+            </button>    
+        {% endif %}     
         <br/>
         <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
         <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
