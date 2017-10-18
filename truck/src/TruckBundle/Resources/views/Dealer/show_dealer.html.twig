@@ -4,10 +4,18 @@
 
 {% block body %} 
 
+    <center>
+        <h3 class="formTitle">dealer details/vehicle list</h3>
+    </center>
+
     <div class="padding7px">
         <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: {{ vehicles | length }}) </span> 
         {% if is_granted('ROLE_OPERATOR') %}
-            <a href='{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}' ><button>edit dealer</button> </a>
+            <button title="edit dealer" 
+                    class="pure-button pure-button-active button90red" 
+                    onclick="window.location = '{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}';">
+                edit dealer
+            </button>  
         {% endif %}   
         <br/>
         <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
@@ -27,13 +35,22 @@
         <div class="padding7px">
             <span class="greenBoldText">Company: {{ vehicle.companyname }}, VIN: {{ vehicle.vin }}, Registration: {{ vehicle.registrationNumber }} </span>
             <br/>
-            <a target="_blank" title="new window" href="{{ path('truck_vehicle_showvehicle', {"vehicleId":vehicle.id}) }}" ><button>details</button></a>  
-            <a target="_blank" title="new window" href='{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}' ><button>edit vehicle</button> </a>
+            <button title="new window" class="pure-button pure-button-active button90green" 
+                    onclick="window.open('{{ path('truck_vehicle_showvehicle', {"vehicleId":vehicle.id}) }}');">
+                details
+            </button>   
+            <button title="new window" class="pure-button pure-button-active button90green" 
+                    onclick="window.open('{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}');">
+                edit
+            </button>   
             {% if is_granted('ROLE_OPERATOR') %}
-                <a href='{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}' ><button>new case</button> </a>
+                <button title="new accident case" 
+                        class="pure-button pure-button-active button90orange" 
+                        onclick="window.location = '{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}';">
+                    new case
+                </button>   
             {% endif %}
             <br/>
-            {#TODO add link to new case#}
             <span class="boldText"> Street:</span> {{ vehicle.street }} <br/>
             <span class="boldText"> City, zip-code:</span> {{ vehicle.city }}, {{ vehicle.zipCode }} <br/>
             <span class="boldText"> First contact person:</span> {{ vehicle.contactPerson }} <br/>
