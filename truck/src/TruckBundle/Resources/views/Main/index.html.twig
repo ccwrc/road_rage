@@ -9,62 +9,65 @@
     </center>
 
     {#user panel#}
-    {% if is_granted('ROLE_USER') %}
-        <button title="logout" class="pure-button pure-button-active button90red"
-                onclick="window.location = '{{ path("fos_user_security_logout") }}';">
-            logout
-        </button>
-    {% else %}
-        <button title="login" class="pure-button pure-button-active button90red"
-                onclick="window.location = '{{ path("fos_user_security_login") }}';">
-            login
-        </button>
-    {% endif %}
+    <div class="padding7px">
+        {% if is_granted('ROLE_USER') %}
+            <button title="logout" class="pure-button pure-button-active button90red"
+                    onclick="window.location = '{{ path("fos_user_security_logout") }}';">
+                logout
+            </button>
+        {% else %}
+            <button title="login" class="pure-button pure-button-active button90red"
+                    onclick="window.location = '{{ path("fos_user_security_login") }}';">
+                login
+            </button>
+        {% endif %}
 
-    {% if is_granted('ROLE_USER') %}
-        <button title="show profile" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("fos_user_profile_show") }}';">
-            profile
-        </button>
-        <button title="edit profile" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("fos_user_profile_edit") }}';">
-            edit profile
-        </button>
-    {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            <button title="show profile" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("fos_user_profile_show") }}';">
+                profile
+            </button>
+            <button title="edit profile" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("fos_user_profile_edit") }}';">
+                edit profile
+            </button>
+        {% endif %}
 
-    {% if is_granted('ROLE_USER') %}
-    {% else %}
-        <button title="register" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("fos_user_registration_register") }}';">
-            register
-        </button>
-    {% endif %}
-    <br/><br/>
+        {% if is_granted('ROLE_USER') %}
+        {% else %}
+            <button title="register" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("fos_user_registration_register") }}';">
+                register
+            </button>
+        {% endif %}
+        <br/>
+    </div>
 
     {#dealer panel#}
     {% if is_granted('ROLE_DEALER') %}
         <center>
             <h3 class="formTitle">dealer</h3>
         </center>
-
-        <button title="show active dealers" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showallactivedealers") }}';">
-            active dealers
-        </button>  
-        <button title="show all dealers" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            all dealers
-        </button>              
-        <button title="add new vehicle" class="pure-button pure-button-active button90red"
-                onclick="window.location = '{{ path("truck_vehicle_createvehicle") }}';">
-            new vehicle
-        </button>    
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved - edit dealer
-        </button>          
-        <br/><br/>
-    {% endif %}
+        <div class="padding7px">
+            <button title="show active dealers" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showallactivedealers") }}';">
+                active dealers
+            </button>  
+            <button title="show all dealers" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                all dealers
+            </button>              
+            <button title="add new vehicle" class="pure-button pure-button-active button90red"
+                    onclick="window.location = '{{ path("truck_vehicle_createvehicle") }}';">
+                new vehicle
+            </button>    
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved - edit dealer
+            </button>          
+            <br/>
+        {% endif %}
+    </div>
 
     {#for operator#}  
     {% if is_granted('ROLE_OPERATOR') %}
@@ -72,24 +75,26 @@
             <h3 class="formTitle">operator</h3>
         </center>
 
-        <button title="new window" class="pure-button pure-button-active button90red" 
-                onclick="window.open('{{ path("truck_operator_panel") }}');">
-            OPERATOR PANEL
-        </button>
-        <button title="new window" class="pure-button pure-button-active button90blue" 
-                onclick="window.open('{{ path("truck_dealer_showallactivedealers") }}');">
-            active dealers
-        </button>  
-        <button title="new window" class="pure-button pure-button-active button90blue" 
-                onclick="window.open('{{ path("truck_vehicle_createvehicle") }}');">
-            new vehicle & case
-        </button>                      
-        <button title="new window" class="pure-button pure-button-active button90blue" 
-                onclick="window.open('{{ path("truck_vehicle_createvehicle") }}');">
-            reserve
-        </button>                       
-        <br/><br/>
-    {% endif %}
+        <div class="padding7px">
+            <button title="new window" class="pure-button pure-button-active button90red" 
+                    onclick="window.open('{{ path("truck_operator_panel") }}');">
+                OPERATOR PANEL
+            </button>
+            <button title="new window" class="pure-button pure-button-active button90blue" 
+                    onclick="window.open('{{ path("truck_dealer_showallactivedealers") }}');">
+                active dealers
+            </button>  
+            <button title="new window" class="pure-button pure-button-active button90blue" 
+                    onclick="window.open('{{ path("truck_vehicle_createvehicle") }}');">
+                new vehicle & case
+            </button>                      
+            <button title="new window" class="pure-button pure-button-active button90blue" 
+                    onclick="window.open('{{ path("truck_vehicle_createvehicle") }}');">
+                reserve
+            </button>                       
+            <br/>
+        {% endif %}
+    </div>
 
     {#for control#}  
     {% if is_granted('ROLE_CONTROL') %}
@@ -97,51 +102,59 @@
             <h3 class="formTitle">control</h3>
         </center>
 
-        <button title="add new dealer" class="pure-button pure-button-active button90red"
-                onclick="window.location = '{{ path("truck_dealer_createdealer") }}';">
-            add new dealer
-        </button>   
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved 
-        </button>  
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved 
-        </button>  
-        <br/><br/>
-    {% endif %}    
+        <div class="padding7px">
+            <button title="add new dealer" class="pure-button pure-button-active button90red"
+                    onclick="window.location = '{{ path("truck_dealer_createdealer") }}';">
+                add new dealer
+            </button>   
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved 
+            </button>  
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved 
+            </button>  
+            <br/>
+        {% endif %}    
+    </div>
 
     {#for admin#}  
     {% if is_granted('ROLE_ADMIN') %}
         <center>
             <h3 class="formTitle">admin</h3>
         </center>
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved 
-        </button>  
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved 
-        </button>  
-        <br/><br/>
-    {% endif %}  
+
+        <div class="padding7px">
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved 
+            </button>  
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved 
+            </button>  
+            <br/>
+        {% endif %}  
+    </div>
 
     {#for SUPER admin#}  
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <center>
             <h3 class="formTitle">super admin</h3>
         </center>
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved 
-        </button>  
-        <button title="res" class="pure-button pure-button-active button90blue"
-                onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-            reserved 
-        </button>  
-        <br/><br/>
-    {% endif %}      
+
+        <div class="padding7px">
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved 
+            </button>  
+            <button title="res" class="pure-button pure-button-active button90blue"
+                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
+                reserved 
+            </button>  
+            <br/>
+        {% endif %}   
+    </div>
 
 {% endblock %}
