@@ -8,36 +8,38 @@
         <h3 class="formTitle">active dealers</h3>
     </center>
 
-    {% for dealer in dealers %} 
+    <div class="padding7px">
+        {% for dealer in dealers %} 
 
-        <span class="redBoldText"> {{ dealer.id }}. {{ dealer.name }} ({{ dealer.isActive }}) </span>
-        <button title="new window" class="pure-button pure-button-active button90blue" 
-                onclick="window.open('{{ path('truck_dealer_showdealer', {"dealerId":dealer.id}) }}');">
-            details/vehicle list
-        </button>         
-        {% if is_granted('ROLE_OPERATOR') %}
-            <button title="edit dealer" 
-                    class="pure-button pure-button-active button90red" 
-                    onclick="window.location = '{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}';">
-                edit dealer
-            </button>   
-        {% endif %}      
-        <br/>
-        <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
-        <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
-        <span class="boldText"> Phone:</span> {{ dealer.mainPhone }} (24H: {{ dealer.phone24h }}) <br/>
-        <span class="boldText"> Fax:</span> {{ dealer.mainFax }} <br/>
-        <span class="boldText"> Mail:</span> {{ dealer.mainMail }} <br/>
-        <span class="boldText"> Phone service car:</span> {{ dealer.phoneServiceCar }} <br/>
-        Alternative phones: {{ dealer.altPhone1 }}, {{ dealer.altPhone2 }} <br/>
-        Alternative mails: {{ dealer.altMail1 }}, {{ dealer.altMail2 }} <br/>
-        <span class="boldText"> Comments:</span> {{ dealer.otherComments }} <br/>
+            <span class="redBoldText"> {{ dealer.id }}. {{ dealer.name }} ({{ dealer.isActive }}) </span>
+            <button title="new window" class="pure-button pure-button-active button90blue" 
+                    onclick="window.open('{{ path('truck_dealer_showdealer', {"dealerId":dealer.id}) }}');">
+                details/vehicle list
+            </button>         
+            {% if is_granted('ROLE_OPERATOR') %}
+                <button title="edit dealer" 
+                        class="pure-button pure-button-active button90red" 
+                        onclick="window.location = '{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}';">
+                    edit dealer
+                </button>   
+            {% endif %}      
+            <br/>
+            <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
+            <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
+            <span class="boldText"> Phone:</span> {{ dealer.mainPhone }} (24H: {{ dealer.phone24h }}) <br/>
+            <span class="boldText"> Fax:</span> {{ dealer.mainFax }} <br/>
+            <span class="boldText"> Mail:</span> {{ dealer.mainMail }} <br/>
+            <span class="boldText"> Phone service car:</span> {{ dealer.phoneServiceCar }} <br/>
+            Alternative phones: {{ dealer.altPhone1 }}, {{ dealer.altPhone2 }} <br/>
+            Alternative mails: {{ dealer.altMail1 }}, {{ dealer.altMail2 }} <br/>
+            <span class="boldText"> Comments:</span> {{ dealer.otherComments }} <br/>
 
-        <hr class="hrStyle"/>
+            <hr class="hrStyle"/>
 
-    {% else %}
-        No dealers.
-    {% endfor %}
+        {% else %}
+            No dealers.
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
