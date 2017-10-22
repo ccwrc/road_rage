@@ -11,14 +11,16 @@
                 <h3 class="formTitle">case {{ caseId }} - estimated arrival time  </h3>
             </center>
 
-            {{ form_start(form) }} 
-            {{ form_widget(form) }} 
-            <center>
-                <input class="pure-button pure-button-active button90red" type="submit" value="add ETA"/>
-            </center>
+            <div class="padding7px">
+                {{ form_start(form) }} 
+                {{ form_widget(form) }} 
+                <center>
+                    <input class="pure-button pure-button-active button90red" type="submit" value="add ETA"/>
+                </center>
 
-            {{ form_end(form) }}
-        </div> 
+                {{ form_end(form) }}
+            </div> 
+        </div>
     </div>
 
 {% endblock %}
