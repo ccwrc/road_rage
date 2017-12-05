@@ -3,6 +3,8 @@ nbproject/
 
 vendor/
 
+test_graphics/
+
 userGuidelines.txt
 
 test.php
