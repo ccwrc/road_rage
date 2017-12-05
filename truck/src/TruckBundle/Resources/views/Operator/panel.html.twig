@@ -84,7 +84,7 @@
             manual
         </button>               
     {% endif %}
-{% endblock %}
+{% endblock %} {# end block menuBar #}
 
 
 {% block cases %}
@@ -95,7 +95,7 @@
     {% else %}    
         {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
     {% endif %} 
-{% endblock %}
+{% endblock %} {# end block cases #}
 
 
 {% block monitoring %}
@@ -146,17 +146,17 @@
     {% endif %}
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
-{% endblock %}
+{% endblock %} {# end block monitoring #}
 
 
 {% block logged %}
     <a title="Logout" class="casesSwitch" href="{{ path("fos_user_security_logout") }}">
         {{ app.user.username }} 
     </a>
-{% endblock %}
+{% endblock %} {# end block logged #}
 
 
 {% block infoBar %}
     {{ parent() }} info1 messageInfo alarmInfo
-{% endblock %}
+{% endblock %} {# end block infoBar #}
 

@@ -8,54 +8,56 @@
         <h3 class="formTitle">show vehicle {{ vehicle.id }}</h3>
     </center>
 
-    <button title="edit vehicle" class="pure-button pure-button-active button90blue"
-            onclick="window.location = '{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}';">
-        edit vehicle
-    </button>
-    <button title="new window" class="pure-button pure-button-active button90blue" 
-            onclick="window.open('{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}');">
-        show dealer
-    </button> 
-    {% if is_granted('ROLE_OPERATOR') %}
-        <button title="start new case" class="pure-button pure-button-active button90red"
-                onclick="window.location = '{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}';">
-            new case
-        </button>      
-    {% endif %}
-    <br/><br/>
+    <div class="padding7px">
+        <button title="edit vehicle" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}';">
+            edit vehicle
+        </button>
+        <button title="new window" class="pure-button pure-button-active button90blue" 
+                onclick="window.open('{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}');">
+            show dealer
+        </button> 
+        {% if is_granted('ROLE_OPERATOR') %}
+            <button title="start new case" class="pure-button pure-button-active button90red"
+                    onclick="window.location = '{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}';">
+                new case
+            </button>      
+        {% endif %}
+        <br/><br/>
 
-    <span class="boldText">Home dealer:</span> {{ dealer.name }} <br/>
-    <span class="boldText">VIN:</span> {{ vehicle.vin }} <br/>
-    <span class="boldText">Company name:</span> {{ vehicle.companyName }} <br/>
-    <span class="boldText">Company tax ID number:</span> {{ vehicle.taxIdNumber }} <br/>
-    <span class="boldText">Company - contact person:</span> {{ vehicle.contactPerson }} <br/>
-    <span class="boldText">Company - street:</span> {{ vehicle.street }} <br/>
-    <span class="boldText">Company - zip code, city:</span> {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
-    <span class="boldText">Phone:</span> {{ vehicle.phone }} <br/>
-    <span class="boldText">Fax:</span> {{ vehicle.fax }} <br/>
-    <span class="boldText">Mail:</span> {{ vehicle.mail }} <br/><br/>
+        <span class="boldText">Home dealer:</span> {{ dealer.name }} <br/>
+        <span class="boldText">VIN:</span> {{ vehicle.vin }} <br/>
+        <span class="boldText">Company name:</span> {{ vehicle.companyName }} <br/>
+        <span class="boldText">Company tax ID number:</span> {{ vehicle.taxIdNumber }} <br/>
+        <span class="boldText">Company - contact person:</span> {{ vehicle.contactPerson }} <br/>
+        <span class="boldText">Company - street:</span> {{ vehicle.street }} <br/>
+        <span class="boldText">Company - zip code, city:</span> {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
+        <span class="boldText">Phone:</span> {{ vehicle.phone }} <br/>
+        <span class="boldText">Fax:</span> {{ vehicle.fax }} <br/>
+        <span class="boldText">Mail:</span> {{ vehicle.mail }} <br/><br/>
 
-    <span class="boldText">Vehicle registration number:</span> {{ vehicle.registrationNumber }} <br/>
-    <span class="boldText">Vehicle mileage:</span> {{ vehicle.mileage }} <br/>
-    <span class="boldText">Vehicle guarantee type:</span> {{ vehicle.guaranteeType }} <br/>
-    <span class="boldText">Vehicle purchase date:</span> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
-    <span class="boldText">Vehicle name/type:</span> {{ vehicle.nameType }} <br/><br/>
+        <span class="boldText">Vehicle registration number:</span> {{ vehicle.registrationNumber }} <br/>
+        <span class="boldText">Vehicle mileage:</span> {{ vehicle.mileage }} <br/>
+        <span class="boldText">Vehicle guarantee type:</span> {{ vehicle.guaranteeType }} <br/>
+        <span class="boldText">Vehicle purchase date:</span> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
+        <span class="boldText">Vehicle name/type:</span> {{ vehicle.nameType }} <br/><br/>
 
-    Number of accident cases: {{ cases|length }} <br/>
+        Number of accident cases: {{ cases|length }} <br/>
 
-    {% if is_granted('ROLE_OPERATOR') %}
-        {% for case in cases %}            
-            <button title="new window" class="pure-button pure-button-active button70noBackground" 
-                    onclick="window.open('{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}');"
-                    style="background-color:{{ case.progressColor }}" >
-                case {{ case.id }} 
-                {% if case.timeStart is not null %}
-                    ({{ case.timeStart | date('Y.m.d') }})
-                {% endif %}
-            </button>
-        {% else %}
-        {% endfor %}
-    {% endif %}    
+        {% if is_granted('ROLE_OPERATOR') %}
+            {% for case in cases %}            
+                <button title="new window" class="pure-button pure-button-active button70noBackground" 
+                        onclick="window.open('{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}');"
+                        style="background-color:{{ case.progressColor }}" >
+                    case {{ case.id }} 
+                    {% if case.timeStart is not null %}
+                        ({{ case.timeStart | date('Y.m.d') }})
+                    {% endif %}
+                </button>
+            {% else %}
+            {% endfor %}
+        {% endif %}    
+    </div>
 
 {% endblock %}
 
