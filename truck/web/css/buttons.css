@@ -90,9 +90,9 @@
     border-radius: 2px;
 }
 
-.panelMenuYellowButton {
+.panelMenuGreyButton {
     color: black;
-    background: #F7F9D0;
+    background: #dcdddf;
     font-size: 85%;
     min-width: 130px;    
     font-family: inherit;
@@ -114,20 +114,8 @@
     border-radius: 2px;
 }
 
-.panelMenuGreenButton {
-    color: black;
-    background: #93EEAA;
-    font-size: 85%;
-    min-width: 130px;    
-    font-family: inherit;
-    border: 1px solid #999;  
-    border: none rgba(0, 0, 0, 0); 
-    text-decoration: none;
-    border-radius: 2px;
-}
-
-.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, .panelMenuGreenButton:hover, 
-.panelMenuYellowButton:hover, .panelOrangeButton:hover, .panelGreenButton:hover {  
+.caseButton:hover, .panelGreyButton:hover, .panelRedButton:hover, .panelOrangeButton:hover,
+.panelGreenButton:hover, .panelMenuGreyButton:hover {  
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;

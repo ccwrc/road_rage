@@ -20,15 +20,15 @@
     {# for operator (overall) #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
-        <button title="new window" class="panelMenuGreenButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             active dealers
         </button>      
-        <button title="new window" class="panelMenuGreenButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_main_index') }}');">
             main page
         </button>          
-        <button title="new window" class="panelMenuGreenButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_main_index') }}');">
             reserve
         </button>    
@@ -37,15 +37,15 @@
     {# for control #}
     {% if is_granted('ROLE_CONTROL') %}
         &nbsp;
-        <button title="new window" class="panelMenuYellowButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             report panel?
         </button>     
-        <button title="new window" class="panelMenuYellowButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             reserved
         </button>  
-        <button title="new window" class="panelMenuYellowButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             reserved
         </button>  
@@ -54,15 +54,15 @@
     {# for admin? #}
     {% if is_granted('ROLE_ADMIN') %}
         &nbsp;
-        <button title="new window" class="panelMenuGreenButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             admin panel?
         </button>     
-        <button title="new window" class="panelMenuGreenButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             reserved
         </button>    
-        <button title="new window" class="panelMenuGreenButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             reserved
         </button>    
@@ -71,19 +71,15 @@
     {# case bar for operator #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
-        <button title="new window" class="panelMenuYellowButton" 
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
             new vehicle
         </button>          
-        <button title="reserved - new window" class="panelMenuYellowButton" 
+        <button title="reserved - new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
             search vehicle
-        </button>    
-        {#        <button title="new window" class="panelMenuYellowButton" 
-                        onclick="window.open('{{ path('truck_monitoring_monitoringcodesmanual') }}');">
-                    mon manual
-                </button>    #}    
-        <button title="new window" class="panelMenuYellowButton" 
+        </button>      
+        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_accidentcase_caseprogresscolormanual') }}');">
             manual
         </button>               
