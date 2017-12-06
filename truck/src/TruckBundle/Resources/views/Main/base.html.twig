@@ -66,7 +66,9 @@
                 document.addEventListener("DOMContentLoaded", function() {   
                     var allInputs = document.getElementsByTagName("input");
                     for (var i=0; i<allInputs.length-1; i++) {
-                        allInputs[i].setAttribute("class", "pure-input-2-3");
+                        if(allInputs[i].getAttribute("type") !== "checkbox") {
+                            allInputs[i].setAttribute("class", "pure-input-2-3");
+                    }
                     }
                     
                     var allTextareas = document.getElementsByTagName("textarea");

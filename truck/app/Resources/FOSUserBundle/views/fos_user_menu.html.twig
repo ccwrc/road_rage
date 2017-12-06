@@ -1,0 +1,13 @@
+{% if is_granted('ROLE_USER') %}
+    
+    {#TODO demo, uzupełnić, poprawić#}
+    
+    <a href='{{ path("fos_user_profile_show") }}' ><button  
+            class="pure-button pure-button-active button90red">example 1</button> </a>
+
+    <a href='{{ path("fos_user_change_password") }}' ><button 
+            class="pure-button pure-button-active button90red">ex 2</button> </a>
+
+    <a href='{{ path("fos_user_profile_edit") }}' ><button 
+            class="pure-button pure-button-active button90red">ex 3 {{ app.user.username }}</button> </a>
+    {% endif %} 
