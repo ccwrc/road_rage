@@ -61,23 +61,27 @@
             {% endblock %}
         </div>
 
-        {% block javascripts %}
-            <script>
-            var allInputs = document.getElementsByTagName("input");
-            for (var i=0; i<allInputs.length-1; i++) {
-                allInputs[i].setAttribute("class", "pure-input-2-3");
-            }
-            var allTextareas = document.getElementsByTagName("textarea");
-            for (var i=0; i<allTextareas.length; i++) {
-                allTextareas[i].setAttribute("class", "pure-input-2-3");
-            }    
-            var allSelects = document.getElementsByTagName("select");
-            for (var i=0; i<allSelects.length; i++) {
-            allSelects[i].setAttribute("class", "pure-u-1-6");
-            }   
-            </script>   
-        {% endblock %}
-
+            {% block javascripts %}
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {   
+                    var allInputs = document.getElementsByTagName("input");
+                    for (var i=0; i<allInputs.length-1; i++) {
+                        allInputs[i].setAttribute("class", "pure-input-2-3");
+                    }
+                    
+                    var allTextareas = document.getElementsByTagName("textarea");
+                    for (var i=0; i<allTextareas.length; i++) {
+                        allTextareas[i].setAttribute("class", "pure-input-2-3");
+                    }  
+                    
+                    var allSelects = document.getElementsByTagName("select");
+                    for (var i=0; i<allSelects.length; i++) {
+                    allSelects[i].setAttribute("class", "pure-u-1-6");
+                    }   
+                }); 
+                </script>   
+            {% endblock %}
+            
     </body>
 </html>
 
