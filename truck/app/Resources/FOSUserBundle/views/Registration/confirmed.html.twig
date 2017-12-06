@@ -3,8 +3,21 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+
+    <center>
+        <h3 class="formTitle">registration completed</h3>
+    </center>
+
+    <div class="padding7px">
+        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+        {% if targetUrl %}
+            <center>
+                <button title="back to main page" 
+                        class="pure-button pure-button-active button90red" 
+                        onclick="window.location = '{{ path('truck_main_index') }}';">
+                    back to main
+                </button>   
+            </center>
+        {% endif %}
+    </div>
 {% endblock fos_user_content %}
