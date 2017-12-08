@@ -17,6 +17,27 @@ use TruckBundle\Entity\Dealer;
  * @Security("has_role('ROLE_OPERATOR')")
  */
 class MonitoringController extends Controller {
+    
+    /**
+     * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
+     */
+    public function showAllMonitoringsForCaseAction($caseId) {
+        $this->throwExceptionIfCaseIdIsWrongExcludingZero($caseId);
+        $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findMonitoringsByCaseId($caseId);
+
+        return $this->render('TruckBundle:Monitoring:show_all_monitorings_for_case.html.twig', [
+                    "monitorings" => $monitorings
+        ]);
+    }
+
+    /**
+     * @Route("/monitoringCodesManual")
+     */
+    public function monitoringCodesManualAction() {
+
+        return $this->render('TruckBundle:Monitoring:monitoring_codes_manual.html.twig');
+    }    
 
     protected function getOperatorName() {
         return $this->container->get("security.context")->getToken()->getUser()
@@ -72,27 +93,6 @@ class MonitoringController extends Controller {
             return true;
         }
         return false;
-    }
-
-    /**
-     * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
-     */
-    public function showAllMonitoringsForCaseAction($caseId) {
-        $this->throwExceptionIfCaseIdIsWrongExcludingZero($caseId);
-        $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findMonitoringsByCaseId($caseId);
-
-        return $this->render('TruckBundle:Monitoring:show_all_monitorings_for_case.html.twig', [
-                    "monitorings" => $monitorings
-        ]);
-    }
-
-    /**
-     * @Route("/monitoringCodesManual")
-     */
-    public function monitoringCodesManualAction() {
-
-        return $this->render('TruckBundle:Monitoring:monitoring_codes_manual.html.twig');
     }
 
 }

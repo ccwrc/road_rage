@@ -1,7 +1,30 @@
-{% extends "::base.html.twig" %}
+{% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:User:showUser{% endblock %}
+{% block title %}show user{% endblock %}
 
-{% block body %}
-<h1>Welcome to the User:showUser page</h1>
+{% block body %} 
+
+    <center>
+        <h3 class="formTitle">user details</h3>
+    </center>
+
+    <div class="padding7px">
+
+        <span class="boldText"> User ID:</span> {{ user.id }} <br/>
+        <span class="boldText"> Username:</span> {{ user.username }} <br/>
+        <span class="boldText"> E-mail:</span> {{ user.email }} <br/>
+        <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }} <br/>
+        <span class="boldText"> Last login:</span> {{ user.lastLogin | date('d/m/Y H:i:s') }} <br/>
+
+        <hr class="hrStyle" />
+        
+        <span class="boldText"> Roles:</span> <br/>
+        {% for role in user.roles %}
+            {{ role }} <br/>
+        {% else %}
+            <span> No roles. </span>
+        {% endfor %}
+
+    </div>
+
 {% endblock %}
