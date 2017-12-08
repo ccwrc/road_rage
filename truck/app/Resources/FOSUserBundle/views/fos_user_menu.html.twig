@@ -1,13 +1,38 @@
 {% if is_granted('ROLE_USER') %}
 
-    {#TODO demo, uzupełnić, poprawić#}
+    <button title="back to main page" 
+            class="pure-button pure-button-active button90red" 
+            onclick="window.location = '{{ path('truck_main_index') }}';">
+        Main page
+    </button>   
 
-    <a href='{{ path("fos_user_profile_show") }}' ><button  
-            class="pure-button pure-button-active button90red">example 1</button> </a>
+    <button title="new user" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_registration_register') }}';">
+        registration
+    </button>     
 
-    <a href='{{ path("fos_user_change_password") }}' ><button 
-            class="pure-button pure-button-active button90red">ex 2</button> </a>
+    <button title="show user profile" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_profile_show') }}';">
+        profile
+    </button>         
 
-    <a href='{{ path("fos_user_profile_edit") }}' ><button 
-            class="pure-button pure-button-active button90red">ex 3 {{ app.user.username }}</button> </a>
+    <button title="edit user profile" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_profile_edit') }}';">
+        edit profile
+    </button>          
+
+    <button title="change password" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_change_password') }}';">
+        change password
+    </button>         
+
+    <button title="logout user" 
+            class="pure-button pure-button-active button90red" 
+            onclick="window.location = '{{ path('fos_user_security_logout') }}';">
+        {{ app.user.username }}: logout
+    </button>    
 {% endif %} 

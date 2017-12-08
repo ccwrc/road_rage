@@ -20,6 +20,11 @@
                     onclick="window.location = '{{ path("fos_user_security_login") }}';">
                 login
             </button>
+            <button title="password reset" 
+                    class="pure-button pure-button-active button90blue" 
+                    onclick="window.location = '{{ path('fos_user_resetting_request') }}';">
+                password reset
+            </button>                    
         {% endif %}
 
         {% if is_granted('ROLE_USER') %}
