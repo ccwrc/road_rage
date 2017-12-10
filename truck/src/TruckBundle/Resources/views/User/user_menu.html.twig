@@ -1,0 +1,39 @@
+<br/>
+<center>
+    <button title="back to main page" 
+            class="pure-button pure-button-active button90red" 
+            onclick="window.location = '{{ path('truck_main_index') }}';">
+        Main page
+    </button>   
+
+    <button title="show all users" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('truck_user_showallusers') }}';">
+        all users
+    </button>     
+
+    <button title="show user profile" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_profile_show') }}';">
+        reserved
+    </button>         
+
+    <button title="edit user profile" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_profile_edit') }}';">
+        reserved
+    </button>          
+
+    <button title="change password" 
+            class="pure-button pure-button-active button90blue" 
+            onclick="window.location = '{{ path('fos_user_change_password') }}';">
+        reserved
+    </button>         
+
+    <button title="logout user" 
+            class="pure-button pure-button-active button90red" 
+            onclick="window.location = '{{ path('fos_user_security_logout') }}';">
+        {{ app.user.username }}: logout
+    </button>    
+</center>
+

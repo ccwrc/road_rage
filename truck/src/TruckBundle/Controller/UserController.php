@@ -30,8 +30,10 @@ class UserController extends Controller {
      * @Route("/showAllUsers")
      */
     public function showAllUsersAction() {
+        $users = $this->getDoctrine()->getRepository("TruckBundle:User")->findAll();
+
         return $this->render('TruckBundle:User:show_all_users.html.twig', array(
-                        // ...
+                    "users" => $users
         ));
     }
 

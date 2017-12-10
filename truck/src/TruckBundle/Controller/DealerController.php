@@ -17,13 +17,6 @@ use TruckBundle\Form\Dealer\DealerEditType;
  */
 class DealerController extends Controller {
     
-    protected function throwExceptionIfDealerIdIsWrong($dealerId) {
-        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
-        if ($dealer === null) {
-            throw $this->createNotFoundException("Wrong dealer ID");
-        }
-    }    
-
     /**
      * @Route("/showAllDealers")
      */
@@ -110,6 +103,13 @@ class DealerController extends Controller {
         return $this->render('TruckBundle:Dealer:edit_dealer.html.twig', [
                     "form" => $form->createView()
         ]);
+    }
+    
+    protected function throwExceptionIfDealerIdIsWrong($dealerId) {
+        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
+        if ($dealer === null) {
+            throw $this->createNotFoundException("Wrong dealer ID");
+        }
     }
 
 }

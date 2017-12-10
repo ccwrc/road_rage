@@ -1,7 +1,28 @@
-{% extends "::base.html.twig" %}
+{% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:User:showAllUsers{% endblock %}
+{% block title %}show all users{% endblock %}
 
-{% block body %}
-<h1>Welcome to the User:showAllUsers page</h1>
+{% block body %} 
+
+    {{ include('TruckBundle:User:user_menu.html.twig') }}
+
+    <center>
+        <h3 class="formTitle">all users</h3>
+    </center>
+
+    <div class="padding7px">
+
+        {% for user in users %}
+            {{ user.id }}.  {{ user.username }} ({{ user.email }}) 
+            <button title="new window" class="pure-button pure-button-active button70noBackground" 
+                    onclick="window.open('{{ path("truck_user_showuser", {"userId":user.id}) }}');">   
+                show
+            </button>
+            <hr class="hrStyle" />
+        {% else %}
+            DB is empty.
+        {% endfor %}
+
+    </div>
+
 {% endblock %}
