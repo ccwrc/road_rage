@@ -34,7 +34,8 @@ class UserController extends Controller {
         $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
 
         return $this->render('TruckBundle:User:show_user.html.twig', array(
-                    "user" => $user
+                    "user" => $user,
+                    "permittedRoles" => self::$permittedRoles
         ));
     }
 
@@ -63,22 +64,33 @@ class UserController extends Controller {
             $userManager = $this->container->get('fos_user.user_manager');
             $foundUser = $userManager->findUserByUsernameOrEmail($user->getUsername());
             return $this->render('TruckBundle:User:show_user.html.twig', [
-                        "user" => $foundUser
+                        "user" => $foundUser,
+                        "permittedRoles" => self::$permittedRoles
             ]);
         }
         return $this->render('TruckBundle:User:find_user.html.twig', [
                     "form" => $form->createView()
         ]);
     }
-
+    
     /**
-     * @Route("/addRoleToUser")
+     * @Route("/{userId}/{role}/addRoleToUser", 
+     * requirements={"userId"="\d+", "role"="\w{0,15}"})
      */
-    public function addRoleToUserAction() {
-        return $this->render('TruckBundle:User:add_role_to_user.html.twig', array(
-                        // ...
+    public function addRoleToUserAction($userId, $role) {
+        $this->throwExceptionIfUserIdIsWrong($userId);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("TruckBundle:User")->find($userId);
+        if (in_array($role, self::$permittedRoles)) {
+            $user->addRole($role);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('truck_user_showuser', array(
+                    "userId" => $userId
         ));
-    }
+    }    
 
     /**
      * @Route("/{userId}/{role}/removeRoleFromUser", 

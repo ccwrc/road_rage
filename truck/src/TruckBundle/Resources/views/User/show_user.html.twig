@@ -19,7 +19,6 @@
             <span class="boldText"> Last login:</span> {{ user.lastLogin | date('d/m/Y H:i:s') }} <br/>
 
             <hr class="hrStyle" />
-
             <span class="boldText"> Roles:</span> <br/>
             {% for role in user.roles %}
                 {% if role != "ROLE_SUPER_ADMIN" %}
@@ -34,6 +33,35 @@
             {% else %}
                 <span> No roles. </span>
             {% endfor %}
+
+            <hr class="hrStyle" />
+            {% for permittedRole in permittedRoles %}
+                <button title="add role to user" 
+                        class="pure-button pure-button-active button70noBackground" 
+                        onclick="window.location = '{{ path('truck_user_addroletouser', {'userId': user.id, 'role': permittedRole}) }}';"
+                        style="background-color:rgb(66, 184, 221)">
+                    add role 
+                </button>   
+                {{ permittedRole | split('_')[1] }}
+                <br/>
+            {% else %}
+                <span> No roles to add. </span>
+            {% endfor %}
+
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <hr class="hrStyle" />
+                <br/>
+                <center>
+                <span class="boldText"> Permanently delete user: </span> <br/>
+                <button title="delete user" 
+                        class="pure-button pure-button-active button70noBackground" 
+                        onclick="window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';"
+                        style="background-color:rgb(202, 60, 60)">
+                    delete !
+                </button>   
+                </center>        
+            {% endif %}
+
         {% else %}
             No hits. User was not found.
         {% endif %}
