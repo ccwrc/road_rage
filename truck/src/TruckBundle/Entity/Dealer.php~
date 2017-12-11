@@ -5,14 +5,18 @@ namespace TruckBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Dealer
  *
  * @ORM\Table(name="dealer")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\DealerRepository")
+ * @UniqueEntity("name")
+ * @UniqueEntity("mainMail")
  */
-class Dealer
-{
+class Dealer {
     
     public function __construct() {
         $this->vehicles = new ArrayCollection();
@@ -33,6 +37,13 @@ class Dealer
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 2,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
@@ -40,48 +51,99 @@ class Dealer
     private $name;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
 
     /**
+     * @Assert\Regex(
+     *     pattern="/[0-9][0-9]-[0-9][0-9][0-9]/",
+     *     match=true,
+     *     message="The right pattern is the DD-DDD (D as digit)"
+     * )      
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=50, nullable=true)
+     * @ORM\Column(name="zip_code", type="string", length=50)
      */
     private $zipCode;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
-     * @ORM\Column(name="main_phone", type="string", length=255, nullable=true)
+     * @ORM\Column(name="main_phone", type="string", length=255)
      */
     private $mainPhone;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )      
      * @var string
      *
      * @ORM\Column(name="main_fax", type="string", length=255, nullable=true)
      */
     private $mainFax;
 
+    //TODO change checkMX val -> true
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
-     * @ORM\Column(name="main_mail", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="main_mail", type="string", length=255, unique=true)
      */
     private $mainMail;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="phone_24h", type="string", length=255, nullable=true)
@@ -89,6 +151,13 @@ class Dealer
     private $phone24h;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )           
      * @var string
      *
      * @ORM\Column(name="phone_service_car", type="string", length=255, nullable=true)
@@ -96,6 +165,13 @@ class Dealer
     private $phoneServiceCar;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="alt_phone_1", type="string", length=255, nullable=true)
@@ -103,6 +179,13 @@ class Dealer
     private $altPhone1;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="alt_phone_2", type="string", length=255, nullable=true)
@@ -110,6 +193,16 @@ class Dealer
     private $altPhone2;
 
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="alt_mail_1", type="string", length=255, nullable=true)
@@ -117,6 +210,16 @@ class Dealer
     private $altMail1;
 
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="alt_mail_2", type="string", length=255, nullable=true)
@@ -124,6 +227,13 @@ class Dealer
     private $altMail2;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 65000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="other_comments", type="text", length=65000, nullable=true)
@@ -131,6 +241,7 @@ class Dealer
     private $otherComments;
 
     /**
+     * @Assert\Choice({"active", "inactive", "suspended"})   
      * @var string
      *
      * @ORM\Column(name="is_active", type="string", length=100)

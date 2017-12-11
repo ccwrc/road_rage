@@ -1,7 +1,25 @@
-{% extends "::base.html.twig" %}
+{% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:User:findUser{% endblock %}
+{% block title %}find user{% endblock %}
 
-{% block body %}
-<h1>Welcome to the User:findUser page</h1>
+{% block body %} 
+
+    <div class="pure-form pure-form-aligned">
+        <div class="pure-control-group">
+
+            <center>
+                <h3 class="formTitle">find user</h3>
+            </center>
+
+            <div class="padding7px">
+                {{ form_start(form) }} 
+                {{ form_widget(form) }} 
+                <center>
+                    <input class="pure-button pure-button-active button90red" type="submit" value="find"/>
+                </center>
+                {{ form_end(form) }}
+            </div>
+        </div> 
+    </div>
+
 {% endblock %}

@@ -4,27 +4,31 @@
 
 {% block body %} 
 
+    {{ include('TruckBundle:User:user_menu.html.twig') }}
+
     <center>
         <h3 class="formTitle">user details</h3>
     </center>
 
     <div class="padding7px">
+        {% if user is not empty %}
+            <span class="boldText"> User ID:</span> {{ user.id }} <br/>
+            <span class="boldText"> Username:</span> {{ user.username }} <br/>
+            <span class="boldText"> E-mail:</span> {{ user.email }} <br/>
+            <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }} <br/>
+            <span class="boldText"> Last login:</span> {{ user.lastLogin | date('d/m/Y H:i:s') }} <br/>
 
-        <span class="boldText"> User ID:</span> {{ user.id }} <br/>
-        <span class="boldText"> Username:</span> {{ user.username }} <br/>
-        <span class="boldText"> E-mail:</span> {{ user.email }} <br/>
-        <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }} <br/>
-        <span class="boldText"> Last login:</span> {{ user.lastLogin | date('d/m/Y H:i:s') }} <br/>
+            <hr class="hrStyle" />
 
-        <hr class="hrStyle" />
-        
-        <span class="boldText"> Roles:</span> <br/>
-        {% for role in user.roles %}
-            {{ role }} <br/>
+            <span class="boldText"> Roles:</span> <br/>
+            {% for role in user.roles %}
+                {{ role }} <br/>
+            {% else %}
+                <span> No roles. </span>
+            {% endfor %}
         {% else %}
-            <span> No roles. </span>
-        {% endfor %}
-
+            No hits. User was not found.
+        {% endif %}
     </div>
 
 {% endblock %}

@@ -5,8 +5,10 @@ namespace TruckBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 
-// use TruckBundle\Entity\User;
+use TruckBundle\Entity\User;
+use TruckBundle\Form\User\UserFindType;
 
 /**
  * @Route("/user")
@@ -40,10 +42,23 @@ class UserController extends Controller {
     /**
      * @Route("/findUser")
      */
-    public function findUserAction() {
-        return $this->render('TruckBundle:User:find_user.html.twig', array(
-                        // ...
-        ));
+    public function findUserAction(Request $req) {
+        $user = new User();
+        $form = $this->createForm(UserFindType::class, $user);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $userManager = $this->container->get('fos_user.user_manager');
+            $foundUser = $userManager->findUserByUsernameOrEmail($user->getUsername());
+            return $this->render('TruckBundle:User:show_user.html.twig', [
+                        "user" => $foundUser
+            ]);
+        }
+        return $this->render('TruckBundle:User:find_user.html.twig', [
+                    "form" => $form->createView()
+        ]);
     }
 
     /**
@@ -68,6 +83,7 @@ class UserController extends Controller {
      * @Route("/deleteUser")
      */
     public function deleteUserAction() {
+        // super admin only
         return $this->render('TruckBundle:User:delete_user.html.twig', array(
                         // ...
         ));

@@ -13,11 +13,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="accident_case")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\AccidentCaseRepository")
  */
-class AccidentCase
-{
+class AccidentCase {
     
     public function __construct() {
         $this->monitorings = new ArrayCollection();
+        $this->reportArrivalTime = 0;
+        $this->reportCaseTotal = 0;
+        $this->reportLate = 0;
+        $this->reportNrsTime = 0;
+        $this->reportRepairStatus = "initialization";
+        $this->reportRepairTotal = 0;
+        $this->reportRsTime = 0;
+        $this->status = "active";
+        $this->progressColor = "#FF7575";
     }
 
     /**
@@ -42,6 +50,13 @@ class AccidentCase
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 30100,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )    
      * @var string
      *
      * @ORM\Column(name="damage_description", type="text", length=30100)
@@ -49,6 +64,13 @@ class AccidentCase
     private $damageDescription;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 30100,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="location", type="text", length=30100)
@@ -56,6 +78,13 @@ class AccidentCase
     private $location;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
      * @ORM\Column(name="driver_contact", type="string", length=255)
@@ -63,13 +92,27 @@ class AccidentCase
     private $driverContact;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 65000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="comment", type="text", length=65000, nullable=true)
+     * @ORM\Column(name="comment", type="text", length=65000)
      */
     private $comment;
 
     /**
+     * @Assert\Type("numeric")
+     * @Assert\Length(
+     * min = 9,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="info_sms", type="string", length=255, nullable=true)
@@ -77,6 +120,16 @@ class AccidentCase
     private $infoSms;
 
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )             
      * @var string
      *
      * @ORM\Column(name="info_mail", type="string", length=255, nullable=true)
@@ -84,6 +137,7 @@ class AccidentCase
     private $infoMail;
 
     /**
+     * @Assert\Choice({"active", "inactive"})
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255)
@@ -91,6 +145,7 @@ class AccidentCase
     private $status;
 
     /**
+     * @Assert\Choice({"#FF7575", "#FF9C42", "#93EEAA", "#E6E6E6"})
      * @var string
      *
      * @ORM\Column(name="progress_color", type="string", length=255)
@@ -98,6 +153,7 @@ class AccidentCase
     private $progressColor;
     
     /**
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_start", type="datetime", nullable=true)
@@ -105,6 +161,10 @@ class AccidentCase
     private $timeStart;    
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )
      * @var int
      *
      * @ORM\Column(name="report_late", type="integer")
@@ -112,6 +172,10 @@ class AccidentCase
     private $reportLate;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_rs_time", type="integer")
@@ -119,6 +183,10 @@ class AccidentCase
     private $reportRsTime;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_nrs_time", type="integer")
@@ -126,6 +194,10 @@ class AccidentCase
     private $reportNrsTime;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )
      * @var int
      *
      * @ORM\Column(name="report_repair_total", type="integer")
@@ -133,6 +205,10 @@ class AccidentCase
     private $reportRepairTotal;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_arrival_time", type="integer")
@@ -140,6 +216,10 @@ class AccidentCase
     private $reportArrivalTime;
 
     /**
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="The value {{ value }} is not a number."
+     * )     
      * @var int
      *
      * @ORM\Column(name="report_case_total", type="integer")
@@ -147,9 +227,10 @@ class AccidentCase
     private $reportCaseTotal;
 
     /**
+     * @Assert\Choice({"initialization", "completed", "incompleted", "canceled"})
      * @var string
      *
-     * @ORM\Column(name="report_repair_status", type="string", length=255, nullable=true)
+     * @ORM\Column(name="report_repair_status", type="string", length=255)
      */
     private $reportRepairStatus;
 

@@ -5,11 +5,15 @@ namespace TruckBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Vehicle
  *
  * @ORM\Table(name="vehicle")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\VehicleRepository")
+ * @UniqueEntity("vin") 
  */
 class Vehicle
 {
@@ -38,7 +42,15 @@ class Vehicle
      */
     private $id;
 
+    // https://pl.wikipedia.org/wiki/Vehicle_Identification_Number
+    // Last 8 characters
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 8,
+     * max = 8,
+     * exactMessage = "Enter last 8 characters from vin"
+     * )        
      * @var string
      *
      * @ORM\Column(name="vin", type="string", length=255, unique=true)
@@ -46,48 +58,95 @@ class Vehicle
     private $vin;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="company_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="company_name", type="string", length=255)
      */
     private $companyName;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="tax_id_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tax_id_number", type="string", length=255)
      */
     private $taxIdNumber;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="contact_person", type="string", length=255, nullable=true)
+     * @ORM\Column(name="contact_person", type="string", length=255)
      */
     private $contactPerson;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
 
     /**
+     * @Assert\Regex(
+     *     pattern="/[0-9][0-9]-[0-9][0-9][0-9]/",
+     *     match=true,
+     *     message="The right pattern is the DD-DDD (D as digit)"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
+     * @ORM\Column(name="zip_code", type="string", length=50)
      */
     private $zipCode;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
@@ -95,6 +154,13 @@ class Vehicle
     private $phone;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="fax", type="string", length=255, nullable=true)
@@ -102,6 +168,13 @@ class Vehicle
     private $fax;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255, nullable=true)
@@ -109,27 +182,49 @@ class Vehicle
     private $mail;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="registration_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="registration_number", type="string", length=255)
      */
     private $registrationNumber;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )      
      * @var string
      *
-     * @ORM\Column(name="mileage", type="string", length=255, nullable=true)
+     * @ORM\Column(name="mileage", type="string", length=255)
      */
     private $mileage;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="guarantee_type", type="string", length=255, nullable=true)
+     * @ORM\Column(name="guarantee_type", type="string", length=255)
      */
     private $guaranteeType;
 
     /**
+     * @Assert\DateTime()       
      * @var \DateTime
      *
      * @ORM\Column(name="purchase_date", type="date", nullable=true)
@@ -137,9 +232,16 @@ class Vehicle
     private $purchaseDate;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
-     * @ORM\Column(name="name_type", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name_type", type="string", length=255)
      */
     private $nameType;
 

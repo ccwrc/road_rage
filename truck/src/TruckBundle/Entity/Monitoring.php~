@@ -4,16 +4,22 @@ namespace TruckBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use \DateTime;
+
 /**
  * Monitoring
  *
  * @ORM\Table(name="monitoring")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\MonitoringRepository")
  */
-class Monitoring
-{
+class Monitoring {
     
-     /**
+    public function __construct() {
+        $this->timeSave = new DateTime("now");
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="AccidentCase", inversedBy="monitorings")
      * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
      */
@@ -39,6 +45,11 @@ class Monitoring
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 2,
+     * max = 255
+     * )      
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
@@ -46,13 +57,19 @@ class Monitoring
     private $code;
     
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 600
+     * )        
      * @var string
      *
-     * @ORM\Column(name="operator", type="string", length=600, nullable=true)
+     * @ORM\Column(name="operator", type="string", length=600)
      */
     private $operator;
 
     /**
+     * @Assert\DateTime()     
      * @var \DateTime
      *
      * @ORM\Column(name="time_save", type="datetime")
@@ -60,12 +77,14 @@ class Monitoring
     private $timeSave;
 
     /**
+     * @Assert\DateTime()    
      * @var \DateTime
      *
      * @ORM\Column(name="time_set", type="datetime", nullable=true)
      */
     private $timeSet;
 
+    //TODO - for document entity. Later...
     /**
      * @var string
      *
@@ -74,34 +93,74 @@ class Monitoring
     private $document;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 5000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )         
      * @var string
      *
-     * @ORM\Column(name="contact_through", type="text", nullable=true)
+     * @ORM\Column(name="contact_through", type="text")
      */
     private $contactThrough;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 65000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )       
      * @var string
      *
-     * @ORM\Column(name="comments", type="text", nullable=true)
+     * @ORM\Column(name="comments", type="text")
      */
     private $comments;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 3,
+     * max = 9000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="out_comment", type="text", nullable=true)
      */
     private $outComment;
 
+    // TODO auto field for document
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false
+     * )    
+     * @Assert\Length(
+     * min = 5,
+     * max = 255,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="contact_mail", type="string", length=255, nullable=true)
      */
     private $contactMail;
 
+    //TODO add regex in controller (document?)
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 5,
+     * max = 600,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var string
      *
      * @ORM\Column(name="optional_mails", type="string", length=600, nullable=true)
@@ -109,13 +168,21 @@ class Monitoring
     private $optionalMails;
     
     /**
+     * @Assert\Type("numeric")
+     * @Assert\Length(
+     * min = 1,
+     * max = 10,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * )        
      * @var int
      *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
-    private $amount;   
-    
+    private $amount;
+
     /**
+     * @Assert\Choice({"PLN", "USD", "EUR"})     
      * @var string
      *
      * @ORM\Column(name="currency", type="string", length=100, nullable=true)
