@@ -112,12 +112,26 @@ class UserController extends Controller {
     }
 
     /**
-     * @Route("/deleteUser")
+     * @Route("/{userId}/deleteUser", requirements={"userId"="\d+"})
      */
-    public function deleteUserAction() {
-        // super admin only
+    public function deleteUserAction($userId) {
+        $this->denyAccessUnlessGranted("ROLE_SUPER_ADMIN", null, "Access denied.");
+        $this->throwExceptionIfUserIdIsWrong($userId);
+        
+        $message = "You can not delete this user.";
+        
+        $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
+        $userName = $user->getUsername();
+        $loggedUser = $this->getUser();
+        if($user != $loggedUser) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+            $message = "User \"" . $userName . "\" removed";
+        }
+        
         return $this->render('TruckBundle:User:delete_user.html.twig', array(
-                        // ...
+                        "message" => $message
         ));
     }
     

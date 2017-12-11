@@ -51,15 +51,14 @@
             {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <hr class="hrStyle" />
                 <br/>
-                <center>
-                <span class="boldText"> Permanently delete user: </span> <br/>
+                <span class="boldText"> Permanently delete user: </span>
+                <br/>
                 <button title="delete user" 
                         class="pure-button pure-button-active button70noBackground" 
                         onclick="window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';"
                         style="background-color:rgb(202, 60, 60)">
                     delete !
-                </button>   
-                </center>        
+                </button>       
             {% endif %}
 
         {% else %}
