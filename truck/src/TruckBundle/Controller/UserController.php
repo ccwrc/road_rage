@@ -15,6 +15,16 @@ use TruckBundle\Form\User\UserFindType;
  * @Security("has_role('ROLE_ADMIN')")
  */
 class UserController extends Controller {
+    
+    // role ROLE_SUPER_ADMIN is protected
+    // preferred to be added/removal only in console
+    private static $permittedRoles = [
+        "ROLE_USER",
+        "ROLE_DEALER",
+        "ROLE_OPERATOR",
+        "ROLE_CONTROL",
+        "ROLE_ADMIN"
+    ];
 
     /**
      * @Route("/{userId}/showUser", requirements={"userId"="\d+"})
@@ -71,11 +81,21 @@ class UserController extends Controller {
     }
 
     /**
-     * @Route("/removeRoleFromUser")
+     * @Route("/{userId}/{role}/removeRoleFromUser", 
+     * requirements={"userId"="\d+", "role"="\w{0,15}"})
      */
-    public function removeRoleFromUserAction() {
-        return $this->render('TruckBundle:User:remove_role_from_user.html.twig', array(
-                        // ...
+    public function removeRoleFromUserAction($userId, $role) {
+        $this->throwExceptionIfUserIdIsWrong($userId);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("TruckBundle:User")->find($userId);
+        if (in_array($role, self::$permittedRoles)) {
+            $user->removeRole($role);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('truck_user_showuser', array(
+                    "userId" => $userId
         ));
     }
 

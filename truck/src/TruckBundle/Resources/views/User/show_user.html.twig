@@ -22,7 +22,15 @@
 
             <span class="boldText"> Roles:</span> <br/>
             {% for role in user.roles %}
-                {{ role }} <br/>
+                {% if role != "ROLE_SUPER_ADMIN" %}
+                    <button title="remove role {{ role }}" 
+                            class="pure-button pure-button-active button70noBackground" 
+                            onclick="window.location = '{{ path('truck_user_removerolefromuser', {'userId': user.id, 'role': role}) }}';">
+                        remove: 
+                    </button>   
+                {% endif %} 
+                {{ role }} 
+                <br/>
             {% else %}
                 <span> No roles. </span>
             {% endfor %}
