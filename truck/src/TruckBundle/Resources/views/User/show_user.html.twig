@@ -21,7 +21,7 @@
             <hr class="hrStyle" />
             <span class="boldText"> Roles:</span> <br/>
             {% for role in user.roles %}
-                {% if role != "ROLE_SUPER_ADMIN" %}
+                {% if (role != 'ROLE_SUPER_ADMIN') and (role != 'ROLE_USER') %}
                     <button title="remove role {{ role }}" 
                             class="pure-button pure-button-active button70noBackground" 
                             onclick="window.location = '{{ path('truck_user_removerolefromuser', {'userId': user.id, 'role': role}) }}';">
@@ -54,8 +54,7 @@
                 <span class="boldText"> Permanently delete user: </span>
                 <br/>
                 <button title="delete user" 
-                        class="pure-button pure-button-active button70noBackground" 
-                        onclick="window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';"
+                        class="pure-button pure-button-active button70noBackground confirm" 
                         style="background-color:rgb(202, 60, 60)">
                     delete !
                 </button>       
@@ -66,4 +65,21 @@
         {% endif %}
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {  
+        
+        var buttonsToConfirm = document.getElementsByClassName("confirm");
+        
+        for (var i=0; i<buttonsToConfirm.length; i++) {
+            buttonsToConfirm[i].onclick = function() {
+                if (confirm('Are you sure?')) {
+                   window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';
+                } 
+            };
+        }
+    }); 
+    </script>   
 {% endblock %}

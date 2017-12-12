@@ -18,8 +18,8 @@ class UserController extends Controller {
     
     // role ROLE_SUPER_ADMIN is protected
     // preferred to be added/removal only in console
+    // role ROLE_USER is default
     private static $permittedRoles = [
-        "ROLE_USER",
         "ROLE_DEALER",
         "ROLE_OPERATOR",
         "ROLE_CONTROL",
@@ -75,7 +75,7 @@ class UserController extends Controller {
     
     /**
      * @Route("/{userId}/{role}/addRoleToUser", 
-     * requirements={"userId"="\d+", "role"="\w{0,15}"})
+     * requirements={"userId"="\d+", "role"="\w{0,20}"})
      */
     public function addRoleToUserAction($userId, $role) {
         $this->throwExceptionIfUserIdIsWrong($userId);
@@ -94,7 +94,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/{userId}/{role}/removeRoleFromUser", 
-     * requirements={"userId"="\d+", "role"="\w{0,15}"})
+     * requirements={"userId"="\d+", "role"="\w{0,20}"})
      */
     public function removeRoleFromUserAction($userId, $role) {
         $this->throwExceptionIfUserIdIsWrong($userId);

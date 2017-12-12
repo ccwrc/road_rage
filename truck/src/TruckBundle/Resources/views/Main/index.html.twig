@@ -124,29 +124,26 @@
         {% endif %}    
     </div>
 
-    {#for admin#}  
-    {% if is_granted('ROLE_ADMIN') %}
-        <center>
-            <h3 class="formTitle">admin</h3>
-        </center>
+        {#for admin#}  
+        {% if is_granted('ROLE_ADMIN') %}
+            <center>
+                <h3 class="formTitle">admin</h3>
+            </center>
 
-        <div class="padding7px">
-            <button title="show all users" 
-                    class="pure-button pure-button-active button90blue" 
-                    onclick="window.location = '{{ path('truck_user_showallusers') }}';">
-                all users
-            </button>             
-            <button title="res" class="pure-button pure-button-active button90blue"
-                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-                reserved 
-            </button>  
-            <button title="res" class="pure-button pure-button-active button90blue"
-                    onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-                reserved 
-            </button>  
-            <br/>
-        {% endif %}  
-    </div>
+            <div class="padding7px">
+                <button title="show all users" 
+                        class="pure-button pure-button-active button90blue" 
+                        onclick="window.location = '{{ path('truck_user_showallusers') }}';">
+                    all users
+                </button>             
+                <button title="find user by username or email" 
+                        class="pure-button pure-button-active button90blue" 
+                        onclick="window.location = '{{ path('truck_user_finduser') }}';">
+                    find user
+                </button>   
+                <br/>
+            {% endif %}  
+        </div>
 
     {#for SUPER admin#}  
     {% if is_granted('ROLE_SUPER_ADMIN') %}

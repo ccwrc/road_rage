@@ -1,10 +1,22 @@
-{% extends "::base.html.twig" %}
+{% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:User:deleteUser{% endblock %}
+{% block title %}delete user{% endblock %}
 
-{% block body %}
-<h1>Welcome to the User:deleteUser page</h1>
+{% block body %} 
 
-{{ dump(message) }}
+    {{ include('TruckBundle:User:user_menu.html.twig') }}
+
+    <center>
+        <h3 class="formTitle">delete user</h3>
+    </center>
+
+    <div class="padding7px">
+        {% if message is not empty %}
+            <br/>
+            <center>
+                <span class="boldText">{{ message }}</span> 
+            </center>
+        {% endif %}
+    </div>
 
 {% endblock %}
