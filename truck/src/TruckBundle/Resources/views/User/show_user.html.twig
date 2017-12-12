@@ -15,7 +15,13 @@
             <span class="boldText"> User ID:</span> {{ user.id }} <br/>
             <span class="boldText"> Username:</span> {{ user.username }} <br/>
             <span class="boldText"> E-mail:</span> {{ user.email }} <br/>
-            <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }} <br/>
+            <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }} 
+            <button title="enable/disable user" 
+                    class="pure-button pure-button-active button50noBackground" 
+                    onclick="window.location = '{{ path('truck_user_enabledisableuser', {'userId': user.id}) }}';">
+                change
+            </button>   
+            <br/>
             <span class="boldText"> Last login:</span> {{ user.lastLogin | date('d/m/Y H:i:s') }} <br/>
 
             <hr class="hrStyle" />
@@ -69,17 +75,17 @@
 
 {% block javascripts %}
     <script>
-    document.addEventListener("DOMContentLoaded", function() {  
-        
-        var buttonsToConfirm = document.getElementsByClassName("confirm");
-        
-        for (var i=0; i<buttonsToConfirm.length; i++) {
-            buttonsToConfirm[i].onclick = function() {
-                if (confirm('Are you sure?')) {
-                   window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';
-                } 
-            };
-        }
-    }); 
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var buttonsToConfirm = document.getElementsByClassName("confirm");
+
+            for (var i = 0; i < buttonsToConfirm.length; i++) {
+                buttonsToConfirm[i].onclick = function () {
+                    if (confirm('Are you sure?')) {
+                        window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';
+                    }
+                };
+            }
+        });
     </script>   
 {% endblock %}

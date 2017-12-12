@@ -15,9 +15,8 @@ use TruckBundle\Form\User\UserFindType;
  * @Security("has_role('ROLE_ADMIN')")
  */
 class UserController extends Controller {
-    
-    // role ROLE_SUPER_ADMIN is protected
-    // preferred to be added/removal only in console
+
+    // role ROLE_SUPER_ADMIN is protected, preferred to be added/removal only in console
     // role ROLE_USER is default
     private static $permittedRoles = [
         "ROLE_DEALER",
@@ -72,7 +71,7 @@ class UserController extends Controller {
                     "form" => $form->createView()
         ]);
     }
-    
+
     /**
      * @Route("/{userId}/{role}/addRoleToUser", 
      * requirements={"userId"="\d+", "role"="\w{0,20}"})
@@ -90,7 +89,7 @@ class UserController extends Controller {
         return $this->redirectToRoute('truck_user_showuser', array(
                     "userId" => $userId
         ));
-    }    
+    }
 
     /**
      * @Route("/{userId}/{role}/removeRoleFromUser", 
@@ -117,24 +116,46 @@ class UserController extends Controller {
     public function deleteUserAction($userId) {
         $this->denyAccessUnlessGranted("ROLE_SUPER_ADMIN", null, "Access denied.");
         $this->throwExceptionIfUserIdIsWrong($userId);
-        
+
         $message = "You can not delete this user.";
-        
+
         $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
         $userName = $user->getUsername();
         $loggedUser = $this->getUser();
-        if($user != $loggedUser) {
+        if ($user != $loggedUser) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush();
             $message = "User \"" . $userName . "\" removed";
         }
-        
+
         return $this->render('TruckBundle:User:delete_user.html.twig', array(
-                        "message" => $message
+                    "message" => $message
         ));
     }
-    
+
+    /**
+     * @Route("/{userId}/enableDisableUser", requirements={"userId"="\d+"})
+     */
+    public function enableDisableUserAction($userId) {
+        $this->throwExceptionIfUserIdIsWrong($userId);
+        $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($user->isEnabled() === false) {
+            $user->setEnabled(true);
+            $em->flush();
+        } else {
+            $user->setEnabled(false);
+            $em->flush();
+        }
+
+        return $this->render('TruckBundle:User:show_user.html.twig', array(
+                    "user" => $user,
+                    "permittedRoles" => self::$permittedRoles
+        ));
+    }
+
     protected function throwExceptionIfUserIdIsWrong($userId) {
         $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
         if ($user === null) {
