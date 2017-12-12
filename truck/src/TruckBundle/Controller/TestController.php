@@ -4,6 +4,7 @@ namespace TruckBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response; //pdfTestAction
 
 use TruckBundle\Entity\AccidentCase;
