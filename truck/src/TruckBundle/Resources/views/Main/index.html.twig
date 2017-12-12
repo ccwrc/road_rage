@@ -13,7 +13,7 @@
         {% if is_granted('ROLE_USER') %}
             <button title="logout" class="pure-button pure-button-active button90red"
                     onclick="window.location = '{{ path("fos_user_security_logout") }}';">
-                logout
+                {{ app.user.username }}: logout
             </button>
         {% else %}
             <button title="login" class="pure-button pure-button-active button90red"
