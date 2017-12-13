@@ -65,10 +65,13 @@ class TestController extends Controller {
         $dealerActiveGenerate = false;
         $dealerInactiveGenerate = false;
         $dealerSuspendedGenerate = false;
-        $vehicleGenerate = true;
+        $vehicleGenerate = false;
+        $accidentCaseActiveGenerate = false;
+        $accidentCaseInactiveGenerate = false;
+        $monitoringIncomingGenerate = false;
+        $monitoringOutGenerate = false;
         
         $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
         $message = (date('H:i:s')) . ' START || ';
         
         if ($dealerActiveGenerate) {
@@ -138,7 +141,7 @@ class TestController extends Controller {
         }         
         
         if ($vehicleGenerate) { 
-            // vin: XY + $i (last 8 characters from vin)
+            // vin: XY + $i (last 8 characters from vin -> $i must be 6 digit)
             for ($i = 20100; $i <= 22100; $i++) {
                 $vehicle = new Vehicle();
                 $vehicle->setCity("city" . $i);
@@ -159,12 +162,98 @@ class TestController extends Controller {
                 $vehicle->setTaxIdNumber("taxie" . $i);
                 $vehicle->setVin("XY" . $i); 
                 $vehicle->setZipCode(mt_rand(10, 99) . "-998");
-                //
+
                 $em->persist($vehicle);
             }
             $em->flush();
             $message .= (date('H:i:s')) . ' vehicleDone || ';
-        }         
+        }       
+        
+        if ($accidentCaseActiveGenerate) {
+            for ($i = 1; $i <= 40; $i++) {
+                $ac = new AccidentCase();
+                $ac->setComment("case comment" . $i);
+                $ac->setDamageDescription("damage description" . $i);
+                $ac->setDriverContact("contact to driver" . $i);
+                $ac->setLocation("vehicle location " . $i);
+
+                $date = new \DateTime("now - " . mt_rand(1, 2000) . "minutes");
+                $ac->setTimeStart($date);
+
+                $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                        ->find(mt_rand(2, 1990));
+                $ac->setVehicle($vehicle);
+                //
+                $em->persist($ac);
+
+                $monitoringStart = new Monitoring();
+                $monitoringStart->setAccidentCase($ac)->setCode("START")->setOperator("op name")
+                        ->setComments($ac->getComment())->setContactThrough($ac->getDriverContact());
+                $em->persist($monitoringStart);
+            }
+            $em->flush();
+            $message .= (date('H:i:s')) . ' accidentCaseActiveDone || ';
+        }
+        
+        if ($accidentCaseInactiveGenerate) {
+            for ($i = 1; $i <= 3000; $i++) {
+                $ac = new AccidentCase();
+                $ac->setComment("case comment" . $i);
+                $ac->setDamageDescription("damage description" . $i);
+                $ac->setDriverContact("contact to driver" . $i);
+                $ac->setLocation("vehicle location " . $i);
+                $ac->setStatus("inactive");
+                $ac->setProgressColor("#E6E6E6");
+
+                $date = new \DateTime("now - " . mt_rand(1, 2000) . "hours");
+                $ac->setTimeStart($date);
+
+                $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                        ->find(mt_rand(2, 1990));
+                $ac->setVehicle($vehicle);
+
+                $em->persist($ac);
+
+                $monitoringStart = new Monitoring();
+                $monitoringStart->setAccidentCase($ac)->setCode("START")->setOperator("op name")
+                        ->setComments($ac->getComment())->setContactThrough($ac->getDriverContact());
+                $em->persist($monitoringStart);
+            }
+            $em->flush();
+            $message .= (date('H:i:s')) . ' accidentCaseInactiveDone || ';
+        }    
+        
+        if ($monitoringIncomingGenerate) {
+            for ($i = 1; $i <= 3000; $i++) {
+                $monitoring = new Monitoring();
+
+                $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                        ->find(mt_rand(2, 2990));
+                $monitoring->setAccidentCase($case)->setOperator("opName")
+                        ->setCode("Incoming")->setContactThrough("test con")
+                        ->setComments("test comment");
+
+                $em->persist($monitoring);
+            }
+            $em->flush();
+            $message .= (date('H:i:s')) . ' monitoringIncomingDone || ';
+        }
+        
+        if ($monitoringOutGenerate) {
+            for ($i = 1; $i <= 5000; $i++) {
+                $monitoring = new Monitoring();
+
+                $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                        ->find(mt_rand(2, 2990));
+                $monitoring->setAccidentCase($case)->setOperator("opName")
+                        ->setCode("Out")->setContactThrough("test con out")
+                        ->setComments("test comment monitoring out");
+
+                $em->persist($monitoring);
+            }
+            $em->flush();
+            $message .= (date('H:i:s')) . ' monitoringOutDone || ';
+        }        
 
         return $this->render('TruckBundle:Test:fill_database.html.twig', array(
                     "message" => $message
