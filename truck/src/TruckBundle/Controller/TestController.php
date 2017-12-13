@@ -21,6 +21,17 @@ use TruckBundle\Entity\Vehicle;
  * @Security("has_role('ROLE_ADMIN')")
  */
 class TestController extends Controller {
+    
+    /**
+     * @Route("/dumpUser")
+     */
+    public function dumpUserAction() {
+        $user = $this->getUser();
+
+        return $this->render('TruckBundle:Test:dump_user.html.twig', array(
+                    "user" => $user
+        ));
+    }
 
     /**
      * @Route("/test")
