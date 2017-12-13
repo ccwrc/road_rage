@@ -21,16 +21,16 @@
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
         <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            active dealers
-        </button>      
-        <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_main_index') }}');">
             main page
         </button>          
         <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_main_index') }}');">
-            reserve
+                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+            active dealers
+        </button>      
+        <button title="new window" class="panelMenuGreyButton" 
+                onclick="window.open('{{ path('truck_accidentcase_caseprogresscolormanual') }}');">
+            MANUAL
         </button>    
         <br/>    
     {% endif %}
@@ -152,6 +152,11 @@
 {% block logged %}
     <a title="Logout" class="casesSwitch" href="{{ path("fos_user_security_logout") }}">
         {{ app.user.username }} 
+    </a>
+    <br/>
+    <a title="profile details - new window" class="casesSwitch" href="{{ path("fos_user_profile_show") }}"
+       target="_blank">
+        profile
     </a>
 {% endblock %} {# end block logged #}
 
