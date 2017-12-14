@@ -522,4 +522,27 @@ class Monitoring {
     {
         return $this->currency;
     }
+
+    /**
+     * Set isDocumentSend
+     *
+     * @param integer $isDocumentSend
+     * @return Monitoring
+     */
+    public function setIsDocumentSend($isDocumentSend)
+    {
+        $this->isDocumentSend = $isDocumentSend;
+
+        return $this;
+    }
+
+    /**
+     * Get isDocumentSend
+     *
+     * @return integer 
+     */
+    public function getIsDocumentSend()
+    {
+        return $this->isDocumentSend;
+    }
 }

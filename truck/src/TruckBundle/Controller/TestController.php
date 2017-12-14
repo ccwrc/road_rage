@@ -76,13 +76,21 @@ class TestController extends Controller {
      */
     public function fillDatabaseAction() {
         $dealerActiveGenerate = false;
+        // $dealerActiveGenerate = true;
         $dealerInactiveGenerate = false;
+        // $dealerInactiveGenerate = true;
         $dealerSuspendedGenerate = false;
+        // $dealerSuspendedGenerate = true;
         $vehicleGenerate = false;
+        // $vehicleGenerate = true;
         $accidentCaseActiveGenerate = false;
+        // $accidentCaseActiveGenerate = true;
         $accidentCaseInactiveGenerate = false;
+        // $accidentCaseActiveGenerate = true;
         $monitoringIncomingGenerate = false;
+        // $monitoringIncomingGenerate = true;
         $monitoringOutGenerate = false;
+        // $monitoringOutGenerate = false;
         
         $em = $this->getDoctrine()->getManager();
         $message = (date('H:i:s')) . ' START || ';
@@ -161,7 +169,8 @@ class TestController extends Controller {
                 $vehicle->setCompanyName("com name" . $i);
                 $vehicle->setContactPerson("person" . $i);
                 
-                $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find(mt_rand(2, 300));
+                $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")
+                        ->find(mt_rand(2, 300));
                 $vehicle->setDealer($dealer);
                 $vehicle->setGuaranteeType("dummy");
                 $vehicle->setMileage("22" . $i);
@@ -201,7 +210,8 @@ class TestController extends Controller {
 
                 $monitoringStart = new Monitoring();
                 $monitoringStart->setAccidentCase($ac)->setCode("START")->setOperator("op name")
-                        ->setComments($ac->getComment())->setContactThrough($ac->getDriverContact());
+                        ->setComments($ac->getComment())
+                        ->setContactThrough($ac->getDriverContact());
                 $em->persist($monitoringStart);
             }
             $em->flush();
@@ -229,7 +239,8 @@ class TestController extends Controller {
 
                 $monitoringStart = new Monitoring();
                 $monitoringStart->setAccidentCase($ac)->setCode("START")->setOperator("op name")
-                        ->setComments($ac->getComment())->setContactThrough($ac->getDriverContact());
+                        ->setComments($ac->getComment())
+                        ->setContactThrough($ac->getDriverContact());
                 $em->persist($monitoringStart);
             }
             $em->flush();
