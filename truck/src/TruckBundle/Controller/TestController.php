@@ -27,9 +27,11 @@ class TestController extends Controller {
      */
     public function dumpUserAction() {
         $user = $this->getUser();
+        $container = $this->container;
 
         return $this->render('TruckBundle:Test:dump_user.html.twig', array(
-                    "user" => $user
+                    "user" => $user,
+                    "container" => $container
         ));
     }
 

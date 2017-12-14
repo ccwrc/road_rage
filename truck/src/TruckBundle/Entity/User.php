@@ -23,5 +23,3 @@ class User extends BaseUser {
     }   
 
 }
-
-

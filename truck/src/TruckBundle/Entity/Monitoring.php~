@@ -84,14 +84,6 @@ class Monitoring {
      */
     private $timeSet;
 
-    //TODO - for document entity. Later...
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="document", type="string", length=600, nullable=true)
-     */
-    private $document;
-
     /**
      * @Assert\Type("string")
      * @Assert\Length(
@@ -188,6 +180,15 @@ class Monitoring {
      * @ORM\Column(name="currency", type="string", length=100, nullable=true)
      */
     private $currency;    
+    
+    /**
+     * 1 - document send (success)
+     * 0 or NULL - not send
+     * @var smallint
+     * 
+     * @ORM\Column(name="is_document_send", type="smallint", nullable=true)
+     */
+    private $isDocumentSend;
 
 
     /**
@@ -267,29 +268,6 @@ class Monitoring {
     public function getTimeSet()
     {
         return $this->timeSet;
-    }
-
-    /**
-     * Set document
-     *
-     * @param string $document
-     * @return Monitoring
-     */
-    public function setDocument($document)
-    {
-        $this->document = $document;
-
-        return $this;
-    }
-
-    /**
-     * Get document
-     *
-     * @return string 
-     */
-    public function getDocument()
-    {
-        return $this->document;
     }
 
     /**
