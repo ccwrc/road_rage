@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+use TruckBundle\Entity\Dealer;
+
 /**
  * @Security("has_role('ROLE_OPERATOR')")
  * @Route("/document")
@@ -17,18 +19,32 @@ class DocumentController extends Controller {
      */
     public function createAndSendPgAction($monitoringPgId) {
         $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringPgId, "PG");
-        
+
         $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringPgId);
         $homeDealer = $monitoringPg->getHomeDealer();
         $accidentCase = $monitoringPg->getAccidentCase();
-        $accidentCaseId = $accidentCase->getId();
+        
+        // if dealer or case is not active -> redirect
+        
+        $accidentCaseId = $accidentCase->getId(); // for title
         $vehicle = $accidentCase->getVehicle();
         $operatorName = $monitoringPg->getOperator();
-        
-        return $this->render('TruckBundle:Document:create_and_send_pg.html.twig', array(
-                        // ...
-        ));
+        $mainMail = $monitoringPg->getContactMail();
+        $optionalMails = $this->getEmailsFromString($monitoringPg->getOptionalMails());
+
+        $messagePg = $this->createMessagePg($vehicle);
+        if ($this->get('mailer')->send($messagePg)) {
+            $monitoringPg->setIsDocumentSend(1);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+
+
+
+        return $this->redirectToRoute("truck_operator_panel", [
+                    "caseId" => $accidentCaseId
+        ]);
     }
 
     /**
@@ -82,5 +98,35 @@ class DocumentController extends Controller {
         }
         return $emails;
     }
+    
+    private function createMessagePg($vehicle) {
+        $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('send@example.com')
+                ->setTo('ccwrcltd@bla.com')
+                ->setBody(
+                $this->renderView(
+                        'TruckBundle:Document:create_and_send_pg.html.twig', [
+                    "vehicle" => $vehicle
+                        ]
+                ), 'text/html'
+        );
+        return $message;
+    }
+
+    private function isDealerIsActive(Dealer $dealer) {
+        if ($dealer->getIsActive === "active") {
+            return true;
+        }
+        return false;
+    }
+    
+    private function isCaseIsActive($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->find($caseId);
+        if ($case->getStatus === "active") {
+            return true;
+        }
+        return false;
+    }    
 
 }
