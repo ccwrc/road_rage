@@ -1,14 +1,45 @@
 {% extends "TruckBundle:Document:document_layout.html.twig" %}
 
-{% block title %}TruckBundle:Document:createAndSendPg{% endblock %}
-
 {% block body %}
-<h1>Welcome to the Document:createAndSendPg page</h1>
+    <b>Case {{accidentCaseId}}. Payment Guarantee request: {{ amount }} {{ currency }}</b><br/>
+    <b>Case started at: </b>{{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
+    <b>Operator name: {{ operatorName }}</b><br/>
+    {% if outComment != "" %}
+       <b>Operator comment: {{ outComment }}</b><br/> 
+    {% endif %}
+    <br/>
 
-{#                    "vehicle" => $vehicle,
-                    "homeDealer" => $homeDealer,
-                    "outComment" => $outComment,
-                    "operatorName" => $operatorName#}
+    {#                    "vehicle" => $vehicle,
+                        "homeDealer" => $homeDealer,
+                        "outComment" => $outComment,
+                          "accidentCase" => $accidentCase#}
+    To: <br/>
+    <b>Dealer name</b> {{ homeDealer.name }} <br/>
+    <b>Street</b> {{ homeDealer.street }} <br/>
+    <b>Zip-code, city</b> {{ homeDealer.zipCode }}, {{ homeDealer.city }}  <br/>
+    Phone: {{ homeDealer.mainPhone }} <br/>
+    Mail: {{ homeDealer.mainMail }} <br/>
+    <hr/>
+    
+    Client/Vehicle: <br/>
+    <b>VIN:</b> {{ vehicle.vin }} <br/>
+    <b>Company name:</b> {{ vehicle.companyName }} <br/>
+    <b>Company tax ID number:</b> {{ vehicle.taxIdNumber }} <br/>
+    <b>Company - contact person:</b> {{ vehicle.contactPerson }} <br/>
+    <b>Company - street:</b> {{ vehicle.street }} <br/>
+    <b>Company - zip code, city:</b> {{ vehicle.zipCode }} {{ vehicle.city }} <br/>
+    <b>Phone:</b> {{ vehicle.phone }} <br/>
+    <b>Fax:</b> {{ vehicle.fax }} <br/>
+    <b>Mail:</b> {{ vehicle.mail }} <br/><br/>
 
+    <b>Vehicle registration number:</b> {{ vehicle.registrationNumber }} <br/>
+    <b>Vehicle mileage:</b> {{ vehicle.mileage }} <br/>
+    <b>Vehicle guarantee type:</b> {{ vehicle.guaranteeType }} <br/>
+    <b>Vehicle purchase date:</b> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
+    <b>Vehicle name/type:</b> {{ vehicle.nameType }} <br/><br/>
+    
+    <b>Damage description: </b> {{ accidentCase.damageDescription }} <br/>
+    <b>Location: </b> {{ accidentCase.location }} <br/>
+    <b>Contact to driver: </b> {{ accidentCase.driverContact }} <br/>
 
 {% endblock %}

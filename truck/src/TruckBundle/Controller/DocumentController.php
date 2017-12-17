@@ -41,8 +41,8 @@ class DocumentController extends Controller {
         $currency = $monitoringPg->getCurrency();
         $outComment = $monitoringPg->getOutComment();
 
-        $messagePg = $this->createMessagePg($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
-            $vehicle, $homeDealer, $outComment, $operatorName);
+        $messagePg = $this->createMessagePg($accidentCaseId, $amount, $currency, $mainMail,
+                $optionalMails, $vehicle, $homeDealer, $outComment, $operatorName, $accidentCase);
         if ($this->get('mailer')->send($messagePg)) {
             $monitoringPg->setIsDocumentSend(1);
             $em = $this->getDoctrine()->getManager();
@@ -108,7 +108,7 @@ class DocumentController extends Controller {
     }
     
     private function createMessagePg($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
-            $vehicle, $homeDealer, $outComment, $operatorName) {
+            $vehicle, $homeDealer, $outComment, $operatorName, $accidentCase) {
         $message = \Swift_Message::newInstance()
                 ->setSubject("Case number: " . $accidentCaseId . " - Payment Guarantee request: " .
                         $amount . " " . $currency)
@@ -118,10 +118,14 @@ class DocumentController extends Controller {
                 ->setBody(
                 $this->renderView(
                         'TruckBundle:Document:create_and_send_pg.html.twig', [
+                    "accidentCaseId" => $accidentCaseId,
+                    "amount" => $amount,
+                    "currency" => $currency,
                     "vehicle" => $vehicle,
                     "homeDealer" => $homeDealer,
                     "outComment" => $outComment,
-                    "operatorName" => $operatorName
+                    "operatorName" => $operatorName,
+                    "accidentCase" => $accidentCase
                         ]
                 ), 'text/html'
         );
@@ -134,18 +138,12 @@ class DocumentController extends Controller {
         }
         return false;
     }
-    
+
     private function isCaseIsActive(AccidentCase $case) {
         if ($case->getStatus() === "active") {
             return true;
         }
-        return false;        
-//        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-//                ->find($caseId);
-//        if ($case->getStatus === "active") {
-//            return true;
-//        }
-//        return false;
-    }    
+        return false;
+    }
 
 }
