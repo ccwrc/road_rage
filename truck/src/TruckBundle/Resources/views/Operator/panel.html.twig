@@ -160,3 +160,34 @@
     {{ parent() }} info1 messageInfo alarmInfo
 {% endblock %} {# end block infoBar #}
 
+{% block javascripts %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {   
+        
+        var allSpansToMorph = document.getElementsByClassName("morph");
+        for (var i=0; i<allSpansToMorph.length; i++) {
+            if(allSpansToMorph[i].innerHTML.indexOf("PG") === 1) {
+                allSpansToMorph[i].classList.add("morphRed");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("CPG") === 1) {
+                allSpansToMorph[i].classList.add("morphRed");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("RO") === 1) {
+                allSpansToMorph[i].classList.add("morphOrange");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("ETA") === 1) {
+                allSpansToMorph[i].classList.add("morphOrange");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("STRR") === 1) {
+                allSpansToMorph[i].classList.add("morphGreen");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("END") === 1) {
+                allSpansToMorph[i].classList.add("morphGreen");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("WPG") === 1) {
+                allSpansToMorph[i].classList.add("morphRed");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("WCPG") === 1) {
+                allSpansToMorph[i].classList.add("morphRed");
+            } else if(allSpansToMorph[i].innerHTML.indexOf("WRO") === 1) {
+                allSpansToMorph[i].classList.add("morphRed");
+            }
+        }
+                    
+    }); 
+    </script>   
+{% endblock %} {# end block javascripts #}
+

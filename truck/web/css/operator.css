@@ -117,3 +117,15 @@ body {
     background-image: -ms-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
     background-image: -o-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb); 
 }
+
+.morphRed {  
+    text-shadow: 2px 2px 2px #FF7575;
+}
+
+.morphOrange {  
+    text-shadow: 2px 2px 2px #FF9C42;
+}
+
+.morphGreen {  
+    text-shadow: 2px 2px 2px #93EEAA;
+}
