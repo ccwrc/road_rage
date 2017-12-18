@@ -18,6 +18,16 @@
                 onclick="window.location = '{{ path('truck_monitoringpg_editmonitoringpg', {"monitoringId":monitoring.id}) }}';">
             edit
         </button>
+
+        {% if monitoring.isDocumentSend == 1 %}
+            <span title="PG document was successfully sent.">
+                (mail sent)
+            </span>
+        {% else %}
+            <span title="PG document not sent, please try again later. Is case and dealer active?">
+                (mail failed)
+            </span>
+        {% endif %}
     {% elseif monitoring.code == "WPG" %}
         <button title="WPG edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}';">
