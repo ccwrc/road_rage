@@ -1,15 +1,15 @@
 {% extends "TruckBundle:Document:document_layout.html.twig" %}
 
 {% block body %}
-    <b>Payment Guarantee request: {{ amount }} {{ currency }}</b><br/>
-    <b>Case {{accidentCaseId}} started at: </b>{{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
-    <b>Operator name: {{ operatorName }}</b><br/>
+    <b>Payment Guarantee request:</b> {{ amount }} {{ currency }}<br/>
+    <b>Case {{accidentCaseId}} started at:</b> {{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
+    <b>Operator name:</b> {{ operatorName }}<br/>
     {% if outComment != "" %}
-       <b>Operator comment: {{ outComment }}</b><br/> 
+       <b>Operator comment:</b> {{ outComment }}<br/> 
     {% endif %}
     <br/>
 
-    To: <br/>
+    <i>To:</i> <br/>
     <b>Dealer name</b> {{ homeDealer.name }} <br/>
     <b>Street</b> {{ homeDealer.street }} <br/>
     <b>Zip-code, city</b> {{ homeDealer.zipCode }}, {{ homeDealer.city }}  <br/>
@@ -17,8 +17,7 @@
     Mail: {{ homeDealer.mainMail }} <br/>
     <hr/>
     
-    Client/Vehicle: <br/>
-    <b>VIN:</b> {{ vehicle.vin }} <br/>
+    <i>Client/Vehicle:</i> <br/>
     <b>Company name:</b> {{ vehicle.companyName }} <br/>
     <b>Company tax ID number:</b> {{ vehicle.taxIdNumber }} <br/>
     <b>Company - contact person:</b> {{ vehicle.contactPerson }} <br/>
@@ -28,6 +27,7 @@
     <b>Fax:</b> {{ vehicle.fax }} <br/>
     <b>Mail:</b> {{ vehicle.mail }} <br/><br/>
 
+    <b>VIN:</b> {{ vehicle.vin }} <br/>
     <b>Vehicle registration number:</b> {{ vehicle.registrationNumber }} <br/>
     <b>Vehicle mileage:</b> {{ vehicle.mileage }} <br/>
     <b>Vehicle guarantee type:</b> {{ vehicle.guaranteeType }} <br/>
