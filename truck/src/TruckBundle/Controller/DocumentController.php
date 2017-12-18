@@ -82,33 +82,8 @@ class DocumentController extends Controller {
     }
     
     // helpers functions below
-    private function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
-        if ($monitoring === null || $monitoring->getCode() != $code) {
-            throw $this->createNotFoundException("Wrong monitoring data");
-        }
-    }
-    
-    // https://swiftmailer.symfony.com/docs/messages.html
-    // If you want to include multiple addresses then you must use an array:
-    // $message->setTo(['some@address.tld', 'other@address.tld']);
-    private function getEmailsFromString($string) {
-        $unverifiedEmails = [];
-        $emails = [];
-        preg_match_all("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $string, $unverifiedEmails);
-
-        $counter = count($unverifiedEmails[0]);
-        for ($i = 0; $i < $counter; $i++) {
-            if (filter_var($unverifiedEmails[0][$i], FILTER_VALIDATE_EMAIL)) {
-                $emails[] = $unverifiedEmails[0][$i];
-            }
-        }
-        return $emails;
-    }
-    
-    private function createMessagePg($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
-            $vehicle, $homeDealer, $outComment, $operatorName, $accidentCase) {
+     private function createMessagePg($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
+             $vehicle, $homeDealer, $outComment, $operatorName, $accidentCase) {
         $message = \Swift_Message::newInstance()
                 ->setSubject("Case number: " . $accidentCaseId . " - Payment Guarantee request: " .
                         $amount . " " . $currency)
@@ -145,5 +120,27 @@ class DocumentController extends Controller {
         }
         return false;
     }
+    
+    private function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        if ($monitoring === null || $monitoring->getCode() != $code) {
+            throw $this->createNotFoundException("Wrong monitoring data");
+        }
+    }
+    
+    private function getEmailsFromString($string) {
+        $unverifiedEmails = [];
+        $emails = [];
+        preg_match_all("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $string, $unverifiedEmails);
+
+        $counter = count($unverifiedEmails[0]);
+        for ($i = 0; $i < $counter; $i++) {
+            if (filter_var($unverifiedEmails[0][$i], FILTER_VALIDATE_EMAIL)) {
+                $emails[] = $unverifiedEmails[0][$i];
+            }
+        }
+        return $emails;
+    }    
 
 }

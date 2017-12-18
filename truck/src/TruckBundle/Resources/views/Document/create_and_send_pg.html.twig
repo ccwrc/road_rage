@@ -1,18 +1,14 @@
 {% extends "TruckBundle:Document:document_layout.html.twig" %}
 
 {% block body %}
-    <b>Case {{accidentCaseId}}. Payment Guarantee request: {{ amount }} {{ currency }}</b><br/>
-    <b>Case started at: </b>{{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
+    <b>Payment Guarantee request: {{ amount }} {{ currency }}</b><br/>
+    <b>Case {{accidentCaseId}} started at: </b>{{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
     <b>Operator name: {{ operatorName }}</b><br/>
     {% if outComment != "" %}
        <b>Operator comment: {{ outComment }}</b><br/> 
     {% endif %}
     <br/>
 
-    {#                    "vehicle" => $vehicle,
-                        "homeDealer" => $homeDealer,
-                        "outComment" => $outComment,
-                          "accidentCase" => $accidentCase#}
     To: <br/>
     <b>Dealer name</b> {{ homeDealer.name }} <br/>
     <b>Street</b> {{ homeDealer.street }} <br/>
@@ -40,6 +36,9 @@
     
     <b>Damage description: </b> {{ accidentCase.damageDescription }} <br/>
     <b>Location: </b> {{ accidentCase.location }} <br/>
-    <b>Contact to driver: </b> {{ accidentCase.driverContact }} <br/>
+    <b>Contact to driver: </b> {{ accidentCase.driverContact }} <br/><br/>
+    
+    <hr/>
+    <b>Please confirm the Payment Guarantee by phone, fax or email.</b>
 
 {% endblock %}
