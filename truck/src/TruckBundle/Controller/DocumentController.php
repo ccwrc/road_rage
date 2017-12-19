@@ -90,6 +90,7 @@ class DocumentController extends Controller {
                 ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
                 ->setTo($mainMail)
                 ->setCc($optionalMails)
+                ->attach(\Swift_Attachment::fromPath('images/companyLogo.png'))
                 ->setBody(
                 $this->renderView(
                         'TruckBundle:Document:create_and_send_pg.html.twig', [
