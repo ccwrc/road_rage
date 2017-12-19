@@ -66,6 +66,16 @@
                 onclick="window.location = '{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}';">
             edit
         </button> 
+            
+        {% if monitoring.isDocumentSend == 1 %}
+            <span title="RO document was successfully sent.">
+                (mail sent)
+            </span>
+        {% else %}
+            <span title="RO document not sent, please try again later. Is case and dealers active?">
+                (mail failed)
+            </span>
+        {% endif %}            
     {% elseif monitoring.code == "WRO" %}
         <button title="WRO edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}';">
