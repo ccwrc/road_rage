@@ -35,6 +35,8 @@ class MonitoringRoController extends MonitoringController {
             $monitoringRo = $form->getData();
             $this->throwExceptionIfDealerIsNotActive($monitoringRo->getRepairDealer());
             $this->setColorProgressOrangeForCase($case);
+            $contactMailForDocument = $monitoringRo->getRepairDealer()->getMainMail();
+            $monitoringRo->setContactMail($contactMailForDocument);
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringRo);
             $em->flush();
