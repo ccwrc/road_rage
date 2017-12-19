@@ -67,8 +67,7 @@ class DocumentController extends Controller {
         $accidentCase = $monitoringRo->getAccidentCase();
         $accidentCaseId = $accidentCase->getId();
 
-        if (!$this->isCaseIsActive($accidentCase) || !$this->isDealerIsActive($homeDealer) 
-                || !$this->isDealerIsActive($repairDealer)) {
+        if (!$this->isCaseIsActive($accidentCase) || !$this->isDealerIsActive($homeDealer) || !$this->isDealerIsActive($repairDealer)) {
             return $this->redirectToRoute("truck_operator_panel", [
                         "caseId" => $accidentCaseId
             ]);
@@ -76,28 +75,24 @@ class DocumentController extends Controller {
 
         $vehicle = $accidentCase->getVehicle();
         $operatorName = $monitoringRo->getOperator();
-        $mainMail = $monitoringRo->getContactMail();       
+        $mainMail = $monitoringRo->getContactMail();
         $optionalMails = $this->getEmailsFromString($monitoringRo->getOptionalMails());
-        $amount = $monitoringRo->getAmount();  /////// amount...
-        $currency = $monitoringPg->getCurrency();
-        $outComment = $monitoringPg->getOutComment();
+        $amount = $monitoringRo->getAmount();
+        $currency = $monitoringRo->getCurrency();
+        $outComment = $monitoringRo->getOutComment();
 
-        $messagePg = $this->createMessagePg($accidentCaseId, $amount, $currency, $mainMail,
+        $messageRo = $this->createMessageRo($accidentCaseId, $amount, $currency, $mainMail, 
                 $optionalMails, $vehicle, $homeDealer, $repairDealer, $outComment, $operatorName,
                 $accidentCase);
-        if ($this->get('mailer')->send($messagePg)) {
-            $monitoringPg->setIsDocumentSend(1);
+        if ($this->get('mailer')->send($messageRo)) {
+            $monitoringRo->setIsDocumentSend(1);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
         }
-        
+
         return $this->redirectToRoute("truck_operator_panel", [
                     "caseId" => $accidentCaseId
-        ]);        
-        
-//        return $this->render('TruckBundle:Document:create_and_send_ro.html.twig', array(
-//                        // ...
-//        ));
+        ]);
     }
 
     /**
@@ -150,7 +145,7 @@ class DocumentController extends Controller {
      private function createMessagePg($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
              $vehicle, $homeDealer, $outComment, $operatorName, $accidentCase) {
         $message = \Swift_Message::newInstance()
-                ->setSubject("Case number: " . $accidentCaseId . " - Payment Guarantee request: " .
+                ->setSubject("Case number " . $accidentCaseId . " - Payment Guarantee request: " .
                         $amount . " " . $currency)
                 ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
                 ->setTo($mainMail)
@@ -173,10 +168,37 @@ class DocumentController extends Controller {
         return $message;
     }
     
-     private function createMessageWpg($accidentCaseId, $mainMail, $optionalMails, $vehicle,
+    private function createMessageRo($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
+             $vehicle, $homeDealer, $repairDealer, $outComment, $operatorName, $accidentCase) {
+        $message = \Swift_Message::newInstance()
+                ->setSubject("Case number " . $accidentCaseId . " - Repair Order: " .
+                        $amount . " " . $currency)
+                ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
+                ->setTo($mainMail)
+                ->setCc($optionalMails)
+                ->attach(\Swift_Attachment::fromPath('images/companyLogo.png'))
+                ->setBody(
+                $this->renderView(
+                        'TruckBundle:Document:create_and_send_ro.html.twig', [
+                    "accidentCaseId" => $accidentCaseId,
+                    "amount" => $amount,
+                    "currency" => $currency,
+                    "vehicle" => $vehicle,
+                    "homeDealer" => $homeDealer,
+                    "repairDealer" => $repairDealer,
+                    "outComment" => $outComment,
+                    "operatorName" => $operatorName,
+                    "accidentCase" => $accidentCase
+                        ]
+                ), 'text/html'
+        );
+        return $message;
+    }    
+    
+    private function createMessageWpg($accidentCaseId, $mainMail, $optionalMails, $vehicle,
              $homeDealer, $outComment, $operatorName, $accidentCase) {
         $message = \Swift_Message::newInstance()
-                ->setSubject("Case number: " . $accidentCaseId . " - Payment Guarantee Withdrawal")
+                ->setSubject("Case number " . $accidentCaseId . " - Payment Guarantee Withdrawal")
                 ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
                 ->setTo($mainMail)
                 ->setCc($optionalMails)
