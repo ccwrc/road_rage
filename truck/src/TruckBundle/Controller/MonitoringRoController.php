@@ -24,10 +24,10 @@ class MonitoringRoController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
-
+// TODO get last CPG from case -> get amount + currency to RO
         $monitoringRo = new Monitoring();
-        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)
-                ->setHomeDealer($homeDealer)->setCode("RO");
+        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)->setAmount(2000)
+                ->setCurrency("EUR")->setHomeDealer($homeDealer)->setCode("RO");
         $form = $this->createForm(MonitoringRoType::class, $monitoringRo);
 
         $form->handleRequest($req);
