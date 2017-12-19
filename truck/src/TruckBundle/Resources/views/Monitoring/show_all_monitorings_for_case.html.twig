@@ -101,11 +101,23 @@
     {% if monitoring.code == "ETA" %} 
         saved ETA: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
     {% elseif monitoring.code == "PG" or monitoring.code == "WPG" %} 
-        home dealer: {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }}) <br/>
+        home dealer:   
+        <a title="show dealer in new window" target="_blank" class="casesSwitch" 
+           href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
+            {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
+        </a> <br/>
     {% elseif monitoring.code == "CPG" or monitoring.code == "WCPG" %} 
-        dealer confirmed: {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }}) <br/>        
-    {% elseif monitoring.code == "RO" %}
-        repair dealer: {{ monitoring.repairDealer.name }} ({{ monitoring.repairDealer.city }}) <br/>
+        dealer confirmed: 
+        <a title="show dealer in new window" target="_blank" class="casesSwitch" 
+           href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
+            {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
+        </a> <br/>
+    {% elseif monitoring.code == "RO" or monitoring.code == "WRO" %}
+        repair dealer: 
+        <a title="show dealer in new window" target="_blank" class="casesSwitch" 
+           href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
+            {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
+        </a> <br/>
     {% elseif monitoring.code == "STRR" %}    
         time of start repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
     {% elseif monitoring.code == "END" %}    

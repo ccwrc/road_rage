@@ -3,7 +3,11 @@
 
     <span class="textBold textItalic">Truck: </span> {{ case.vehicle.nameType }}, 
     {{ case.vehicle.registrationNumber }}, Guarantee: 
-    {{ case.vehicle.guaranteeType }}, Dealer: {{ case.vehicle.dealer.name }} <br/>
+    {{ case.vehicle.guaranteeType }}, Dealer: 
+    <a title="show dealer in new window" target="_blank" class="casesSwitch" 
+       href="{{ path("truck_dealer_showdealer", {"dealerId":case.vehicle.dealer.id }) }}">
+        {{ case.vehicle.dealer.name }}
+    </a> <br/>
 
     <span class="textBold textItalic">Company: </span> {{ case.vehicle.companyName }}, Contact: 
     {{ case.vehicle.contactPerson }}. 
