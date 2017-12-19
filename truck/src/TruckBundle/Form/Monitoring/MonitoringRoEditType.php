@@ -12,6 +12,14 @@ class MonitoringRoEditType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
+                ->add("amount", "number", [
+                    "label" => "Amount: ",
+                    "read_only" => true
+                ])
+                ->add("currency", "text", [
+                    "label" => "Currency: ",
+                    "read_only" => true
+                ])                
                 ->add("outComment", "textarea", [
                     "label" => "Comment for dealer (the document has already been sent): ",
                     "read_only" => true
