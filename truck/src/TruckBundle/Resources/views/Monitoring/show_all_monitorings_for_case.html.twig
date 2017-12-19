@@ -33,6 +33,16 @@
                 onclick="window.location = '{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}';">
             edit
         </button>
+            
+        {% if monitoring.isDocumentSend == 1 %}
+            <span title="WPG document was successfully sent.">
+                (mail sent)
+            </span>
+        {% else %}
+            <span title="WPG document not sent, please try again later. Is case active?">
+                (mail failed)
+            </span>
+        {% endif %}            
     {% elseif monitoring.code == "CPG" %}
         <button title="Withdrawal CPG" class="panelRedButton"
                 onclick="window.location = '{{ path('truck_monitoringwcpg_createmonitoringwcpg', {"monitoringCpgId":monitoring.id}) }}';">
