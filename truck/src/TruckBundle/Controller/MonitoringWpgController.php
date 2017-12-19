@@ -44,9 +44,9 @@ class MonitoringWpgController extends MonitoringController {
             $em->persist($monitoringWpg);
             $em->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
-            ]);
+            return $this->redirectToRoute("truck_document_createandsendwpg", [
+                        "monitoringWpgId" => $monitoringWpg->getId()
+            ]);            
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_wpg.html.twig', [
