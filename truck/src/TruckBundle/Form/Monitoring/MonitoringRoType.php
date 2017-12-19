@@ -15,6 +15,15 @@ class MonitoringRoType extends AbstractType {
         $builder
                 ->add("contactThrough", "text", ["label" => "Contact through: "])
                 ->add("comments", "textarea", ["label" => "Comments: "])
+                ->add("amount", "number", ["label" => "Amount: "])
+                ->add("currency", "choice", [
+                    "choices" => [
+                        "PLN" => "PLN",
+                        "USD" => "USD",
+                        "EUR" => "EUR"
+                    ],
+                    "choices_as_values" => true, "label" => "Currency: "
+                ])                
                 ->add("outComment", "textarea", [
                     "label" => "Comment for repair dealer: ",
                     "required" => false

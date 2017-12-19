@@ -115,8 +115,8 @@
     {% elseif monitoring.code == "RO" or monitoring.code == "WRO" %}
         repair dealer: 
         <a title="show dealer in new window" target="_blank" class="casesSwitch" 
-           href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
-            {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
+           href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.repairDealer.id }) }}">
+            {{ monitoring.repairDealer.name }} ({{ monitoring.repairDealer.city }})
         </a> <br/>
     {% elseif monitoring.code == "STRR" %}    
         time of start repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>

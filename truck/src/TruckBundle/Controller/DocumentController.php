@@ -55,12 +55,49 @@ class DocumentController extends Controller {
     }
 
     /**
-     * @Route("/createAndSendRo")
+     * @Route("/{monitoringRoId}/createAndSendRo", requirements={"monitoringRoId"="\d+"})
      */
-    public function createAndSendRoAction() {
-        return $this->render('TruckBundle:Document:create_and_send_ro.html.twig', array(
-                        // ...
-        ));
+    public function createAndSendRoAction($monitoringRoId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringRoId, "RO");
+
+        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringRoId);
+        $homeDealer = $monitoringRo->getHomeDealer();
+        $repairDealer = $monitoringRo->getRepairDealer();
+        $accidentCase = $monitoringRo->getAccidentCase();
+        $accidentCaseId = $accidentCase->getId();
+
+        if (!$this->isCaseIsActive($accidentCase) || !$this->isDealerIsActive($homeDealer) 
+                || !$this->isDealerIsActive($repairDealer)) {
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $accidentCaseId
+            ]);
+        }
+
+        $vehicle = $accidentCase->getVehicle();
+        $operatorName = $monitoringRo->getOperator();
+        $mainMail = $monitoringRo->getContactMail();       
+        $optionalMails = $this->getEmailsFromString($monitoringRo->getOptionalMails());
+        $amount = $monitoringRo->getAmount();  /////// amount...
+        $currency = $monitoringPg->getCurrency();
+        $outComment = $monitoringPg->getOutComment();
+
+        $messagePg = $this->createMessagePg($accidentCaseId, $amount, $currency, $mainMail,
+                $optionalMails, $vehicle, $homeDealer, $repairDealer, $outComment, $operatorName,
+                $accidentCase);
+        if ($this->get('mailer')->send($messagePg)) {
+            $monitoringPg->setIsDocumentSend(1);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+        
+        return $this->redirectToRoute("truck_operator_panel", [
+                    "caseId" => $accidentCaseId
+        ]);        
+        
+//        return $this->render('TruckBundle:Document:create_and_send_ro.html.twig', array(
+//                        // ...
+//        ));
     }
 
     /**
