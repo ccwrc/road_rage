@@ -44,7 +44,7 @@ class MonitoringWpgController extends MonitoringController {
             $em->persist($monitoringWpg);
             $em->flush();
 
-            return $this->redirectToRoute("truck_document_createandsendwpg", [
+            return $this->redirectToRoute("truck_documentwpg_createandsendwpg", [
                         "monitoringWpgId" => $monitoringWpg->getId()
             ]);            
         }
