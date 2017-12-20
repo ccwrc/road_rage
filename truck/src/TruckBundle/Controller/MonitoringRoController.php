@@ -41,7 +41,7 @@ class MonitoringRoController extends MonitoringController {
             $em->persist($monitoringRo);
             $em->flush();
 
-            return $this->redirectToRoute("truck_document_createandsendro", [
+            return $this->redirectToRoute("truck_documentro_createandsendro", [
                         "monitoringRoId" => $monitoringRo->getId()
             ]);
         }
