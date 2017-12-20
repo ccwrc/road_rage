@@ -45,9 +45,12 @@ class MonitoringWroController extends MonitoringController {
             $em->persist($monitoringWro);
             $em->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
+            return $this->redirectToRoute("truck_documentwro_createandsendwro", [
+                        "monitoringWroId" => $monitoringWro->getId()
             ]);
+//            return $this->redirectToRoute("truck_operator_panel", [
+//                        "caseId" => $caseId
+//            ]);
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_wro.html.twig', [

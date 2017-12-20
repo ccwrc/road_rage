@@ -12,15 +12,65 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class DocumentWroController extends DocumentController {
 
     /**
-     * @Route("/createAndSendWro")
+     * @Route("/{monitoringWroId}/createAndSendWro", requirements={"monitoringWroId"="\d+"})
      */
-    public function createAndSendWroAction() {
+    public function createAndSendWroAction($monitoringWroId) {
+        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringWroId, "WRO");
+
+        $monitoringWro = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringWroId);
+        $accidentCase = $monitoringWro->getAccidentCase();
+        $accidentCaseId = $accidentCase->getId();
+
+        if (!$this->isCaseIsActive($accidentCase)) {
+            return $this->redirectToRoute("truck_operator_panel", [
+                        "caseId" => $accidentCaseId
+            ]);
+        }
         
-        return $this->render('TruckBundle:Document:create_and_send_wro.html.twig', array(
-                        // ...
-        ));
+        $homeDealer = $monitoringWro->getHomeDealer();
+        $repairDealer = $monitoringWro->getRepairDealer();
+        $vehicle = $accidentCase->getVehicle();
+        $operatorName = $monitoringWro->getOperator();
+        $mainMail = $monitoringWro->getContactMail();
+        $optionalMails = $this->getEmailsFromString($monitoringWro->getOptionalMails());
+        $outComment = $monitoringWro->getOutComment();
+
+        $messageWro = $this->createMessageWro($accidentCaseId, $mainMail, $optionalMails, $vehicle, 
+                $homeDealer, $repairDealer, $outComment, $operatorName, $accidentCase);
+        if ($this->get('mailer')->send($messageWro)) {
+            $monitoringWro->setIsDocumentSend(1);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+
+        return $this->redirectToRoute("truck_operator_panel", [
+                    "caseId" => $accidentCaseId
+        ]);
     }
 
-
+    private function createMessageWro($accidentCaseId, $mainMail, $optionalMails, $vehicle, 
+            $homeDealer, $repairDealer, $outComment, $operatorName, $accidentCase) {
+        $message = \Swift_Message::newInstance()
+                ->setSubject("Case number " . $accidentCaseId . " - Repair Order: Withdrawal")
+                ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
+                ->setTo($mainMail)
+                ->setCc($optionalMails)
+                ->attach(\Swift_Attachment::fromPath('images/companyLogo.png'))
+                ->setBody(
+                $this->renderView(
+                        'TruckBundle:Document:create_and_send_wro.html.twig', [
+                    "accidentCaseId" => $accidentCaseId,
+                    "vehicle" => $vehicle,
+                    "homeDealer" => $homeDealer,
+                    "repairDealer" => $repairDealer,
+                    "outComment" => $outComment,
+                    "operatorName" => $operatorName,
+                    "accidentCase" => $accidentCase
+                        ]
+                ), 'text/html'
+        );
+        return $message;
+    }
 
 }
