@@ -14,15 +14,6 @@ use TruckBundle\Entity\AccidentCase;
  * @Route("/document")
  */
 class DocumentController extends Controller {
-
-    /**
-     * @Route("/createAndSendWro")
-     */
-    public function createAndSendWroAction() {
-        return $this->render('TruckBundle:Document:create_and_send_wro.html.twig', array(
-                        // ...
-        ));
-    }
     
     protected function isDealerIsActive(Dealer $dealer) {
         if ($dealer->getIsActive() === "active") {
