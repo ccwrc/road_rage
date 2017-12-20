@@ -40,7 +40,7 @@ class MonitoringPgController extends MonitoringController {
             $em->persist($monitoringPg);
             $em->flush();
 
-            return $this->redirectToRoute("truck_document_createandsendpg", [
+            return $this->redirectToRoute("truck_documentpg_createandsendpg", [
                         "monitoringPgId" => $monitoringPg->getId()
             ]);
         }
