@@ -80,7 +80,17 @@
         <button title="WRO edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>       
+        </button>      
+            
+        {% if monitoring.isDocumentSend == 1 %}
+            <span title="WRO document was successfully sent.">
+                (mail sent)
+            </span>
+        {% else %}
+            <span title="WRO document not sent, please try again later. Is case active?">
+                (mail failed)
+            </span>
+        {% endif %}               
     {% elseif monitoring.code == "ETA" %}
         <button title="ETA edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringeta_editmonitoringeta', {"monitoringId":monitoring.id}) }}';">
