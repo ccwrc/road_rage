@@ -129,3 +129,12 @@ body {
 .morphGreen {  
     text-shadow: 2px 2px 2px #93EEAA;
 }
+
+.greyText {
+    color: #aaa5a5;
+}
+
+.greyTextRed {
+    color: #aaa5a5;
+    text-shadow: 1px 1px 1px #FF7575;
+}

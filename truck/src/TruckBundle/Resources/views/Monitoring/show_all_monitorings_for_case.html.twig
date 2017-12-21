@@ -20,12 +20,13 @@
         </button>
 
         {% if monitoring.isDocumentSend == 1 %}
-            <span title="PG document was successfully sent.">
-                (mail sent)
+            <span title="PG document was successfully sent." class="greyText">
+                mail sent
             </span>
         {% else %}
-            <span title="PG document not sent, please try again later. Is case and dealer active?">
-                (mail failed)
+            <span title="PG document not sent, please try again later. Is case and dealer active?"
+                  class="greyTextRed">
+                mail failed
             </span>
         {% endif %}
     {% elseif monitoring.code == "WPG" %}
@@ -35,12 +36,13 @@
         </button>
             
         {% if monitoring.isDocumentSend == 1 %}
-            <span title="WPG document was successfully sent.">
-                (mail sent)
+            <span title="WPG document was successfully sent." class="greyText">
+                mail sent
             </span>
         {% else %}
-            <span title="WPG document not sent, please try again later. Is case active?">
-                (mail failed)
+            <span title="WPG document not sent, please try again later. Is case active?"
+                  class="greyTextRed">
+                mail failed
             </span>
         {% endif %}            
     {% elseif monitoring.code == "CPG" %}
@@ -68,12 +70,13 @@
         </button> 
             
         {% if monitoring.isDocumentSend == 1 %}
-            <span title="RO document was successfully sent.">
-                (mail sent)
+            <span title="RO document was successfully sent." class="greyText">
+                mail sent
             </span>
         {% else %}
-            <span title="RO document not sent, please try again later. Is case and dealers active?">
-                (mail failed)
+            <span title="RO document not sent, please try again later. Is case and dealers active?"
+                  class="greyTextRed">
+                mail failed
             </span>
         {% endif %}            
     {% elseif monitoring.code == "WRO" %}
@@ -83,12 +86,13 @@
         </button>      
             
         {% if monitoring.isDocumentSend == 1 %}
-            <span title="WRO document was successfully sent.">
-                (mail sent)
+            <span title="WRO document was successfully sent." class="greyText">
+                mail sent
             </span>
         {% else %}
-            <span title="WRO document not sent, please try again later. Is case active?">
-                (mail failed)
+            <span title="WRO document not sent, please try again later. Is case active?" 
+                  class="greyTextRed">
+                mail failed
             </span>
         {% endif %}               
     {% elseif monitoring.code == "ETA" %}
