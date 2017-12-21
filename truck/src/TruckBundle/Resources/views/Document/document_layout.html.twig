@@ -8,15 +8,26 @@
             {% endblock %}
         </title>
         {% block stylesheets %}
-            {# <link href="{{ asset('/css/operator.css') }}" rel="stylesheet" />#}
+            <style type="text/css">              
+                .document {
+                    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+                }
+                hr {
+                    width: 99%;
+                    border: 0; 
+                    height: 1px; 
+                    background-image: -webkit-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+                    background-image: -moz-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+                    background-image: -ms-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+                    background-image: -o-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb); 
+                }
+            </style> 
         {% endblock %}
     </head>
 
     <body>
-        <div>
+        <div class="document">
             {% block body %}
-
-
 
             {% endblock %}   
         </div>
