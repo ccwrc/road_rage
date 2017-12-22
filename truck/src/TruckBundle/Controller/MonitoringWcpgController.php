@@ -27,10 +27,12 @@ class MonitoringWcpgController extends MonitoringController {
         $case = $monitoringCpg->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringCpg->getHomeDealer();
+        $amount = $monitoringCpg->getAmount();
+        $currency = $monitoringCpg->getCurrency();
 
         $monitoringWcpg = new Monitoring();
-        $monitoringWcpg->setAccidentCase($case)->setOperator($operatorName)
-                ->setHomeDealer($homeDealer)->setCode("WCPG");
+        $monitoringWcpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+                ->setCode("WCPG")->setAmount($amount)->setCurrency($currency);
         $form = $this->createForm(MonitoringWcpgType::class, $monitoringWcpg);
 
         $form->handleRequest($req);
