@@ -31,8 +31,10 @@ class MonitoringCpgController extends MonitoringController {
         }
 
         $monitoringCpg = new Monitoring();
-        $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)
-                ->setHomeDealer($homeDealer)->setCode("CPG");
+        $amount = $this->getAmountFromLastPgOrReturnZero($caseId);
+        $currency = $this->getCurrencyFromLastPgOrReturnEur($caseId);
+        $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+                ->setCode("CPG")->setAmount($amount)->setCurrency($currency);
         $form = $this->createForm(MonitoringCpgType::class, $monitoringCpg);
 
         $form->handleRequest($req);
@@ -82,5 +84,23 @@ class MonitoringCpgController extends MonitoringController {
                     "caseId" => $caseId
         ]);
     }
+    
+    private function getAmountFromLastPgOrReturnZero($caseId) {
+        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringPgByCaseId($caseId);
+        if($monitoringPg !== null) {
+            return $monitoringPg->getAmount();
+        }
+        return 0;
+    }
+    
+    private function getCurrencyFromLastPgOrReturnEur($caseId) {
+        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringPgByCaseId($caseId);
+        if($monitoringPg !== null) {
+            return $monitoringPg->getCurrency();
+        }
+        return "EUR";
+    }    
 
 }
