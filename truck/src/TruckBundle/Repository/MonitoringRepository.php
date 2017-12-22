@@ -69,6 +69,16 @@ class MonitoringRepository extends EntityRepository {
                 ->setParameter("caseId", $caseId)
                 ->setParameter("code", "RO");
         return $query->getOneOrNullResult();
-    }      
+    }   
+    
+    public function findLastMonitoringPgByCaseId($caseId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT m FROM TruckBundle:Monitoring m WHERE m.accidentCase'
+                . ' = :caseId AND m.code = :code ORDER BY m.timeSave DESC')
+                ->setMaxResults(1)
+                ->setParameter("caseId", $caseId)
+                ->setParameter("code", "PG");
+        return $query->getOneOrNullResult();
+    }        
     
 }
