@@ -29,11 +29,13 @@ class MonitoringWpgController extends MonitoringController {
         $homeDealer = $monitoringPg->getHomeDealer();
         $mailForDocument = $monitoringPg->getContactMail();
         $stringWithOptionalMails = $monitoringPg->getOptionalMails();
+        $amount = $monitoringPg->getAmount();
+        $currency = $monitoringPg->getCurrency();
 
         $monitoringWpg = new Monitoring();
         $monitoringWpg->setAccidentCase($case)->setOperator($operatorName)
                 ->setHomeDealer($homeDealer)->setCode("WPG")->setContactMail($mailForDocument)
-                ->setOptionalMails($stringWithOptionalMails);
+                ->setOptionalMails($stringWithOptionalMails)->setAmount($amount)->setCurrency($currency);
         $form = $this->createForm(MonitoringWpgType::class, $monitoringWpg);
 
         $form->handleRequest($req);

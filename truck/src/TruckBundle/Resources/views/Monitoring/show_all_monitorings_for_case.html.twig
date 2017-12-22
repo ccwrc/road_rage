@@ -1,8 +1,10 @@
 
 {% for monitoring in monitorings %}
+    {# START first line in monitoring#}
     <span class="textBold textItalic morph"> {{ monitoring.code }} </span>
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span>
+    
     {% if monitoring.code == "START" %} 
         <button title="START edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}';">
@@ -121,26 +123,28 @@
             edit
         </button>          
     {% endif %}
+    {# END first line in monitoring#}
     <br/>
+    {#  START additional information for code (second line in monitoring) #}
     {% if monitoring.code == "ETA" %} 
         saved ETA: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
     {% elseif monitoring.code == "PG" or monitoring.code == "WPG" %} 
         home dealer:   
-        <a title="({{ monitoring.amount }} {{ monitoring.currency }}) show dealer in new window"
+        <a title="[{{ monitoring.amount }} {{ monitoring.currency }}] show dealer in new window"
            target="_blank" class="casesSwitch" 
            href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
             {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
         </a> <br/>
     {% elseif monitoring.code == "CPG" or monitoring.code == "WCPG" %} 
         dealer confirmed: 
-        <a title="({{ monitoring.amount }} {{ monitoring.currency }}) show dealer in new window"
+        <a title="[{{ monitoring.amount }} {{ monitoring.currency }}] show dealer in new window"
            target="_blank" class="casesSwitch" 
            href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
             {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
         </a> <br/>
     {% elseif monitoring.code == "RO" or monitoring.code == "WRO" %}
         repair dealer: 
-        <a title="({{ monitoring.amount }} {{ monitoring.currency }}) show dealer in new window"
+        <a title="[{{ monitoring.amount }} {{ monitoring.currency }}] show dealer in new window"
            target="_blank" class="casesSwitch" 
            href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.repairDealer.id }) }}">
             {{ monitoring.repairDealer.name }} ({{ monitoring.repairDealer.city }})
@@ -150,6 +154,7 @@
     {% elseif monitoring.code == "END" %}    
         time of end repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>        
     {% endif %}    
+    {#  END additional information for code (second line in monitoring) #}
 
     <span class="textBold textItalic">contact through:  </span> {{ monitoring.contactThrough }} <br/>
     <span class="textBold textItalic">comments:  </span> {{ monitoring.comments }}
