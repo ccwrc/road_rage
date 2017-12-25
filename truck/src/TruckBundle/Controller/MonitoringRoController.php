@@ -24,10 +24,12 @@ class MonitoringRoController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
-// TODO get last CPG from case -> get amount + currency to RO
+        $amount = $this->getAmountFromLastCpgOrReturnZero($caseId);
+        $currency = $this->getCurrencyFromLastCpgOrReturnEur($caseId);
+
         $monitoringRo = new Monitoring();
-        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)->setAmount(2000)
-                ->setCurrency("EUR")->setHomeDealer($homeDealer)->setCode("RO");
+        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)->setAmount($amount)
+                ->setCurrency($currency)->setHomeDealer($homeDealer)->setCode("RO");
         $form = $this->createForm(MonitoringRoType::class, $monitoringRo);
 
         $form->handleRequest($req);
@@ -80,5 +82,23 @@ class MonitoringRoController extends MonitoringController {
                     "caseId" => $caseId
         ]);
     }
+    
+    private function getAmountFromLastCpgOrReturnZero($caseId) {
+        $monitoringCpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringCpgByCaseId($caseId);
+        if($monitoringCpg !== null) {
+            return $monitoringCpg->getAmount();
+        }
+        return 0;
+    }
+    
+    private function getCurrencyFromLastCpgOrReturnEur($caseId) {
+        $monitoringCpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->findLastMonitoringCpgByCaseId($caseId);
+        if($monitoringCpg !== null) {
+            return $monitoringCpg->getCurrency();
+        }
+        return "EUR";
+    }      
 
 }
