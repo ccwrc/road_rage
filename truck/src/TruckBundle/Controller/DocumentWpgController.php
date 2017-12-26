@@ -50,23 +50,24 @@ class DocumentWpgController extends DocumentController {
 
     private function createMessageWpg($accidentCaseId, $mainMail, $optionalMails, $vehicle, 
             $homeDealer, $outComment, $operatorName, $accidentCase) {
-        $message = \Swift_Message::newInstance()
-                ->setSubject("Case number " . $accidentCaseId . " - Payment Guarantee Withdrawal")
+        $message = \Swift_Message::newInstance();
+        $companyLogoSrc = $message->embed(\Swift_Image::fromPath('images/companyLogo.png'));
+        $message->setSubject("Case number " . $accidentCaseId . " - Payment Guarantee Withdrawal")
                 ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
                 ->setTo($mainMail)
                 ->setCc($optionalMails)
-                ->attach(\Swift_Attachment::fromPath('images/companyLogo.png'))
                 ->setBody(
-                $this->renderView(
-                        'TruckBundle:Document:create_and_send_wpg.html.twig', [
-                    "accidentCaseId" => $accidentCaseId,
-                    "vehicle" => $vehicle,
-                    "homeDealer" => $homeDealer,
-                    "outComment" => $outComment,
-                    "operatorName" => $operatorName,
-                    "accidentCase" => $accidentCase
-                        ]
-                ), 'text/html'
+                        $this->renderView(
+                                'TruckBundle:Document:create_and_send_wpg.html.twig', [
+                            "accidentCaseId" => $accidentCaseId,
+                            "vehicle" => $vehicle,
+                            "homeDealer" => $homeDealer,
+                            "outComment" => $outComment,
+                            "operatorName" => $operatorName,
+                            "accidentCase" => $accidentCase,
+                            "companyLogoSrc" => $companyLogoSrc
+                                ]
+                        ), 'text/html'
         );
         return $message;
     }

@@ -1,6 +1,8 @@
 {% extends "TruckBundle:Document:document_layout.html.twig" %}
 
 {% block body %}
+    {{ parent() }}
+    
     <b>Payment Guarantee Withdrawal</b><br/>
     <b>Case {{accidentCaseId}} started at:</b> {{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
     <b>Operator name:</b> {{ operatorName }}<br/>
