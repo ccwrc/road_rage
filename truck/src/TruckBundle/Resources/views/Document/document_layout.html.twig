@@ -8,10 +8,9 @@
             {% endblock %}
         </title>
         {% block stylesheets %}
-            <!-- TODO  https://webgradients.com/ -->
             <style type="text/css">              
                 .document {
-                    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+                    background-image: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
                 }
                 hr {
                     width: 99%;
@@ -29,7 +28,9 @@
     <body>
         <div class="document">
             {% block body %}
-
+                <center>
+                    <img src="{{ companyLogoSrc }}" alt="BAD TRUCK company logo">
+                </center>
             {% endblock %}   
         </div>
     </body>

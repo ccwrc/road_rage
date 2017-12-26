@@ -5,12 +5,9 @@ namespace TruckBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-// use Symfony\Component\HttpFoundation\Request; // TODO to delete after refactor
 
-//use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\AccidentCase; 
 use TruckBundle\Entity\Dealer;
-//use \DateTime;  // TODO to delete after refactor
 
 /**
  * @Route("/monitoring")

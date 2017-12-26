@@ -1,13 +1,15 @@
 {% extends "TruckBundle:Document:document_layout.html.twig" %}
 
 {% block body %}
+    {{ parent() }}
+    
     <b>Payment Guarantee request:</b> {{ amount }} {{ currency }}<br/>
     <b>Case {{accidentCaseId}} started at:</b> {{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
     <b>Operator name:</b> {{ operatorName }}<br/>
     {% if outComment != "" %}
        <b>Operator comment:</b> {{ outComment }}<br/> 
     {% endif %}
-    <br/>
+    <br/> 
 
     <i>To:</i> <br/>
     <b>Dealer name:</b> {{ homeDealer.name }} <br/>
