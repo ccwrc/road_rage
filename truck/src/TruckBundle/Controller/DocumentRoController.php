@@ -55,27 +55,28 @@ class DocumentRoController extends DocumentController {
 
     private function createMessageRo($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
             $vehicle, $homeDealer, $repairDealer, $outComment, $operatorName, $accidentCase) {
-        $message = \Swift_Message::newInstance()
-                ->setSubject("Case number " . $accidentCaseId . " - Repair Order: " .
+        $message = \Swift_Message::newInstance();
+        $companyLogoSrc = $message->embed(\Swift_Image::fromPath('images/companyLogo.png'));
+        $message->setSubject("Case number " . $accidentCaseId . " - Repair Order: " .
                         $amount . " " . $currency)
                 ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
                 ->setTo($mainMail)
                 ->setCc($optionalMails)
-                ->attach(\Swift_Attachment::fromPath('images/companyLogo.png'))
                 ->setBody(
-                $this->renderView(
-                        'TruckBundle:Document:create_and_send_ro.html.twig', [
-                    "accidentCaseId" => $accidentCaseId,
-                    "amount" => $amount,
-                    "currency" => $currency,
-                    "vehicle" => $vehicle,
-                    "homeDealer" => $homeDealer,
-                    "repairDealer" => $repairDealer,
-                    "outComment" => $outComment,
-                    "operatorName" => $operatorName,
-                    "accidentCase" => $accidentCase
-                        ]
-                ), 'text/html'
+                        $this->renderView(
+                                'TruckBundle:Document:create_and_send_ro.html.twig', [
+                            "accidentCaseId" => $accidentCaseId,
+                            "amount" => $amount,
+                            "currency" => $currency,
+                            "vehicle" => $vehicle,
+                            "homeDealer" => $homeDealer,
+                            "repairDealer" => $repairDealer,
+                            "outComment" => $outComment,
+                            "operatorName" => $operatorName,
+                            "accidentCase" => $accidentCase,
+                            "companyLogoSrc" => $companyLogoSrc
+                                ]
+                        ), 'text/html'
         );
         return $message;
     }
