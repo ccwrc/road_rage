@@ -51,24 +51,25 @@ class DocumentWroController extends DocumentController {
 
     private function createMessageWro($accidentCaseId, $mainMail, $optionalMails, $vehicle, 
             $homeDealer, $repairDealer, $outComment, $operatorName, $accidentCase) {
-        $message = \Swift_Message::newInstance()
-                ->setSubject("Case number " . $accidentCaseId . " - Repair Order: Withdrawal")
+        $message = \Swift_Message::newInstance();
+        $companyLogoSrc = $message->embed(\Swift_Image::fromPath('images/companyLogo.png'));
+        $message->setSubject("Case number " . $accidentCaseId . " - Repair Order: Withdrawal")
                 ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
                 ->setTo($mainMail)
                 ->setCc($optionalMails)
-                ->attach(\Swift_Attachment::fromPath('images/companyLogo.png'))
                 ->setBody(
-                $this->renderView(
-                        'TruckBundle:Document:create_and_send_wro.html.twig', [
-                    "accidentCaseId" => $accidentCaseId,
-                    "vehicle" => $vehicle,
-                    "homeDealer" => $homeDealer,
-                    "repairDealer" => $repairDealer,
-                    "outComment" => $outComment,
-                    "operatorName" => $operatorName,
-                    "accidentCase" => $accidentCase
-                        ]
-                ), 'text/html'
+                        $this->renderView(
+                                'TruckBundle:Document:create_and_send_wro.html.twig', [
+                            "accidentCaseId" => $accidentCaseId,
+                            "vehicle" => $vehicle,
+                            "homeDealer" => $homeDealer,
+                            "repairDealer" => $repairDealer,
+                            "outComment" => $outComment,
+                            "operatorName" => $operatorName,
+                            "accidentCase" => $accidentCase,
+                            "companyLogoSrc" => $companyLogoSrc
+                                ]
+                        ), 'text/html'
         );
         return $message;
     }
