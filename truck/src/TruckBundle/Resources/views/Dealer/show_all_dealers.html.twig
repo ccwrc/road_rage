@@ -7,6 +7,10 @@
     <center>
         <h3 class="formTitle">list of dealers</h3>
     </center>
+    
+    <div class="navigation">
+        {{ knp_pagination_render(dealers) }}
+    </div>    
 
     <div class="padding7px">
         {% for dealer in dealers %} 
@@ -38,6 +42,10 @@
         {% else %}
             No dealers.
         {% endfor %}
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(dealers) }}
     </div>
 
 {% endblock %}

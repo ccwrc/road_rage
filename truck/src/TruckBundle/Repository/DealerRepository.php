@@ -18,5 +18,10 @@ class DealerRepository extends EntityRepository {
                 . 'd.isActive = :active')->setParameter("active", "active");
         return $query->getResult();
     }
+    
+    public function findAllDealersQuery() {
+        $em = $this->getEntityManager();
+        return $query = $em->createQuery('SELECT d FROM TruckBundle:Dealer d');
+    }
 
 }

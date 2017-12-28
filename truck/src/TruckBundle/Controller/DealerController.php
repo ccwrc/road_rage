@@ -20,14 +20,19 @@ class DealerController extends Controller {
     /**
      * @Route("/showAllDealers")
      */
-    public function showAllDealersAction() {
-        $dealers = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->findAll();
+    public function showAllDealersAction(Request $req) {
+        $dealersQuery = $this->getDoctrine()->getRepository("TruckBundle:Dealer")
+                ->findAllDealersQuery();
+        $paginator = $this->get('knp_paginator');
+        $dealers = $paginator->paginate(
+                $dealersQuery, $req->query->get('page', 1)/* page number */, 30/* limit per page */
+        );
 
         return $this->render('TruckBundle:Dealer:show_all_dealers.html.twig', [
                     "dealers" => $dealers
         ]);
     }
-    
+
     /**
      * @Route("/showAllActiveDealers")
      */
