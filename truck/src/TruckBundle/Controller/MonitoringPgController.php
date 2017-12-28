@@ -24,6 +24,11 @@ class MonitoringPgController extends MonitoringController {
         $operatorName = $this->getOperatorName();
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
+        if (!$this->checkIfDealerIsActive($homeDealer)) {
+            return $this->redirectToRoute("truck_main_warninginformation", [
+                        "message" => "Dealer is not active, can not confirm PG."
+            ]);
+        }        
         $contactMailForSendDocument = $homeDealer->getMainMail();
 
         $monitoringPg = new Monitoring();
