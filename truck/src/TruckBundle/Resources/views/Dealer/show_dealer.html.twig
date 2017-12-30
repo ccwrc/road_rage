@@ -9,7 +9,8 @@
     </center>
 
     <div class="padding7px">
-        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: {{ vehicles | length }}) </span> 
+        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: 
+            {{ vehicles | length }}/{{ dealer.vehicles | length }}) </span> 
         {% if is_granted('ROLE_OPERATOR') %}
             <button title="edit dealer" 
                     class="pure-button pure-button-active button90red" 
@@ -66,5 +67,9 @@
     {% else %}
         <span class="greenBoldText padding7px"> No vehicles. </span>
     {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(vehicles) }}
+    </div>
 
 {% endblock %}

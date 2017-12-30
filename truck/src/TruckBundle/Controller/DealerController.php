@@ -53,17 +53,23 @@ class DealerController extends Controller {
     /**
      * @Route("/{dealerId}/showDealer", requirements={"dealerId"="\d+"})
      */
-    public function showDealerAction($dealerId) {
+    public function showDealerAction(Request $req, $dealerId) {
         $this->throwExceptionIfDealerIdIsWrong($dealerId);
         $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
-        $vehicles = $dealer->getVehicles();
+        $vehiclesQuery = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                ->findVehiclesByDealerIdQuery($dealerId);
+
+        $paginator = $this->get('knp_paginator');
+        $vehicles = $paginator->paginate(
+                $vehiclesQuery, $req->query->get('page', 1)/* page number */, 40/* limit per page */
+        );
 
         return $this->render('TruckBundle:Dealer:show_dealer.html.twig', [
                     "dealer" => $dealer,
                     "vehicles" => $vehicles
         ]);
     }
-    
+
     /**
      * @Route("/createDealer")
      */
