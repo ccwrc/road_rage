@@ -138,3 +138,60 @@ body {
     color: #aaa5a5;
     text-shadow: 1px 1px 1px #FF7575;
 }
+
+/* TODO START knp pagination*/
+.navigation {
+    text-align: center;
+    padding-bottom: 15px;
+    font-size: 120%;
+}
+
+.current {
+    color: #c9cacc;
+}
+
+.page a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.page a:hover {  
+    color: black;
+}
+
+.first a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.first a:hover {  
+    color: black;
+}
+
+.last a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.last a:hover {  
+    color: black;
+}
+
+.next a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.next a:hover {  
+    color: black;
+}
+
+.previous a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.previous a:hover {  
+    color: black;
+}
+/* END knp pagination*/

@@ -101,7 +101,6 @@ body {
 
 .page a:hover {  
     color: black;
-    text-shadow: 1px 1px 1px #fffdb5;
 }
 
 .first a {
@@ -111,7 +110,6 @@ body {
 
 .first a:hover {  
     color: black;
-    text-shadow: 1px 1px 1px #fffdb5;
 }
 
 .last a {
@@ -121,7 +119,6 @@ body {
 
 .last a:hover {  
     color: black;
-    text-shadow: 1px 1px 1px #fffdb5;
 }
 
 .next a {
@@ -131,7 +128,6 @@ body {
 
 .next a:hover {  
     color: black;
-    text-shadow: 1px 1px 1px #fffdb5;
 }
 
 .previous a {
@@ -141,6 +137,5 @@ body {
 
 .previous a:hover {  
     color: black;
-    text-shadow: 1px 1px 1px #fffdb5;
 }
 /* END knp pagination*/
