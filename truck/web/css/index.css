@@ -82,3 +82,65 @@ body {
 .statusGrey {
     background-color: #E6E6E6;
 }
+
+/* START knp pagination*/
+.navigation {
+    text-align: center;
+    padding-bottom: 15px;
+    font-size: 120%;
+}
+
+.current {
+    color: #c9cacc;
+}
+
+.page a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.page a:hover {  
+    color: black;
+    text-shadow: 1px 1px 1px #fffdb5;
+}
+
+.first a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.first a:hover {  
+    color: black;
+    text-shadow: 1px 1px 1px #fffdb5;
+}
+
+.last a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.last a:hover {  
+    color: black;
+    text-shadow: 1px 1px 1px #fffdb5;
+}
+
+.next a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.next a:hover {  
+    color: black;
+    text-shadow: 1px 1px 1px #fffdb5;
+}
+
+.previous a {
+    color: #555759;
+    text-decoration: none;
+}
+
+.previous a:hover {  
+    color: black;
+    text-shadow: 1px 1px 1px #fffdb5;
+}
+/* END knp pagination*/
