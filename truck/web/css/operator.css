@@ -142,8 +142,8 @@ body {
 /* TODO START knp pagination*/
 .navigation {
     text-align: center;
-    padding-bottom: 15px;
-    font-size: 120%;
+    padding-top: 5px;
+    font-size: 90%;
 }
 
 .current {

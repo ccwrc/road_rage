@@ -20,24 +20,7 @@ use \DateTime;
  */
 class AccidentCaseController extends Controller {
 
-    protected function getOperatorName() {
-        return $this->container->get("security.context")->getToken()->getUser()
-                        ->getUsername();
-    }
 
-    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
-        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
-        if ($vehicle === null) {
-            throw $this->createNotFoundException("Wrong vehicle ID");
-        }
-    }
-
-    protected function throwExceptionIfCaseIdIsWrong($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        if ($case === null) {
-            throw $this->createNotFoundException("Wrong case ID");
-        }
-    }
 
     /**
      * @Route("/caseProgressColorManual")
@@ -158,9 +141,15 @@ class AccidentCaseController extends Controller {
     /**
      * @Route("/{caseId}/showAllCases", requirements={"caseId"="\d+"})
      */
-    public function showAllCasesAction($caseId = 0) {
-        $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAll();
+    public function showAllCasesAction(Request $req, $caseId = 0) {
+        //$cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAll();
 
+        $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->findAllCasesQuery();
+        $paginator = $this->get('knp_paginator');
+        $cases = $paginator->paginate(
+                $casesQuery, $req->getSession()->get('allPageNumber', 1)/* page number */, 20/* limit per page */
+        );
         return $this->render('TruckBundle:AccidentCase:show_all_cases.html.twig', [
                     "cases" => $cases,
                     "caseId" => $caseId
@@ -170,8 +159,18 @@ class AccidentCaseController extends Controller {
     /**
      * @Route("/{caseId}/showAllActiveCases", requirements={"caseId"="\d+"})
      */
-    public function showAllActiveCasesAction($caseId = 0) {
-        $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAllActiveCases();
+    public function showAllActiveCasesAction(Request $req, $caseId = 0) {
+        //$cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+        //->findAllActiveCases();
+        
+        // TODO knp paginator not work correctly...
+        
+        $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->findAllActiveCasesQuery();
+        $paginator = $this->get('knp_paginator');
+        $cases = $paginator->paginate(
+                $casesQuery, $req->query->get('page', 1)/* page number */, 20/* limit per page */
+        );
 
         return $this->render('TruckBundle:AccidentCase:show_all_active_cases.html.twig', [
                     "cases" => $cases,
@@ -239,7 +238,6 @@ class AccidentCaseController extends Controller {
 
     
     // functions for generate end case report
-
     protected function getDateDifferenceInMinutesOrReturnZero($earlierDate, $laterDate) {
         $diff = date_diff($earlierDate, $laterDate, false);
         if ($diff->invert == 1) {
@@ -364,5 +362,24 @@ class AccidentCaseController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->flush();
     }
+    // end functions for generate end case report
+    
+    protected function getOperatorName() {
+        return $this->container->get("security.context")->getToken()->getUser()
+                        ->getUsername();
+    }
 
+    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        if ($vehicle === null) {
+            throw $this->createNotFoundException("Wrong vehicle ID");
+        }
+    }
+
+    protected function throwExceptionIfCaseIdIsWrong($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        if ($case === null) {
+            throw $this->createNotFoundException("Wrong case ID");
+        }
+    }    
 }

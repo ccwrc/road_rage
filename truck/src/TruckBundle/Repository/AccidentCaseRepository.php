@@ -12,12 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class AccidentCaseRepository extends EntityRepository {
     
+    public function findAllCasesQuery() {
+        $em = $this->getEntityManager();
+        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c');
+    }    
+    
     public function findAllActiveCases() {
         $em = $this->getEntityManager();
         $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
                 . 'LIKE :active')->setParameter("active", "active");
         return $query->getResult();
     }
+    
+    public function findAllActiveCasesQuery() {
+        $em = $this->getEntityManager();
+        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
+                . 'LIKE :active')->setParameter("active", "active");
+    }    
     
     public function findAllInactiveCases() {
         $em = $this->getEntityManager();
