@@ -37,4 +37,10 @@ class AccidentCaseRepository extends EntityRepository {
         return $query->getResult();
     }    
     
+    public function findAllInactiveCasesQuery() {
+        $em = $this->getEntityManager();
+        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
+                . 'LIKE :inactive')->setParameter("inactive", "inactive");
+    }     
+    
 }

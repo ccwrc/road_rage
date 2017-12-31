@@ -179,9 +179,16 @@ class AccidentCaseController extends Controller {
     /**
      * @Route("/{caseId}/showAllInactiveCases", requirements={"caseId"="\d+"})
      */
-    public function showAllInactiveCasesAction($caseId = 0) {
-        $cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-                ->findAllInactiveCases();
+    public function showAllInactiveCasesAction(Request $req, $caseId = 0) {
+        //session from OperatorController, method panelAction
+
+        $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                ->findAllInactiveCasesQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $cases = $paginator->paginate(
+                $casesQuery, $req->getSession()->get('inactivePageNumber', 1)/* page number */, 
+                500/* limit per page */);
 
         return $this->render('TruckBundle:AccidentCase:show_all_inactive_cases.html.twig', [
                     "cases" => $cases,
