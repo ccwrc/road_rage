@@ -14,7 +14,7 @@ class AccidentCaseRepository extends EntityRepository {
     
     public function findAllCasesQuery() {
         $em = $this->getEntityManager();
-        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c');
+        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c ORDER BY c.id ASC');
     }    
     
     public function findAllActiveCases() {
@@ -40,7 +40,7 @@ class AccidentCaseRepository extends EntityRepository {
     public function findAllInactiveCasesQuery() {
         $em = $this->getEntityManager();
         return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
-                . 'LIKE :inactive')->setParameter("inactive", "inactive");
+                . 'LIKE :inactive ORDER BY c.id ASC')->setParameter("inactive", "inactive");
     }     
     
 }
