@@ -142,14 +142,15 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/showAllCases", requirements={"caseId"="\d+"})
      */
     public function showAllCasesAction(Request $req, $caseId = 0) {
-        //$cases = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->findAll();
+        //session from OperatorController, method panelAction
 
         $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
                 ->findAllCasesQuery();
         $paginator = $this->get('knp_paginator');
         $cases = $paginator->paginate(
-                $casesQuery, $req->getSession()->get('allPageNumber', 1)/* page number */, 20/* limit per page */
-        );
+                $casesQuery, $req->getSession()->get('allPageNumber', 1)/* page number */, 
+                500/* limit per page */);
+        
         return $this->render('TruckBundle:AccidentCase:show_all_cases.html.twig', [
                     "cases" => $cases,
                     "caseId" => $caseId
