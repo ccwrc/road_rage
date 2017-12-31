@@ -10,13 +10,15 @@
     {% if caseId == case.id %}
         <button title="{{ case.vehicle.companyName }}" class="caseButton" 
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "all"}) }}';">
+                onclick="window.location = '{{ path('truck_operator_panel', 
+                    {'caseId': case.id, 'casesStatus': "all", 'page': cases.currentPageNumber}) }}';">
             &rarr; {{ case.id }} &larr;
         </button> <br/>
     {% else %}
         <button title="{{ case.vehicle.companyName }}" class="caseButton" 
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', {'caseId': case.id, 'casesStatus': "all"}) }}';">
+                onclick="window.location = '{{ path('truck_operator_panel', 
+                    {'caseId': case.id, 'casesStatus': "all", 'page': cases.currentPageNumber}) }}';">
             {{ case.id }}
         </button> <br/>
     {% endif %}    

@@ -10,13 +10,15 @@
     {% if caseId == case.id %}
         <button title="{{ case.vehicle.companyName }}" class="caseButton" 
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', {'caseId': case.id}) }}';">
+                onclick="window.location = '{{ path('truck_operator_panel', 
+                    {'caseId': case.id, 'page': cases.currentPageNumber}) }}';">
             &rarr; {{ case.id }} &larr;
         </button> <br/>
     {% else %}
         <button title="{{ case.vehicle.companyName }}" class="caseButton" 
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', {'caseId': case.id}) }}';">
+                onclick="window.location = '{{ path('truck_operator_panel', 
+                    {'caseId': case.id, 'page': cases.currentPageNumber}) }}';">
             {{ case.id }}
         </button> <br/>
     {% endif %}
@@ -27,6 +29,7 @@
 
 <div class="navigation">
     {{ knp_pagination_render(cases) }}
+    {# {{ dump(cases.currentPageNumber) }}#}
 </div>
 
 
