@@ -21,7 +21,7 @@ class DealerRepository extends EntityRepository {
     
     public function findAllDealersQuery() {
         $em = $this->getEntityManager();
-        return $query = $em->createQuery('SELECT d FROM TruckBundle:Dealer d');
+        return $query = $em->createQuery('SELECT d FROM TruckBundle:Dealer d ORDER BY d.id ASC');
     }
     
     public function findAllActiveDealersQuery() {
