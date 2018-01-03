@@ -4,7 +4,7 @@
         <button title="back to main page" 
                 class="topMenu" 
                 onclick="window.location = '{{ path('truck_main_index') }}';">
-            Main page
+            main_page
         </button>   
 
         <button title="show all users" 
@@ -22,7 +22,7 @@
         <button title="logout user" 
                 class="topMenu" 
                 onclick="window.location = '{{ path('fos_user_security_logout') }}';">
-            {{ app.user.username }}: logout
+            {{ app.user.username }}:logout
         </button>   
     </center> 
 </div>

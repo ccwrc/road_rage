@@ -4,11 +4,7 @@
 
 {% block body %} 
     
-    {% if is_granted('ROLE_USER') %}
-        {{ include('TruckBundle:Main:main_menu.html.twig') }}
-    {% else %}
-        <br/>
-    {% endif %}
+    <br/>
         
     <center>
         {% if is_granted('ROLE_USER') %}
