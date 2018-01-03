@@ -1,26 +1,28 @@
 <br/>
-<center>
-    <button title="back to main page" 
-            class="pure-button pure-button-active button80red" 
-            onclick="window.location = '{{ path('truck_main_index') }}';">
-        Main page
-    </button>   
+<div class="formTitle">
+    <center> 
+        <button title="back to main page" 
+                class="topMenu" 
+                onclick="window.location = '{{ path('truck_main_index') }}';">
+            Main page
+        </button>   
 
-    <button title="show all users" 
-            class="pure-button pure-button-active button80blue" 
-            onclick="window.location = '{{ path('truck_user_showallusers') }}';">
-        test
-    </button>     
+        <button title="show all users" 
+                class="topMenu" 
+                onclick="window.location = '{{ path('truck_user_showallusers') }}';">
+            test
+        </button>     
 
-    <button title="find user by username or email" 
-            class="pure-button pure-button-active button80blue" 
-            onclick="window.location = '{{ path('truck_user_finduser') }}';">
-        test
-    </button>               
+        <button title="find user by username or email" 
+                class="topMenu" 
+                onclick="window.location = '{{ path('truck_user_finduser') }}';">
+            test
+        </button>               
 
-    <button title="logout user" 
-            class="pure-button pure-button-active button80red" 
-            onclick="window.location = '{{ path('fos_user_security_logout') }}';">
-        {{ app.user.username }}: logout
-    </button>    
-</center>
+        <button title="logout user" 
+                class="topMenu" 
+                onclick="window.location = '{{ path('fos_user_security_logout') }}';">
+            {{ app.user.username }}: logout
+        </button>   
+    </center> 
+</div>

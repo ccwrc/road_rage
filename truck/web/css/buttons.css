@@ -26,20 +26,6 @@
     font-size: 90%;
 }
 
-.button80red {
-    color: white;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: rgb(202, 60, 60);
-    font-size: 80%;
-}
-
-.button80blue {
-    color: white;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: rgb(66, 184, 221);
-    font-size: 80%;
-}
-
 .button70noBackground { /* for show_vehicle - cases */
     color: black;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -62,6 +48,17 @@
     border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
     text-decoration: none;
     border-radius: 2px;
+}
+
+.topMenu {
+    color: black;
+    background: #E6E6E6;
+    font-size: 85%;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  
+    border: none rgba(0, 0, 0, 0);  
+    text-decoration: none;
 }
 
 .casesSwitch {  /* active/inactive/all */
@@ -139,4 +136,9 @@
     color: white;
     text-shadow: 1px 1px 1px #000000;
     box-shadow: 1px 1px 1px 1px grey;
+}
+
+.topMenu:hover {
+    color: white;
+    text-shadow: 1px 1px 1px #000000;
 }
