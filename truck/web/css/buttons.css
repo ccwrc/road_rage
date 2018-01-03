@@ -26,6 +26,20 @@
     font-size: 90%;
 }
 
+.button80red {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(202, 60, 60);
+    font-size: 80%;
+}
+
+.button80blue {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(66, 184, 221);
+    font-size: 80%;
+}
+
 .button70noBackground { /* for show_vehicle - cases */
     color: black;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);

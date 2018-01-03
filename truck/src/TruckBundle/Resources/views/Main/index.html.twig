@@ -3,7 +3,13 @@
 {% block title %}truck - index{% endblock %}
 
 {% block body %} 
-
+    
+    {% if is_granted('ROLE_USER') %}
+        {{ include('TruckBundle:Main:main_menu.html.twig') }}
+    {% else %}
+        <br/>
+    {% endif %}
+        
     <center>
         {% if is_granted('ROLE_USER') %}
             <h3 class="formTitle">truck service center - main menu</h3>
