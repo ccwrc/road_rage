@@ -12,18 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class VehicleRepository extends EntityRepository {
 
-    // unused. TODO to delete
-    public function findVehiclesByDealerId($dealerId) {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT v FROM TruckBundle:Vehicle v JOIN v.dealer d WHERE'
-                        . ' d.id = :dealerId')->setParameter("dealerId", $dealerId);
-        return $query->getResult();
-    }
-
     public function findVehiclesByDealerIdQuery($dealerId) {
         $em = $this->getEntityManager();
         return $query = $em->createQuery('SELECT v FROM TruckBundle:Vehicle v JOIN v.dealer d WHERE'
-                        . ' d.id = :dealerId')->setParameter("dealerId", $dealerId);
+                        . ' d.id = :dealerId ORDER BY v.companyName ASC')
+                ->setParameter("dealerId", $dealerId);
     }
 
 }

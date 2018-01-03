@@ -11,7 +11,7 @@
     <div class="padding7px">
         <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: 
             {{ vehicles | length }}/{{ dealer.vehicles | length }}) </span> 
-        {% if is_granted('ROLE_OPERATOR') %}
+            {% if is_granted('ROLE_OPERATOR') %}
             <button title="edit dealer" 
                     class="pure-button pure-button-active button90red" 
                     onclick="window.location = '{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}';">
@@ -32,7 +32,11 @@
 
     <hr class="hrStyle" />
 
-    {% for vehicle in vehicles %}
+    <div class="navigation">
+        {{ knp_pagination_render(vehicles) }}
+    </div>          
+
+    {% for vehicle in vehicles %}  
         <div class="padding7px">
             <span class="greenBoldText">Company: {{ vehicle.companyname }}, VIN: {{ vehicle.vin }}, Registration: {{ vehicle.registrationNumber }} </span>
             <br/>

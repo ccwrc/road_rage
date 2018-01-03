@@ -59,8 +59,7 @@ class DealerController extends Controller {
 
         $paginator = $this->get('knp_paginator');
         $vehicles = $paginator->paginate(
-                $vehiclesQuery, $req->query->get('page', 1)/* page number */, 40/* limit per page */
-        );
+                $vehiclesQuery, $req->query->get('page', 1)/* page number */, 40/* limit per page */);
 
         return $this->render('TruckBundle:Dealer:show_dealer.html.twig', [
                     "dealer" => $dealer,
