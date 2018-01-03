@@ -5,7 +5,11 @@
 {% block body %} 
 
     <center>
-        <h3 class="formTitle">truck service center - main menu</h3>
+        {% if is_granted('ROLE_USER') %}
+            <h3 class="formTitle">truck service center - main menu</h3>
+        {% else %}
+            <h3 class="formTitle">truck service center</h3>
+        {% endif %}
     </center>
 
     {#user panel#}
@@ -16,15 +20,21 @@
                 {{ app.user.username }}: logout
             </button>
         {% else %}
-            <button title="login" class="pure-button pure-button-active button90red"
-                    onclick="window.location = '{{ path("fos_user_security_login") }}';">
-                login
-            </button>
-            <button title="password reset" 
-                    class="pure-button pure-button-active button90blue" 
-                    onclick="window.location = '{{ path('fos_user_resetting_request') }}';">
-                password reset
-            </button>                    
+            <center>
+                <button title="login" class="pure-button pure-button-active button90red"
+                        onclick="window.location = '{{ path("fos_user_security_login") }}';">
+                    login
+                </button>
+                <button title="password reset" 
+                        class="pure-button pure-button-active button90blue" 
+                        onclick="window.location = '{{ path('fos_user_resetting_request') }}';">
+                    password reset
+                </button>   
+                <button title="register" class="pure-button pure-button-active button90blue"
+                        onclick="window.location = '{{ path("fos_user_registration_register") }}';">
+                    register
+                </button>   
+            </center>
         {% endif %}
 
         {% if is_granted('ROLE_USER') %}
@@ -38,13 +48,6 @@
             </button>
         {% endif %}
 
-        {% if is_granted('ROLE_USER') %}
-        {% else %}
-            <button title="register" class="pure-button pure-button-active button90blue"
-                    onclick="window.location = '{{ path("fos_user_registration_register") }}';">
-                register
-            </button>
-        {% endif %}
         <br/>
     </div>
 

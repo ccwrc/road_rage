@@ -74,18 +74,20 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    {% if user is not empty %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
 
-            var buttonsToConfirm = document.getElementsByClassName("confirm");
+                var buttonsToConfirm = document.getElementsByClassName("confirm");
 
-            for (var i = 0; i < buttonsToConfirm.length; i++) {
-                buttonsToConfirm[i].onclick = function () {
-                    if (confirm('Are you sure?')) {
-                        window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';
-                    }
-                };
-            }
-        });
-    </script>   
+                for (var i = 0; i < buttonsToConfirm.length; i++) {
+                    buttonsToConfirm[i].onclick = function () {
+                        if (confirm('Are you sure?')) {
+                            window.location = '{{ path('truck_user_deleteuser', {'userId': user.id}) }}';
+                        }
+                    };
+                }
+            });
+        </script>   
+    {% endif %}
 {% endblock %}
