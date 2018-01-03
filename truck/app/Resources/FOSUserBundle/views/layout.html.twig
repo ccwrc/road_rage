@@ -6,9 +6,11 @@
 {% block body %} 
     <div>
         <br/>
-        <center>
-            {{ include('@FOSUser/fos_user_menu.html.twig') }}
-        </center>
+        <div class="formTitle">
+            <center>
+                {{ include('@FOSUser/fos_user_menu.html.twig') }}
+            </center>
+        </div>
     </div>
 
     {% if app.request.hasPreviousSession %}

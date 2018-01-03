@@ -1,38 +1,38 @@
 {% if is_granted('ROLE_USER') %}
 
     <button title="back to main page" 
-            class="pure-button pure-button-active button90red" 
+            class="topMenu" 
             onclick="window.location = '{{ path('truck_main_index') }}';">
-        Main page
+        main_page
     </button>   
 
     <button title="new user" 
-            class="pure-button pure-button-active button90blue" 
+            class="topMenu" 
             onclick="window.location = '{{ path('fos_user_registration_register') }}';">
         registration
     </button>     
 
     <button title="show user profile" 
-            class="pure-button pure-button-active button90blue" 
+            class="topMenu" 
             onclick="window.location = '{{ path('fos_user_profile_show') }}';">
         profile
     </button>         
 
     <button title="edit user profile" 
-            class="pure-button pure-button-active button90blue" 
+            class="topMenu" 
             onclick="window.location = '{{ path('fos_user_profile_edit') }}';">
-        edit profile
+        edit_profile
     </button>          
 
     <button title="change password" 
-            class="pure-button pure-button-active button90blue" 
+            class="topMenu" 
             onclick="window.location = '{{ path('fos_user_change_password') }}';">
-        change password
+        change_password
     </button>         
 
     <button title="logout user" 
-            class="pure-button pure-button-active button90red" 
+            class="topMenu" 
             onclick="window.location = '{{ path('fos_user_security_logout') }}';">
-        {{ app.user.username }}: logout
+        {{ app.user.username }}:logout
     </button>    
 {% endif %} 
