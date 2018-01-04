@@ -73,13 +73,6 @@ fos_user:
     from_email:
         address: trucktest@mail.fake
         sender_name: fake_trucktest_user   
-   
-# KNP html to pdf TODO to delete after tests        
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     %kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386
-        options:    []     
        
 # KNP paginator bundle        
 knp_paginator:

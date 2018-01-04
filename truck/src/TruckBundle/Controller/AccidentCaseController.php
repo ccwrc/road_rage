@@ -26,6 +26,7 @@ class AccidentCaseController extends Controller {
      * @Route("/caseProgressColorManual")
      */
     public function caseProgressColorManualAction() {
+        
         return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig');
     }
 
@@ -242,7 +243,7 @@ class AccidentCaseController extends Controller {
     }
 
     
-    // functions for generate end case report
+    // (start) functions for generate end case report
     protected function getDateDifferenceInMinutesOrReturnZero($earlierDate, $laterDate) {
         $diff = date_diff($earlierDate, $laterDate, false);
         if ($diff->invert == 1) {
@@ -367,7 +368,7 @@ class AccidentCaseController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->flush();
     }
-    // end functions for generate end case report
+    // (end) functions for generate end case report
     
     protected function getOperatorName() {
         return $this->container->get("security.context")->getToken()->getUser()

@@ -5,7 +5,7 @@ namespace TruckBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Response; //pdfTestAction
+// use Symfony\Component\HttpFoundation\Response; //pdfTestAction
 
 use DateTime;
 
@@ -44,31 +44,22 @@ class TestController extends Controller {
         ));
     }
 
-    /**
-     * @Route("/pdf")
-     */
-    public function pdfAction() {
-        return $this->render('TruckBundle:Test:pdf.html.twig', array(
-                        // ...
-        ));
-    }
-
-    /**
-     * @Route("/pdfTest")
-     */
-    public function pdfTestAction() {
-        // https://github.com/barryvdh/laravel-snappy/issues/9
-        //  rvanlaak commented on 7 Mar 2016 
-        // $this->get('knp_snappy.pdf')->getInternalGenerator()->setTimeout(300);
-        $html = $this->renderView('TruckBundle:Test:pdf_test.html.twig');
-        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
-
-        return new Response(
-                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => sprintf('attachment; filename="%s"', $filename)
-        ]);
-    }    
+//    /**
+//     * @Route("/pdfTest")
+//     */
+//    public function pdfTestAction() {
+//        // https://github.com/barryvdh/laravel-snappy/issues/9
+//        //  rvanlaak commented on 7 Mar 2016 
+//        // $this->get('knp_snappy.pdf')->getInternalGenerator()->setTimeout(300);
+//        $html = $this->renderView('TruckBundle:Test:pdf_test.html.twig');
+//        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
+//
+//        return new Response(
+//                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 200, [
+//            'Content-Type' => 'application/pdf',
+//            'Content-Disposition' => sprintf('attachment; filename="%s"', $filename)
+//        ]);
+//    }    
     
     /**
      * for stress test in sim. prod. env.
