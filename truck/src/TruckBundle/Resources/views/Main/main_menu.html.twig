@@ -7,22 +7,36 @@
             main_page
         </button>   
 
-        <button title="show all users" 
-                class="topMenu" 
-                onclick="window.location = '{{ path('truck_user_showallusers') }}';">
-            test
-        </button>     
+        {% if is_granted('ROLE_DEALER') %}
+            <button title="show active dealers" 
+                    class="topMenu"
+                    onclick="window.location = '{{ path("truck_dealer_showallactivedealers") }}';">
+                active_dealers
+            </button>  
+        {% endif %}    
 
-        <button title="find user by username or email" 
-                class="topMenu" 
-                onclick="window.location = '{{ path('truck_user_finduser') }}';">
-            test
-        </button>               
+        {% if is_granted('ROLE_OPERATOR') %}
+            <button title="go to operator panel"
+                    class="topMenu"
+                    onclick="window.location = '{{ path("truck_operator_panel") }}';">
+                OPERATOR_PANEL
+            </button>
+        {% endif %}        
 
-        <button title="logout user" 
-                class="topMenu" 
-                onclick="window.location = '{{ path('fos_user_security_logout') }}';">
-            {{ app.user.username }}:logout
-        </button>   
+        {% if is_granted('ROLE_ADMIN') %}
+            <button title="show all users" 
+                    class="topMenu" 
+                    onclick="window.location = '{{ path('truck_user_showallusers') }}';">
+                all_users
+            </button>             
+        {% endif %}              
+
+        {% if is_granted('ROLE_USER') %}
+            <button title="logout user" 
+                    class="topMenu" 
+                    onclick="window.location = '{{ path('fos_user_security_logout') }}';">
+                {{ app.user.username }}:logout
+            </button>   
+        {% endif %}
     </center> 
 </div>
