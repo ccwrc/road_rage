@@ -3,7 +3,7 @@
 {% block title %}new vehicle{% endblock %}
 
 {% block body %} 
-    
+
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <div class="pure-form pure-form-aligned">
@@ -28,26 +28,27 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-    document.addEventListener("DOMContentLoaded", function() {   
+        document.addEventListener("DOMContentLoaded", function () {
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '{{ path('truck_test_jsontest', {"vin":"123456pp"}) }}');
-xhr.onload = function() {
-    if (xhr.status === 200 && ((xhr.responseText.indexOf("fail")) !== 1)) {
-        alert(xhr.responseText);
-        var responseVehicleId = xhr.responseText;
-     var path = "{{ absolute_url('') }}";
-       window.location = path + responseVehicleId + '/editVehicle';
-    }
-    else {
-        alert('porazka ' + xhr.status);
-    }
-};
-xhr.send();
+            var inputVehicleVin = document.getElementById("vehicle_vin");
 
+            inputVehicleVin.addEventListener('keyup', function () {
+                if (inputVehicleVin.value.length === 8) {
+                    var xhr = new XMLHttpRequest();
+                    var getPath = "{{ absolute_url('') }}" + "checkVin?vin=" + inputVehicleVin.value;
+                    xhr.open('GET', getPath);
+                    xhr.onload = function () {
+                        if (xhr.status === 200 && ((xhr.responseText.indexOf("fail")) !== 1)) {
+                            var responseVehicleId = xhr.responseText;
+                            var pathToRedirect = "{{ absolute_url('') }}";
+                            window.location = pathToRedirect + responseVehicleId + '/editVehicle';
+                        }
+                    };
+                    xhr.send();
+                }
+            });
 
         });
     </script>   
 {% endblock %}
-
 
