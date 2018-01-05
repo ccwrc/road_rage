@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 // use Symfony\Component\HttpFoundation\Response; //pdfTestAction
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 use DateTime;
 
@@ -21,6 +23,34 @@ use TruckBundle\Entity\Vehicle;
  * @Security("has_role('ROLE_ADMIN')")
  */
 class TestController extends Controller {
+    
+    /**
+     * @Route("/jsonTest")
+     */
+    public function jsonTestAction(Request $req) {
+        $data = "fail";
+        $vin = $req->query->get('vin');
+
+        if (preg_match('/^\w{8}$/', $vin) == 1) {
+            $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                    ->findOneByVin($vin);
+            if ($vehicle !== null) {
+                $data = $vehicle->getId();
+            }
+        }
+
+        //$data = "fail";
+        return new JsonResponse($data);
+    }
+
+    //$regex = '/^.xyz[0-8]{3}$/'; // dowolny znak + xyz + dokładnie 3 wystapienia
+//// cyfry z przedzialu 0-8
+//$text = '5xyz451';
+//if(preg_match($regex, $text) == 1) {
+//    echo 'Matched';
+//} else {
+//    echo 'Not matched';
+//}
     
     /**
      * @Route("/dumpUser")
@@ -154,7 +184,7 @@ class TestController extends Controller {
         
         if ($vehicleGenerate) { 
             // vin: XY + $i (last 8 characters from vin -> $i must be 6 digit)
-            for ($i = 20100; $i <= 22100; $i++) {
+            for ($i = 200100; $i <= 202100; $i++) {
                 $vehicle = new Vehicle();
                 $vehicle->setCity("city" . $i);
                 $vehicle->setCompanyName("com name" . $i);

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use TruckBundle\Entity\Vehicle;
 use TruckBundle\Form\Vehicle\VehicleType;
@@ -17,12 +18,23 @@ use TruckBundle\Form\Vehicle\VehicleEditType;
  */
 class VehicleController extends Controller {
     
-    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
-        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
-        if ($vehicle === null) {
-            throw $this->createNotFoundException("Wrong vehicle ID");
+    /**
+     * @Route("/checkVin")
+     */
+    public function checkVinAction(Request $req) {
+        $responseVehicleId = "fail";
+        $vin = $req->query->get('vin');
+
+        if (preg_match('/^\w{8}$/', $vin) == 1) {
+            $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                    ->findOneByVin($vin);
+            if ($vehicle !== null) {
+                $responseVehicleId = $vehicle->getId();
+            }
         }
-    }    
+
+        return new JsonResponse($responseVehicleId);
+    }
 
     /**
      * @Route("/createVehicle")
@@ -91,5 +103,12 @@ class VehicleController extends Controller {
                     "vehicleId" => $vehicleId
         ]);
     }
+    
+    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        if ($vehicle === null) {
+            throw $this->createNotFoundException("Wrong vehicle ID");
+        }
+    }      
 
 }
