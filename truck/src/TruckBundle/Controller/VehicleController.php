@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use TruckBundle\Entity\Vehicle;
 use TruckBundle\Form\Vehicle\VehicleType;
 use TruckBundle\Form\Vehicle\VehicleEditType;
+use TruckBundle\Form\Vehicle\VehicleSearchType; // test only
 
 /**
  * @Route("/vehicle")
@@ -111,6 +112,29 @@ class VehicleController extends Controller {
         }
     }    
     
-    //TODO search by ($field, $data) {}
+    //TODO search by ($field, $data) {} ////////////////////////////////////
+    
+        /**
+     * @Route("/searchVehicle")
+     */
+    public function searchVehicleAction(Request $req) {
+        $vehicle = new Vehicle();
+        $form = $this->createForm(VehicleSearchType::class, $vehicle);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $vehicle = $form->getData();
+
+            var_dump($vehicle); exit;
+
+            return $this->redirectToRoute("truck_vehicle_showvehicle", [
+                        "vehicleId" => $vehicleId
+            ]);
+        }
+
+        return $this->render('TruckBundle:Vehicle:search_vehicle.html.twig', [
+                    "form" => $form->createView()
+        ]);
+    }
 
 }
