@@ -42,15 +42,6 @@ class TestController extends Controller {
         //$data = "fail";
         return new JsonResponse($data);
     }
-
-    //$regex = '/^.xyz[0-8]{3}$/'; // dowolny znak + xyz + dokładnie 3 wystapienia
-//// cyfry z przedzialu 0-8
-//$text = '5xyz451';
-//if(preg_match($regex, $text) == 1) {
-//    echo 'Matched';
-//} else {
-//    echo 'Not matched';
-//}
     
     /**
      * @Route("/dumpUser")
@@ -107,11 +98,11 @@ class TestController extends Controller {
         $accidentCaseActiveGenerate = false;
         // $accidentCaseActiveGenerate = true;
         $accidentCaseInactiveGenerate = false;
-        // $accidentCaseActiveGenerate = true;
+        // $accidentCaseInactiveGenerate = true;
         $monitoringIncomingGenerate = false;
         // $monitoringIncomingGenerate = true;
         $monitoringOutGenerate = false;
-        // $monitoringOutGenerate = false;
+        // $monitoringOutGenerate = true;
         
         $em = $this->getDoctrine()->getManager();
         $message = (date('H:i:s')) . ' START || ';

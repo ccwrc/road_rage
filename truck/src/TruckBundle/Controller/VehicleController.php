@@ -109,6 +109,8 @@ class VehicleController extends Controller {
         if ($vehicle === null) {
             throw $this->createNotFoundException("Wrong vehicle ID");
         }
-    }      
+    }    
+    
+    //TODO search by ($field, $data) {}
 
 }

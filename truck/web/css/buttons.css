@@ -62,6 +62,18 @@
     text-decoration: none;
 }
 
+.topMenuRed {
+    color: red;
+    background: #E6E6E6;
+    font-size: 80%;
+    font-weight: bold;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  
+    border: none rgba(0, 0, 0, 0);  
+    text-decoration: none;
+}
+
 .casesSwitch {  /* active/inactive/all */
     color: black;
     text-decoration: none;
@@ -139,7 +151,7 @@
     box-shadow: 1px 1px 1px 1px grey;
 }
 
-.topMenu:hover {
+.topMenu:hover, .topMenuRed:hover {
     color: white;
     text-shadow: 1px 1px 1px #000000;
 }
