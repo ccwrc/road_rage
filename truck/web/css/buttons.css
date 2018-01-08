@@ -151,7 +151,31 @@
     box-shadow: 1px 1px 1px 1px grey;
 }
 
-.topMenu:hover, .topMenuRed:hover {
+.indexMenu {
+    color: #6d6e70;
+    background: #E6E6E6;
+    font-size: 100%;
+    font-weight: bold;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  
+    border: none rgba(0, 0, 0, 0);  
+    text-decoration: none;
+}
+
+.indexMenuRed {
+    color: red;
+    background: #E6E6E6;
+    font-size: 100%;
+    font-weight: bold;
+    min-width: 50px;    
+    font-family: inherit;
+    border: 1px solid #999;  
+    border: none rgba(0, 0, 0, 0);  
+    text-decoration: none;
+}
+
+.topMenu:hover, .topMenuRed:hover, .indexMenu:hover, .indexMenuRed:hover {
     color: white;
     text-shadow: 1px 1px 1px #000000;
 }

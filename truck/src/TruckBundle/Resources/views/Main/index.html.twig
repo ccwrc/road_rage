@@ -17,9 +17,9 @@
     {#user panel#}
     <div class="padding7px">
         {% if is_granted('ROLE_USER') %}
-            <div class="formTitle">
+            <div class="indexTitle">
                 <center> 
-                    <button title="logout" class="topMenu"
+                    <button title="logout" class="indexMenu"
                             onclick="window.location = '{{ path("fos_user_security_logout") }}';">
                         {{ app.user.username }}:logout
                     </button>
@@ -42,11 +42,11 @@
                 {% endif %}
 
                 {% if is_granted('ROLE_USER') %}
-                    <button title="show profile" class="topMenu"
+                    <button title="show profile" class="indexMenu"
                             onclick="window.location = '{{ path("fos_user_profile_show") }}';">
                         profile
                     </button>
-                    <button title="edit profile" class="topMenu"
+                    <button title="edit profile" class="indexMenu"
                             onclick="window.location = '{{ path("fos_user_profile_edit") }}';">
                         edit_profile
                     </button>
@@ -63,23 +63,23 @@
             <h3 class="formTitle">dealer</h3>
         </center>
         <div class="padding7px">
-            <div class="formTitle">
+            <div class="indexTitle">
                 <center> 
-                    <button title="show active dealers" class="topMenu"
+                    <button title="show active dealers" class="indexMenu"
                             onclick="window.location = '{{ path("truck_dealer_showallactivedealers") }}';">
                         active_dealers
                     </button>  
-                    <button title="show all dealers" class="topMenu"
+                    <button title="show all dealers" class="indexMenu"
                             onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
                         all_dealers
                     </button>              
-                    <button title="add new vehicle" class="topMenu"
+                    <button title="add new vehicle" class="indexMenu"
                             onclick="window.location = '{{ path("truck_vehicle_createvehicle") }}';">
                         new_vehicle
                     </button>    
-                    <button title="res" class="topMenu"
-                            onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
-                        reserved - edit dealer
+                    <button title="search for a vehicle" class="indexMenu"
+                            onclick="window.location = '{{ path("truck_vehicle_searchvehicle") }}';">
+                        search_vehicle
                     </button>          
                 </center> 
             </div>
@@ -93,23 +93,23 @@
         </center>
 
         <div class="padding7px">
-            <div class="formTitle">
+            <div class="indexTitle">
                 <center> 
-                    <button title="new window" class="topMenuRed" 
+                    <button title="new window" class="indexMenuRed" 
                             onclick="window.open('{{ path("truck_operator_panel") }}');">
                         OPERATOR_PANEL
                     </button>
-                    <button title="new window" class="topMenu" 
+                    <button title="new window" class="indexMenu" 
                             onclick="window.open('{{ path("truck_dealer_showallactivedealers") }}');">
                         active_dealers
                     </button>  
-                    <button title="new window" class="topMenu" 
+                    <button title="new window" class="indexMenu" 
                             onclick="window.open('{{ path("truck_vehicle_createvehicle") }}');">
                         new_vehicle_&_case
                     </button>                      
-                    <button title="new window" class="topMenu" 
-                            onclick="window.open('{{ path("truck_vehicle_createvehicle") }}');">
-                        reserve
+                    <button title="new window" class="indexMenu" 
+                            onclick="window.open('{{ path("truck_vehicle_searchvehicle") }}');">
+                        search_vehicle
                     </button>                       
                 </center> 
             </div>
@@ -123,17 +123,17 @@
         </center>
 
         <div class="padding7px">
-            <div class="formTitle">
+            <div class="indexTitle">
                 <center> 
-                    <button title="add new dealer" class="topMenuRed"
+                    <button title="add new dealer" class="indexMenuRed"
                             onclick="window.location = '{{ path("truck_dealer_createdealer") }}';">
                         add_new_dealer
                     </button>   
-                    <button title="res" class="topMenu"
+                    <button title="res" class="indexMenu"
                             onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
                         reserved 
                     </button>  
-                    <button title="res" class="topMenu"
+                    <button title="res" class="indexMenu"
                             onclick="window.location = '{{ path("truck_dealer_showalldealers") }}';">
                         reserved 
                     </button>  
@@ -149,15 +149,15 @@
         </center>
 
         <div class="padding7px">
-            <div class="formTitle">
+            <div class="indexTitle">
                 <center> 
                     <button title="show all users" 
-                            class="topMenu" 
+                            class="indexMenu" 
                             onclick="window.location = '{{ path('truck_user_showallusers') }}';">
                         all_users
                     </button>             
                     <button title="find user by username or email" 
-                            class="topMenu" 
+                            class="indexMenu" 
                             onclick="window.location = '{{ path('truck_user_finduser') }}';">
                         find_user
                     </button>   
@@ -173,10 +173,10 @@
         </center>
 
         <div class="padding7px">
-            <div class="formTitle">
+            <div class="indexTitle">
                 <center> 
                     <button title="show all users" 
-                            class="topMenuRed" 
+                            class="indexMenuRed" 
                             onclick="window.location = '{{ path('truck_user_showallusers') }}';">
                         you have the option of deleting users
                     </button>   

@@ -13,6 +13,11 @@
                     onclick="window.location = '{{ path("truck_dealer_showallactivedealers") }}';">
                 active_dealers
             </button>  
+            <button title="search for a vehicle" 
+                    class="topMenu"
+                    onclick="window.location = '{{ path("truck_vehicle_searchvehicle") }}';">
+                search_vehicle
+            </button>                  
         {% endif %}    
 
         {% if is_granted('ROLE_OPERATOR') %}

@@ -51,23 +51,6 @@
         </button>  
         <br/>
     {% endif %}
-    {# for admin? #}
-    {% if is_granted('ROLE_ADMIN') %}
-        &nbsp;
-        <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            admin panel?
-        </button>     
-        <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved
-        </button>    
-        <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved
-        </button>    
-        <br/>
-    {% endif %}
     {# case bar for operator #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
@@ -75,12 +58,12 @@
                 onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
             new vehicle
         </button>          
-        <button title="reserved - new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
+        <button title="new window" class="panelMenuGreyButton" 
+                onclick="window.open('{{ path('truck_vehicle_searchvehicle') }}');">
             search vehicle
         </button>      
         <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_accidentcase_caseprogresscolormanual') }}');">
+                onclick="window.open('{{ path('truck_vehicle_searchvehicle') }}');">
             manual
         </button>               
     {% endif %}

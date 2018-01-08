@@ -139,3 +139,11 @@ body {
     color: black;
 }
 /* END knp pagination*/
+
+.indexTitle {
+    background-color: #E6E6E6;
+}
+
+.indexTitle:hover {
+    box-shadow: 0px 0px 3px 3px white;
+}
