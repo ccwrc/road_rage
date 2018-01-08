@@ -71,8 +71,8 @@ fos_user:
     firewall_name: main
     user_class: TruckBundle\Entity\User
     from_email:
-        address: trucktest@mail.fake
-        sender_name: fake_trucktest_user   
+        address: ccwrcbadtruck@gmail.com
+        sender_name: BAD_TRUCK_user_helper   
        
 # KNP paginator bundle        
 knp_paginator:
