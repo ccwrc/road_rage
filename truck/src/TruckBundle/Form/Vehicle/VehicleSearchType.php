@@ -10,6 +10,7 @@ class VehicleSearchType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
+                ->setMethod('GET')
                 ->add('companyName', null, [
                     "required" => false,
                     "label" => "By company name: "

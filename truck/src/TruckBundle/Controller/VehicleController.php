@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use TruckBundle\Entity\Vehicle;
 use TruckBundle\Form\Vehicle\VehicleType;
 use TruckBundle\Form\Vehicle\VehicleEditType;
-use TruckBundle\Form\Vehicle\VehicleSearchType; // test only
+use TruckBundle\Form\Vehicle\VehicleSearchType; 
 
 /**
  * @Route("/vehicle")
@@ -105,16 +105,7 @@ class VehicleController extends Controller {
         ]);
     }
     
-    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
-        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
-        if ($vehicle === null) {
-            throw $this->createNotFoundException("Wrong vehicle ID");
-        }
-    }    
-    
-    //TODO search by ($field, $data) {} ////////////////////////////////////
-    
-        /**
+    /**
      * @Route("/searchVehicle")
      */
     public function searchVehicleAction(Request $req) {
@@ -123,9 +114,19 @@ class VehicleController extends Controller {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $vehicles = $form->getData();
-// companyName, city, street, registrationNumber
+            $vehicleForm = $form->getData();
+            $companyName = $vehicleForm->getCompanyName();
+            $city = $vehicleForm->getCity();
+            $street = $vehicleForm->getStreet();
+            $registrationNumber = $vehicleForm->getRegistrationNumber();
 
+            $vehiclesQuery = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+                    ->findAllVehiclesByQuery($companyName, $city, $street, $registrationNumber);
+
+            $paginator = $this->get('knp_paginator');
+            $vehicles = $paginator->paginate(
+                    $vehiclesQuery, $req->query->get('page', 1)/* page number */, 
+                    20/* limit per page */);
 
             return $this->render('TruckBundle:Vehicle:show_search_vehicles.html.twig', [
                         "vehicles" => $vehicles
@@ -135,6 +136,13 @@ class VehicleController extends Controller {
         return $this->render('TruckBundle:Vehicle:search_vehicle.html.twig', [
                     "form" => $form->createView()
         ]);
+    }
+
+    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        if ($vehicle === null) {
+            throw $this->createNotFoundException("Wrong vehicle ID");
+        }
     }
 
 }

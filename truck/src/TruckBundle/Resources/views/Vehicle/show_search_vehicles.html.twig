@@ -12,7 +12,56 @@
 
     <div class="padding7px">
 
-        {{ dump(vehicles) }}
+        <div class="navigation">
+            {{ knp_pagination_render(vehicles) }}
+        </div>  
+
+        {% for vehicle in vehicles %}  
+            <span class="redBoldText">VIN: {{ vehicle.vin }}, 
+                Registration: {{ vehicle.registrationNumber }} </span>
+            <br/>
+            <button title="new window" class="pure-button pure-button-active button90blue" 
+                    onclick="window.open('{{ path('truck_vehicle_showvehicle', 
+                        {"vehicleId":vehicle.id}) }}');">
+                details
+            </button>   
+            <button title="new window" class="pure-button pure-button-active button90blue" 
+                    onclick="window.open('{{ path("truck_vehicle_editvehicle", 
+                        {"vehicleId":vehicle.id}) }}');">
+                edit
+            </button>   
+            {% if is_granted('ROLE_OPERATOR') %}
+                <button title="new accident case" 
+                        class="pure-button pure-button-active button90red" 
+                        onclick="window.location = '{{ path("truck_accidentcase_createcase", 
+                            {"vehicleId":vehicle.id}) }}';">
+                    new case
+                </button>   
+            {% endif %}
+            <br/>
+            <span class="boldText"> Company name:</span> {{ vehicle.companyName }} <br/> 
+            <span class="boldText"> Street:</span> {{ vehicle.street }} <br/>
+            <span class="boldText"> City, zip-code:</span> {{ vehicle.city }}, {{ vehicle.zipCode }} <br/>
+            <span class="boldText"> First contact person:</span> {{ vehicle.contactPerson }} <br/>
+            <span class="boldText"> Tax ID number:</span> {{ vehicle.taxIdNumber }} <br/>
+            <span class="boldText"> Phone:</span> {{ vehicle.phone }} <br/>
+            <span class="boldText"> Fax:</span> {{ vehicle.fax }} <br/>
+            <span class="boldText"> Mail:</span> {{ vehicle.mail }} <br/>
+            <span class="boldText"> Last mileage:</span> {{ vehicle.mileage }} <br/>
+            <span class="boldText"> Guarantee Type:</span> {{ vehicle.guaranteeType }} <br/>
+            <span class="boldText"> Purchase Date:</span> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
+            <span class="boldText"> Vehicle type:</span> {{ vehicle.nameType }} <br/><br/>
+
+            <span class="boldText"> Home dealer:</span> {{ vehicle.dealer.name }} <br/>
+            <span class="boldText"> Number of accident cases:</span> {{ vehicle.accidentCases | length }} <br/>
+            <hr class="hrStyle"/>
+        {% else %}
+            <span> No search results. </span>
+        {% endfor %}
+
+        <div class="navigation">
+            {{ knp_pagination_render(vehicles) }}
+        </div>  
 
     </div>
 
