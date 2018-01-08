@@ -1,0 +1,21 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}vehicles - search results{% endblock %}
+
+{% block body %}  
+
+    {{ include('TruckBundle:Main:main_menu.html.twig') }}
+
+    <center>
+        <h3 class="formTitle">vehicles - search results</h3>
+    </center>
+
+    <div class="padding7px">
+
+        {{ dump(vehicles) }}
+
+    </div>
+
+{% endblock %}
+
+

@@ -123,12 +123,12 @@ class VehicleController extends Controller {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $vehicle = $form->getData();
+            $vehicles = $form->getData();
+// companyName, city, street, registrationNumber
 
-            var_dump($vehicle); exit;
 
-            return $this->redirectToRoute("truck_vehicle_showvehicle", [
-                        "vehicleId" => $vehicleId
+            return $this->render('TruckBundle:Vehicle:show_search_vehicles.html.twig', [
+                        "vehicles" => $vehicles
             ]);
         }
 
