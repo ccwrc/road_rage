@@ -36,9 +36,7 @@ class NoteController extends Controller {
             $em->persist($note);
             $em->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                            //
-            ]);
+            return $this->redirectToRoute("truck_note_showusernotes");
         }
 
         return $this->render('TruckBundle:Note:create_note.html.twig', array(
