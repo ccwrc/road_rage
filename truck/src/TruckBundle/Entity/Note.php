@@ -4,14 +4,21 @@ namespace TruckBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use \DateTime;
+
 /**
  * Note
  *
  * @ORM\Table(name="note")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\NoteRepository")
  */
-class Note
-{
+class Note {
+
+    public function __construct() {
+        $this->timeSave = new DateTime("now");
+    }
+
     /**
      * @var int
      *
@@ -22,6 +29,8 @@ class Note
     private $id;
 
     /**
+     * @Assert\Choice({"private", "public"}) 
+     * 
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=60)
@@ -29,48 +38,66 @@ class Note
     private $status;
 
     /**
+     * @Assert\Type(type="integer")
+     * 
      * @var int
      *
-     * @ORM\Column(name="userId", type="integer")
+     * @ORM\Column(name="user_id", type="integer")
      */
     private $userId;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 255
+     * )  
+     * 
      * @var string
      *
-     * @ORM\Column(name="usernameAndRole", type="string", length=255)
+     * @ORM\Column(name="username_and_role", type="string", length=255)
      */
     private $usernameAndRole;
 
     /**
+     * @Assert\DateTime()   
+     * 
      * @var \DateTime
      *
-     * @ORM\Column(name="timeSave", type="datetime")
+     * @ORM\Column(name="time_save", type="datetime")
      */
     private $timeSave;
 
     /**
+     * @Assert\DateTime()   
+     * 
      * @var \DateTime
      *
-     * @ORM\Column(name="timePublication", type="datetime")
+     * @ORM\Column(name="time_publication", type="datetime")
      */
     private $timePublication;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     * min = 1,
+     * max = 21000,
+     * minMessage = "Minimum number of characters is {{ limit }}",
+     * maxMessage = "Maximum number of characters is {{ limit }}"
+     * ) 
+     * 
      * @var string
      *
-     * @ORM\Column(name="content", type="string", length=22000)
+     * @ORM\Column(name="content", type="string", length=21000)
      */
     private $content;
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -80,8 +107,7 @@ class Note
      * @param string $status
      * @return Note
      */
-    public function setStatus($status)
-    {
+    public function setStatus($status) {
         $this->status = $status;
 
         return $this;
@@ -92,8 +118,7 @@ class Note
      *
      * @return string 
      */
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
 
@@ -103,8 +128,7 @@ class Note
      * @param integer $userId
      * @return Note
      */
-    public function setUserId($userId)
-    {
+    public function setUserId($userId) {
         $this->userId = $userId;
 
         return $this;
@@ -115,8 +139,7 @@ class Note
      *
      * @return integer 
      */
-    public function getUserId()
-    {
+    public function getUserId() {
         return $this->userId;
     }
 
@@ -126,8 +149,7 @@ class Note
      * @param string $usernameAndRole
      * @return Note
      */
-    public function setUsernameAndRole($usernameAndRole)
-    {
+    public function setUsernameAndRole($usernameAndRole) {
         $this->usernameAndRole = $usernameAndRole;
 
         return $this;
@@ -138,8 +160,7 @@ class Note
      *
      * @return string 
      */
-    public function getUsernameAndRole()
-    {
+    public function getUsernameAndRole() {
         return $this->usernameAndRole;
     }
 
@@ -149,8 +170,7 @@ class Note
      * @param \DateTime $timeSave
      * @return Note
      */
-    public function setTimeSave($timeSave)
-    {
+    public function setTimeSave($timeSave) {
         $this->timeSave = $timeSave;
 
         return $this;
@@ -161,8 +181,7 @@ class Note
      *
      * @return \DateTime 
      */
-    public function getTimeSave()
-    {
+    public function getTimeSave() {
         return $this->timeSave;
     }
 
@@ -172,8 +191,7 @@ class Note
      * @param \DateTime $timePublication
      * @return Note
      */
-    public function setTimePublication($timePublication)
-    {
+    public function setTimePublication($timePublication) {
         $this->timePublication = $timePublication;
 
         return $this;
@@ -184,8 +202,7 @@ class Note
      *
      * @return \DateTime 
      */
-    public function getTimePublication()
-    {
+    public function getTimePublication() {
         return $this->timePublication;
     }
 
@@ -195,8 +212,7 @@ class Note
      * @param string $content
      * @return Note
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
 
         return $this;
@@ -207,8 +223,8 @@ class Note
      *
      * @return string 
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
+
 }
