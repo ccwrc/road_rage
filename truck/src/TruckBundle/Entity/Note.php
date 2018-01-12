@@ -30,7 +30,6 @@ class Note {
 
     /**
      * @Assert\Choice({"private", "public"}) 
-     * 
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=60)
@@ -39,7 +38,6 @@ class Note {
 
     /**
      * @Assert\Type(type="integer")
-     * 
      * @var int
      *
      * @ORM\Column(name="user_id", type="integer")
@@ -52,7 +50,6 @@ class Note {
      * min = 1,
      * max = 255
      * )  
-     * 
      * @var string
      *
      * @ORM\Column(name="username_and_role", type="string", length=255)
@@ -61,7 +58,6 @@ class Note {
 
     /**
      * @Assert\DateTime()   
-     * 
      * @var \DateTime
      *
      * @ORM\Column(name="time_save", type="datetime")
@@ -70,7 +66,6 @@ class Note {
 
     /**
      * @Assert\DateTime()   
-     * 
      * @var \DateTime
      *
      * @ORM\Column(name="time_publication", type="datetime")
@@ -85,7 +80,6 @@ class Note {
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
      * ) 
-     * 
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=21000)
