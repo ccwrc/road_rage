@@ -95,7 +95,7 @@
         <div class="padding7px">
             <div class="indexTitle">
                 <center> 
-                    <button title="new window" class="indexMenuRed" 
+                    <button title="new window" class="indexMenuRed" id="playEngineSound"
                             onclick="window.open('{{ path("truck_operator_panel") }}');">
                         OPERATOR_PANEL
                     </button>
@@ -185,4 +185,23 @@
         {% endif %}   
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var playEngineSoundButton = document.getElementById("playEngineSound");
+            var engineSound = new Audio("{{ asset('/sound_sample/engineStartSound.mp3') }}");
+
+            playEngineSoundButton.addEventListener("mouseenter", function () {
+                engineSound.play();
+            });
+
+            playEngineSoundButton.addEventListener("mouseleave", function () {
+                engineSound.pause();
+                engineSound.currentTime = 0;
+            });
+        });
+    </script>   
 {% endblock %}
