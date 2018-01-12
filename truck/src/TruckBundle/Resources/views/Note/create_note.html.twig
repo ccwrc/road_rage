@@ -1,7 +1,31 @@
-{% extends "::base.html.twig" %}
+{% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:Note:createNote{% endblock %}
+{% block title %}new note{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Note:createNote page</h1>
+{% block body %} 
+
+    {{ include('TruckBundle:Main:main_menu.html.twig') }}
+
+    <div class="pure-form pure-form-aligned">
+        <div class="pure-control-group">
+
+            <center>
+                <h3 class="formTitle"> new note </h3>
+            </center>
+
+            <div class="padding7px">
+                {{ form_start(form) }} 
+                {{ form_widget(form) }} 
+                <center>
+                    <input class="pure-button pure-button-active button90red" type="submit" 
+                           value="add note"/>
+                </center>
+
+                {{ form_end(form) }}
+            </div> 
+        </div>
+    </div>
+
 {% endblock %}
+
+

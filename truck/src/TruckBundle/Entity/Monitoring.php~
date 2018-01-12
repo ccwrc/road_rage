@@ -126,7 +126,6 @@ class Monitoring {
      */
     private $outComment;
 
-    // TODO auto field for document
     /**
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",

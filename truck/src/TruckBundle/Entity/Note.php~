@@ -200,27 +200,4 @@ class Note {
         return $this->content;
     }
 
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return Note
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
 }
