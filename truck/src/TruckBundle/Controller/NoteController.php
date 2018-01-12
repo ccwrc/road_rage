@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use TruckBundle\Entity\Note;
 use TruckBundle\Form\Note\NoteType;
-//use TruckBundle\Form\Note\NoteEditType;
+use TruckBundle\Form\Note\NoteEditType;
 use DateTime;
 
 /**
@@ -40,7 +40,30 @@ class NoteController extends Controller {
         }
 
         return $this->render('TruckBundle:Note:create_note.html.twig', array(
-                    "form" => $form->createView(),
+                    "form" => $form->createView()
+        ));
+    }
+    
+    /**
+     * @Route("/{noteId}/editNote", requirements={"noteId"="\d+"})
+     */
+    public function editNoteAction(Request $req, $noteId) {
+        // TODO $this->throwExceptionIf...
+        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->find($noteId);
+        $form = $this->createForm(NoteEditType::class, $note);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute("truck_note_showusernotes");
+        }
+
+        return $this->render('TruckBundle:Note:edit_note.html.twig', array(
+                    "form" => $form->createView()
         ));
     }
 
@@ -58,15 +81,6 @@ class NoteController extends Controller {
      */
     public function showUserNotesAction() {
         return $this->render('TruckBundle:Note:show_user_notes.html.twig', array(
-                        // ...
-        ));
-    }
-
-    /**
-     * @Route("/editNote")
-     */
-    public function editNoteAction() {
-        return $this->render('TruckBundle:Note:edit_note.html.twig', array(
                         // ...
         ));
     }
