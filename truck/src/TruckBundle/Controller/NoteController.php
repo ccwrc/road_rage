@@ -93,5 +93,16 @@ class NoteController extends Controller {
                         // ...
         ));
     }
+    
+    protected function throwExceptionIfIdOrUserIdIsWrong($noteId) {
+        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+        $userId = $this->getUser()->getId();
+        
+        if ($note === null) {
+            throw $this->createNotFoundException("Wrong note ID");
+        } else if ($note->getUserId() != $userId) {
+             throw $this->createNotFoundException("Wrong note ID");
+        }
+    }    
 
 }
