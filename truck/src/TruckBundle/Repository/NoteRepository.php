@@ -19,5 +19,21 @@ class NoteRepository extends EntityRepository {
                         . ' DESC')->setParameter('public', 'public');
         return $query;
     }
+    
+    public function findPrivateActualNotesByUserIdQuery($userId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT n FROM TruckBundle:Note n WHERE n.timePublication'
+                        . ' <= CURRENT_TIMESTAMP() AND n.userId = :userId ORDER BY n.timePublication'
+                        . ' DESC')->setParameter('userId', $userId);
+        return $query;
+    }    
+    
+    public function findPrivateFutureNotesByUserIdQuery($userId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT n FROM TruckBundle:Note n WHERE n.timePublication'
+                        . ' >= CURRENT_TIMESTAMP() AND n.userId = :userId ORDER BY n.timePublication'
+                        . ' ASC')->setParameter('userId', $userId);
+        return $query;
+    }     
 
 }

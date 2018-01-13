@@ -86,15 +86,32 @@ class NoteController extends Controller {
     /**
      * @Route("/showUserActualNotes")
      */
-    public function showUserActualNotesAction() {
+    public function showUserActualNotesAction(Request $req) {
+        $userId = $this->getUser()->getId();
+        $notesQuery = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->findPrivateActualNotesByUserIdQuery($userId);
+
+        $paginator = $this->get('knp_paginator');
+        $notes = $paginator->paginate(
+                $notesQuery, $req->query->get('page', 1)/* page number */, 20/* limit per page */);
+
+        return $this->render('TruckBundle:Note:show_user_actual_notes.html.twig', array(
+                    "notes" => $notes
+        ));
+    }
+
+    /**
+     * @Route("/showUserFutureNotes")
+     */
+    public function showUserFutureNotesAction(Request $req) {
         $userId = $this->getUser()->getId();
         $notes = $this->getDoctrine()->getRepository("TruckBundle:Note")
                 ->findAll();
 
-        return $this->render('TruckBundle:Note:show_user_notes.html.twig', array(
+        return $this->render('TruckBundle:Note:show_user_future_notes.html.twig', array(
                     "notes" => $notes
         ));
-    }
+    }    
 
     /**
      * @Route("/deleteNote")
