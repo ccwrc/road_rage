@@ -149,7 +149,7 @@ class NoteController extends Controller {
     }    
     
     /**
-     * @Route("/{noteId}/deleteFutureNote", requirements={"noteId"="\d+"})
+     * @Route("/{noteId}/deleteNote", requirements={"noteId"="\d+"})
      */
     public function deleteNoteAction($noteId) {
         $this->denyAccessUnlessGranted('ROLE_CONTROL', null, 'Access denied.');
@@ -181,7 +181,7 @@ class NoteController extends Controller {
         if ($note === null) {
             throw $this->createNotFoundException("Wrong note ID.");
         } else if ($note->getStatus() == "private") {
-            throw $this->createNotFoundException("No match.");
+            throw $this->createNotFoundException("Private note.");
         }
     }
 
