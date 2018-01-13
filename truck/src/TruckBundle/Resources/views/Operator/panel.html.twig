@@ -34,20 +34,37 @@
         </button>    
         <br/>    
     {% endif %}
-    {# for control #}
+    {# for operator (notes) #}
+    {% if is_granted('ROLE_CONTROL') %}
+        &nbsp;
+        <button title="new window" class="panelMenuGreyButton" 
+                onclick="window.open('{{ path('truck_note_createnote') }}');">
+            new note
+        </button>     
+        <button title="new window" class="panelMenuGreyButton" 
+                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+            reserved {# TODO #}
+        </button>  
+        <button title="new window" class="panelMenuGreyButton" 
+                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+            reserved  {# TODO #}
+        </button>  
+        <br/>
+    {% endif %}    
+    {# TODO for control #}
     {% if is_granted('ROLE_CONTROL') %}
         &nbsp;
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            report panel?
+            report panel? {# TODO #}
         </button>     
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved
+            reserved {# TODO #}
         </button>  
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved
+            reserved {# TODO #}
         </button>  
         <br/>
     {% endif %}
@@ -64,7 +81,7 @@
         </button>      
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_vehicle_searchvehicle') }}');">
-            manual
+            res for maps {# TODO #}
         </button>               
     {% endif %}
 {% endblock %} {# end block menuBar #}

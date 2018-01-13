@@ -48,7 +48,7 @@ class NoteController extends Controller {
      * @Route("/{noteId}/editNote", requirements={"noteId"="\d+"})
      */
     public function editNoteAction(Request $req, $noteId) {
-        // TODO $this->throwExceptionIf...
+        $this->throwExceptionIfIdOrUserIdIsWrong($noteId);
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")
                 ->find($noteId);
         $form = $this->createForm(NoteEditType::class, $note);
@@ -97,12 +97,12 @@ class NoteController extends Controller {
     protected function throwExceptionIfIdOrUserIdIsWrong($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
         $userId = $this->getUser()->getId();
-        
+
         if ($note === null) {
-            throw $this->createNotFoundException("Wrong note ID");
+            throw $this->createNotFoundException("Wrong note ID.");
         } else if ($note->getUserId() != $userId) {
-             throw $this->createNotFoundException("Wrong note ID");
+            throw $this->createNotFoundException("No match.");
         }
-    }    
+    }
 
 }
