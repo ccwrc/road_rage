@@ -14,7 +14,7 @@ use DateTime;
 
 /**
  * @Route("/note")
- * @Security("has_role('ROLE_DEALER')")
+ * @Security("has_role('ROLE_OPERATOR')")
  */
 class NoteController extends Controller {
 
@@ -70,9 +70,16 @@ class NoteController extends Controller {
     /**
      * @Route("/showPublicNotes")
      */
-    public function showPublicNotesAction() {
+    public function showPublicNotesAction(Request $req) {
+        $notesQuery = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->findAllPublicNotesQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $notes = $paginator->paginate(
+                $notesQuery, $req->query->get('page', 1)/* page number */, 20/* limit per page */);
+
         return $this->render('TruckBundle:Note:show_public_notes.html.twig', array(
-                        // ...
+                    "notes" => $notes
         ));
     }
 
@@ -80,8 +87,12 @@ class NoteController extends Controller {
      * @Route("/showUserNotes")
      */
     public function showUserNotesAction() {
+        $userId = $this->getUser()->getId();
+        $notes = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->findAll();
+
         return $this->render('TruckBundle:Note:show_user_notes.html.twig', array(
-                        // ...
+                    "notes" => $notes
         ));
     }
 

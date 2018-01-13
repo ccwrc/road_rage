@@ -35,7 +35,7 @@
         <br/>    
     {% endif %}
     {# for operator (notes) #}
-    {% if is_granted('ROLE_CONTROL') %}
+    {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_note_createnote') }}');">

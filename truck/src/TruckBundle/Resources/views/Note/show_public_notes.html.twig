@@ -1,7 +1,34 @@
-{% extends "::base.html.twig" %}
+{% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}TruckBundle:Note:showPublicNotes{% endblock %}
+{% block title %}all public notes{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Note:showPublicNotes page</h1>
+{% block body %} 
+
+    {{ include('TruckBundle:Main:main_menu.html.twig') }}
+
+    <center>
+        <h3 class="formTitle">notes for operators</h3>
+    </center>
+
+    <div class="navigation">
+        {{ knp_pagination_render(notes) }}
+    </div>       
+
+    <div class="padding7px">
+        {% for note in notes %} 
+            <span class="boldText"> Author:</span> {{ note.username }} 
+            <span class="boldText"> Date:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} <br/>
+            {{ note.content }}
+            <hr class="hrStyle"/>
+        {% else %}
+            No notes.
+        {% endfor %}
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(notes) }}
+    </div>    
+
 {% endblock %}
+
+
