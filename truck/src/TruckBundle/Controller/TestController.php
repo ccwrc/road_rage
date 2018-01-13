@@ -60,8 +60,11 @@ class TestController extends Controller {
      * @Route("/test")
      */
     public function testAction() {
+        $result = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->countPublicNotesFromLast24h();
+
         return $this->render('TruckBundle:Test:test.html.twig', array(
-                        // ...
+                    "result" => $result
         ));
     }
 

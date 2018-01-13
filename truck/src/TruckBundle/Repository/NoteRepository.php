@@ -4,6 +4,8 @@ namespace TruckBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+use DateTime;
+
 /**
  * NoteRepository
  *
@@ -11,6 +13,26 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class NoteRepository extends EntityRepository {
+    
+//    $date = new DateTime('2006-12-12');
+//$date->modify('+1 day');
+    
+    public function countUserNotesFromLast24h($userId) {
+//
+    }
+
+    public function countPublicNotesFromLast24h() {
+        $day = new DateTime("now");
+        $dayMinusOne = $day->modify("-1 day");
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT COUNT (n.id) FROM TruckBundle:Note n WHERE n.timePublication'
+                . ' BETWEEN :dayMinusOne AND CURRENT_TIMESTAMP() AND n.status LIKE :public');
+        $query->setParameter("dayMinusOne", $dayMinusOne);
+        $query->setParameter('public', 'public');
+        
+        return $query->getSingleScalarResult();
+    }
 
     public function findAllPublicNotesQuery() {
         $em = $this->getEntityManager();

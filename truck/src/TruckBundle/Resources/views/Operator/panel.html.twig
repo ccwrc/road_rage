@@ -42,12 +42,12 @@
             new note
         </button>     
         <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved {# TODO #}
+                onclick="window.open('{{ path('truck_note_showuseractualnotes') }}');">
+            my notes
         </button>  
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_note_showpublicnotes') }}');">
-            public notes  {# TODO #}
+            public notes  
         </button>  
         <br/>
     {% endif %}    
