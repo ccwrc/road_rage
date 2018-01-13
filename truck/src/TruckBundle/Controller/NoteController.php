@@ -36,7 +36,7 @@ class NoteController extends Controller {
             $em->persist($note);
             $em->flush();
 
-            return $this->redirectToRoute("truck_note_showusernotes");
+            return $this->redirectToRoute("truck_note_showuseractualnotes");
         }
 
         return $this->render('TruckBundle:Note:create_note.html.twig', array(
@@ -59,7 +59,7 @@ class NoteController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute("truck_note_showusernotes");
+            return $this->redirectToRoute("truck_note_showuseractualnotes");
         }
 
         return $this->render('TruckBundle:Note:edit_note.html.twig', array(
@@ -105,13 +105,17 @@ class NoteController extends Controller {
      */
     public function showUserFutureNotesAction(Request $req) {
         $userId = $this->getUser()->getId();
-        $notes = $this->getDoctrine()->getRepository("TruckBundle:Note")
-                ->findAll();
+        $notesQuery = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->findPrivateFutureNotesByUserIdQuery($userId);
+
+        $paginator = $this->get('knp_paginator');
+        $notes = $paginator->paginate(
+                $notesQuery, $req->query->get('page', 1)/* page number */, 20/* limit per page */);
 
         return $this->render('TruckBundle:Note:show_user_future_notes.html.twig', array(
                     "notes" => $notes
         ));
-    }    
+    }
 
     /**
      * @Route("/deleteNote")

@@ -1,35 +1,38 @@
 {% extends "TruckBundle:Main:base.html.twig" %}
 
-{% block title %}all notes{% endblock %}
+{% block title %}all notes - future{% endblock %}
 
 {% block body %} 
 
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <center>
-        <h3 class="formTitle">my notes</h3>
+        <h3 class="formTitle">my notes 
+            <button title="switch to future notes" 
+                    class="topMenu"
+                    onclick="window.location = '{{ path("truck_note_showuseractualnotes") }}';">
+                (switch to current)
+            </button>  
+        </h3>
     </center>
 
-    {#    <div class="navigation">
-            {{ knp_pagination_render(notes) }}
-        </div>  #}     
+    <div class="navigation">
+        {{ knp_pagination_render(notes) }}
+    </div>       
 
     <div class="padding7px">
         {% for note in notes %} 
-
-            <span class="boldText"> Author:</span> {{ note.username }} 
-            <span class="boldText"> Date:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} <br/>
+            <span class="boldText"> Status:</span> {{ note.status }}
+            <span class="boldText"> Date of publication:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} <br/>
             {{ note.content }}
-
             <hr class="hrStyle"/>
-
         {% else %}
             No notes.
         {% endfor %}
     </div>
 
-    {#    <div class="navigation">
-            {{ knp_pagination_render(notes) }}
-        </div>   #} 
+    <div class="navigation">
+        {{ knp_pagination_render(notes) }}
+    </div>    
 
 {% endblock %}
