@@ -59,6 +59,9 @@ class NoteController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
+            if ($note->getTimePublication() > new DateTime("now")) {
+                return $this->redirectToRoute("truck_note_showuserfuturenotes");
+            }
             return $this->redirectToRoute("truck_note_showuseractualnotes");
         }
 
@@ -144,6 +147,8 @@ class NoteController extends Controller {
 
         return $this->redirectToRoute("truck_note_showuserfuturenotes");
     }    
+    
+    // TODO plain del for control
 
     protected function throwExceptionIfIdOrUserIdIsWrong($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
