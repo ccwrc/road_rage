@@ -118,14 +118,19 @@ class NoteController extends Controller {
     }
 
     /**
-     * @Route("/deleteNote")
+     * @Route("/{noteId}/deleteActualNote", requirements={"noteId"="\d+"})
      */
-    public function deleteNoteAction() {
-        return $this->render('TruckBundle:Note:delete_note.html.twig', array(
-                        // ...
-        ));
+    public function deleteActualNoteAction($noteId) {
+        $this->throwExceptionIfIdOrUserIdIsWrong($noteId);
+        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($note);
+        $em->flush();
+
+        return $this->redirectToRoute("truck_note_showuseractualnotes");
     }
-    
+
     protected function throwExceptionIfIdOrUserIdIsWrong($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
         $userId = $this->getUser()->getId();

@@ -23,7 +23,19 @@
     <div class="padding7px">
         {% for note in notes %} 
             <span class="boldText"> Status:</span> {{ note.status }}
-            <span class="boldText"> Date of publication:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} <br/>
+            <span class="boldText"> Date of publication:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} 
+            <button title="edit note" 
+                    class="pure-button pure-button-active button70noBackground"
+                    onclick="window.location = '{{ path('truck_note_editnote', {"noteId":note.id}) }}';">
+                edit
+            </button>  
+            <button title="delete note" 
+                    class="pure-button pure-button-active button70noBackground"
+                    onclick="window.location = '{{ path('truck_note_deleteactualnote', {"noteId":note.id}) }}';"
+                    style="background-color:rgb(202, 60, 60)">
+                delete
+            </button>                  
+            <br/>
             {{ note.content }}
             <hr class="hrStyle"/>
         {% else %}
