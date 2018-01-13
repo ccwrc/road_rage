@@ -13,12 +13,20 @@ use DateTime;
  * repository methods below.
  */
 class NoteRepository extends EntityRepository {
-    
-//    $date = new DateTime('2006-12-12');
-//$date->modify('+1 day');
-    
-    public function countUserNotesFromLast24h($userId) {
-//
+
+    public function countUserPrivateNotesFromLast24h($userId) {
+        $day = new DateTime("now");
+        $dayMinusOne = $day->modify("-1 day");
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT COUNT (n.id) FROM TruckBundle:Note n WHERE n.timePublication'
+                . ' BETWEEN :dayMinusOne AND CURRENT_TIMESTAMP() AND n.status LIKE :private'
+                . ' AND n.userId = :userId');
+        $query->setParameter("dayMinusOne", $dayMinusOne);
+        $query->setParameter('private', 'private');
+        $query->setParameter('userId', $userId);
+        
+        return $query->getSingleScalarResult();
     }
 
     public function countPublicNotesFromLast24h() {

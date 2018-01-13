@@ -17,7 +17,7 @@ class OperatorController extends Controller {
      * @Route("/panel/{caseId}/{casesStatus}", requirements={"caseId"="\d+", "casesStatus"="\w{0,9}"})
      */
     public function panelAction(Request $req, $caseId = 0, $casesStatus = "active") {
-        $pageNumber = $this->checkVarIsNumberOrReturnOne($req->query->get('page', 1)); 
+        $pageNumber = $this->checkVarIsNumberOrReturnOne($req->query->get('page', 1));
         // session for AccidentCaseController, methods:
         // - showAllCasesAction
         // - showAllActiveCasesAction
@@ -34,12 +34,20 @@ class OperatorController extends Controller {
             $session->set('allPageNumber', $pageNumber);
         }
 
+        $userId = $this->getUser()->getId();
+        $countPrivateNote = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->countUserPrivateNotesFromLast24h($userId);
+        $countPublicNote = $this->getDoctrine()->getRepository("TruckBundle:Note")
+                ->countPublicNotesFromLast24h();
+
         return $this->render('TruckBundle:Operator:panel.html.twig', [
                     "caseId" => $caseId,
-                    "casesStatus" => $casesStatus
+                    "casesStatus" => $casesStatus,
+                    "countPrivateNote" => $countPrivateNote,
+                    "countPublicNote" => $countPublicNote
         ]);
     }
-    
+
     private function checkVarIsNumberOrReturnOne($var) {
         if(is_numeric($var)){
             return $var;

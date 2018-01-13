@@ -60,8 +60,10 @@ class TestController extends Controller {
      * @Route("/test")
      */
     public function testAction() {
+        $userId = $this->getUser()->getId();
+        
         $result = $this->getDoctrine()->getRepository("TruckBundle:Note")
-                ->countPublicNotesFromLast24h();
+                ->countUserPrivateNotesFromLast24h($userId);
 
         return $this->render('TruckBundle:Test:test.html.twig', array(
                     "result" => $result

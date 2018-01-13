@@ -157,7 +157,17 @@
 
 
 {% block infoBar %}
-    {{ parent() }} info1 messageInfo alarmInfo
+    {% if countPrivateNote != 0 %}
+        <a title="new window" target="_blank" class="casesSwitch" href="{{ path("truck_note_showuseractualnotes") }}">
+            my private notes from last 24h: {{ countPrivateNote }}  
+        </a>
+        <br/>
+    {% endif %}
+    {% if countPublicNote != 0 %}
+        <a title="new window" target="_blank" class="casesSwitch" href="{{ path("truck_note_showpublicnotes") }}">
+            public notes from last 24h: {{ countPublicNote }}
+        </a>
+    {% endif %}
 {% endblock %} {# end block infoBar #}
 
 {% block javascripts %}
