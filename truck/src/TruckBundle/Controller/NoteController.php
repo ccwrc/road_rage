@@ -84,9 +84,9 @@ class NoteController extends Controller {
     }
 
     /**
-     * @Route("/showUserNotes")
+     * @Route("/showUserActualNotes")
      */
-    public function showUserNotesAction() {
+    public function showUserActualNotesAction() {
         $userId = $this->getUser()->getId();
         $notes = $this->getDoctrine()->getRepository("TruckBundle:Note")
                 ->findAll();
