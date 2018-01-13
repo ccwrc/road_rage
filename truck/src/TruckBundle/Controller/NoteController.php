@@ -130,6 +130,20 @@ class NoteController extends Controller {
 
         return $this->redirectToRoute("truck_note_showuseractualnotes");
     }
+    
+    /**
+     * @Route("/{noteId}/deleteFutureNote", requirements={"noteId"="\d+"})
+     */
+    public function deleteFutureNoteAction($noteId) {
+        $this->throwExceptionIfIdOrUserIdIsWrong($noteId);
+        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($note);
+        $em->flush();
+
+        return $this->redirectToRoute("truck_note_showuserfuturenotes");
+    }    
 
     protected function throwExceptionIfIdOrUserIdIsWrong($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
