@@ -148,15 +148,39 @@ class NoteController extends Controller {
         return $this->redirectToRoute("truck_note_showuserfuturenotes");
     }    
     
-    // TODO plain del for control
+    /**
+     * @Route("/{noteId}/deleteFutureNote", requirements={"noteId"="\d+"})
+     */
+    public function deleteNoteAction($noteId) {
+        $this->denyAccessUnlessGranted('ROLE_CONTROL', null, 'Access denied.');
+        $this->throwExceptionIfIdOrStatusIsWrong($noteId);
+        
+        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
 
-    protected function throwExceptionIfIdOrUserIdIsWrong($noteId) {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($note);
+        $em->flush();
+
+        return $this->redirectToRoute("truck_note_showpublicnotes");
+    }     
+
+    private function throwExceptionIfIdOrUserIdIsWrong($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
         $userId = $this->getUser()->getId();
 
         if ($note === null) {
             throw $this->createNotFoundException("Wrong note ID.");
         } else if ($note->getUserId() != $userId) {
+            throw $this->createNotFoundException("No match.");
+        }
+    }
+    
+    private function throwExceptionIfIdOrStatusIsWrong($noteId) {
+        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+
+        if ($note === null) {
+            throw $this->createNotFoundException("Wrong note ID.");
+        } else if ($note->getStatus() == "private") {
             throw $this->createNotFoundException("No match.");
         }
     }
