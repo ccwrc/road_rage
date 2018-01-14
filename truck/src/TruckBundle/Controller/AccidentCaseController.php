@@ -12,6 +12,7 @@ use TruckBundle\Entity\Monitoring; //for createCaseAction (monitoringStart)
 use TruckBundle\Form\AccidentCase\AccidentCaseType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditEndType;
+use TruckBundle\Form\AccidentCase\AccidentCaseSearchType;
 use \DateTime;
 
 /**
@@ -20,14 +21,40 @@ use \DateTime;
  */
 class AccidentCaseController extends Controller {
 
-
-
     /**
      * @Route("/caseProgressColorManual")
      */
     public function caseProgressColorManualAction() {
         
         return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig');
+    }
+    
+    /**
+     * @Route("/searchCase")
+     */
+    public function searchCaseAction(Request $req) {
+        $case = new AccidentCase(); // TODO finish it
+        $form = $this->createForm(AccidentCaseSearchType::class, $case);
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $caseForm = $form->getData();
+            $probablyCaseId = $caseForm->getReportCaseTotal(); // i know...
+            $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+                    ->findOneById($probablyCaseId);
+            if ($case !== null) {
+                $caseId = $case->getId();
+                $casesStatus = $case->getStatus();
+                return $this->redirectToRoute("truck_operator_panel", [
+                            "caseId" => $caseId,
+                            "casesStatus" => $casesStatus
+                ]);
+            }
+        }
+
+        return $this->render('TruckBundle:AccidentCase:search_case.html.twig', [
+                    "form" => $form->createView()
+        ]);
     }
 
     /**
@@ -150,7 +177,7 @@ class AccidentCaseController extends Controller {
         $paginator = $this->get('knp_paginator');
         $cases = $paginator->paginate(
                 $casesQuery, $req->getSession()->get('allPageNumber', 1)/* page number */, 
-                500/* limit per page */);
+                200/* limit per page */);
         
         return $this->render('TruckBundle:AccidentCase:show_all_cases.html.twig', [
                     "cases" => $cases,
@@ -189,7 +216,7 @@ class AccidentCaseController extends Controller {
         $paginator = $this->get('knp_paginator');
         $cases = $paginator->paginate(
                 $casesQuery, $req->getSession()->get('inactivePageNumber', 1)/* page number */, 
-                500/* limit per page */);
+                200/* limit per page */);
 
         return $this->render('TruckBundle:AccidentCase:show_all_inactive_cases.html.twig', [
                     "cases" => $cases,
