@@ -61,8 +61,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{vehicleId}/createCase", requirements={"vehicleId"="\d+"})
      */
     public function createCaseAction(Request $req, $vehicleId) {
-        $this->throwExceptionIfVehicleIdIsWrong($vehicleId);
-        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
+        $vehicle = $this->throwExceptionOrGetVehicleBy($vehicleId);
         $case = new AccidentCase();
         $case->setVehicle($vehicle)->setTimeStart(new DateTime("now"));
         $form = $this->createForm(AccidentCaseType::class, $case);
@@ -95,8 +94,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/editCase", requirements={"caseId"="\d+"})
      */
     public function editCaseAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case = $this->throwExceptionOrGetCaseBy($caseId);
         $form = $this->createForm(AccidentCaseEditType::class, $case);
 
         $form->handleRequest($req);
@@ -119,10 +117,8 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/firstEditCaseEnd", requirements={"caseId"="\d+"})
      */
     public function firstEditCaseEndAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionOrGetCaseBy($caseId); 
         $this->generateAndSaveEndCaseReport($caseId);
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-                ->find($caseId);
         $form = $this->createForm(AccidentCaseEditEndType::class, $case);
 
         $form->handleRequest($req);
@@ -145,9 +141,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/editCaseEnd", requirements={"caseId"="\d+"})
      */
     public function editCaseEndAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
-                ->find($caseId);
+        $case = $this->throwExceptionOrGetCaseBy($caseId);
         $form = $this->createForm(AccidentCaseEditEndType::class, $case);
 
         $form->handleRequest($req);
@@ -171,7 +165,6 @@ class AccidentCaseController extends Controller {
      */
     public function showAllCasesAction(Request $req, $caseId = 0) {
         //session from OperatorController, method panelAction
-
         $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
                 ->findAllCasesQuery();
         $paginator = $this->get('knp_paginator');
@@ -190,7 +183,6 @@ class AccidentCaseController extends Controller {
      */
     public function showAllActiveCasesAction(Request $req, $caseId = 0) {
         //session from OperatorController, method panelAction
-
         $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
                 ->findAllActiveCasesQuery();
         $paginator = $this->get('knp_paginator');
@@ -209,7 +201,6 @@ class AccidentCaseController extends Controller {
      */
     public function showAllInactiveCasesAction(Request $req, $caseId = 0) {
         //session from OperatorController, method panelAction
-
         $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
                 ->findAllInactiveCasesQuery();
 
@@ -229,7 +220,7 @@ class AccidentCaseController extends Controller {
      */
     public function showStartCaseAction($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-
+        // do not throw exception above
         return $this->render('TruckBundle:AccidentCase:show_start_case.html.twig', [
                     "case" => $case
         ]);
@@ -240,7 +231,7 @@ class AccidentCaseController extends Controller {
      */
     public function showEndCaseAction($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-
+        // do not throw exception above
         return $this->render('TruckBundle:AccidentCase:show_end_case.html.twig', [
                     "case" => $case
         ]);
@@ -250,8 +241,7 @@ class AccidentCaseController extends Controller {
      * @Route("/{caseId}/activateDeactivateCase", requirements={"caseId"="\d+"})
      */
     public function activateDeactivateCaseAction($caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case = $this->throwExceptionOrGetCaseBy($caseId);
         if ($case->getStatus() === "active" && $case->getProgressColor() === "#E6E6E6") {
             $case->setStatus("inactive");
             $em = $this->getDoctrine()->getManager();
@@ -269,25 +259,22 @@ class AccidentCaseController extends Controller {
         }
     }
 
-    
     // (start) functions for generate end case report
     protected function getDateDifferenceInMinutesOrReturnZero($earlierDate, $laterDate) {
         $diff = date_diff($earlierDate, $laterDate, false);
         if ($diff->invert == 1) {
             return 0;
-        }
-        // http://php.net/manual/pl/class.dateinterval.php
+        }  // http://php.net/manual/pl/class.dateinterval.php
         $totalInMinutes = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i;
         return (int) $totalInMinutes;
     }
 
     protected function calculateArrivalTimeOrReturnZero($caseId) {
-        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEtaByCaseId($caseId);
-        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringRoByCaseId($caseId);
-        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        
+        $monitoringEta = $monitoringRepository->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringRo = $monitoringRepository->findLastMonitoringRoByCaseId($caseId);
+        $monitoringStrr = $monitoringRepository->findLastMonitoringStrrByCaseId($caseId);
 
         if (!$monitoringEta || !$monitoringRo || !$monitoringStrr) {
             return 0;
@@ -299,10 +286,10 @@ class AccidentCaseController extends Controller {
     }
 
     protected function calculateServiceCarLateOrReturnZero($caseId) {
-        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEtaByCaseId($caseId);
-        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        
+        $monitoringEta = $monitoringRepository->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringStrr = $monitoringRepository->findLastMonitoringStrrByCaseId($caseId);
 
         if (!$monitoringEta || !$monitoringStrr) {
             return 0;
@@ -314,12 +301,11 @@ class AccidentCaseController extends Controller {
     }
 
     protected function calculateRoadServiceTimeOrReturnZero($caseId) {
-        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEtaByCaseId($caseId);
-        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringStrrByCaseId($caseId);
-        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEndByCaseId($caseId);
+        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        
+        $monitoringEta = $monitoringRepository->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringStrr = $monitoringRepository->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringEnd = $monitoringRepository->findLastMonitoringEndByCaseId($caseId);
 
         if (!$monitoringEta || !$monitoringStrr || !$monitoringEnd) {
             return 0;
@@ -331,12 +317,11 @@ class AccidentCaseController extends Controller {
     }
 
     protected function calculateNoRoadServiceTimeOrReturnZero($caseId) {
-        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEtaByCaseId($caseId);
-        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringStrrByCaseId($caseId);
-        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEndByCaseId($caseId);
+        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        
+        $monitoringEta = $monitoringRepository->findLastMonitoringEtaByCaseId($caseId);
+        $monitoringStrr = $monitoringRepository->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringEnd = $monitoringRepository->findLastMonitoringEndByCaseId($caseId);
 
         if ($monitoringEta || !$monitoringStrr || !$monitoringEnd) {
             return 0;
@@ -348,10 +333,10 @@ class AccidentCaseController extends Controller {
     }
 
     protected function calculateRepairTotalTimeOrReturnZero($caseId) {
-        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringStrrByCaseId($caseId);
-        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEndByCaseId($caseId);
+        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        
+        $monitoringStrr = $monitoringRepository->findLastMonitoringStrrByCaseId($caseId);
+        $monitoringEnd = $monitoringRepository->findLastMonitoringEndByCaseId($caseId);
 
         if (!$monitoringStrr || !$monitoringEnd) {
             return 0;
@@ -363,10 +348,10 @@ class AccidentCaseController extends Controller {
     }
 
     protected function calculateCaseTotalTimeOrReturnZero($caseId) {
-        $monitoringStart = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findFirstMonitoringStartByCaseId($caseId);
-        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringEndByCaseId($caseId);
+        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        
+        $monitoringStart = $monitoringRepository->findFirstMonitoringStartByCaseId($caseId);
+        $monitoringEnd = $monitoringRepository->findLastMonitoringEndByCaseId($caseId);
 
         if (!$monitoringStart || !$monitoringEnd) {
             return 0;
@@ -398,21 +383,22 @@ class AccidentCaseController extends Controller {
     // (end) functions for generate end case report
     
     protected function getOperatorName() {
-        return $this->container->get("security.context")->getToken()->getUser()
-                        ->getUsername();
+        return $this->getUser()->getUsername();
     }
-
-    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+    
+    protected function throwExceptionOrGetVehicleBy($vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         if ($vehicle === null) {
             throw $this->createNotFoundException("Wrong vehicle ID");
         }
-    }
-
-    protected function throwExceptionIfCaseIdIsWrong($caseId) {
+        return $vehicle;
+    } 
+    
+    protected function throwExceptionOrGetCaseBy($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         if ($case === null) {
             throw $this->createNotFoundException("Wrong case ID");
         }
+        return $case;
     }    
 }
