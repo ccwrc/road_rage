@@ -22,10 +22,9 @@ class MonitoringEtaController extends MonitoringController {
      */
     public function createMonitoringEtaAction(Request $req, $caseId) {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
-        $operatorName = $this->getOperatorName();
 
         $monitoringEta = new Monitoring();
-        $monitoringEta->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringEta->setAccidentCase($case)->setOperator($this->getOperatorName())
                 ->setCode("ETA")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringEtaType::class, $monitoringEta);
 
@@ -59,8 +58,7 @@ class MonitoringEtaController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringEta = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringEta->setOperator($operatorName);
+            $monitoringEta->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

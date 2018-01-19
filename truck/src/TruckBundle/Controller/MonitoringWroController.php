@@ -20,10 +20,7 @@ class MonitoringWroController extends MonitoringController {
      * @Route("/{monitoringRoId}/createMonitoringWro", requirements={"monitoringRoId"="\d+"})
      */
     public function createMonitoringWroAction(Request $req, $monitoringRoId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringRoId, "RO");
-        $operatorName = $this->getOperatorName();
-        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringRoId);
+        $monitoringRo = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringRoId, "RO");
         $case = $monitoringRo->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringRo->getHomeDealer();
@@ -34,7 +31,7 @@ class MonitoringWroController extends MonitoringController {
         $currency = $monitoringRo->getCurrency();
 
         $monitoringWro = new Monitoring();
-        $monitoringWro->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
+        $monitoringWro->setAccidentCase($case)->setOperator($this->getOperatorName())->setHomeDealer($homeDealer)
                 ->setCode("WRO")->setRepairDealer($repairDealer)->setContactMail($mailForDocument)
                 ->setOptionalMails($stringWithOptionalMails)->setAmount($amount)->setCurrency($currency);
         $form = $this->createForm(MonitoringWroType::class, $monitoringWro);
@@ -62,15 +59,14 @@ class MonitoringWroController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringWro", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringWroAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "WRO");
-        $monitoringWro = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringWro = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "WRO");
         $caseId = $monitoringWro->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringWroEditType::class, $monitoringWro);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringWro = $form->getData();
+            $monitoringWro->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

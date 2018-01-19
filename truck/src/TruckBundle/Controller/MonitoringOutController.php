@@ -21,10 +21,9 @@ class MonitoringOutController extends MonitoringController {
      */
     public function createMonitoringOutAction(Request $req, $caseId) {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
-        $operatorName = $this->getOperatorName();
 
         $monitoringOut = new Monitoring();
-        $monitoringOut->setAccidentCase($case)->setOperator($operatorName)->setCode("Out");
+        $monitoringOut->setAccidentCase($case)->setOperator($this->getOperatorName())->setCode("Out");
         $form = $this->createForm(MonitoringOutType::class, $monitoringOut);
 
         $form->handleRequest($req);
@@ -56,8 +55,7 @@ class MonitoringOutController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringOut = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringOut->setOperator($operatorName);
+            $monitoringOut->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

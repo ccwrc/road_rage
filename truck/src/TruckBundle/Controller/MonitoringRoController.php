@@ -21,13 +21,12 @@ class MonitoringRoController extends MonitoringController {
      */
     public function createMonitoringRoAction(Request $req, $caseId) {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
-        $operatorName = $this->getOperatorName();
         $homeDealer = $case->getVehicle()->getDealer();
         $amount = $this->getAmountFromLastCpgOrReturnZero($caseId);
         $currency = $this->getCurrencyFromLastCpgOrReturnEur($caseId);
 
         $monitoringRo = new Monitoring();
-        $monitoringRo->setAccidentCase($case)->setOperator($operatorName)->setAmount($amount)
+        $monitoringRo->setAccidentCase($case)->setOperator($this->getOperatorName())->setAmount($amount)
                 ->setCurrency($currency)->setHomeDealer($homeDealer)->setCode("RO");
         $form = $this->createForm(MonitoringRoType::class, $monitoringRo);
 
@@ -64,8 +63,7 @@ class MonitoringRoController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringRo = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringRo->setOperator($operatorName);
+            $monitoringRo->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

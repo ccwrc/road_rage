@@ -37,8 +37,6 @@ class MonitoringController extends Controller {
     }    
 
     protected function getOperatorName() {
-//        return $this->container->get("security.context")->getToken()->getUser()
-//                ->getUsername();
         return $this->getUser()->getUsername();
     }
 
@@ -58,15 +56,6 @@ class MonitoringController extends Controller {
         $case->setProgressColor("#E6E6E6");
     }  
     
-    // TODO to delete
-    protected function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
-        if ($monitoring === null || $monitoring->getCode() != $code) { 
-            throw $this->createNotFoundException("Wrong monitoring data");
-        }
-    }  
-    
     protected function throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, $code) {
         $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
@@ -79,14 +68,6 @@ class MonitoringController extends Controller {
     protected function throwExceptionIfCaseIdIsWrongExcludingZero($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         if ($case === null && $caseId != 0) { //0 is default for operator panel
-            throw $this->createNotFoundException("Wrong case ID");
-        }
-    }
-    
-    // TODO to delete
-    protected function throwExceptionIfCaseIdIsWrong($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        if ($case === null) {
             throw $this->createNotFoundException("Wrong case ID");
         }
     }

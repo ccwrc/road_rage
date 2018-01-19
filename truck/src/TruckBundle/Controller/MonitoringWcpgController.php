@@ -21,7 +21,6 @@ class MonitoringWcpgController extends MonitoringController {
      */
     public function createMonitoringWcpgAction(Request $req, $monitoringCpgId) {
         $monitoringCpg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringCpgId, "CPG");
-        $operatorName = $this->getOperatorName();
         $case = $monitoringCpg->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringCpg->getHomeDealer();
@@ -29,8 +28,9 @@ class MonitoringWcpgController extends MonitoringController {
         $currency = $monitoringCpg->getCurrency();
 
         $monitoringWcpg = new Monitoring();
-        $monitoringWcpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setCode("WCPG")->setAmount($amount)->setCurrency($currency);
+        $monitoringWcpg->setAccidentCase($case)->setOperator($this->getOperatorName())
+                ->setHomeDealer($homeDealer)->setCode("WCPG")->setAmount($amount)
+                ->setCurrency($currency);
         $form = $this->createForm(MonitoringWcpgType::class, $monitoringWcpg);
 
         $form->handleRequest($req);
@@ -63,6 +63,7 @@ class MonitoringWcpgController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringWcpg = $form->getData();
+            $monitoringWcpg->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

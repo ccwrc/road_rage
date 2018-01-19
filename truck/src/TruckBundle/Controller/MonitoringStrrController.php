@@ -22,10 +22,9 @@ class MonitoringStrrController extends MonitoringController {
      */
     public function createMonitoringStrrAction(Request $req, $caseId) {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
-        $operatorName = $this->getOperatorName();
 
         $monitoringStrr = new Monitoring();
-        $monitoringStrr->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringStrr->setAccidentCase($case)->setOperator($this->getOperatorName())
                 ->setCode("STRR")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringStrrType::class, $monitoringStrr);
 
@@ -59,8 +58,7 @@ class MonitoringStrrController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringStrr = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringStrr->setOperator($operatorName);
+            $monitoringStrr->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

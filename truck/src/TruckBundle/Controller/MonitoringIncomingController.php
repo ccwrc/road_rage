@@ -21,10 +21,9 @@ class MonitoringIncomingController extends MonitoringController {
      */
     public function createMonitoringIncomingAction(Request $req, $caseId) {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
-        $operatorName = $this->getOperatorName();
 
         $monitoringIncoming = new Monitoring();
-        $monitoringIncoming->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringIncoming->setAccidentCase($case)->setOperator($this->getOperatorName())
                 ->setCode("Incoming");
         $form = $this->createForm(MonitoringIncomingType::class, $monitoringIncoming);
 
@@ -57,8 +56,7 @@ class MonitoringIncomingController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringIncoming = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringIncoming->setOperator($operatorName);
+            $monitoringIncoming->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

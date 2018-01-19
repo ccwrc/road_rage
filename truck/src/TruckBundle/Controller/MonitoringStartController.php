@@ -29,6 +29,7 @@ class MonitoringStartController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringStart = $form->getData();
+            $monitoringStart->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

@@ -28,10 +28,9 @@ class MonitoringPgController extends MonitoringController {
             ]);
         }        
         $contactMailForSendDocument = $homeDealer->getMainMail();
-        $operatorName = $this->getOperatorName();
 
         $monitoringPg = new Monitoring();
-        $monitoringPg->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringPg->setAccidentCase($case)->setOperator($this->getOperatorName())
                 ->setHomeDealer($homeDealer)->setCode("PG")->setAmount(2000)
                 ->setCurrency("EUR")->setContactMail($contactMailForSendDocument);
         $form = $this->createForm(MonitoringPgType::class, $monitoringPg);
@@ -66,6 +65,7 @@ class MonitoringPgController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringPg = $form->getData();
+            $monitoringPg->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

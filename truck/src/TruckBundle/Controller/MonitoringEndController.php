@@ -22,10 +22,9 @@ class MonitoringEndController extends MonitoringController {
      */
     public function createMonitoringEndAction(Request $req, $caseId) {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
-        $operatorName = $this->getOperatorName();
 
         $monitoringEnd = new Monitoring();
-        $monitoringEnd->setAccidentCase($case)->setOperator($operatorName)
+        $monitoringEnd->setAccidentCase($case)->setOperator($this->getOperatorName())
                 ->setCode("END")->setTimeSet(new DateTime("now"));
         $form = $this->createForm(MonitoringEndType::class, $monitoringEnd);
      
@@ -59,8 +58,7 @@ class MonitoringEndController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringEnd = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringEnd->setOperator($operatorName);
+            $monitoringEnd->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

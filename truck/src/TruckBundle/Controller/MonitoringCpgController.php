@@ -30,11 +30,10 @@ class MonitoringCpgController extends MonitoringController {
         }
 
         $monitoringCpg = new Monitoring();
-        $operatorName = $this->getOperatorName();
         $amount = $this->getAmountFromLastPgOrReturnZero($caseId);
         $currency = $this->getCurrencyFromLastPgOrReturnEur($caseId);
-        $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
-                ->setCode("CPG")->setAmount($amount)->setCurrency($currency);
+        $monitoringCpg->setAccidentCase($case)->setOperator($this->getOperatorName())
+                ->setHomeDealer($homeDealer)->setCode("CPG")->setAmount($amount)->setCurrency($currency);
         $form = $this->createForm(MonitoringCpgType::class, $monitoringCpg);
 
         $form->handleRequest($req);
@@ -67,8 +66,7 @@ class MonitoringCpgController extends MonitoringController {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringCpg = $form->getData();
-            $operatorName = $this->getOperatorName();
-            $monitoringCpg->setOperator($operatorName);
+            $monitoringCpg->setOperator($this->getOperatorName());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
