@@ -20,10 +20,8 @@ class MonitoringWpgController extends MonitoringController {
      * @Route("/{monitoringPgId}/createMonitoringWpg", requirements={"monitoringPgId"="\d+"})
      */
     public function createMonitoringWpgAction(Request $req, $monitoringPgId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringPgId, "PG");
+        $monitoringPg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringPgId, "PG");
         $operatorName = $this->getOperatorName();
-        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringPgId);
         $case = $monitoringPg->getAccidentCase();
         $caseId = $case->getId();
         $homeDealer = $monitoringPg->getHomeDealer();
@@ -61,9 +59,7 @@ class MonitoringWpgController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringWpg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringWpgAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "WPG");
-        $monitoringWpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringWpg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "WPG");
         $caseId = $monitoringWpg->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringWpgEditType::class, $monitoringWpg);
 
