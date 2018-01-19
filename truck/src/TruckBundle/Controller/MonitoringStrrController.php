@@ -21,9 +21,8 @@ class MonitoringStrrController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringStrr", requirements={"caseId"="\d+"})
      */
     public function createMonitoringStrrAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoringStrr = new Monitoring();
         $monitoringStrr->setAccidentCase($case)->setOperator($operatorName)
@@ -53,9 +52,7 @@ class MonitoringStrrController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringStrr", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringStrrAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "STRR");
-        $monitoringStrr = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringStrr = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "STRR");
         $caseId = $monitoringStrr->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringStrrEditType::class, $monitoringStrr);
 
