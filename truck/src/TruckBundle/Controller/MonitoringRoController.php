@@ -20,9 +20,8 @@ class MonitoringRoController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringRo", requirements={"caseId"="\d+"})
      */
     public function createMonitoringRoAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
         $amount = $this->getAmountFromLastCpgOrReturnZero($caseId);
         $currency = $this->getCurrencyFromLastCpgOrReturnEur($caseId);
@@ -58,9 +57,7 @@ class MonitoringRoController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringRo", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringRoAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "RO");
-        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringRo = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "RO");
         $caseId = $monitoringRo->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringRoEditType::class, $monitoringRo);
 
