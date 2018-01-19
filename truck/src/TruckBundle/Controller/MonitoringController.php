@@ -37,8 +37,9 @@ class MonitoringController extends Controller {
     }    
 
     protected function getOperatorName() {
-        return $this->container->get("security.context")->getToken()->getUser()
-                ->getUsername();
+//        return $this->container->get("security.context")->getToken()->getUser()
+//                ->getUsername();
+        return $this->getUser()->getUsername();
     }
 
     protected function setColorProgressRedForCase(AccidentCase $case) {
@@ -57,13 +58,23 @@ class MonitoringController extends Controller {
         $case->setProgressColor("#E6E6E6");
     }  
     
+    // TODO to delete
     protected function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
         $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
         if ($monitoring === null || $monitoring->getCode() != $code) { 
             throw $this->createNotFoundException("Wrong monitoring data");
         }
-    }    
+    }  
+    
+    protected function throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, $code) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        if ($monitoring === null || $monitoring->getCode() != $code) { 
+            throw $this->createNotFoundException("Wrong monitoring data");
+        }
+        return $monitoring;
+    }     
     
     protected function throwExceptionIfCaseIdIsWrongExcludingZero($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
@@ -72,12 +83,21 @@ class MonitoringController extends Controller {
         }
     }
     
+    // TODO to delete
     protected function throwExceptionIfCaseIdIsWrong($caseId) {
         $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
         if ($case === null) {
             throw $this->createNotFoundException("Wrong case ID");
         }
     }
+    
+    protected function throwExceptionIfWrongIdOrGetCaseBy($caseId) {
+        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        if ($case === null) {
+            throw $this->createNotFoundException("Wrong case ID");
+        }
+        return $case;
+    }    
     
     protected function throwExceptionIfDealerIsNotActive(Dealer $dealer) {
         if ($dealer->getIsActive() !== "active") {

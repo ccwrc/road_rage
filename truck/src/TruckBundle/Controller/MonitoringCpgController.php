@@ -20,10 +20,9 @@ class MonitoringCpgController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringCpgAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
-        $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
+        
         if (!$this->checkIfDealerIsActive($homeDealer)) {
             return $this->redirectToRoute("truck_main_warninginformation", [
                         "message" => "Dealer is not active, can not confirm PG."
@@ -31,6 +30,7 @@ class MonitoringCpgController extends MonitoringController {
         }
 
         $monitoringCpg = new Monitoring();
+        $operatorName = $this->getOperatorName();
         $amount = $this->getAmountFromLastPgOrReturnZero($caseId);
         $currency = $this->getCurrencyFromLastPgOrReturnEur($caseId);
         $monitoringCpg->setAccidentCase($case)->setOperator($operatorName)->setHomeDealer($homeDealer)
@@ -60,9 +60,7 @@ class MonitoringCpgController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringCpg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringCpgAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "CPG");
-        $monitoringCpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringCpg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "CPG");
         $caseId = $monitoringCpg->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringCpgEditType::class, $monitoringCpg);
 
