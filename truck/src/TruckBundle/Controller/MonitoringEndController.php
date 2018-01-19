@@ -21,9 +21,8 @@ class MonitoringEndController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringEnd", requirements={"caseId"="\d+"})
      */
     public function createMonitoringEndAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoringEnd = new Monitoring();
         $monitoringEnd->setAccidentCase($case)->setOperator($operatorName)
@@ -53,9 +52,7 @@ class MonitoringEndController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringEnd", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringEndAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "END");
-        $monitoringEnd = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringEnd = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "END");
         $caseId = $monitoringEnd->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringEndEditType::class, $monitoringEnd);
 
