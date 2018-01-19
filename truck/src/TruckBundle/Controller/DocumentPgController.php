@@ -15,10 +15,7 @@ class DocumentPgController extends DocumentController {
      * @Route("/{monitoringPgId}/createAndSendPg", requirements={"monitoringPgId"="\d+"})
      */
     public function createAndSendPgAction($monitoringPgId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringPgId, "PG");
-
-        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringPgId);
+        $monitoringPg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringPgId, "PG");
         $homeDealer = $monitoringPg->getHomeDealer();
         $accidentCase = $monitoringPg->getAccidentCase();
         $accidentCaseId = $accidentCase->getId();

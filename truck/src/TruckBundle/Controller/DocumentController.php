@@ -29,6 +29,7 @@ class DocumentController extends Controller {
         return false;
     }
     
+    // TODO to delete
     protected function throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, $code) {
         $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
                 ->find($monitoringId);
@@ -36,6 +37,15 @@ class DocumentController extends Controller {
             throw $this->createNotFoundException("Wrong monitoring data");
         }
     }
+    
+    protected function throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, $code) {
+        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
+                ->find($monitoringId);
+        if ($monitoring === null || $monitoring->getCode() != $code) {
+            throw $this->createNotFoundException("Wrong monitoring data");
+        }
+        return $monitoring;
+    }    
     
     protected function getEmailsFromString($string) {
         $unverifiedEmails = [];
