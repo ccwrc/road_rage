@@ -21,9 +21,8 @@ class MonitoringEtaController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringEta", requirements={"caseId"="\d+"})
      */
     public function createMonitoringEtaAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoringEta = new Monitoring();
         $monitoringEta->setAccidentCase($case)->setOperator($operatorName)
@@ -53,9 +52,7 @@ class MonitoringEtaController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringEta", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringEtaAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "ETA");
-        $monitoringEta = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringEta = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "ETA");
         $caseId = $monitoringEta->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringEtaEditType::class, $monitoringEta);
 
