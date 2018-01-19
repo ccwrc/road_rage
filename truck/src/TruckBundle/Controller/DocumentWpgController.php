@@ -15,10 +15,7 @@ class DocumentWpgController extends DocumentController {
      * @Route("/{monitoringWpgId}/createAndSendWpg", requirements={"monitoringWpgId"="\d+"})
      */
     public function createAndSendWpgAction($monitoringWpgId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringWpgId, "WPG");
-
-        $monitoringWpg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringWpgId);
+        $monitoringWpg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringWpgId, "WPG");
         $homeDealer = $monitoringWpg->getHomeDealer();
         $accidentCase = $monitoringWpg->getAccidentCase();
         $accidentCaseId = $accidentCase->getId();
