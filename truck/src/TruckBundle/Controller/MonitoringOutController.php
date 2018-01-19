@@ -20,9 +20,8 @@ class MonitoringOutController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringOut", requirements={"caseId"="\d+"})
      */
     public function createMonitoringOutAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoringOut = new Monitoring();
         $monitoringOut->setAccidentCase($case)->setOperator($operatorName)->setCode("Out");
@@ -50,9 +49,7 @@ class MonitoringOutController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringOut", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringOutAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "Out");
-        $monitoringOut = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringOut = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "Out");
         $caseId = $monitoringOut->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringOutEditType::class, $monitoringOut);
 
