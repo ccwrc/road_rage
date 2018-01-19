@@ -20,9 +20,8 @@ class MonitoringIncomingController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringIncoming", requirements={"caseId"="\d+"})
      */
     public function createMonitoringIncomingAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
 
         $monitoringIncoming = new Monitoring();
         $monitoringIncoming->setAccidentCase($case)->setOperator($operatorName)
@@ -51,9 +50,7 @@ class MonitoringIncomingController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringIncoming", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringIncomingAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "Incoming");
-        $monitoringIncoming = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringIncoming = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "Incoming");
         $caseId = $monitoringIncoming->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringIncomingEditType::class, $monitoringIncoming);
 
