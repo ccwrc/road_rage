@@ -15,10 +15,7 @@ class DocumentRoController extends DocumentController {
      * @Route("/{monitoringRoId}/createAndSendRo", requirements={"monitoringRoId"="\d+"})
      */
     public function createAndSendRoAction($monitoringRoId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringRoId, "RO");
-
-        $monitoringRo = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringRoId);
+        $monitoringRo = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringRoId, "RO");
         $homeDealer = $monitoringRo->getHomeDealer();
         $repairDealer = $monitoringRo->getRepairDealer();
         $accidentCase = $monitoringRo->getAccidentCase();
