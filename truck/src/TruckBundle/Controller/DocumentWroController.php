@@ -15,10 +15,7 @@ class DocumentWroController extends DocumentController {
      * @Route("/{monitoringWroId}/createAndSendWro", requirements={"monitoringWroId"="\d+"})
      */
     public function createAndSendWroAction($monitoringWroId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringWroId, "WRO");
-
-        $monitoringWro = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringWroId);
+        $monitoringWro = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringWroId, "WRO");
         $accidentCase = $monitoringWro->getAccidentCase();
         $accidentCaseId = $accidentCase->getId();
 
