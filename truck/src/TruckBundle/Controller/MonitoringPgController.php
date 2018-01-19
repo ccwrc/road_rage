@@ -20,9 +20,7 @@ class MonitoringPgController extends MonitoringController {
      * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
      */
     public function createMonitoringPgAction(Request $req, $caseId) {
-        $this->throwExceptionIfCaseIdIsWrong($caseId);
-        $operatorName = $this->getOperatorName();
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
         if (!$this->checkIfDealerIsActive($homeDealer)) {
             return $this->redirectToRoute("truck_main_warninginformation", [
@@ -30,6 +28,7 @@ class MonitoringPgController extends MonitoringController {
             ]);
         }        
         $contactMailForSendDocument = $homeDealer->getMainMail();
+        $operatorName = $this->getOperatorName();
 
         $monitoringPg = new Monitoring();
         $monitoringPg->setAccidentCase($case)->setOperator($operatorName)
@@ -60,9 +59,7 @@ class MonitoringPgController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringPgAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "PG");
-        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringPg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "PG");
         $caseId = $monitoringPg->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringPgEditType::class, $monitoringPg);
 
