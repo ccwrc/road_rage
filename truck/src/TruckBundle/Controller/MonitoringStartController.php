@@ -22,9 +22,7 @@ class MonitoringStartController extends MonitoringController {
      * @Route("/{monitoringId}/editMonitoringStart", requirements={"monitoringId"="\d+"})
      */
     public function editMonitoringStartAction(Request $req, $monitoringId) {
-        $this->throwExceptionIfMonitoringHasWrongCodeOrId($monitoringId, "START");
-        $monitoringStart = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
+        $monitoringStart = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "START");
         $caseId = $monitoringStart->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringStartEditType::class, $monitoringStart);
 
