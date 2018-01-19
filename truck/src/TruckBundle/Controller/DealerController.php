@@ -52,8 +52,7 @@ class DealerController extends Controller {
      * @Route("/{dealerId}/showDealer", requirements={"dealerId"="\d+"})
      */
     public function showDealerAction(Request $req, $dealerId) {
-        $this->throwExceptionIfDealerIdIsWrong($dealerId);
-        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
+        $dealer = $this->throwExceptionOrGetDealerBy($dealerId);
         $vehiclesQuery = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
                 ->findVehiclesByDealerIdQuery($dealerId);
 
@@ -98,10 +97,9 @@ class DealerController extends Controller {
      * @Route("/{dealerId}/editDealer", requirements={"dealerId"="\d+"})
      */
     public function editDealerAction(Request $req, $dealerId) {
-        $this->throwExceptionIfDealerIdIsWrong($dealerId);
         $this->denyAccessUnlessGranted('ROLE_OPERATOR', null, 'Access denied.');
-        $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")
-                ->find($dealerId);
+
+        $dealer = $this->throwExceptionOrGetDealerBy($dealerId);
         $form = $this->createForm(DealerEditType::class, $dealer);
 
         $form->handleRequest($req);
@@ -119,11 +117,12 @@ class DealerController extends Controller {
         ]);
     }
     
-    protected function throwExceptionIfDealerIdIsWrong($dealerId) {
+    private function throwExceptionOrGetDealerBy($dealerId) {
         $dealer = $this->getDoctrine()->getRepository("TruckBundle:Dealer")->find($dealerId);
         if ($dealer === null) {
             throw $this->createNotFoundException("Wrong dealer ID");
         }
+        return $dealer;
     }
 
 }
