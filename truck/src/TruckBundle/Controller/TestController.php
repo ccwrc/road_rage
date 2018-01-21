@@ -20,7 +20,7 @@ use TruckBundle\Entity\Vehicle;
 
 /**
  * @Route("/test")
- * @Security("has_role('ROLE_ADMIN')")
+ * @Security("has_role('ROLE_SUPER_ADMIN')")
  */
 class TestController extends Controller {
     

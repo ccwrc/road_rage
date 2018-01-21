@@ -29,8 +29,7 @@ class UserController extends Controller {
      * @Route("/{userId}/showUser", requirements={"userId"="\d+"})
      */
     public function showUserAction($userId) {
-        $this->throwExceptionIfUserIdIsWrong($userId);
-        $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
+        $user = $this->throwExceptionIfUserIdIsWrongOrGetUserBy($userId);
 
         return $this->render('TruckBundle:User:show_user.html.twig', array(
                     "user" => $user,
@@ -43,7 +42,7 @@ class UserController extends Controller {
      */
     public function showAllUsersAction() {
         $users = $this->getDoctrine()->getRepository("TruckBundle:User")->findAll();
-
+          // TODO pagination
         return $this->render('TruckBundle:User:show_all_users.html.twig', array(
                     "users" => $users
         ));
@@ -59,7 +58,7 @@ class UserController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-
+              // TODO create own repo (find by piece of name/email)
             $userManager = $this->container->get('fos_user.user_manager');
             $foundUser = $userManager->findUserByUsernameOrEmail($user->getUsername());
             return $this->render('TruckBundle:User:show_user.html.twig', [
@@ -77,12 +76,11 @@ class UserController extends Controller {
      * requirements={"userId"="\d+", "role"="\w{0,20}"})
      */
     public function addRoleToUserAction($userId, $role) {
-        $this->throwExceptionIfUserIdIsWrong($userId);
+        $user = $this->throwExceptionIfUserIdIsWrongOrGetUserBy($userId);
 
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository("TruckBundle:User")->find($userId);
         if (in_array($role, self::$permittedRoles)) {
             $user->addRole($role);
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
         }
 
@@ -96,12 +94,11 @@ class UserController extends Controller {
      * requirements={"userId"="\d+", "role"="\w{0,20}"})
      */
     public function removeRoleFromUserAction($userId, $role) {
-        $this->throwExceptionIfUserIdIsWrong($userId);
+        $user = $this->throwExceptionIfUserIdIsWrongOrGetUserBy($userId);
 
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository("TruckBundle:User")->find($userId);
         if (in_array($role, self::$permittedRoles)) {
             $user->removeRole($role);
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
         }
 
@@ -115,11 +112,9 @@ class UserController extends Controller {
      */
     public function deleteUserAction($userId) {
         $this->denyAccessUnlessGranted("ROLE_SUPER_ADMIN", null, "Access denied.");
-        $this->throwExceptionIfUserIdIsWrong($userId);
-
+        $user = $this->throwExceptionIfUserIdIsWrongOrGetUserBy($userId);
         $message = "You can not delete this user.";
 
-        $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
         $userName = $user->getUsername();
         $loggedUser = $this->getUser();
         if ($user != $loggedUser) {
@@ -138,8 +133,7 @@ class UserController extends Controller {
      * @Route("/{userId}/enableDisableUser", requirements={"userId"="\d+"})
      */
     public function enableDisableUserAction($userId) {
-        $this->throwExceptionIfUserIdIsWrong($userId);
-        $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
+        $user = $this->throwExceptionIfUserIdIsWrongOrGetUserBy($userId);
         $em = $this->getDoctrine()->getManager();
 
         if ($user->isEnabled() === false) {
@@ -155,12 +149,13 @@ class UserController extends Controller {
                     "permittedRoles" => self::$permittedRoles
         ));
     }
-
-    protected function throwExceptionIfUserIdIsWrong($userId) {
+    
+    private function throwExceptionIfUserIdIsWrongOrGetUserBy($userId) {
         $user = $this->getDoctrine()->getRepository("TruckBundle:User")->find($userId);
         if ($user === null) {
             throw $this->createNotFoundException("Wrong user ID");
         }
-    }
+        return $user;
+    }    
 
 }
