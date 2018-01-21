@@ -48,9 +48,7 @@ class NoteController extends Controller {
      * @Route("/{noteId}/editNote", requirements={"noteId"="\d+"})
      */
     public function editNoteAction(Request $req, $noteId) {
-        $this->throwExceptionIfIdOrUserIdIsWrong($noteId);
-        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")
-                ->find($noteId);
+        $note = $this->throwExceptionIfIdOrUserIdIsWrongOrGetNoteBy($noteId);
         $form = $this->createForm(NoteEditType::class, $note);
 
         $form->handleRequest($req);
@@ -124,8 +122,7 @@ class NoteController extends Controller {
      * @Route("/{noteId}/deleteActualNote", requirements={"noteId"="\d+"})
      */
     public function deleteActualNoteAction($noteId) {
-        $this->throwExceptionIfIdOrUserIdIsWrong($noteId);
-        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+        $note = $this->throwExceptionIfIdOrUserIdIsWrongOrGetNoteBy($noteId);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($note);
@@ -138,8 +135,7 @@ class NoteController extends Controller {
      * @Route("/{noteId}/deleteFutureNote", requirements={"noteId"="\d+"})
      */
     public function deleteFutureNoteAction($noteId) {
-        $this->throwExceptionIfIdOrUserIdIsWrong($noteId);
-        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+        $note = $this->throwExceptionIfIdOrUserIdIsWrongOrGetNoteBy($noteId);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($note);
@@ -153,9 +149,7 @@ class NoteController extends Controller {
      */
     public function deleteNoteAction($noteId) {
         $this->denyAccessUnlessGranted('ROLE_CONTROL', null, 'Access denied.');
-        $this->throwExceptionIfIdOrStatusIsWrong($noteId);
-        
-        $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
+        $note = $this->throwExceptionIfIdOrStatusIsWrongOrGetNoteBy($noteId);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($note);
@@ -163,8 +157,8 @@ class NoteController extends Controller {
 
         return $this->redirectToRoute("truck_note_showpublicnotes");
     }     
-
-    private function throwExceptionIfIdOrUserIdIsWrong($noteId) {
+    
+    private function throwExceptionIfIdOrUserIdIsWrongOrGetNoteBy($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
         $userId = $this->getUser()->getId();
 
@@ -173,9 +167,10 @@ class NoteController extends Controller {
         } else if ($note->getUserId() != $userId) {
             throw $this->createNotFoundException("No match.");
         }
-    }
+        return $note;
+    }    
     
-    private function throwExceptionIfIdOrStatusIsWrong($noteId) {
+    private function throwExceptionIfIdOrStatusIsWrongOrGetNoteBy($noteId) {
         $note = $this->getDoctrine()->getRepository("TruckBundle:Note")->find($noteId);
 
         if ($note === null) {
@@ -183,6 +178,7 @@ class NoteController extends Controller {
         } else if ($note->getStatus() == "private") {
             throw $this->createNotFoundException("Private note.");
         }
+        return $note;
     }
 
 }
