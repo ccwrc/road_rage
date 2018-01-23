@@ -33,7 +33,7 @@ class VehicleController extends Controller {
                 $responseVehicleId = $vehicle->getId();
             }
         }
-
+        // for view Vehicle:create_vehicle.html.twig
         return new JsonResponse($responseVehicleId);
     }
 
@@ -51,10 +51,9 @@ class VehicleController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($vehicle);
             $em->flush();
-            $vehicleId = $vehicle->getId();
 
             return $this->redirectToRoute("truck_vehicle_showvehicle", [
-                        "vehicleId" => $vehicleId
+                        "vehicleId" => $vehicle->getId()
             ]);
         }
 
@@ -67,9 +66,7 @@ class VehicleController extends Controller {
      * @Route("/{vehicleId}/showVehicle", requirements={"vehicleId"="\d+"})
      */
     public function showVehicleAction($vehicleId) {
-        $this->throwExceptionIfVehicleIdIsWrong($vehicleId);
-        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
-                ->find($vehicleId);
+        $vehicle = $this->throwExceptionIfVehicleIdIsWrongOrGetVehicleBy($vehicleId);
         $dealer = $vehicle->getDealer();
         $cases = $vehicle->getAccidentCases();
 
@@ -84,9 +81,7 @@ class VehicleController extends Controller {
      * @Route("/{vehicleId}/editVehicle", requirements={"vehicleId"="\d+"})
      */
     public function editVehicleAction(Request $req, $vehicleId) {
-        $this->throwExceptionIfVehicleIdIsWrong($vehicleId);
-        $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
-                ->find($vehicleId);
+        $vehicle = $this->throwExceptionIfVehicleIdIsWrongOrGetVehicleBy($vehicleId);
         $form = $this->createForm(VehicleEditType::class, $vehicle);
 
         $form->handleRequest($req);
@@ -137,12 +132,13 @@ class VehicleController extends Controller {
                     "form" => $form->createView()
         ]);
     }
-
-    protected function throwExceptionIfVehicleIdIsWrong($vehicleId) {
+    
+    private function throwExceptionIfVehicleIdIsWrongOrGetVehicleBy($vehicleId) {
         $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")->find($vehicleId);
         if ($vehicle === null) {
             throw $this->createNotFoundException("Wrong vehicle ID");
         }
-    }
+        return $vehicle;
+    }    
 
 }
