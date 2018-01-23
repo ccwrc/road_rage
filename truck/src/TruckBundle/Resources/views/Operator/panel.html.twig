@@ -52,22 +52,22 @@
         <br/>
     {% endif %}    
     {# TODO for control #}
-    {% if is_granted('ROLE_CONTROL') %}
+{#    {% if is_granted('ROLE_CONTROL') %}
         &nbsp;
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            report panel? {# TODO #}
+            report panel? 
         </button>     
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved {# TODO #}
+            reserved 
         </button>  
         <button title="new window" class="panelMenuGreyButton" 
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved {# TODO #}
+            reserved 
         </button>  
         <br/>
-    {% endif %}
+    {% endif %}#}
     {# case bar for operator #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
@@ -105,9 +105,6 @@
                 onclick="window.location = '{{ path('truck_monitoringpg_createmonitoringpg', {"caseId":caseId}) }}';">
             PG  
         </button>
-        {# old type button below #}
-        {#  <a title="Confirmation Payment Guarantee" href="{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}">
-            <button class="panelRedButton">CPG</button> </a>#}
         <button title="Confirmation Payment Guarantee" class="panelRedButton"
                 onclick="window.location = '{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}';">
             CPG  
@@ -137,12 +134,7 @@
                 onclick="window.location = '{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}';">
             Incoming
         </button>   
-        <br/>    
-
-        {# new window!  <button title="new window" class="panelOrangeButton" 
-                        onclick="window.open('{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}');">
-                    new window !
-                </button>  #}              
+        <br/>               
     {% endif %}
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
