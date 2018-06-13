@@ -27,28 +27,29 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    {# TODO #}
+    {#<script>#}
+        {#document.addEventListener("DOMContentLoaded", function () {#}
 
-            var inputVehicleVin = document.getElementById("vehicle_vin");
+            {#var inputVehicleVin = document.getElementById("vehicle_vin");#}
 
-            inputVehicleVin.addEventListener('keyup', function () {
-                if (inputVehicleVin.value.length === 8) {
-                    var xhr = new XMLHttpRequest();
-                    var getPath = "{{ absolute_url('') }}" + "checkVin?vin=" + inputVehicleVin.value;
-                    xhr.open('GET', getPath);
-                    xhr.onload = function () {
-                        if (xhr.status === 200 && ((xhr.responseText.indexOf("fail")) !== 1)) {
-                            var responseVehicleId = xhr.responseText;
-                            var pathToRedirect = "{{ absolute_url('') }}";
-                            window.location = pathToRedirect + responseVehicleId + '/editVehicle';
-                        }
-                    };
-                    xhr.send();
-                }
-            });
+            {#inputVehicleVin.addEventListener('keyup', function () {#}
+                {#if (inputVehicleVin.value.length === 8) {#}
+                    {#var xhr = new XMLHttpRequest();#}
+                    {#var getPath = "{{ absolute_url('') }}" + "checkVin?vin=" + inputVehicleVin.value;#}
+                    {#xhr.open('GET', getPath);#}
+                    {#xhr.onload = function () {#}
+                        {#if (xhr.status === 200 && ((xhr.responseText.indexOf("fail")) !== 1)) {#}
+                            {#var responseVehicleId = xhr.responseText;#}
+                            {#var pathToRedirect = "{{ absolute_url('') }}";#}
+                            {#window.location = pathToRedirect + responseVehicleId + '/editVehicle';#}
+                        {#}#}
+                    {#};#}
+                    {#xhr.send();#}
+                {#}#}
+            {#});#}
 
-        });
-    </script>   
+        {#});#}
+    {#</script>#}
 {% endblock %}
 
