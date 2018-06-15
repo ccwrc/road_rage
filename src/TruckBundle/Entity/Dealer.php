@@ -17,6 +17,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("mainMail")
  */
 class Dealer {
+
+    public static $active = 'active';
+    public static $inactive = 'inactive';
+    public static $suspended = 'suspended';
     
     public function __construct() {
         $this->vehicles = new ArrayCollection();
@@ -118,7 +122,7 @@ class Dealer {
      */
     private $mainFax;
 
-    //TODO change checkMX val -> true
+    //TODO (prod) change checkMX val -> true
     /**
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
