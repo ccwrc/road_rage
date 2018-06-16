@@ -19,7 +19,7 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i <= 40; $i++) {
-            $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1,2000));
+            $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1, 2000));
             $date = new \DateTime("now - " . \mt_rand(1, 2000) . "minutes");
 
             $activeAccidentCase = new AccidentCase();
@@ -33,7 +33,7 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
 
             $monitoringStart = new Monitoring();
             $monitoringStart->setAccidentCase($activeAccidentCase)
-                ->setCode("START")
+                ->setCode(Monitoring::$codeStart)
                 ->setOperator("operatorName")
                 ->setComments($activeAccidentCase->getComment())
                 ->setContactThrough($activeAccidentCase->getDriverContact());
@@ -41,7 +41,8 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
         }
 
         for ($i = 1; $i <= 3000; $i++) {
-            $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1,2000));
+            $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1, 2000));
+            $date = new \DateTime("now - " . \mt_rand(1500, 5000) . "minutes");
 
             $inactiveAccidentCase = new AccidentCase();
             $inactiveAccidentCase->setComment("case comment" . $i);
@@ -49,19 +50,15 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
             $inactiveAccidentCase->setDriverContact("contact to driver" . $i);
             $inactiveAccidentCase->setLocation("vehicle location " . $i);
             $inactiveAccidentCase->setStatus("inactive");
-            $inactiveAccidentCase->setProgressColor("#E6E6E6");
-
-            $date = new \DateTime("now - " . mt_rand(1, 2000) . "hours");
+            $inactiveAccidentCase->setProgressColor(AccidentCase::$progressColorLightGrey);
             $inactiveAccidentCase->setTimeStart($date);
-
-//            $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
-//                ->find(mt_rand(2, 1990));
             $inactiveAccidentCase->setVehicle($vehicle);
-
             $manager->persist($inactiveAccidentCase);
 
             $monitoringStart = new Monitoring();
-            $monitoringStart->setAccidentCase($inactiveAccidentCase)->setCode("START")->setOperator("op name")
+            $monitoringStart->setAccidentCase($inactiveAccidentCase)
+                ->setCode(Monitoring::$codeStart)
+                ->setOperator('plainName')
                 ->setComments($inactiveAccidentCase->getComment())
                 ->setContactThrough($inactiveAccidentCase->getDriverContact());
             $manager->persist($monitoringStart);
