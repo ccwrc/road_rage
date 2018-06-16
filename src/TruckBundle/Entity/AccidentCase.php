@@ -13,19 +13,34 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="accident_case")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\AccidentCaseRepository")
  */
-class AccidentCase {
-    
-    public function __construct() {
+class AccidentCase
+{
+
+    public static $statusActive = 'active';
+    public static $statusInactive = 'inactive';
+
+    public static $progressColorRed = '#FF7575';
+    public static $progressColorOrange = '#FF9C42';
+    public static $progressColorGreen = '#93EEAA';
+    public static $progressColorLightGrey = '#E6E6E6';
+
+    public static $reportRepairStatusInitialization = 'initialization';
+    public static $reportRepairStatusCompleted = 'completed';
+    public static $reportRepairStatusIncompleted = 'incompleted';
+    public static $reportRepairStatusCanceled = 'canceled';
+
+    public function __construct()
+    {
         $this->monitorings = new ArrayCollection();
         $this->reportArrivalTime = 0;
         $this->reportCaseTotal = 0;
         $this->reportLate = 0;
-        $this->reportNrsTime = 0;
-        $this->reportRepairStatus = "initialization";
+        $this->reportNrsTime = 0; // nrs - no road service
+        $this->reportRepairStatus = AccidentCase::$reportRepairStatusInitialization;
         $this->reportRepairTotal = 0;
-        $this->reportRsTime = 0;
-        $this->status = "active";
-        $this->progressColor = "#FF7575";
+        $this->reportRsTime = 0; // rs - road service
+        $this->status = AccidentCase::$statusActive;
+        $this->progressColor = AccidentCase::$progressColorRed;
     }
 
     /**
@@ -56,7 +71,7 @@ class AccidentCase {
      * max = 30100,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )    
+     * )
      * @var string
      *
      * @ORM\Column(name="damage_description", type="text", length=30100)
@@ -70,7 +85,7 @@ class AccidentCase {
      * max = 30100,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="location", type="text", length=30100)
@@ -84,7 +99,7 @@ class AccidentCase {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )         
+     * )
      * @var string
      *
      * @ORM\Column(name="driver_contact", type="string", length=255)
@@ -98,7 +113,7 @@ class AccidentCase {
      * max = 65000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="comment", type="text", length=65000)
@@ -112,7 +127,7 @@ class AccidentCase {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="info_sms", type="string", length=255, nullable=true)
@@ -123,13 +138,13 @@ class AccidentCase {
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
-     * )    
+     * )
      * @Assert\Length(
      * min = 5,
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )             
+     * )
      * @var string
      *
      * @ORM\Column(name="info_mail", type="string", length=255, nullable=true)
@@ -151,14 +166,14 @@ class AccidentCase {
      * @ORM\Column(name="progress_color", type="string", length=255)
      */
     private $progressColor;
-    
+
     /**
      * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_start", type="datetime", nullable=true)
      */
-    private $timeStart;    
+    private $timeStart;
 
     /**
      * @Assert\Type(
@@ -175,7 +190,7 @@ class AccidentCase {
      * @Assert\Type(
      *     type="numeric",
      *     message="The value {{ value }} is not a number."
-     * )     
+     * )
      * @var int
      *
      * @ORM\Column(name="report_rs_time", type="integer")
@@ -186,7 +201,7 @@ class AccidentCase {
      * @Assert\Type(
      *     type="numeric",
      *     message="The value {{ value }} is not a number."
-     * )     
+     * )
      * @var int
      *
      * @ORM\Column(name="report_nrs_time", type="integer")
@@ -208,7 +223,7 @@ class AccidentCase {
      * @Assert\Type(
      *     type="numeric",
      *     message="The value {{ value }} is not a number."
-     * )     
+     * )
      * @var int
      *
      * @ORM\Column(name="report_arrival_time", type="integer")
@@ -219,7 +234,7 @@ class AccidentCase {
      * @Assert\Type(
      *     type="numeric",
      *     message="The value {{ value }} is not a number."
-     * )     
+     * )
      * @var int
      *
      * @ORM\Column(name="report_case_total", type="integer")
@@ -238,7 +253,7 @@ class AccidentCase {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -261,7 +276,7 @@ class AccidentCase {
     /**
      * Get damageDescription
      *
-     * @return string 
+     * @return string
      */
     public function getDamageDescription()
     {
@@ -284,7 +299,7 @@ class AccidentCase {
     /**
      * Get location
      *
-     * @return string 
+     * @return string
      */
     public function getLocation()
     {
@@ -307,7 +322,7 @@ class AccidentCase {
     /**
      * Get driverContact
      *
-     * @return string 
+     * @return string
      */
     public function getDriverContact()
     {
@@ -330,7 +345,7 @@ class AccidentCase {
     /**
      * Get comment
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
@@ -353,7 +368,7 @@ class AccidentCase {
     /**
      * Get infoSms
      *
-     * @return string 
+     * @return string
      */
     public function getInfoSms()
     {
@@ -376,7 +391,7 @@ class AccidentCase {
     /**
      * Get infoMail
      *
-     * @return string 
+     * @return string
      */
     public function getInfoMail()
     {
@@ -399,7 +414,7 @@ class AccidentCase {
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -422,7 +437,7 @@ class AccidentCase {
     /**
      * Get reportLate
      *
-     * @return integer 
+     * @return integer
      */
     public function getReportLate()
     {
@@ -445,7 +460,7 @@ class AccidentCase {
     /**
      * Get reportRsTime
      *
-     * @return integer 
+     * @return integer
      */
     public function getReportRsTime()
     {
@@ -468,7 +483,7 @@ class AccidentCase {
     /**
      * Get reportNrsTime
      *
-     * @return integer 
+     * @return integer
      */
     public function getReportNrsTime()
     {
@@ -491,7 +506,7 @@ class AccidentCase {
     /**
      * Get reportRepairTotal
      *
-     * @return integer 
+     * @return integer
      */
     public function getReportRepairTotal()
     {
@@ -514,7 +529,7 @@ class AccidentCase {
     /**
      * Get reportArrivalTime
      *
-     * @return integer 
+     * @return integer
      */
     public function getReportArrivalTime()
     {
@@ -537,7 +552,7 @@ class AccidentCase {
     /**
      * Get reportCaseTotal
      *
-     * @return integer 
+     * @return integer
      */
     public function getReportCaseTotal()
     {
@@ -560,7 +575,7 @@ class AccidentCase {
     /**
      * Get reportRepairStatus
      *
-     * @return string 
+     * @return string
      */
     public function getReportRepairStatus()
     {
@@ -583,7 +598,7 @@ class AccidentCase {
     /**
      * Get vehicle
      *
-     * @return \TruckBundle\Entity\Vehicle 
+     * @return \TruckBundle\Entity\Vehicle
      */
     public function getVehicle()
     {
@@ -616,7 +631,7 @@ class AccidentCase {
     /**
      * Get monitorings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMonitorings()
     {
@@ -639,7 +654,7 @@ class AccidentCase {
     /**
      * Get progressColor
      *
-     * @return string 
+     * @return string
      */
     public function getProgressColor()
     {
@@ -663,7 +678,7 @@ class AccidentCase {
     /**
      * Get timeStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTimeStart()
     {
