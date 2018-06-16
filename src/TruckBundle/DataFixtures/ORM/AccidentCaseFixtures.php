@@ -41,6 +41,8 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
         }
 
         for ($i = 1; $i <= 3000; $i++) {
+            $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1,2000));
+
             $inactiveAccidentCase = new AccidentCase();
             $inactiveAccidentCase->setComment("case comment" . $i);
             $inactiveAccidentCase->setDamageDescription("damage description" . $i);
@@ -52,8 +54,8 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
             $date = new \DateTime("now - " . mt_rand(1, 2000) . "hours");
             $inactiveAccidentCase->setTimeStart($date);
 
-            $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
-                ->find(mt_rand(2, 1990));
+//            $vehicle = $this->getDoctrine()->getRepository("TruckBundle:Vehicle")
+//                ->find(mt_rand(2, 1990));
             $inactiveAccidentCase->setVehicle($vehicle);
 
             $manager->persist($inactiveAccidentCase);

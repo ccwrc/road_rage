@@ -13,12 +13,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="vehicle")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\VehicleRepository")
- * @UniqueEntity("vin") 
+ * @UniqueEntity("vin")
  */
 class Vehicle
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->accidentCases = new ArrayCollection();
     }
 
@@ -26,12 +27,12 @@ class Vehicle
      * @ORM\OneToMany(targetEntity="AccidentCase", mappedBy="vehicle")
      */
     private $accidentCases;
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="Dealer", inversedBy="vehicles")
      * @ORM\JoinColumn(name="dealer_id", referencedColumnName="id")
      */
-    private $dealer;    
+    private $dealer;
 
     /**
      * @var int
@@ -50,7 +51,7 @@ class Vehicle
      * min = 8,
      * max = 8,
      * exactMessage = "Enter last 8 characters from vin"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="vin", type="string", length=255, unique=true)
@@ -64,7 +65,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="company_name", type="string", length=255)
@@ -78,7 +79,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="tax_id_number", type="string", length=255)
@@ -92,7 +93,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="contact_person", type="string", length=255)
@@ -106,7 +107,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255)
@@ -118,7 +119,7 @@ class Vehicle
      *     pattern="/[0-9][0-9]-[0-9][0-9][0-9]/",
      *     match=true,
      *     message="The right pattern is the DD-DDD (D as digit)"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="zip_code", type="string", length=50)
@@ -132,7 +133,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
@@ -146,7 +147,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
@@ -160,7 +161,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="fax", type="string", length=255, nullable=true)
@@ -174,7 +175,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255, nullable=true)
@@ -188,7 +189,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="registration_number", type="string", length=255)
@@ -202,7 +203,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )      
+     * )
      * @var string
      *
      * @ORM\Column(name="mileage", type="string", length=255)
@@ -216,7 +217,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="guarantee_type", type="string", length=255)
@@ -224,7 +225,7 @@ class Vehicle
     private $guaranteeType;
 
     /**
-     * @Assert\DateTime()       
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="purchase_date", type="date", nullable=true)
@@ -238,7 +239,7 @@ class Vehicle
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="name_type", type="string", length=255)
@@ -249,7 +250,7 @@ class Vehicle
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -272,7 +273,7 @@ class Vehicle
     /**
      * Get vin
      *
-     * @return string 
+     * @return string
      */
     public function getVin()
     {
@@ -295,7 +296,7 @@ class Vehicle
     /**
      * Get companyName
      *
-     * @return string 
+     * @return string
      */
     public function getCompanyName()
     {
@@ -318,7 +319,7 @@ class Vehicle
     /**
      * Get taxIdNumber
      *
-     * @return string 
+     * @return string
      */
     public function getTaxIdNumber()
     {
@@ -341,7 +342,7 @@ class Vehicle
     /**
      * Get contactPerson
      *
-     * @return string 
+     * @return string
      */
     public function getContactPerson()
     {
@@ -364,7 +365,7 @@ class Vehicle
     /**
      * Get street
      *
-     * @return string 
+     * @return string
      */
     public function getStreet()
     {
@@ -387,7 +388,7 @@ class Vehicle
     /**
      * Get zipCode
      *
-     * @return string 
+     * @return string
      */
     public function getZipCode()
     {
@@ -410,7 +411,7 @@ class Vehicle
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -433,7 +434,7 @@ class Vehicle
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -456,7 +457,7 @@ class Vehicle
     /**
      * Get fax
      *
-     * @return string 
+     * @return string
      */
     public function getFax()
     {
@@ -479,7 +480,7 @@ class Vehicle
     /**
      * Get mail
      *
-     * @return string 
+     * @return string
      */
     public function getMail()
     {
@@ -502,7 +503,7 @@ class Vehicle
     /**
      * Get registrationNumber
      *
-     * @return string 
+     * @return string
      */
     public function getRegistrationNumber()
     {
@@ -525,7 +526,7 @@ class Vehicle
     /**
      * Get mileage
      *
-     * @return string 
+     * @return string
      */
     public function getMileage()
     {
@@ -548,7 +549,7 @@ class Vehicle
     /**
      * Get guaranteeType
      *
-     * @return string 
+     * @return string
      */
     public function getGuaranteeType()
     {
@@ -571,7 +572,7 @@ class Vehicle
     /**
      * Get purchaseDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPurchaseDate()
     {
@@ -594,7 +595,7 @@ class Vehicle
     /**
      * Get nameType
      *
-     * @return string 
+     * @return string
      */
     public function getNameType()
     {
@@ -627,7 +628,7 @@ class Vehicle
     /**
      * Get accidentCases
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAccidentCases()
     {
@@ -650,7 +651,7 @@ class Vehicle
     /**
      * Get dealer
      *
-     * @return \TruckBundle\Entity\Dealer 
+     * @return \TruckBundle\Entity\Dealer
      */
     public function getDealer()
     {

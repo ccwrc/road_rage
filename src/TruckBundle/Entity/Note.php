@@ -13,9 +13,11 @@ use \DateTime;
  * @ORM\Table(name="note")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\NoteRepository")
  */
-class Note {
+class Note
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->timeSave = new DateTime("now");
     }
 
@@ -29,7 +31,7 @@ class Note {
     private $id;
 
     /**
-     * @Assert\Choice({"private", "public"}) 
+     * @Assert\Choice({"private", "public"})
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=60)
@@ -49,7 +51,7 @@ class Note {
      * @Assert\Length(
      * min = 1,
      * max = 255
-     * )  
+     * )
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
@@ -57,7 +59,7 @@ class Note {
     private $username;
 
     /**
-     * @Assert\DateTime()   
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_save", type="datetime")
@@ -65,7 +67,7 @@ class Note {
     private $timeSave;
 
     /**
-     * @Assert\DateTime()   
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_publication", type="datetime")
@@ -79,7 +81,7 @@ class Note {
      * max = 21000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * ) 
+     * )
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=21000)
@@ -89,9 +91,10 @@ class Note {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -101,7 +104,8 @@ class Note {
      * @param string $status
      * @return Note
      */
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
 
         return $this;
@@ -110,9 +114,10 @@ class Note {
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
@@ -122,7 +127,8 @@ class Note {
      * @param integer $userId
      * @return Note
      */
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->userId = $userId;
 
         return $this;
@@ -131,9 +137,10 @@ class Note {
     /**
      * Get userId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->userId;
     }
 
@@ -143,7 +150,8 @@ class Note {
      * @param \DateTime $timeSave
      * @return Note
      */
-    public function setTimeSave($timeSave) {
+    public function setTimeSave($timeSave)
+    {
         $this->timeSave = $timeSave;
 
         return $this;
@@ -152,9 +160,10 @@ class Note {
     /**
      * Get timeSave
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getTimeSave() {
+    public function getTimeSave()
+    {
         return $this->timeSave;
     }
 
@@ -164,7 +173,8 @@ class Note {
      * @param \DateTime $timePublication
      * @return Note
      */
-    public function setTimePublication($timePublication) {
+    public function setTimePublication($timePublication)
+    {
         $this->timePublication = $timePublication;
 
         return $this;
@@ -173,9 +183,10 @@ class Note {
     /**
      * Get timePublication
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getTimePublication() {
+    public function getTimePublication()
+    {
         return $this->timePublication;
     }
 
@@ -185,7 +196,8 @@ class Note {
      * @param string $content
      * @return Note
      */
-    public function setContent($content) {
+    public function setContent($content)
+    {
         $this->content = $content;
 
         return $this;
@@ -194,9 +206,10 @@ class Note {
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
     }
 
@@ -217,7 +230,7 @@ class Note {
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {

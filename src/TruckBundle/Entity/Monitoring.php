@@ -13,9 +13,35 @@ use \DateTime;
  * @ORM\Table(name="monitoring")
  * @ORM\Entity(repositoryClass="TruckBundle\Repository\MonitoringRepository")
  */
-class Monitoring {
-    
-    public function __construct() {
+class Monitoring
+{
+    // START new accident case
+    public static $codeStart = 'START';
+    // Payment Guarantee (request)
+    public static $codePg = 'PG';
+    // Confirmation Payment Guarantee
+    public static $codeCpg = 'CPG';
+    // Repair Order
+    public static $codeRo = 'RO';
+    // Estimated Arrival Time (dealer → client)
+    public static $codeEta = 'ETA';
+    // STaRt Repair
+    public static $codeStrr = 'STRR';
+    // Incoming: General purpose code. Incoming phone call/fax/mail/etc.
+    public static $codeIncoming = 'Incoming';
+    // Out: General purpose code. Outgoing phone call/fax/mail/etc.
+    public static $codeOut = 'Out';
+    // Withdrawal Payment Guarantee
+    public static $codeWpg = 'WPG';
+    // Withdrawal Confirmation Payment Guarantee
+    public static $codeWcpg = 'WCPG';
+    // Withdrawal Repair Order
+    public static $codeWro = 'WRO';
+    // END accident case
+    public static $codeEnd = 'END';
+
+    public function __construct()
+    {
         $this->timeSave = new DateTime("now");
     }
 
@@ -24,16 +50,16 @@ class Monitoring {
      * @ORM\JoinColumn(name="accident_case_id", referencedColumnName="id")
      */
     private $accidentCase;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Dealer")
      */
     private $homeDealer;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Dealer")
      */
-    private $repairDealer;    
+    private $repairDealer;
 
     /**
      * @var int
@@ -49,19 +75,19 @@ class Monitoring {
      * @Assert\Length(
      * min = 2,
      * max = 255
-     * )      
+     * )
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
      */
     private $code;
-    
+
     /**
      * @Assert\Type("string")
      * @Assert\Length(
      * min = 1,
      * max = 600
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="operator", type="string", length=600)
@@ -69,7 +95,7 @@ class Monitoring {
     private $operator;
 
     /**
-     * @Assert\DateTime()     
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_save", type="datetime")
@@ -77,7 +103,7 @@ class Monitoring {
     private $timeSave;
 
     /**
-     * @Assert\DateTime()    
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="time_set", type="datetime", nullable=true)
@@ -91,7 +117,7 @@ class Monitoring {
      * max = 5000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )         
+     * )
      * @var string
      *
      * @ORM\Column(name="contact_through", type="text")
@@ -105,7 +131,7 @@ class Monitoring {
      * max = 65000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="comments", type="text")
@@ -119,7 +145,7 @@ class Monitoring {
      * max = 9000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="out_comment", type="text", nullable=true)
@@ -130,20 +156,19 @@ class Monitoring {
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = false
-     * )    
+     * )
      * @Assert\Length(
      * min = 5,
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="contact_mail", type="string", length=255, nullable=true)
      */
     private $contactMail;
 
-    //TODO add regex in controller (document?)
     /**
      * @Assert\Type("string")
      * @Assert\Length(
@@ -151,13 +176,13 @@ class Monitoring {
      * max = 600,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="optional_mails", type="string", length=600, nullable=true)
      */
     private $optionalMails;
-    
+
     /**
      * @Assert\Type("numeric")
      * @Assert\Length(
@@ -165,7 +190,7 @@ class Monitoring {
      * max = 10,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var int
      *
      * @ORM\Column(name="amount", type="integer", nullable=true)
@@ -173,18 +198,18 @@ class Monitoring {
     private $amount;
 
     /**
-     * @Assert\Choice({"PLN", "USD", "EUR"})     
+     * @Assert\Choice({"PLN", "USD", "EUR"})
      * @var string
      *
      * @ORM\Column(name="currency", type="string", length=100, nullable=true)
      */
-    private $currency;    
-    
+    private $currency;
+
     /**
      * 1 - document send (success)
      * 0 or NULL - not send
      * @var smallint
-     * 
+     *
      * @ORM\Column(name="is_document_send", type="smallint", nullable=true)
      */
     private $isDocumentSend;
@@ -193,7 +218,7 @@ class Monitoring {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -216,7 +241,7 @@ class Monitoring {
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -239,7 +264,7 @@ class Monitoring {
     /**
      * Get timeSave
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTimeSave()
     {
@@ -262,7 +287,7 @@ class Monitoring {
     /**
      * Get timeSet
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTimeSet()
     {
@@ -285,7 +310,7 @@ class Monitoring {
     /**
      * Get contactThrough
      *
-     * @return string 
+     * @return string
      */
     public function getContactThrough()
     {
@@ -308,7 +333,7 @@ class Monitoring {
     /**
      * Get comments
      *
-     * @return string 
+     * @return string
      */
     public function getComments()
     {
@@ -331,7 +356,7 @@ class Monitoring {
     /**
      * Get outComment
      *
-     * @return string 
+     * @return string
      */
     public function getOutComment()
     {
@@ -354,7 +379,7 @@ class Monitoring {
     /**
      * Get contactMail
      *
-     * @return string 
+     * @return string
      */
     public function getContactMail()
     {
@@ -377,7 +402,7 @@ class Monitoring {
     /**
      * Get optionalMails
      *
-     * @return string 
+     * @return string
      */
     public function getOptionalMails()
     {
@@ -400,7 +425,7 @@ class Monitoring {
     /**
      * Get accidentCase
      *
-     * @return \TruckBundle\Entity\AccidentCase 
+     * @return \TruckBundle\Entity\AccidentCase
      */
     public function getAccidentCase()
     {
@@ -423,7 +448,7 @@ class Monitoring {
     /**
      * Get operator
      *
-     * @return string 
+     * @return string
      */
     public function getOperator()
     {
@@ -446,7 +471,7 @@ class Monitoring {
     /**
      * Get homeDealer
      *
-     * @return \TruckBundle\Entity\Dealer 
+     * @return \TruckBundle\Entity\Dealer
      */
     public function getHomeDealer()
     {
@@ -469,7 +494,7 @@ class Monitoring {
     /**
      * Get repairDealer
      *
-     * @return \TruckBundle\Entity\Dealer 
+     * @return \TruckBundle\Entity\Dealer
      */
     public function getRepairDealer()
     {
@@ -492,7 +517,7 @@ class Monitoring {
     /**
      * Get amount
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmount()
     {
@@ -515,7 +540,7 @@ class Monitoring {
     /**
      * Get currency
      *
-     * @return string 
+     * @return string
      */
     public function getCurrency()
     {
@@ -538,7 +563,7 @@ class Monitoring {
     /**
      * Get isDocumentSend
      *
-     * @return integer 
+     * @return smallint
      */
     public function getIsDocumentSend()
     {

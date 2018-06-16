@@ -16,21 +16,23 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("name")
  * @UniqueEntity("mainMail")
  */
-class Dealer {
+class Dealer
+{
 
     public static $active = 'active';
     public static $inactive = 'inactive';
     public static $suspended = 'suspended';
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->vehicles = new ArrayCollection();
-    }    
-    
+    }
+
     /**
      * @ORM\OneToMany(targetEntity="Vehicle", mappedBy="dealer")
      */
-    private $vehicles;    
-    
+    private $vehicles;
+
     /**
      * @var int
      *
@@ -47,7 +49,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
@@ -61,7 +63,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255)
@@ -73,7 +75,7 @@ class Dealer {
      *     pattern="/[0-9][0-9]-[0-9][0-9][0-9]/",
      *     match=true,
      *     message="The right pattern is the DD-DDD (D as digit)"
-     * )      
+     * )
      * @var string
      *
      * @ORM\Column(name="zip_code", type="string", length=50)
@@ -87,7 +89,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
@@ -101,7 +103,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )         
+     * )
      * @var string
      *
      * @ORM\Column(name="main_phone", type="string", length=255)
@@ -115,7 +117,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )      
+     * )
      * @var string
      *
      * @ORM\Column(name="main_fax", type="string", length=255, nullable=true)
@@ -127,13 +129,13 @@ class Dealer {
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = false
-     * )    
+     * )
      * @Assert\Length(
      * min = 5,
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )         
+     * )
      * @var string
      *
      * @ORM\Column(name="main_mail", type="string", length=255, unique=true)
@@ -147,7 +149,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="phone_24h", type="string", length=255, nullable=true)
@@ -161,7 +163,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )           
+     * )
      * @var string
      *
      * @ORM\Column(name="phone_service_car", type="string", length=255, nullable=true)
@@ -175,7 +177,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="alt_phone_1", type="string", length=255, nullable=true)
@@ -189,7 +191,7 @@ class Dealer {
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="alt_phone_2", type="string", length=255, nullable=true)
@@ -200,13 +202,13 @@ class Dealer {
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
-     * )    
+     * )
      * @Assert\Length(
      * min = 5,
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="alt_mail_1", type="string", length=255, nullable=true)
@@ -217,13 +219,13 @@ class Dealer {
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
-     * )    
+     * )
      * @Assert\Length(
      * min = 5,
      * max = 255,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )        
+     * )
      * @var string
      *
      * @ORM\Column(name="alt_mail_2", type="string", length=255, nullable=true)
@@ -237,7 +239,7 @@ class Dealer {
      * max = 65000,
      * minMessage = "Minimum number of characters is {{ limit }}",
      * maxMessage = "Maximum number of characters is {{ limit }}"
-     * )       
+     * )
      * @var string
      *
      * @ORM\Column(name="other_comments", type="text", length=65000, nullable=true)
@@ -245,7 +247,7 @@ class Dealer {
     private $otherComments;
 
     /**
-     * @Assert\Choice({"active", "inactive", "suspended"})   
+     * @Assert\Choice({"active", "inactive", "suspended"})
      * @var string
      *
      * @ORM\Column(name="is_active", type="string", length=100)
@@ -256,7 +258,7 @@ class Dealer {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -279,7 +281,7 @@ class Dealer {
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -302,7 +304,7 @@ class Dealer {
     /**
      * Get street
      *
-     * @return string 
+     * @return string
      */
     public function getStreet()
     {
@@ -325,7 +327,7 @@ class Dealer {
     /**
      * Get zipCode
      *
-     * @return string 
+     * @return string
      */
     public function getZipCode()
     {
@@ -348,7 +350,7 @@ class Dealer {
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -371,7 +373,7 @@ class Dealer {
     /**
      * Get mainPhone
      *
-     * @return string 
+     * @return string
      */
     public function getMainPhone()
     {
@@ -394,7 +396,7 @@ class Dealer {
     /**
      * Get mainFax
      *
-     * @return string 
+     * @return string
      */
     public function getMainFax()
     {
@@ -417,7 +419,7 @@ class Dealer {
     /**
      * Get mainMail
      *
-     * @return string 
+     * @return string
      */
     public function getMainMail()
     {
@@ -440,7 +442,7 @@ class Dealer {
     /**
      * Get phone24h
      *
-     * @return string 
+     * @return string
      */
     public function getPhone24h()
     {
@@ -463,7 +465,7 @@ class Dealer {
     /**
      * Get phoneServiceCar
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneServiceCar()
     {
@@ -486,7 +488,7 @@ class Dealer {
     /**
      * Get altPhone1
      *
-     * @return string 
+     * @return string
      */
     public function getAltPhone1()
     {
@@ -509,7 +511,7 @@ class Dealer {
     /**
      * Get altPhone2
      *
-     * @return string 
+     * @return string
      */
     public function getAltPhone2()
     {
@@ -532,7 +534,7 @@ class Dealer {
     /**
      * Get altMail1
      *
-     * @return string 
+     * @return string
      */
     public function getAltMail1()
     {
@@ -555,7 +557,7 @@ class Dealer {
     /**
      * Get altMail2
      *
-     * @return string 
+     * @return string
      */
     public function getAltMail2()
     {
@@ -578,7 +580,7 @@ class Dealer {
     /**
      * Get otherComments
      *
-     * @return string 
+     * @return string
      */
     public function getOtherComments()
     {
@@ -601,7 +603,7 @@ class Dealer {
     /**
      * Get isActive
      *
-     * @return string 
+     * @return string
      */
     public function getIsActive()
     {
@@ -634,7 +636,7 @@ class Dealer {
     /**
      * Get vehicles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getVehicles()
     {
