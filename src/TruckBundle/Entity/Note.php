@@ -15,6 +15,8 @@ use \DateTime;
  */
 class Note
 {
+    public static $statusPrivate = 'private';
+    public static $statusPublic = 'public';
 
     public function __construct()
     {
