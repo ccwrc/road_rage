@@ -22,7 +22,7 @@ class DealerFixtures extends Fixture implements DependentFixtureInterface
             $inactiveDealer->setAltMail1($i . 'inactivedealer@pp.elo');
             $inactiveDealer->setAltPhone1('123456789');
             $inactiveDealer->setCity($i . 'city');
-            $inactiveDealer->setIsActive(Dealer::$inactive);
+            $inactiveDealer->setIsActive(Dealer::$dealerIsInactive);
             $inactiveDealer->setMainFax('123456789');
             $inactiveDealer->setMainMail($i . 'inactivedealer@pp.1mail');
             $inactiveDealer->setMainPhone($i . '12345678');
@@ -40,7 +40,7 @@ class DealerFixtures extends Fixture implements DependentFixtureInterface
             $activeDealer->setAltMail1($i . 'activedealer@pp.elo');
             $activeDealer->setAltPhone1('123456789');
             $activeDealer->setCity($i . 'city');
-            $activeDealer->setIsActive(Dealer::$active);
+            $activeDealer->setIsActive(Dealer::$dealerIsActive);
             $activeDealer->setMainFax('123456789');
             $activeDealer->setMainMail($i . 'activedealer@pp.1mail');
             $activeDealer->setMainPhone($i . '12345678');

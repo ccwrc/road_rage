@@ -2,9 +2,8 @@
 
 namespace TruckBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -585,10 +584,10 @@ class AccidentCase
     /**
      * Set vehicle
      *
-     * @param \TruckBundle\Entity\Vehicle $vehicle
+     * @param Vehicle $vehicle
      * @return AccidentCase
      */
-    public function setVehicle(\TruckBundle\Entity\Vehicle $vehicle = null)
+    public function setVehicle(Vehicle $vehicle = null)
     {
         $this->vehicle = $vehicle;
 
@@ -598,7 +597,7 @@ class AccidentCase
     /**
      * Get vehicle
      *
-     * @return \TruckBundle\Entity\Vehicle
+     * @return Vehicle
      */
     public function getVehicle()
     {
@@ -608,10 +607,10 @@ class AccidentCase
     /**
      * Add monitorings
      *
-     * @param \TruckBundle\Entity\Monitoring $monitorings
+     * @param Monitoring $monitorings
      * @return AccidentCase
      */
-    public function addMonitoring(\TruckBundle\Entity\Monitoring $monitorings)
+    public function addMonitoring(Monitoring $monitorings)
     {
         $this->monitorings[] = $monitorings;
 
@@ -621,9 +620,9 @@ class AccidentCase
     /**
      * Remove monitorings
      *
-     * @param \TruckBundle\Entity\Monitoring $monitorings
+     * @param Monitoring $monitorings
      */
-    public function removeMonitoring(\TruckBundle\Entity\Monitoring $monitorings)
+    public function removeMonitoring(Monitoring $monitorings)
     {
         $this->monitorings->removeElement($monitorings);
     }

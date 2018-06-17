@@ -2,11 +2,10 @@
 
 namespace TruckBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Vehicle
@@ -43,9 +42,9 @@ class Vehicle
      */
     private $id;
 
-    // https://pl.wikipedia.org/wiki/Vehicle_Identification_Number
-    // Last 8 characters
     /**
+     * @link https://pl.wikipedia.org/wiki/Vehicle_Identification_Number Last 8 characters
+     *
      * @Assert\Type("string")
      * @Assert\Length(
      * min = 8,
@@ -605,10 +604,10 @@ class Vehicle
     /**
      * Add accidentCases
      *
-     * @param \TruckBundle\Entity\AccidentCase $accidentCases
+     * @param AccidentCase $accidentCases
      * @return Vehicle
      */
-    public function addAccidentCase(\TruckBundle\Entity\AccidentCase $accidentCases)
+    public function addAccidentCase(AccidentCase $accidentCases)
     {
         $this->accidentCases[] = $accidentCases;
 
@@ -618,9 +617,9 @@ class Vehicle
     /**
      * Remove accidentCases
      *
-     * @param \TruckBundle\Entity\AccidentCase $accidentCases
+     * @param AccidentCase $accidentCases
      */
-    public function removeAccidentCase(\TruckBundle\Entity\AccidentCase $accidentCases)
+    public function removeAccidentCase(AccidentCase $accidentCases)
     {
         $this->accidentCases->removeElement($accidentCases);
     }
@@ -638,10 +637,10 @@ class Vehicle
     /**
      * Set dealer
      *
-     * @param \TruckBundle\Entity\Dealer $dealer
+     * @param Dealer $dealer
      * @return Vehicle
      */
-    public function setDealer(\TruckBundle\Entity\Dealer $dealer = null)
+    public function setDealer(Dealer $dealer = null)
     {
         $this->dealer = $dealer;
 
@@ -651,7 +650,7 @@ class Vehicle
     /**
      * Get dealer
      *
-     * @return \TruckBundle\Entity\Dealer
+     * @return Dealer
      */
     public function getDealer()
     {

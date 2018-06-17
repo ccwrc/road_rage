@@ -3,9 +3,7 @@
 namespace TruckBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
-use \DateTime;
 
 /**
  * Monitoring
@@ -40,9 +38,14 @@ class Monitoring
     // END accident case
     public static $codeEnd = 'END';
 
+    // 1 - document send (success)
+    public static $documentSend = 1;
+    // 0 (fail) or NULL (initial state) - not send
+    public static $documentNotSend = 0;
+
     public function __construct()
     {
-        $this->timeSave = new DateTime("now");
+        $this->timeSave = new \DateTime("now");
     }
 
     /**
@@ -208,7 +211,7 @@ class Monitoring
     /**
      * 1 - document send (success)
      * 0 or NULL - not send
-     * @var smallint
+     * @var int
      *
      * @ORM\Column(name="is_document_send", type="smallint", nullable=true)
      */
@@ -412,10 +415,10 @@ class Monitoring
     /**
      * Set accidentCase
      *
-     * @param \TruckBundle\Entity\AccidentCase $accidentCase
+     * @param AccidentCase $accidentCase
      * @return Monitoring
      */
-    public function setAccidentCase(\TruckBundle\Entity\AccidentCase $accidentCase = null)
+    public function setAccidentCase(AccidentCase $accidentCase = null)
     {
         $this->accidentCase = $accidentCase;
 
@@ -425,7 +428,7 @@ class Monitoring
     /**
      * Get accidentCase
      *
-     * @return \TruckBundle\Entity\AccidentCase
+     * @return AccidentCase
      */
     public function getAccidentCase()
     {
@@ -458,10 +461,10 @@ class Monitoring
     /**
      * Set homeDealer
      *
-     * @param \TruckBundle\Entity\Dealer $homeDealer
+     * @param Dealer $homeDealer
      * @return Monitoring
      */
-    public function setHomeDealer(\TruckBundle\Entity\Dealer $homeDealer = null)
+    public function setHomeDealer(Dealer $homeDealer = null)
     {
         $this->homeDealer = $homeDealer;
 
@@ -471,7 +474,7 @@ class Monitoring
     /**
      * Get homeDealer
      *
-     * @return \TruckBundle\Entity\Dealer
+     * @return Dealer
      */
     public function getHomeDealer()
     {
@@ -481,10 +484,10 @@ class Monitoring
     /**
      * Set repairDealer
      *
-     * @param \TruckBundle\Entity\Dealer $repairDealer
+     * @param Dealer $repairDealer
      * @return Monitoring
      */
-    public function setRepairDealer(\TruckBundle\Entity\Dealer $repairDealer = null)
+    public function setRepairDealer(Dealer $repairDealer = null)
     {
         $this->repairDealer = $repairDealer;
 
@@ -494,7 +497,7 @@ class Monitoring
     /**
      * Get repairDealer
      *
-     * @return \TruckBundle\Entity\Dealer
+     * @return Dealer
      */
     public function getRepairDealer()
     {
@@ -563,7 +566,7 @@ class Monitoring
     /**
      * Get isDocumentSend
      *
-     * @return smallint
+     * @return int|null
      */
     public function getIsDocumentSend()
     {

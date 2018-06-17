@@ -36,7 +36,7 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
             $vehicle->setStreet('street ' . $i);
             $vehicle->setTaxIdNumber('tax ' . $i);
             $vehicle->setVin('XY' . $i);
-            $vehicle->setZipCode(mt_rand(10, 99) . "-998");
+            $vehicle->setZipCode(\mt_rand(10, 99) . "-998");
 
             $manager->persist($vehicle);
         }

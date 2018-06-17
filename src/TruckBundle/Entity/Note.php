@@ -3,9 +3,7 @@
 namespace TruckBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
-use \DateTime;
 
 /**
  * Note
@@ -20,7 +18,7 @@ class Note
 
     public function __construct()
     {
-        $this->timeSave = new DateTime("now");
+        $this->timeSave = new \DateTime("now");
     }
 
     /**

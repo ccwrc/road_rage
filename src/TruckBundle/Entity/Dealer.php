@@ -2,11 +2,10 @@
 
 namespace TruckBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Dealer
@@ -19,9 +18,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Dealer
 {
 
-    public static $active = 'active';
-    public static $inactive = 'inactive';
-    public static $suspended = 'suspended';
+    public static $dealerIsActive = 'active';
+    public static $dealerIsInactive = 'inactive';
+    public static $dealerIsSuspended = 'suspended';
 
     public function __construct()
     {
@@ -613,10 +612,10 @@ class Dealer
     /**
      * Add vehicles
      *
-     * @param \TruckBundle\Entity\Vehicle $vehicles
+     * @param Vehicle $vehicles
      * @return Dealer
      */
-    public function addVehicle(\TruckBundle\Entity\Vehicle $vehicles)
+    public function addVehicle(Vehicle $vehicles)
     {
         $this->vehicles[] = $vehicles;
 
@@ -626,9 +625,9 @@ class Dealer
     /**
      * Remove vehicles
      *
-     * @param \TruckBundle\Entity\Vehicle $vehicles
+     * @param Vehicle $vehicles
      */
-    public function removeVehicle(\TruckBundle\Entity\Vehicle $vehicles)
+    public function removeVehicle(Vehicle $vehicles)
     {
         $this->vehicles->removeElement($vehicles);
     }
