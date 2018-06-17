@@ -106,6 +106,8 @@ class Monitoring
     private $timeSave;
 
     /**
+     * Time set by the operator depending on the code
+     *
      * @Assert\DateTime()
      * @var \DateTime
      *

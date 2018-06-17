@@ -40,6 +40,7 @@ class AccidentCase
         $this->reportRsTime = 0; // rs - road service
         $this->status = AccidentCase::$statusActive;
         $this->progressColor = AccidentCase::$progressColorRed;
+        $this->timeStart = new \DateTime('now');
     }
 
     /**

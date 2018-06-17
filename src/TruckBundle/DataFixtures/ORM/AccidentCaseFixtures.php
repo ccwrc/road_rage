@@ -36,7 +36,8 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
                 ->setCode(Monitoring::$codeStart)
                 ->setOperator("operatorName")
                 ->setComments($activeAccidentCase->getComment())
-                ->setContactThrough($activeAccidentCase->getDriverContact());
+                ->setContactThrough($activeAccidentCase->getDriverContact())
+                ->setTimeSave($date);
             $manager->persist($monitoringStart);
         }
 
@@ -60,7 +61,8 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
                 ->setCode(Monitoring::$codeStart)
                 ->setOperator('plainName')
                 ->setComments($inactiveAccidentCase->getComment())
-                ->setContactThrough($inactiveAccidentCase->getDriverContact());
+                ->setContactThrough($inactiveAccidentCase->getDriverContact())
+                ->setTimeSave($date);
             $manager->persist($monitoringStart);
         }
 
