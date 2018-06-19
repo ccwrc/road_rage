@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use TruckBundle\Entity\Dealer;
 use TruckBundle\Form\Dealer\DealerType;
@@ -16,19 +17,20 @@ use TruckBundle\Form\Dealer\DealerEditType;
  * @Security("has_role('ROLE_DEALER')")
  */
 class DealerController extends Controller {
-    
+
     /**
      * @Route("/showAllDealers")
      */
-    public function showAllDealersAction(Request $req) {
+    public function showAllDealersAction(Request $req): Response
+    {
         $dealersQuery = $this->getDoctrine()->getRepository("TruckBundle:Dealer")
-                ->findAllDealersQuery();
+            ->findAllDealersQuery();
         $paginator = $this->get('knp_paginator');
         $dealers = $paginator->paginate(
-                $dealersQuery, $req->query->get('page', 1)/* page number */, 50/* limit per page */);
+            $dealersQuery, $req->query->get('page', 1)/* page number */, 50/* limit per page */);
 
         return $this->render('TruckBundle:Dealer:show_all_dealers.html.twig', [
-                    "dealers" => $dealers
+            "dealers" => $dealers
         ]);
     }
 

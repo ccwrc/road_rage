@@ -6,7 +6,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Monitoring;
 use TruckBundle\Entity\Vehicle;
@@ -24,7 +26,7 @@ class AccidentCaseController extends Controller {
     /**
      * @Route("/caseProgressColorManual")
      */
-    public function caseProgressColorManualAction()
+    public function caseProgressColorManualAction(): Response
     {
         return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig');
     }
@@ -32,7 +34,7 @@ class AccidentCaseController extends Controller {
     /**
      * @Route("/searchCase")
      */
-    public function searchCaseAction(Request $req)
+    public function searchCaseAction(Request $req): Response
     {
         $case = new AccidentCase(); // TODO finish it
         $form = $this->createForm(AccidentCaseSearchType::class, $case);
@@ -46,22 +48,22 @@ class AccidentCaseController extends Controller {
             if ($case !== null) {
                 $caseId = $case->getId();
                 $casesStatus = $case->getStatus();
-                return $this->redirectToRoute("truck_operator_panel", [
-                    "caseId" => $caseId,
-                    "casesStatus" => $casesStatus
+                return $this->redirectToRoute('truck_operator_panel', [
+                    'caseId' => $caseId,
+                    'casesStatus' => $casesStatus
                 ]);
             }
         }
 
         return $this->render('TruckBundle:AccidentCase:search_case.html.twig', [
-            "form" => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/{vehicleId}/createCase", requirements={"vehicleId"="\d+"})
      */
-    public function createCaseAction(Request $req, int $vehicleId)
+    public function createCaseAction(Request $req, int $vehicleId): Response
     {
         $vehicle = $this->throwExceptionOrGetVehicleBy($vehicleId);
         $case = new AccidentCase();
@@ -83,20 +85,20 @@ class AccidentCaseController extends Controller {
             $em->persist($monitoringStart);
             $em->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                "caseId" => $case->getId()
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $case->getId()
             ]);
         }
 
         return $this->render('TruckBundle:AccidentCase:create_case.html.twig', [
-            "form" => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/{caseId}/editCase", requirements={"caseId"="\d+"})
      */
-    public function editCaseAction(Request $req, int $caseId)
+    public function editCaseAction(Request $req, int $caseId): Response
     {
         $case = $this->throwExceptionOrGetCaseBy($caseId);
         $form = $this->createForm(AccidentCaseEditType::class, $case);
@@ -105,21 +107,21 @@ class AccidentCaseController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("truck_operator_panel", [
-                "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:AccidentCase:edit_case.html.twig', [
-            "form" => $form->createView(),
-            "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/firstEditCaseEnd", requirements={"caseId"="\d+"})
      */
-    public function firstEditCaseEndAction(Request $req, int $caseId)
+    public function firstEditCaseEndAction(Request $req, int $caseId): Response
     {
         $case = $this->throwExceptionOrGetCaseBy($caseId);
         $this->generateAndSaveEndCaseReport($caseId);
@@ -129,21 +131,21 @@ class AccidentCaseController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("truck_operator_panel", [
-                "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:AccidentCase:first_edit_case_end.html.twig', [
-            "form" => $form->createView(),
-            "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/editCaseEnd", requirements={"caseId"="\d+"})
      */
-    public function editCaseEndAction(Request $req, int $caseId)
+    public function editCaseEndAction(Request $req, int $caseId): Response
     {
         $case = $this->throwExceptionOrGetCaseBy($caseId);
         $form = $this->createForm(AccidentCaseEditEndType::class, $case);
@@ -152,24 +154,24 @@ class AccidentCaseController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("truck_operator_panel", [
-                "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:AccidentCase:edit_case_end.html.twig', [
-            "form" => $form->createView(),
-            "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/showAllCases", requirements={"caseId"="\d+"})
      */
-    public function showAllCasesAction(Request $req, int $caseId = 0)
+    public function showAllCasesAction(Request $req, int $caseId = 0): Response
     {
         //session from OperatorController, method panelAction
-        $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+        $casesQuery = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')
             ->findAllCasesQuery();
         $paginator = $this->get('knp_paginator');
         $cases = $paginator->paginate(
@@ -177,18 +179,18 @@ class AccidentCaseController extends Controller {
             $req->getSession()->get('allPageNumber', 1)/* page number */, 200/* limit per page */);
 
         return $this->render('TruckBundle:AccidentCase:show_all_cases.html.twig', [
-            "cases" => $cases,
-            "caseId" => $caseId
+            'cases' => $cases,
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/showAllActiveCases", requirements={"caseId"="\d+"})
      */
-    public function showAllActiveCasesAction(Request $req, int $caseId = 0)
+    public function showAllActiveCasesAction(Request $req, int $caseId = 0): Response
     {
         //session from OperatorController, method panelAction
-        $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+        $casesQuery = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')
             ->findAllActiveCasesQuery();
         $paginator = $this->get('knp_paginator');
         $cases = $paginator->paginate(
@@ -196,18 +198,18 @@ class AccidentCaseController extends Controller {
             $req->getSession()->get('activePageNumber', 1)/* page number */, 35/* limit per page */);
 
         return $this->render('TruckBundle:AccidentCase:show_all_active_cases.html.twig', [
-            "cases" => $cases,
-            "caseId" => $caseId
+            'cases' => $cases,
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/showAllInactiveCases", requirements={"caseId"="\d+"})
      */
-    public function showAllInactiveCasesAction(Request $req, int $caseId = 0)
+    public function showAllInactiveCasesAction(Request $req, int $caseId = 0): Response
     {
         //session from OperatorController, method panelAction
-        $casesQuery = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")
+        $casesQuery = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')
             ->findAllInactiveCasesQuery();
 
         $paginator = $this->get('knp_paginator');
@@ -216,39 +218,39 @@ class AccidentCaseController extends Controller {
             $req->getSession()->get('inactivePageNumber', 1)/* page number */, 200/* limit per page */);
 
         return $this->render('TruckBundle:AccidentCase:show_all_inactive_cases.html.twig', [
-            "cases" => $cases,
-            "caseId" => $caseId
+            'cases' => $cases,
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{caseId}/showStartCase", requirements={"caseId"="\d+"})
      */
-    public function showStartCaseAction(int $caseId)
+    public function showStartCaseAction(int $caseId): Response
     {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
         // do not throw exception above
         return $this->render('TruckBundle:AccidentCase:show_start_case.html.twig', [
-            "case" => $case
+            'case' => $case
         ]);
     }
 
     /**
      * @Route("/{caseId}/showEndCase", requirements={"caseId"="\d+"})
      */
-    public function showEndCaseAction(int $caseId)
+    public function showEndCaseAction(int $caseId): Response
     {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
+        $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
         // do not throw exception above
         return $this->render('TruckBundle:AccidentCase:show_end_case.html.twig', [
-            "case" => $case
+            'case' => $case
         ]);
     }
 
     /**
      * @Route("/{caseId}/activateDeactivateCase", requirements={"caseId"="\d+"})
      */
-    public function activateDeactivateCaseAction(int $caseId)
+    public function activateDeactivateCaseAction(int $caseId): Response
     {
         $case = $this->throwExceptionOrGetCaseBy($caseId);
 
@@ -256,15 +258,15 @@ class AccidentCaseController extends Controller {
             $case->setStatus(AccidentCase::$statusInactive);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("truck_operator_panel", [
-                "caseId" => 0
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => 0
             ]);
         } else {
             $case->setStatus(AccidentCase::$statusActive);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("truck_operator_panel", [
-                "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
     }
@@ -381,7 +383,7 @@ class AccidentCaseController extends Controller {
 
     private function calculateCaseTotalTimeOrReturnZero(int $caseId): int
     {
-        $monitoringRepository = $this->getDoctrine()->getRepository("TruckBundle:Monitoring");
+        $monitoringRepository = $this->getDoctrine()->getRepository('TruckBundle:Monitoring');
 
         $monitoringStart = $monitoringRepository->findFirstMonitoringStartByCaseId($caseId);
         $monitoringEnd = $monitoringRepository->findLastMonitoringEndByCaseId($caseId);
@@ -398,6 +400,10 @@ class AccidentCaseController extends Controller {
         return $this->getDateDifferenceInMinutesOrReturnZero($startCaseTime, $endCaseTime);
     }
 
+    /**
+     * @param int $caseId
+     * @return void
+     */
     private function generateAndSaveEndCaseReport(int $caseId)
     {
         $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
@@ -414,8 +420,7 @@ class AccidentCaseController extends Controller {
             ->setReportRepairTotal($repairTotalTime)->setReportCaseTotal($caseTotalTime)
             ->setReportRepairStatus(AccidentCase::$reportRepairStatusCanceled);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
+        $this->getDoctrine()->getManager()->flush();
     }
     // (end) functions for generate end case report
 
@@ -428,7 +433,7 @@ class AccidentCaseController extends Controller {
     {
         $vehicle = $this->getDoctrine()->getRepository('TruckBundle:Vehicle')->find($vehicleId);
         if ($vehicle === null) {
-            throw $this->createNotFoundException("Wrong vehicle ID");
+            throw $this->createNotFoundException('Wrong vehicle ID');
         }
         return $vehicle;
     }
@@ -442,7 +447,7 @@ class AccidentCaseController extends Controller {
     {
         $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
         if ($case === null) {
-            throw $this->createNotFoundException("Wrong case ID");
+            throw $this->createNotFoundException('Wrong case ID');
         }
         return $case;
     }    
