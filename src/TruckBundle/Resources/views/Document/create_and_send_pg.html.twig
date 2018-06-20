@@ -2,14 +2,14 @@
 
 {% block body %}
     {{ parent() }}
-    
+
     <b>Payment Guarantee request:</b> {{ amount }} {{ currency }}<br/>
-    <b>Case {{accidentCaseId}} started at:</b> {{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
+    <b>Case {{ accidentCaseId }} started at:</b> {{ accidentCase.timeStart | date("d/m/Y H:i:s") }} <br/>
     <b>Operator name:</b> {{ operatorName }}<br/>
     {% if outComment != "" %}
-       <b>Operator comment:</b> {{ outComment }}<br/> 
+        <b>Operator comment:</b> {{ outComment }}<br/>
     {% endif %}
-    <br/> 
+    <br/>
 
     <i>To:</i> <br/>
     <b>Dealer name:</b> {{ homeDealer.name }} <br/>
@@ -18,7 +18,7 @@
     <b>Phone:</b> {{ homeDealer.mainPhone }} <br/>
     <b>Mail:</b> {{ homeDealer.mainMail }} <br/>
     <hr/>
-    
+
     <i>Client/Vehicle:</i> <br/>
     <b>Company name:</b> {{ vehicle.companyName }} <br/>
     <b>Company tax ID number:</b> {{ vehicle.taxIdNumber }} <br/>
@@ -35,11 +35,11 @@
     <b>Vehicle guarantee type:</b> {{ vehicle.guaranteeType }} <br/>
     <b>Vehicle purchase date:</b> {{ vehicle.purchaseDate | date("d/m/Y") }} <br/>
     <b>Vehicle name/type:</b> {{ vehicle.nameType }} <br/><br/>
-    
+
     <b>Damage description: </b> {{ accidentCase.damageDescription }} <br/>
     <b>Location: </b> {{ accidentCase.location }} <br/>
     <b>Contact to driver: </b> {{ accidentCase.driverContact }} <br/><br/>
-    
+
     <hr/>
     <b>Please confirm the Payment Guarantee by phone, fax or email.</b>
 

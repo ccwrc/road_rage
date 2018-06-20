@@ -50,6 +50,10 @@ class DocumentController extends Controller
         return $monitoring;
     }
 
+    /**
+     * @param string $string
+     * @return array [filtered correct emails]
+     */
     public static function getEmailsFromString(string $string): array
     {
         $unverifiedEmails = [];

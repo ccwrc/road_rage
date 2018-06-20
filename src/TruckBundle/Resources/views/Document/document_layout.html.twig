@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>
-            {% block title %} 
-                BAD TRUCK Documents
-            {% endblock %}
-        </title>
-        {% block stylesheets %}
-            <style type="text/css">              
-                .document {
-                    background-image: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
-                }
-                hr {
-                    width: 99%;
-                    border: 0; 
-                    height: 1px; 
-                    background-image: -webkit-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
-                    background-image: -moz-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
-                    background-image: -ms-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
-                    background-image: -o-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb); 
-                }
-            </style> 
+<head>
+    <meta charset="UTF-8"/>
+    <title>
+        {% block title %}
+            BAD TRUCK Documents
         {% endblock %}
-    </head>
+    </title>
+    {% block stylesheets %}
+        <style type="text/css">
+            .document {
+                background-image: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
+            }
 
-    <body>
-        <div class="document">
-            {% block body %}
-                <center>
-                    <img src="{{ companyLogoSrc }}" alt="BAD TRUCK company logo">
-                </center>
-            {% endblock %}   
-        </div>
-    </body>
+            hr {
+                width: 99%;
+                border: 0;
+                height: 1px;
+                background-image: -webkit-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+                background-image: -moz-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+                background-image: -ms-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+                background-image: -o-linear-gradient(left, #ebedee, #c2c2a3, #fdfbfb);
+            }
+        </style>
+    {% endblock %}
+</head>
+
+<body>
+<div class="document">
+    {% block body %}
+        <center>
+            <img src="{{ companyLogoSrc }}" alt="BAD TRUCK company logo">
+        </center>
+    {% endblock %}
+</div>
+</body>
 </html>
 
 
