@@ -4,78 +4,105 @@ namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
+
+use TruckBundle\Entity\AccidentCase;
+use TruckBundle\Entity\Dealer;
+use TruckBundle\Entity\Monitoring;
+use TruckBundle\Entity\Vehicle;
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
  * @Route("/document")
  */
-class DocumentRoController extends DocumentController {
+final class DocumentRoController extends DocumentController {
 
     /**
      * @Route("/{monitoringRoId}/createAndSendRo", requirements={"monitoringRoId"="\d+"})
      */
-    public function createAndSendRoAction($monitoringRoId) {
-        $monitoringRo = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringRoId, "RO");
+    public function createAndSendRoAction(int $monitoringRoId): Response
+    {
+        $monitoringRo = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringRoId, Monitoring::$codeRo);
         $homeDealer = $monitoringRo->getHomeDealer();
         $repairDealer = $monitoringRo->getRepairDealer();
         $accidentCase = $monitoringRo->getAccidentCase();
         $accidentCaseId = $accidentCase->getId();
 
-        if (!$this->isCaseIsActive($accidentCase) || !$this->isDealerIsActive($homeDealer) 
-                || !$this->isDealerIsActive($repairDealer)) {
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $accidentCaseId
+        if (!$this->isCaseIsActive($accidentCase) || !$this->isDealerIsActive($homeDealer)
+            || !$this->isDealerIsActive($repairDealer)) {
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $accidentCaseId
             ]);
         }
 
         $vehicle = $accidentCase->getVehicle();
         $operatorName = $monitoringRo->getOperator();
         $mainMail = $monitoringRo->getContactMail();
-        $optionalMails = $this->getEmailsFromString($monitoringRo->getOptionalMails());
+        $optionalMails = self::getEmailsFromString($monitoringRo->getOptionalMails());
         $amount = $monitoringRo->getAmount();
         $currency = $monitoringRo->getCurrency();
         $outComment = $monitoringRo->getOutComment();
 
-        $messageRo = $this->createMessageRo($accidentCaseId, $amount, $currency, $mainMail, 
-                $optionalMails, $vehicle, $homeDealer, $repairDealer, $outComment, $operatorName, 
-                $accidentCase);
+        $messageRo = $this->createMessageRo(
+            $accidentCaseId,
+            $amount,
+            $currency,
+            $mainMail,
+            $optionalMails,
+            $vehicle,
+            $homeDealer,
+            $repairDealer,
+            $outComment,
+            $operatorName,
+            $accidentCase
+        );
         if ($this->get('mailer')->send($messageRo)) {
-            $monitoringRo->setIsDocumentSend(1);
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $monitoringRo->setIsDocumentSend(Monitoring::$documentSend);
+            $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->redirectToRoute("truck_operator_panel", [
-                    "caseId" => $accidentCaseId
+        return $this->redirectToRoute('truck_operator_panel', [
+            'caseId' => $accidentCaseId
         ]);
     }
 
-    private function createMessageRo($accidentCaseId, $amount, $currency, $mainMail, $optionalMails,
-            $vehicle, $homeDealer, $repairDealer, $outComment, $operatorName, $accidentCase) {
+    private function createMessageRo(
+        int $accidentCaseId,
+        string $amount,
+        string $currency,
+        string $mainMail,
+        array $optionalMails,
+        Vehicle $vehicle,
+        Dealer $homeDealer,
+        Dealer $repairDealer,
+        string $outComment,
+        string $operatorName,
+        AccidentCase $accidentCase
+    ): \Swift_Message
+    {
         $message = \Swift_Message::newInstance();
         $companyLogoSrc = $message->embed(\Swift_Image::fromPath('images/companyLogo.png'));
-        $message->setSubject("Case number " . $accidentCaseId . " - Repair Order: " .
-                        $amount . " " . $currency)
-                ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
-                ->setTo($mainMail)
-                ->setCc($optionalMails)
-                ->setBody(
-                        $this->renderView(
-                                'TruckBundle:Document:create_and_send_ro.html.twig', [
-                            "accidentCaseId" => $accidentCaseId,
-                            "amount" => $amount,
-                            "currency" => $currency,
-                            "vehicle" => $vehicle,
-                            "homeDealer" => $homeDealer,
-                            "repairDealer" => $repairDealer,
-                            "outComment" => $outComment,
-                            "operatorName" => $operatorName,
-                            "accidentCase" => $accidentCase,
-                            "companyLogoSrc" => $companyLogoSrc
-                                ]
-                        ), 'text/html'
-        );
+        $message->setSubject('Case number ' . $accidentCaseId . ' - Repair Order: ' .
+            $amount . ' ' . $currency)
+            ->setFrom(['ccwrcbadtruck@gmail.com' => 'BAD TRUCK'])
+            ->setTo($mainMail)
+            ->setCc($optionalMails)
+            ->setBody(
+                $this->renderView(
+                    'TruckBundle:Document:create_and_send_ro.html.twig', [
+                        'accidentCaseId' => $accidentCaseId,
+                        'amount' => $amount,
+                        'currency' => $currency,
+                        'vehicle' => $vehicle,
+                        'homeDealer' => $homeDealer,
+                        'repairDealer' => $repairDealer,
+                        'outComment' => $outComment,
+                        'operatorName' => $operatorName,
+                        'accidentCase' => $accidentCase,
+                        'companyLogoSrc' => $companyLogoSrc
+                    ]
+                ), 'text/html'
+            );
         return $message;
     }
-
 }

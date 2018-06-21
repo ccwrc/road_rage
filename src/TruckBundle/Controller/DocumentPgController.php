@@ -5,6 +5,7 @@ namespace TruckBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
+
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Dealer;
 use TruckBundle\Entity\Monitoring;
@@ -14,7 +15,7 @@ use TruckBundle\Entity\Vehicle;
  * @Security("has_role('ROLE_OPERATOR')")
  * @Route("/document")
  */
-class DocumentPgController extends DocumentController {
+final class DocumentPgController extends DocumentController {
 
     /**
      * @Route("/{monitoringPgId}/createAndSendPg", requirements={"monitoringPgId"="\d+"})
@@ -34,7 +35,7 @@ class DocumentPgController extends DocumentController {
         $vehicle = $accidentCase->getVehicle();
         $operatorName = $monitoringPg->getOperator();
         $mainMail = $monitoringPg->getContactMail();
-        $optionalMails = $this->getEmailsFromString($monitoringPg->getOptionalMails());
+        $optionalMails = self::getEmailsFromString($monitoringPg->getOptionalMails());
         $amount = $monitoringPg->getAmount();
         $currency = $monitoringPg->getCurrency();
         $outComment = $monitoringPg->getOutComment();
