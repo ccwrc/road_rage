@@ -1,39 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use TruckBundle\Entity\Monitoring;
-use TruckBundle\Form\Monitoring\MonitoringCpgType;
-use TruckBundle\Form\Monitoring\MonitoringCpgEditType;
+use TruckBundle\Form\Monitoring\{
+    MonitoringCpgType, MonitoringCpgEditType
+};
 
 /**
  * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class MonitoringCpgController extends MonitoringController {
+final class MonitoringCpgController extends MonitoringController
+{
 
     /**
      * @Route("/{caseId}/createMonitoringCpg", requirements={"caseId"="\d+"})
      */
-    public function createMonitoringCpgAction(Request $req, $caseId) {
+    public function createMonitoringCpgAction(Request $req, int $caseId): Response
+    {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
         $homeDealer = $case->getVehicle()->getDealer();
-        
+
         if (!$this->checkIfDealerIsActive($homeDealer)) {
-            return $this->redirectToRoute("truck_main_warninginformation", [
-                        "message" => "Dealer is not active, can not confirm PG."
+            return $this->redirectToRoute('truck_main_warninginformation', [
+                'message' => 'Dealer is not active, can not confirm PG.'
             ]);
         }
 
         $monitoringCpg = new Monitoring();
         $amount = $this->getAmountFromLastPgOrReturnZero($caseId);
         $currency = $this->getCurrencyFromLastPgOrReturnEur($caseId);
-        $monitoringCpg->setAccidentCase($case)->setOperator($this->getOperatorName())
-                ->setHomeDealer($homeDealer)->setCode("CPG")->setAmount($amount)->setCurrency($currency);
+        $monitoringCpg->setAccidentCase($case)
+            ->setOperator($this->getOperatorName())
+            ->setHomeDealer($homeDealer)
+            ->setCode(Monitoring::$codeCpg)
+            ->setAmount($amount)
+            ->setCurrency($currency);
         $form = $this->createForm(MonitoringCpgType::class, $monitoringCpg);
 
         $form->handleRequest($req);
@@ -44,22 +54,23 @@ class MonitoringCpgController extends MonitoringController {
             $em->persist($monitoringCpg);
             $em->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_cpg.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{monitoringId}/editMonitoringCpg", requirements={"monitoringId"="\d+"})
      */
-    public function editMonitoringCpgAction(Request $req, $monitoringId) {
-        $monitoringCpg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "CPG");
+    public function editMonitoringCpgAction(Request $req, int $monitoringId): Response
+    {
+        $monitoringCpg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, Monitoring::$codeCpg);
         $caseId = $monitoringCpg->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringCpgEditType::class, $monitoringCpg);
 
@@ -67,36 +78,37 @@ class MonitoringCpgController extends MonitoringController {
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringCpg = $form->getData();
             $monitoringCpg->setOperator($this->getOperatorName());
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:edit_monitoring_cpg.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
-    
-    private function getAmountFromLastPgOrReturnZero($caseId) {
-        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringPgByCaseId($caseId);
-        if($monitoringPg !== null) {
+
+    private function getAmountFromLastPgOrReturnZero(int $caseId): int
+    {
+        $monitoringPg = $this->getDoctrine()->getRepository('TruckBundle:Monitoring')
+            ->findLastMonitoringPgByCaseId($caseId);
+        if ($monitoringPg !== null) {
             return $monitoringPg->getAmount();
         }
         return 0;
     }
-    
-    private function getCurrencyFromLastPgOrReturnEur($caseId) {
-        $monitoringPg = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findLastMonitoringPgByCaseId($caseId);
-        if($monitoringPg !== null) {
+
+    private function getCurrencyFromLastPgOrReturnEur(int $caseId): string
+    {
+        $monitoringPg = $this->getDoctrine()->getRepository('TruckBundle:Monitoring')
+            ->findLastMonitoringPgByCaseId($caseId);
+        if ($monitoringPg !== null) {
             return $monitoringPg->getCurrency();
         }
-        return "EUR";
-    }    
+        return Monitoring::$currencyEur;
+    }
 
 }

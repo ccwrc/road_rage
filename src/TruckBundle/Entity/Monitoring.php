@@ -43,6 +43,10 @@ class Monitoring
     // 0 (fail) or NULL (initial state) - not send
     public static $documentNotSend = 0;
 
+    public static $currencyPln = 'PLN';
+    public static $currencyUsd = 'USD';
+    public static $currencyEur = 'EUR';
+
     public function __construct()
     {
         $this->timeSave = new \DateTime("now");
