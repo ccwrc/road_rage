@@ -1,33 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use TruckBundle\Entity\Monitoring;
-use TruckBundle\Form\Monitoring\MonitoringEndType;
-use TruckBundle\Form\Monitoring\MonitoringEndEditType;
-use \DateTime;
+use TruckBundle\Form\Monitoring\{
+    MonitoringEndType, MonitoringEndEditType
+};
 
 /**
  * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class MonitoringEndController extends MonitoringController {
+final class MonitoringEndController extends MonitoringController
+{
 
     /**
      * @Route("/{caseId}/createMonitoringEnd", requirements={"caseId"="\d+"})
      */
-    public function createMonitoringEndAction(Request $req, $caseId) {
+    public function createMonitoringEndAction(Request $req, int $caseId): Response
+    {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
 
         $monitoringEnd = new Monitoring();
-        $monitoringEnd->setAccidentCase($case)->setOperator($this->getOperatorName())
-                ->setCode("END")->setTimeSet(new DateTime("now"));
+        $monitoringEnd->setAccidentCase($case)
+            ->setOperator($this->getOperatorName())
+            ->setCode(Monitoring::$codeEnd)
+            ->setTimeSet(new \DateTime('now'));
         $form = $this->createForm(MonitoringEndType::class, $monitoringEnd);
-     
+
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setColorProgressGreyForCase($case);
@@ -35,23 +42,24 @@ class MonitoringEndController extends MonitoringController {
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEnd);
             $em->flush();
-            
-            return $this->redirectToRoute("truck_accidentcase_firsteditcaseend", [
-                        "caseId" => $caseId
+
+            return $this->redirectToRoute('truck_accidentcase_firsteditcaseend', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_end.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{monitoringId}/editMonitoringEnd", requirements={"monitoringId"="\d+"})
      */
-    public function editMonitoringEndAction(Request $req, $monitoringId) {
-        $monitoringEnd = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "END");
+    public function editMonitoringEndAction(Request $req, int $monitoringId): Response
+    {
+        $monitoringEnd = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, Monitoring::$codeEnd);
         $caseId = $monitoringEnd->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringEndEditType::class, $monitoringEnd);
 
@@ -59,18 +67,16 @@ class MonitoringEndController extends MonitoringController {
         if ($form->isSubmitted() && $form->isValid()) {
             $monitoringEnd = $form->getData();
             $monitoringEnd->setOperator($this->getOperatorName());
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("truck_accidentcase_editcaseend", [
-                        "caseId" => $caseId
+            return $this->redirectToRoute('truck_accidentcase_editcaseend', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:edit_monitoring_end.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
-
 }
