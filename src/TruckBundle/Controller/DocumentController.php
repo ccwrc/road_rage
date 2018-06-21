@@ -9,7 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use TruckBundle\Entity\{Dealer, AccidentCase, Monitoring};
+use TruckBundle\Entity\{
+    Dealer, AccidentCase, Monitoring
+};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")

@@ -11,11 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use TruckBundle\Entity\{AccidentCase, Monitoring, Vehicle};
-use TruckBundle\Form\AccidentCase\AccidentCaseEditEndType;
-use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
-use TruckBundle\Form\AccidentCase\AccidentCaseSearchType;
-use TruckBundle\Form\AccidentCase\AccidentCaseType;
+use TruckBundle\Entity\{
+    AccidentCase, Monitoring, Vehicle
+};
+use TruckBundle\Form\AccidentCase\{
+    AccidentCaseEditEndType, AccidentCaseEditType, AccidentCaseSearchType, AccidentCaseType
+};
 
 /**
  * @Route("/cases")

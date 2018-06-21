@@ -1,96 +1,133 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use TruckBundle\Entity\AccidentCase; 
-use TruckBundle\Entity\Dealer;
+use TruckBundle\Entity\{
+    AccidentCase, Dealer, Monitoring
+};
 
 /**
  * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class MonitoringController extends Controller {
-    
+class MonitoringController extends Controller
+{
+
     /**
      * @Route("/{caseId}/showAllMonitoringsForCase", requirements={"caseId"="\d+"})
      */
-    public function showAllMonitoringsForCaseAction($caseId) {
+    public function showAllMonitoringsForCaseAction(int $caseId): Response
+    {
         $this->throwExceptionIfCaseIdIsWrongExcludingZero($caseId);
-        $monitorings = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->findMonitoringsByCaseId($caseId);
+        $monitorings = $this->getDoctrine()->getRepository('TruckBundle:Monitoring')
+            ->findMonitoringsByCaseId($caseId);
 
         return $this->render('TruckBundle:Monitoring:show_all_monitorings_for_case.html.twig', [
-                    "monitorings" => $monitorings
+            'monitorings' => $monitorings
         ]);
     }
 
     /**
      * @Route("/monitoringCodesManual")
      */
-    public function monitoringCodesManualAction() {
-
+    public function monitoringCodesManualAction(): Response
+    {
         return $this->render('TruckBundle:Monitoring:monitoring_codes_manual.html.twig');
-    }    
+    }
 
-    protected function getOperatorName() {
+    protected function getOperatorName(): string
+    {
         return $this->getUser()->getUsername();
     }
 
-    protected function setColorProgressRedForCase(AccidentCase $case) {
-        $case->setProgressColor("#FF7575");
+    // (start) set colors
+    protected function setColorProgressRedForCase(AccidentCase $case): void
+    {
+        $case->setProgressColor(AccidentCase::$progressColorRed);
     }
 
-    protected function setColorProgressOrangeForCase(AccidentCase $case) {
-        $case->setProgressColor("#FF9C42");
+    protected function setColorProgressOrangeForCase(AccidentCase $case): void
+    {
+        $case->setProgressColor(AccidentCase::$progressColorOrange);
     }
-    
-    protected function setColorProgressGreenForCase(AccidentCase $case) {
-        $case->setProgressColor("#93EEAA");
-    }    
 
-    protected function setColorProgressGreyForCase(AccidentCase $case) {
-        $case->setProgressColor("#E6E6E6");
-    }  
-    
-    protected function throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, $code) {
-        $monitoring = $this->getDoctrine()->getRepository("TruckBundle:Monitoring")
-                ->find($monitoringId);
-        if ($monitoring === null || $monitoring->getCode() != $code) { 
-            throw $this->createNotFoundException("Wrong monitoring data");
+    protected function setColorProgressGreenForCase(AccidentCase $case): void
+    {
+        $case->setProgressColor(AccidentCase::$progressColorGreen);
+    }
+
+    protected function setColorProgressGreyForCase(AccidentCase $case): void
+    {
+        $case->setProgressColor(AccidentCase::$progressColorLightGrey);
+    }
+    // (end) set colors
+
+    /**
+     * @param int $monitoringId
+     * @param string $code
+     * @throws NotFoundHttpException
+     * @return Monitoring
+     */
+    protected function throwExceptionIfHasWrongDataOrGetMonitoringBy(int $monitoringId, string $code): Monitoring
+    {
+        $monitoring = $this->getDoctrine()->getRepository('TruckBundle:Monitoring')
+            ->find($monitoringId);
+        if ($monitoring === null || $monitoring->getCode() != $code) {
+            throw $this->createNotFoundException('Wrong monitoring data');
         }
         return $monitoring;
-    }     
-    
-    protected function throwExceptionIfCaseIdIsWrongExcludingZero($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        if ($case === null && $caseId != 0) { //0 is default for operator panel
-            throw $this->createNotFoundException("Wrong case ID");
-        }
     }
-    
-    protected function throwExceptionIfWrongIdOrGetCaseBy($caseId) {
-        $case = $this->getDoctrine()->getRepository("TruckBundle:AccidentCase")->find($caseId);
-        if ($case === null) {
-            throw $this->createNotFoundException("Wrong case ID");
-        }
-        return $case;
-    }    
-    
-    protected function throwExceptionIfDealerIsNotActive(Dealer $dealer) {
-        if ($dealer->getIsActive() !== "active") {
-            throw $this->createNotFoundException("Dealer is not active!");
+
+    /**
+     * @param int $caseId
+     * @throws NotFoundHttpException
+     */
+    protected function throwExceptionIfCaseIdIsWrongExcludingZero(int $caseId): void
+    {
+        $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
+        if ($case === null && $caseId != 0) { //0 is default for operator panel
+            throw $this->createNotFoundException('Wrong case ID');
         }
     }
 
-    protected function checkIfDealerIsActive(Dealer $dealer) {
-        if($dealer->getIsActive() === "active") {
+    /**
+     * @param int $caseId
+     * @throws NotFoundHttpException
+     * @return AccidentCase
+     */
+    protected function throwExceptionIfWrongIdOrGetCaseBy(int $caseId): AccidentCase
+    {
+        $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
+        if ($case === null) {
+            throw $this->createNotFoundException('Wrong case ID');
+        }
+        return $case;
+    }
+
+    /**
+     * @param Dealer $dealer
+     * @throws NotFoundHttpException
+     */
+    protected function throwExceptionIfDealerIsNotActive(Dealer $dealer): void
+    {
+        if ($dealer->getIsActive() !== Dealer::$dealerIsActive) {
+            throw $this->createNotFoundException('Dealer is not active!');
+        }
+    }
+
+    protected function checkIfDealerIsActive(Dealer $dealer): bool
+    {
+        if ($dealer->getIsActive() === Dealer::$dealerIsActive) {
             return true;
         }
         return false;
     }
-
 }

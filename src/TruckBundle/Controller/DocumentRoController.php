@@ -8,7 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-use TruckBundle\Entity\{AccidentCase, Dealer, Monitoring, Vehicle};
+use TruckBundle\Entity\{
+    AccidentCase, Dealer, Monitoring, Vehicle
+};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
@@ -39,7 +41,7 @@ final class DocumentRoController extends DocumentController
         $operatorName = $monitoringRo->getOperator();
         $mainMail = $monitoringRo->getContactMail();
         $optionalMails = self::getEmailsFromString($monitoringRo->getOptionalMails());
-        $amount = (string) $monitoringRo->getAmount();
+        $amount = (string)$monitoringRo->getAmount();
         $currency = $monitoringRo->getCurrency();
         $outComment = $monitoringRo->getOutComment();
 

@@ -12,8 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use TruckBundle\Entity\Dealer;
-use TruckBundle\Form\Dealer\DealerEditType;
-use TruckBundle\Form\Dealer\DealerType;
+use TruckBundle\Form\Dealer\{
+    DealerEditType, DealerType
+};
 
 /**
  * @Route("/dealer")

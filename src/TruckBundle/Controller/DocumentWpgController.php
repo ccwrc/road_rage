@@ -8,7 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-use TruckBundle\Entity\{AccidentCase, Dealer, Monitoring, Vehicle};
+use TruckBundle\Entity\{
+    AccidentCase, Dealer, Monitoring, Vehicle
+};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
