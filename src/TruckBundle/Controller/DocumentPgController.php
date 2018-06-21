@@ -15,7 +15,8 @@ use TruckBundle\Entity\Vehicle;
  * @Security("has_role('ROLE_OPERATOR')")
  * @Route("/document")
  */
-final class DocumentPgController extends DocumentController {
+final class DocumentPgController extends DocumentController
+{
 
     /**
      * @Route("/{monitoringPgId}/createAndSendPg", requirements={"monitoringPgId"="\d+"})

@@ -15,7 +15,8 @@ use TruckBundle\Entity\Vehicle;
  * @Security("has_role('ROLE_OPERATOR')")
  * @Route("/document")
  */
-final class DocumentRoController extends DocumentController {
+final class DocumentRoController extends DocumentController
+{
 
     /**
      * @Route("/{monitoringRoId}/createAndSendRo", requirements={"monitoringRoId"="\d+"})
