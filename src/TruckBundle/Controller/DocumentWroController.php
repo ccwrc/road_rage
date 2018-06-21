@@ -60,7 +60,7 @@ final class DocumentWroController extends DocumentController
             'caseId' => $accidentCaseId
         ]);
     }
-    
+
     private function createMessageWro(
         int $accidentCaseId,
         string $mainMail,
