@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Dealer;
-use TruckBundle\Entity\Monitoring;
-use TruckBundle\Entity\Vehicle;
+use TruckBundle\Entity\{AccidentCase, Dealer, Monitoring, Vehicle};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
@@ -40,7 +39,7 @@ final class DocumentRoController extends DocumentController
         $operatorName = $monitoringRo->getOperator();
         $mainMail = $monitoringRo->getContactMail();
         $optionalMails = self::getEmailsFromString($monitoringRo->getOptionalMails());
-        $amount = $monitoringRo->getAmount();
+        $amount = (string) $monitoringRo->getAmount();
         $currency = $monitoringRo->getCurrency();
         $outComment = $monitoringRo->getOutComment();
 
@@ -69,14 +68,14 @@ final class DocumentRoController extends DocumentController
 
     private function createMessageRo(
         int $accidentCaseId,
-        string $amount,
+        ?string $amount,
         string $currency,
         string $mainMail,
         array $optionalMails,
         Vehicle $vehicle,
         Dealer $homeDealer,
         Dealer $repairDealer,
-        string $outComment,
+        ?string $outComment,
         string $operatorName,
         AccidentCase $accidentCase
     ): \Swift_Message

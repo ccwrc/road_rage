@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Dealer;
-use TruckBundle\Entity\Monitoring;
-use TruckBundle\Entity\Vehicle;
+use TruckBundle\Entity\{AccidentCase, Dealer, Monitoring, Vehicle};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
@@ -37,7 +36,7 @@ final class DocumentPgController extends DocumentController
         $operatorName = $monitoringPg->getOperator();
         $mainMail = $monitoringPg->getContactMail();
         $optionalMails = self::getEmailsFromString($monitoringPg->getOptionalMails());
-        $amount = $monitoringPg->getAmount();
+        $amount = (string) $monitoringPg->getAmount();
         $currency = $monitoringPg->getCurrency();
         $outComment = $monitoringPg->getOutComment();
 
@@ -66,13 +65,13 @@ final class DocumentPgController extends DocumentController
 
     private function createMessagePg(
         int $accidentCaseId,
-        string $amount,
+        ?string $amount,
         string $currency,
         string $mainMail,
         array $optionalMails,
         Vehicle $vehicle,
         Dealer $homeDealer,
-        string $outComment,
+        ?string $outComment,
         string $operatorName,
         AccidentCase $accidentCase
     ): \Swift_Message

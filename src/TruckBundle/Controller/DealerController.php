@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -8,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use TruckBundle\Entity\Dealer;
 use TruckBundle\Form\Dealer\DealerEditType;
 use TruckBundle\Form\Dealer\DealerType;
@@ -16,7 +19,8 @@ use TruckBundle\Form\Dealer\DealerType;
  * @Route("/dealer")
  * @Security("has_role('ROLE_DEALER')")
  */
-class DealerController extends Controller {
+class DealerController extends Controller
+{
 
     /**
      * @Route("/showAllDealers")
@@ -100,7 +104,7 @@ class DealerController extends Controller {
             'form' => $form->createView()
         ]);
     }
-    
+
     /**
      * @Route("/{dealerId}/editDealer", requirements={"dealerId"="\d+"})
      */

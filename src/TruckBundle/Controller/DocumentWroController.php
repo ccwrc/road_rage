@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
-use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Dealer;
-use TruckBundle\Entity\Monitoring;
-use TruckBundle\Entity\Vehicle;
+use TruckBundle\Entity\{AccidentCase, Dealer, Monitoring, Vehicle};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
@@ -61,19 +60,7 @@ final class DocumentWroController extends DocumentController
             'caseId' => $accidentCaseId
         ]);
     }
-
-    /**
-     * @param int $accidentCaseId
-     * @param string $mainMail
-     * @param array $optionalMails
-     * @param Vehicle $vehicle
-     * @param Dealer $homeDealer
-     * @param Dealer $repairDealer
-     * @param string|null $outComment
-     * @param string $operatorName
-     * @param AccidentCase $accidentCase
-     * @return \Swift_Message
-     */
+    
     private function createMessageWro(
         int $accidentCaseId,
         string $mainMail,
@@ -81,7 +68,7 @@ final class DocumentWroController extends DocumentController
         Vehicle $vehicle,
         Dealer $homeDealer,
         Dealer $repairDealer,
-        string $outComment,
+        ?string $outComment,
         string $operatorName,
         AccidentCase $accidentCase
     ): \Swift_Message

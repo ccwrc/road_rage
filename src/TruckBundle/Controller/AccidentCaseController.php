@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,9 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Monitoring;
-use TruckBundle\Entity\Vehicle;
+use TruckBundle\Entity\{AccidentCase, Monitoring, Vehicle};
 use TruckBundle\Form\AccidentCase\AccidentCaseEditEndType;
 use TruckBundle\Form\AccidentCase\AccidentCaseEditType;
 use TruckBundle\Form\AccidentCase\AccidentCaseSearchType;
@@ -21,7 +21,8 @@ use TruckBundle\Form\AccidentCase\AccidentCaseType;
  * @Route("/cases")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class AccidentCaseController extends Controller {
+class AccidentCaseController extends Controller
+{
 
     /**
      * @Route("/caseProgressColorManual")
@@ -30,7 +31,7 @@ class AccidentCaseController extends Controller {
     {
         return $this->render('TruckBundle:AccidentCase:case_progress_color_manual.html.twig');
     }
-    
+
     /**
      * @Route("/searchCase")
      */
@@ -400,11 +401,7 @@ class AccidentCaseController extends Controller {
         return $this->getDateDifferenceInMinutesOrReturnZero($startCaseTime, $endCaseTime);
     }
 
-    /**
-     * @param int $caseId
-     * @return void
-     */
-    private function generateAndSaveEndCaseReport(int $caseId)
+    private function generateAndSaveEndCaseReport(int $caseId): void
     {
         $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->find($caseId);
 
@@ -450,5 +447,5 @@ class AccidentCaseController extends Controller {
             throw $this->createNotFoundException('Wrong case ID');
         }
         return $case;
-    }    
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -7,9 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use TruckBundle\Entity\Dealer;
-use TruckBundle\Entity\AccidentCase;
-use TruckBundle\Entity\Monitoring;
+use TruckBundle\Entity\{Dealer, AccidentCase, Monitoring};
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
@@ -51,11 +51,15 @@ class DocumentController extends Controller
     }
 
     /**
-     * @param string $string
+     * @param null|string $string
      * @return array [filtered correct emails]
      */
-    public static function getEmailsFromString(string $string): array
+    public static function getEmailsFromString(?string $string): array
     {
+        if ($string === null) {
+            return [];
+        }
+
         $unverifiedEmails = [];
         $emails = [];
         preg_match_all("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $string, $unverifiedEmails);
