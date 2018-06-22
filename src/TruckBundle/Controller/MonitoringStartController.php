@@ -1,19 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+use TruckBundle\Entity\Monitoring;
 use TruckBundle\Form\Monitoring\MonitoringStartEditType;
 
 /**
  * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class MonitoringStartController extends MonitoringController {
-    
+final class MonitoringStartController extends MonitoringController
+{
+
     /* START: START new case (automatic code) 
        created automatically when the case starts in AccidentCaseController
        look -> createCaseAction */
@@ -21,27 +26,25 @@ class MonitoringStartController extends MonitoringController {
     /**
      * @Route("/{monitoringId}/editMonitoringStart", requirements={"monitoringId"="\d+"})
      */
-    public function editMonitoringStartAction(Request $req, $monitoringId) {
-        $monitoringStart = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "START");
+    public function editMonitoringStartAction(Request $req, int $monitoringId): Response
+    {
+        $monitoringStart = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, Monitoring::$codeStart);
         $caseId = $monitoringStart->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringStartEditType::class, $monitoringStart);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoringStart = $form->getData();
             $monitoringStart->setOperator($this->getOperatorName());
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:edit_monitoring_start.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
-
 }
