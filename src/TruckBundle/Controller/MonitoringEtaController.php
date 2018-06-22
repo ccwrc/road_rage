@@ -38,7 +38,6 @@ final class MonitoringEtaController extends MonitoringController
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setColorProgressOrangeForCase($case);
-            $monitoringEta = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEta);
             $em->flush();
@@ -65,7 +64,6 @@ final class MonitoringEtaController extends MonitoringController
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoringEta = $form->getData();
             $monitoringEta->setOperator($this->getOperatorName());
             $this->getDoctrine()->getManager()->flush();
 

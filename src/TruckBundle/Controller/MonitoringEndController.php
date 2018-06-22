@@ -38,7 +38,6 @@ final class MonitoringEndController extends MonitoringController
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setColorProgressGreyForCase($case);
-            $monitoringEnd = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringEnd);
             $em->flush();
@@ -65,7 +64,6 @@ final class MonitoringEndController extends MonitoringController
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoringEnd = $form->getData();
             $monitoringEnd->setOperator($this->getOperatorName());
             $this->getDoctrine()->getManager()->flush();
 
