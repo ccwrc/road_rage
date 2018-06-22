@@ -1,83 +1,90 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use TruckBundle\Entity\Monitoring;
-use TruckBundle\Form\Monitoring\MonitoringPgType;
-use TruckBundle\Form\Monitoring\MonitoringPgEditType;
+use TruckBundle\Form\Monitoring\{
+    MonitoringPgType, MonitoringPgEditType
+};
 
 /**
  * @Route("/monitoring")
  * @Security("has_role('ROLE_OPERATOR')")
  */
-class MonitoringPgController extends MonitoringController {
+final class MonitoringPgController extends MonitoringController
+{
 
     /**
      * @Route("/{caseId}/createMonitoringPg", requirements={"caseId"="\d+"})
      */
-    public function createMonitoringPgAction(Request $req, $caseId) {
+    public function createMonitoringPgAction(Request $req, int $caseId): Response
+    {
         $case = $this->throwExceptionIfWrongIdOrGetCaseBy($caseId);
+
         $homeDealer = $case->getVehicle()->getDealer();
         if (!$this->checkIfDealerIsActive($homeDealer)) {
-            return $this->redirectToRoute("truck_main_warninginformation", [
-                        "message" => "Dealer is not active, can not confirm PG."
+            return $this->redirectToRoute('truck_main_warninginformation', [
+                'message' => 'Dealer is not active, can not confirm PG.'
             ]);
-        }        
-        $contactMailForSendDocument = $homeDealer->getMainMail();
+        }
 
         $monitoringPg = new Monitoring();
-        $monitoringPg->setAccidentCase($case)->setOperator($this->getOperatorName())
-                ->setHomeDealer($homeDealer)->setCode("PG")->setAmount(2000)
-                ->setCurrency("EUR")->setContactMail($contactMailForSendDocument);
+        $monitoringPg->setAccidentCase($case)
+            ->setOperator($this->getOperatorName())
+            ->setHomeDealer($homeDealer)
+            ->setCode(Monitoring::$codePg)
+            ->setAmount(2000)
+            ->setCurrency(Monitoring::$currencyEur)
+            ->setContactMail($homeDealer->getMainMail());
         $form = $this->createForm(MonitoringPgType::class, $monitoringPg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setColorProgressRedForCase($case);
-            $monitoringPg = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($monitoringPg);
             $em->flush();
 
-            return $this->redirectToRoute("truck_documentpg_createandsendpg", [
-                        "monitoringPgId" => $monitoringPg->getId()
+            return $this->redirectToRoute('truck_documentpg_createandsendpg', [
+                'monitoringPgId' => $monitoringPg->getId()
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:create_monitoring_pg.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
 
     /**
      * @Route("/{monitoringId}/editMonitoringPg", requirements={"monitoringId"="\d+"})
      */
-    public function editMonitoringPgAction(Request $req, $monitoringId) {
-        $monitoringPg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, "PG");
+    public function editMonitoringPgAction(Request $req, int $monitoringId): Response
+    {
+        $monitoringPg = $this->throwExceptionIfHasWrongDataOrGetMonitoringBy($monitoringId, Monitoring::$codePg);
         $caseId = $monitoringPg->getAccidentCase()->getId();
         $form = $this->createForm(MonitoringPgEditType::class, $monitoringPg);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $monitoringPg = $form->getData();
             $monitoringPg->setOperator($this->getOperatorName());
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("truck_operator_panel", [
-                        "caseId" => $caseId
+            return $this->redirectToRoute('truck_operator_panel', [
+                'caseId' => $caseId
             ]);
         }
 
         return $this->render('TruckBundle:Monitoring:edit_monitoring_pg.html.twig', [
-                    "form" => $form->createView(),
-                    "caseId" => $caseId
+            'form' => $form->createView(),
+            'caseId' => $caseId
         ]);
     }
-
 }
