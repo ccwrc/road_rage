@@ -2,57 +2,70 @@
 
 namespace TruckBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Security("has_role('ROLE_OPERATOR')")
  * @Route("/operator")
  */
-class OperatorController extends Controller {
+final class OperatorController extends Controller
+{
+    public const PANEL_CASES_STATUS_ACTIVE = 'active';
+    public const PANEL_CASES_STATUS_INACTIVE = 'inactive';
+    public const PANEL_CASES_STATUS_ALL = 'all';
 
     /**
      * @Route("/panel/{caseId}/{casesStatus}", requirements={"caseId"="\d+", "casesStatus"="\w{0,9}"})
      */
-    public function panelAction(Request $req, $caseId = 0, $casesStatus = "active") {
+    public function panelAction(
+        Request $req,
+        int $caseId = 0,
+        string $casesStatus = OperatorController::PANEL_CASES_STATUS_ACTIVE): Response
+    {
         $pageNumber = $this->checkVarIsNumberOrReturnOne($req->query->get('page', 1));
-        // session for AccidentCaseController, methods:
-        // - showAllCasesAction
-        // - showAllActiveCasesAction
-        // - showAllInactiveCasesAction
+        /* session for AccidentCaseController, methods:
+         * - showAllCasesAction
+         * - showAllActiveCasesAction
+         * - showAllInactiveCasesAction  */
         $session = $req->getSession();
 
-        if ($casesStatus === "active") {
+        if ($casesStatus === OperatorController::PANEL_CASES_STATUS_ACTIVE) {
             $session->set('activePageNumber', $pageNumber);
         }
-        if ($casesStatus === "inactive") {
+        if ($casesStatus === OperatorController::PANEL_CASES_STATUS_INACTIVE) {
             $session->set('inactivePageNumber', $pageNumber);
         }
-        if ($casesStatus === "all") {
+        if ($casesStatus === OperatorController::PANEL_CASES_STATUS_ALL) {
             $session->set('allPageNumber', $pageNumber);
         }
 
         $userId = $this->getUser()->getId();
-        $countPrivateNote = $this->getDoctrine()->getRepository("TruckBundle:Note")
-                ->countUserPrivateNotesFromLast24h($userId);
-        $countPublicNote = $this->getDoctrine()->getRepository("TruckBundle:Note")
-                ->countPublicNotesFromLast24h();
+        $countPrivateNote = $this->getDoctrine()->getRepository('TruckBundle:Note')
+            ->countUserPrivateNotesFromLast24h($userId);
+        $countPublicNote = $this->getDoctrine()->getRepository('TruckBundle:Note')
+            ->countPublicNotesFromLast24h();
 
         return $this->render('TruckBundle:Operator:panel.html.twig', [
-                    "caseId" => $caseId,
-                    "casesStatus" => $casesStatus,
-                    "countPrivateNote" => $countPrivateNote,
-                    "countPublicNote" => $countPublicNote
+            'caseId' => $caseId,
+            'casesStatus' => $casesStatus,
+            'countPrivateNote' => $countPrivateNote,
+            'countPublicNote' => $countPublicNote
         ]);
     }
 
-    private function checkVarIsNumberOrReturnOne($var) {
-        if(is_numeric($var)){
+    /**
+     * @param mixed $var
+     * @return int
+     */
+    private function checkVarIsNumberOrReturnOne($var): int
+    {
+        if (is_integer($var)) {
             return $var;
         }
         return 1;
     }
-
 }
