@@ -2,7 +2,7 @@
 
 {% block title %}show all users{% endblock %}
 
-{% block body %} 
+{% block body %}
 
     {{ include('TruckBundle:User:user_menu.html.twig') }}
 
@@ -13,16 +13,20 @@
     <div class="padding7px">
 
         {% for user in users %}
-            {{ user.id }}.  {{ user.username }} ({{ user.email }}) 
-            <button title="new window" class="pure-button pure-button-active button70noBackground" 
-                    onclick="window.open('{{ path("truck_user_showuser", {"userId":user.id}) }}');">   
+            {{ user.id }}.  {{ user.username }} ({{ user.email }})
+            <button title="new window" class="pure-button pure-button-active button70noBackground"
+                    onclick="window.open('{{ path("truck_user_showuser", {"userId":user.id}) }}');">
                 show
             </button>
-            <hr class="hrStyle" />
+            <hr class="hrStyle"/>
         {% else %}
             DB is empty.
         {% endfor %}
 
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
     </div>
 
 {% endblock %}
