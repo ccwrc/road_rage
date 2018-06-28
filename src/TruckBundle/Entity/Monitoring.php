@@ -49,7 +49,7 @@ class Monitoring
 
     public function __construct()
     {
-        $this->timeSave = new \DateTime("now");
+        $this->timeSave = new \DateTime('now');
     }
 
     /**

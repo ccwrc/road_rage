@@ -123,7 +123,6 @@ class Dealer
      */
     private $mainFax;
 
-    //TODO (prod) change checkMX val -> true
     /**
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",

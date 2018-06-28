@@ -18,7 +18,7 @@ class Note
 
     public function __construct()
     {
-        $this->timeSave = new \DateTime("now");
+        $this->timeSave = new \DateTime('now');
     }
 
     /**
