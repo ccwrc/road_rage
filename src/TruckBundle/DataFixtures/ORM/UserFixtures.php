@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\DataFixtures\ORM;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use TruckBundle\Entity\User;
 
+use TruckBundle\Entity\User;
 
 class UserFixtures extends Fixture
 {
@@ -14,7 +16,7 @@ class UserFixtures extends Fixture
      *
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $dataProvider = [
             [

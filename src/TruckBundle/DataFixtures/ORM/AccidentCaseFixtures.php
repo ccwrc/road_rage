@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\DataFixtures\ORM;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+
 use TruckBundle\Entity\AccidentCase;
 use TruckBundle\Entity\Monitoring;
 
@@ -16,17 +19,17 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
      *
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         for ($i = 1; $i <= 40; $i++) {
             $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1, 2000));
-            $date = new \DateTime("now - " . \mt_rand(1, 2000) . "minutes");
+            $date = new \DateTime('now - ' . \mt_rand(1, 2000) . 'minutes');
 
             $activeAccidentCase = new AccidentCase();
-            $activeAccidentCase->setComment("case comment" . $i);
-            $activeAccidentCase->setDamageDescription("damage description" . $i);
-            $activeAccidentCase->setDriverContact("contact to driver" . $i);
-            $activeAccidentCase->setLocation("vehicle location " . $i);
+            $activeAccidentCase->setComment('case comment' . $i);
+            $activeAccidentCase->setDamageDescription('damage description' . $i);
+            $activeAccidentCase->setDriverContact('contact to driver' . $i);
+            $activeAccidentCase->setLocation('vehicle location ' . $i);
             $activeAccidentCase->setTimeStart($date);
             $activeAccidentCase->setVehicle($vehicle);
             $manager->persist($activeAccidentCase);
@@ -34,7 +37,7 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
             $monitoringStart = new Monitoring();
             $monitoringStart->setAccidentCase($activeAccidentCase)
                 ->setCode(Monitoring::$codeStart)
-                ->setOperator("operatorName")
+                ->setOperator('operatorName')
                 ->setComments($activeAccidentCase->getComment())
                 ->setContactThrough($activeAccidentCase->getDriverContact())
                 ->setTimeSave($date);
@@ -43,14 +46,14 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 1; $i <= 3000; $i++) {
             $vehicle = $manager->getRepository('TruckBundle:Vehicle')->find(\mt_rand(1, 2000));
-            $date = new \DateTime("now - " . \mt_rand(1500, 5000) . "minutes");
+            $date = new \DateTime('now - ' . \mt_rand(1500, 5000) . 'minutes');
 
             $inactiveAccidentCase = new AccidentCase();
-            $inactiveAccidentCase->setComment("case comment" . $i);
-            $inactiveAccidentCase->setDamageDescription("damage description" . $i);
-            $inactiveAccidentCase->setDriverContact("contact to driver" . $i);
-            $inactiveAccidentCase->setLocation("vehicle location " . $i);
-            $inactiveAccidentCase->setStatus("inactive");
+            $inactiveAccidentCase->setComment('case comment' . $i);
+            $inactiveAccidentCase->setDamageDescription('damage description' . $i);
+            $inactiveAccidentCase->setDriverContact('contact to driver' . $i);
+            $inactiveAccidentCase->setLocation('vehicle location ' . $i);
+            $inactiveAccidentCase->setStatus('inactive');
             $inactiveAccidentCase->setProgressColor(AccidentCase::$progressColorLightGrey);
             $inactiveAccidentCase->setTimeStart($date);
             $inactiveAccidentCase->setVehicle($vehicle);
@@ -69,7 +72,7 @@ class AccidentCaseFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             VehicleFixtures::class

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\DataFixtures\ORM;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+
 use TruckBundle\Entity\Note;
 
 class NoteFixtures extends Fixture implements DependentFixtureInterface
@@ -15,7 +18,7 @@ class NoteFixtures extends Fixture implements DependentFixtureInterface
      *
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         for ($i = 1; $i <= 30; $i++) {
             $operator = $manager->getRepository('TruckBundle:User')->find(\mt_rand(3, 6));
@@ -92,7 +95,7 @@ class NoteFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             UserFixtures::class,

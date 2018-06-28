@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\DataFixtures\ORM;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+
 use TruckBundle\Entity\Vehicle;
 
 class VehicleFixtures extends Fixture implements DependentFixtureInterface
@@ -15,12 +18,12 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
      *
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         // vin: XY + $i (last 8 characters from vin -> $i must be 6 digit)
         for ($i = 200100; $i <= 202100; $i++) {
             $dealer = $manager->getRepository('TruckBundle:Dealer')->find(\mt_rand(1, 75));
-            $date = new \DateTime('now - ' . \mt_rand(1, 2000) . "days");
+            $date = new \DateTime('now - ' . \mt_rand(1, 2000) . 'days');
 
             $vehicle = new Vehicle();
             $vehicle->setCity('city' . $i);
@@ -36,7 +39,7 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
             $vehicle->setStreet('street ' . $i);
             $vehicle->setTaxIdNumber('tax ' . $i);
             $vehicle->setVin('XY' . $i);
-            $vehicle->setZipCode(\mt_rand(10, 99) . "-998");
+            $vehicle->setZipCode(\mt_rand(10, 99) . '-998');
 
             $manager->persist($vehicle);
         }
@@ -44,7 +47,7 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             DealerFixtures::class

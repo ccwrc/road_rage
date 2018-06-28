@@ -33,7 +33,7 @@ final class VehicleController extends Controller
         $responseVehicleId = 'fail';
         $vin = $req->query->get('vin');
 
-        if (preg_match('/^\w{8}$/', $vin) == 1) {
+        if (\preg_match('/^\w{8}$/', $vin) == 1) {
             $vehicle = $this->getDoctrine()->getRepository('TruckBundle:Vehicle')
                 ->findOneByVin($vin);
             if ($vehicle !== null) {
