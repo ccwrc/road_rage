@@ -24,10 +24,10 @@ final class UserController extends Controller
     /* role ROLE_SUPER_ADMIN is protected, preferred to be added/removal only in console
        role ROLE_USER is default */
     private static $permittedRolesForAddOrRemove = [
-        "ROLE_DEALER",
-        "ROLE_OPERATOR",
-        "ROLE_CONTROL",
-        "ROLE_ADMIN"
+        'ROLE_DEALER',
+        'ROLE_OPERATOR',
+        'ROLE_CONTROL',
+        'ROLE_ADMIN'
     ];
 
     /**

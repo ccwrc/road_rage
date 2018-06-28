@@ -1,8 +1,8 @@
-{% extends "TruckBundle:Main:base.html.twig" %}
+{% extends 'TruckBundle:Main:base.html.twig' %}
 
 {% block title %}new vehicle{% endblock %}
 
-{% block body %} 
+{% block body %}
 
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
@@ -14,42 +14,41 @@
             </center>
 
             <div class="padding7px">
-                {{ form_start(form) }} 
-                {{ form_widget(form) }} 
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
                 <center>
                     <input class="pure-button pure-button-active button90red" type="submit" value="add vehicle"/>
                 </center>
                 {{ form_end(form) }}
             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {# TODO #}
-    {#<script>#}
-        {#document.addEventListener("DOMContentLoaded", function () {#}
 
-            {#var inputVehicleVin = document.getElementById("vehicle_vin");#}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-            {#inputVehicleVin.addEventListener('keyup', function () {#}
-                {#if (inputVehicleVin.value.length === 8) {#}
-                    {#var xhr = new XMLHttpRequest();#}
-                    {#var getPath = "{{ absolute_url('') }}" + "checkVin?vin=" + inputVehicleVin.value;#}
-                    {#xhr.open('GET', getPath);#}
-                    {#xhr.onload = function () {#}
-                        {#if (xhr.status === 200 && ((xhr.responseText.indexOf("fail")) !== 1)) {#}
-                            {#var responseVehicleId = xhr.responseText;#}
-                            {#var pathToRedirect = "{{ absolute_url('') }}";#}
-                            {#window.location = pathToRedirect + responseVehicleId + '/editVehicle';#}
-                        {#}#}
-                    {#};#}
-                    {#xhr.send();#}
-                {#}#}
-            {#});#}
+            let inputVehicleVin = document.getElementById("vehicle_vin");
 
-        {#});#}
-    {#</script>#}
+            inputVehicleVin.addEventListener('keyup', function () {
+                if (inputVehicleVin.value.length === 8) {
+                    let xhr = new XMLHttpRequest();
+                    let getPath = "{{ absolute_url('check') }}" + "Vin?vin=" + inputVehicleVin.value;
+                    xhr.open('GET', getPath);
+                    xhr.onload = function () {
+                        if (xhr.status === 200 && ((xhr.responseText.indexOf("fail")) !== 1)) {
+                            let responseVehicleId = xhr.responseText;
+                            let pathToRedirect = "{{ absolute_url('0') }}";
+                            window.location = pathToRedirect + responseVehicleId + '/editVehicle';
+                        }
+                    };
+                    xhr.send();
+                }
+            });
+
+        });
+    </script>
 {% endblock %}
-
