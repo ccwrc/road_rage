@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TruckBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TruckBundle\Entity\User;
+use Doctrine\ORM\Query;
 
 /**
  * UserRepository
@@ -13,27 +13,28 @@ use TruckBundle\Entity\User;
  */
 class UserRepository extends EntityRepository
 {
-    /**
-     * @param string $email
-     * @return User[]
-     */
-    public function findUsersByPieceOfEmail(string $email): array
+    public function findUsersByQuery(?string $pieceOfUsername, ?string $pieceOfEmail): Query
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT u FROM TruckBundle:User u WHERE u.email '
-            . 'LIKE :email')->setParameter('email', "%$email%");
-        return $query->getResult();
-    }
+        $qb = $em->createQueryBuilder();
 
-    /**
-     * @param string $username
-     * @return User[]
-     */
-    public function findUsersByPieceOfUsername(string $username): array
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT u FROM TruckBundle:User u WHERE u.username '
-            . 'LIKE :username')->setParameter('username', "%$username%");
-        return $query->getResult();
+        $qb->select('u');
+        $qb->from('TruckBundle:User', 'u');
+
+        if ($pieceOfUsername !== null) {
+            $qb->andWhere(
+                $qb->expr()->like('u.username', ":username")
+            );
+            $qb->setParameter("username", "%$pieceOfUsername%");
+        }
+
+        if ($pieceOfEmail !== null) {
+            $qb->andWhere(
+                $qb->expr()->like("u.email", ":pieceOfEmail")
+            );
+            $qb->setParameter("pieceOfEmail", "%$pieceOfEmail%");
+        }
+
+        return $query = $qb->getQuery();
     }
 }

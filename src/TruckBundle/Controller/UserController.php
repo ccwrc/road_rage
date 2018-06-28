@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use TruckBundle\Entity\User;
 use TruckBundle\Form\User\UserFindType;
+use TruckBundle\Presenter\UserFindPresenter;
 
 /**
  * @Route("/user")
@@ -65,20 +66,24 @@ final class UserController extends Controller
      */
     public function findUserAction(Request $req): Response
     {
-        // TODO find user by piece of name/email (repo ready)
-        // TODO create custom form
-        $user = new User();
-        $form = $this->createForm(UserFindType::class, $user);
+        $userFindPresenter = new UserFindPresenter();
+        $form = $this->createForm(UserFindType::class, $userFindPresenter);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $userManager = $this->container->get('fos_user.user_manager');
-            $foundUser = $userManager->findUserByUsernameOrEmail($user->getUsername());
+            $usersQuery = $this->getDoctrine()->getRepository('TruckBundle:User')->findUsersByQuery(
+                $userFindPresenter->getPieceOfUsername(),
+                $userFindPresenter->getPieceOfEmail()
+            );
 
-            return $this->render('TruckBundle:User:show_user.html.twig', [
-                'user' => $foundUser,
-                'permittedRoles' => self::$permittedRolesForAddOrRemove
-            ]);
+            $paginator = $this->get('knp_paginator');
+            $users = $paginator->paginate(
+                $usersQuery,
+                $req->query->get('page', 1), 15);
+
+            return $this->render('TruckBundle:User:show_all_users.html.twig', array(
+                'users' => $users
+            ));
         }
         return $this->render('TruckBundle:User:find_user.html.twig', [
             'form' => $form->createView()
