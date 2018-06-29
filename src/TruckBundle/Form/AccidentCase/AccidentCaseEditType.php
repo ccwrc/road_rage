@@ -1,35 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Form\AccidentCase;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AccidentCaseEditType extends AbstractType {
+class AccidentCaseEditType extends AbstractType
+{
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
         $builder
-                ->add("damageDescription", "textarea", ["label" => "Damage/fault description: "])
-                ->add("location", "textarea", ["label" => "Truck location: "])
-                ->add("driverContact", "text", ["label" => "Driver name & phone: "])
-                ->add("infoSms", "text", [
-                    "label" => "SMS info (optional - phone): ",
-                    "required" => false
-                ])
-                ->add("infoMail", "text", [
-                    "label" => "Mail info (optional - mail): ",
-                    "required" => false
-                ])
-                ->add("comment", "textarea", [
-                    "label" => "Other comments: "
-                ]);
+            ->add('damageDescription', TextareaType::class, [
+                'label' => 'Damage/fault description: '
+            ])
+            ->add('location', TextareaType::class, [
+                'label' => 'Truck location: '
+            ])
+            ->add('driverContact', TextType::class, [
+                'label' => 'Driver name & phone: '
+            ])
+            ->add('infoSms', TextType::class, [
+                'label' => 'SMS info (optional - phone): ',
+                'required' => false
+            ])
+            ->add('infoMail', TextType::class, [
+                'label' => 'Mail info (optional - mail): ',
+                'required' => false
+            ])
+            ->add('comment', TextareaType::class, [
+                'label' => 'Other comments: '
+            ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver) {
+    public function configureOptions(OptionsResolver $resolver): void
+    {
         $resolver->setDefaults([
-            "data_class" => "TruckBundle\Entity\AccidentCase"
+            'data_class' => 'TruckBundle\Entity\AccidentCase'
         ]);
     }
-
 }
