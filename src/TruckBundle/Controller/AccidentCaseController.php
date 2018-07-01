@@ -17,6 +17,7 @@ use TruckBundle\Entity\{
 use TruckBundle\Form\AccidentCase\{
     AccidentCaseEditEndType, AccidentCaseEditType, AccidentCaseSearchType, AccidentCaseType
 };
+use TruckBundle\Presenter\AccidentCaseSearchPresenter;
 
 /**
  * @Route("/cases")
@@ -38,23 +39,19 @@ class AccidentCaseController extends Controller
      */
     public function searchCaseAction(Request $req): Response
     {
-        $case = new AccidentCase(); // TODO finish it
-        $form = $this->createForm(AccidentCaseSearchType::class, $case);
+        // TODO finish it
+        $accidentCaseSearchPresenter = new AccidentCaseSearchPresenter();
+        $form = $this->createForm(AccidentCaseSearchType::class, $accidentCaseSearchPresenter);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $caseForm = $form->getData();
-            $probablyCaseId = $caseForm->getReportCaseTotal(); // i know... TODO
-            $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')
-                ->findOneById($probablyCaseId);
-            if ($case !== null) {
-                $caseId = $case->getId();
-                $casesStatus = $case->getStatus();
-                return $this->redirectToRoute('truck_operator_panel', [
-                    'caseId' => $caseId,
-                    'casesStatus' => $casesStatus
-                ]);
+
+            if (is_int($accidentCaseSearchPresenter->getCaseId()) &&
+                $this->checkIsCaseExists($accidentCaseSearchPresenter->getCaseId())) {
+                    return $this->redirectToOperatorPanelBy($accidentCaseSearchPresenter->getCaseId());
             }
+
+            //
         }
 
         return $this->render('TruckBundle:AccidentCase:search_case.html.twig', [
@@ -448,5 +445,32 @@ class AccidentCaseController extends Controller
             throw $this->createNotFoundException('Wrong case ID');
         }
         return $case;
+    }
+
+    /**
+     * @param int $caseId
+     * @return bool
+     */
+    private function checkIsCaseExists(int $caseId): bool
+    {
+        $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->findOneById($caseId);
+        if ($case instanceof AccidentCase) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param int $existingCaseId
+     * @return Response
+     */
+    private function redirectToOperatorPanelBy(int $existingCaseId): Response
+    {
+        $case = $this->getDoctrine()->getRepository('TruckBundle:AccidentCase')->findOneById($existingCaseId);
+        $casesStatus = $case->getStatus();
+        return $this->redirectToRoute('truck_operator_panel', [
+            'caseId' => $existingCaseId,
+            'casesStatus' => $casesStatus
+        ]);
     }
 }
