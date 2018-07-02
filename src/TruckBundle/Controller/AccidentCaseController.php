@@ -39,7 +39,6 @@ class AccidentCaseController extends Controller
      */
     public function searchCaseAction(Request $req): Response
     {
-        // TODO finish it
         $accidentCaseSearchPresenter = new AccidentCaseSearchPresenter();
         $form = $this->createForm(AccidentCaseSearchType::class, $accidentCaseSearchPresenter);
 
@@ -48,10 +47,23 @@ class AccidentCaseController extends Controller
 
             if (is_int($accidentCaseSearchPresenter->getCaseId()) &&
                 $this->checkIsCaseExists($accidentCaseSearchPresenter->getCaseId())) {
-                    return $this->redirectToOperatorPanelBy($accidentCaseSearchPresenter->getCaseId());
+                return $this->redirectToOperatorPanelBy($accidentCaseSearchPresenter->getCaseId());
             }
 
-            //
+            $casesQuery = $this->getDoctrine()->getManager()->getRepository('TruckBundle:AccidentCase')->findAllCasesBy(
+                $accidentCaseSearchPresenter->getCompanyName(),
+                $accidentCaseSearchPresenter->getDamageDescription(),
+                $accidentCaseSearchPresenter->getTruckLocation()
+            );
+
+            $paginator = $this->get('knp_paginator'); // TODO fix paginatioon
+            $cases = $paginator->paginate(
+                $casesQuery,
+                $req->query->get('page', 1), 30);
+
+            return $this->render('@Truck/AccidentCase/show_all_found_cases.html.twig', [
+                'cases' => $cases
+            ]);
         }
 
         return $this->render('TruckBundle:AccidentCase:search_case.html.twig', [

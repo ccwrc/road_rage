@@ -1,0 +1,43 @@
+{% extends "TruckBundle:Main:base.html.twig" %}
+
+{% block title %}found cases{% endblock %}
+
+{% block body %}
+
+    {{ include('TruckBundle:Main:main_menu.html.twig') }}
+
+    <center>
+        <h3 class="formTitle">found cases</h3>
+    </center>
+
+    <div class="padding7px">
+        Number of accident cases: {{ cases|length }} <br/>
+
+        {% if is_granted('ROLE_OPERATOR') %}
+            {% for case in cases %}
+                <button title="new window" class="pure-button pure-button-active button70noBackground"
+                        onclick="window.open('{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}');"
+                        style="background-color:{{ case.progressColor }}">
+                    case {{ case.id }}
+                    {% if case.timeStart is not null %}
+                        ({{ case.timeStart | date('Y.m.d') }})
+                    {% endif %}
+                </button> <br/>
+            {% else %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(cases) }}
+    </div>
+
+    <center>
+        <button title="edit vehicle" class="pure-button pure-button-active button90blue"
+                onclick="window.location = '{{ path("truck_accidentcase_searchcase") }}';">
+            back to search
+        </button>
+    </center>
+
+{% endblock %}
+
