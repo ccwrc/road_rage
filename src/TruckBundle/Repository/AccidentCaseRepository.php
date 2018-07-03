@@ -52,12 +52,6 @@ class AccidentCaseRepository extends EntityRepository
             . 'LIKE :inactive ORDER BY c.id ASC')->setParameter("inactive", "inactive");
     }
 
-    /**
-     * @param null|string $companyName
-     * @param null|string $damageDescription
-     * @param null|string $truckLocation
-     * @return Query
-     */
     public function findAllCasesBy(
         ?string $companyName,
         ?string $damageDescription,

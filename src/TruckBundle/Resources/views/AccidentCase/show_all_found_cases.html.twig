@@ -21,7 +21,10 @@
                     {% if case.timeStart is not null %}
                         ({{ case.timeStart | date('Y.m.d') }})
                     {% endif %}
-                </button> <br/>
+                </button>
+                <span class="boldText">Company: </span> {{ case.vehicle.companyName }}
+                <span class="boldText">Truck: </span> {{ case.vehicle.nameType }}
+                <hr class="hrStyle"/>
             {% else %}
             {% endfor %}
         {% endif %}

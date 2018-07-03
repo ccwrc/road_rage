@@ -61,7 +61,7 @@ class AccidentCaseController extends Controller
             $paginator = $this->get('knp_paginator');
             $cases = $paginator->paginate(
                 $casesQuery,
-                $req->query->get('page', 1), 30);
+                $req->query->get('page', 1), 20);
 
             return $this->render('TruckBundle:AccidentCase:show_all_found_cases.html.twig', [
                 'cases' => $cases

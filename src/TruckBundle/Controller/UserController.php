@@ -54,7 +54,7 @@ final class UserController extends Controller
         $paginator = $this->get('knp_paginator');
         $users = $paginator->paginate(
             $usersQuery,
-            $req->query->get('page', 1), 15);
+            $req->query->get('page', 1), 20);
 
         return $this->render('TruckBundle:User:show_all_users.html.twig', array(
             'users' => $users
@@ -67,7 +67,9 @@ final class UserController extends Controller
     public function findUserAction(Request $req): Response
     {
         $userFindPresenter = new UserFindPresenter();
-        $form = $this->createForm(UserFindType::class, $userFindPresenter);
+        $form = $this->createForm(UserFindType::class, $userFindPresenter, [
+            'method' => 'GET'
+        ]);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +81,7 @@ final class UserController extends Controller
             $paginator = $this->get('knp_paginator');
             $users = $paginator->paginate(
                 $usersQuery,
-                $req->query->get('page', 1), 15);
+                $req->query->get('page', 1), 20);
 
             return $this->render('TruckBundle:User:show_all_users.html.twig', array(
                 'users' => $users
