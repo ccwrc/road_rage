@@ -71,7 +71,9 @@ class DealerEditType extends AbstractType
                     'inactive' => Dealer::$dealerIsInactive,
                     'suspended' => Dealer::$dealerIsSuspended
                 ],
-                'choices_as_values' => true, 'label' => 'Is active: '])
+                'choices_as_values' => true,
+                'label' => 'Is active: '
+            ])
             ->add('otherComments', TextareaType::class, [
                 'label' => 'Other comments: ',
                 'required' => false
