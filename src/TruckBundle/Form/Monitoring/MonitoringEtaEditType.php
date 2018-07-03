@@ -1,25 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TruckBundle\Form\Monitoring;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\{
+    DateTimeType, TextareaType, TextType
+};
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use \DateTime;  // for timeSet
 
-class MonitoringEtaEditType extends AbstractType {
+class MonitoringEtaEditType extends AbstractType
+{
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
         $builder
-                ->add("contactThrough", "text", ["label" => "Contact through: "])
-                ->add("comments", "textarea", ["label" => "Comments: "])
-                ->add("timeSet", "datetime", ["label" => "Enter estimated arrival time: "]);
+            ->add('contactThrough', TextType::class, [
+                'label' => 'Contact through: '
+            ])
+            ->add('comments', TextareaType::class, [
+                'label' => 'Comments: '
+            ])
+            ->add('timeSet', DateTimeType::class, [
+                'label' => 'Enter estimated arrival time: '
+            ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver) {
+    public function configureOptions(OptionsResolver $resolver): void
+    {
         $resolver->setDefaults([
-            "data_class" => "TruckBundle\Entity\Monitoring"
+            'data_class' => 'TruckBundle\Entity\Monitoring'
         ]);
     }
-
 }
