@@ -40,7 +40,9 @@ class AccidentCaseController extends Controller
     public function searchCaseAction(Request $req): Response
     {
         $accidentCaseSearchPresenter = new AccidentCaseSearchPresenter();
-        $form = $this->createForm(AccidentCaseSearchType::class, $accidentCaseSearchPresenter);
+        $form = $this->createForm(AccidentCaseSearchType::class, $accidentCaseSearchPresenter, [
+            'method' => 'GET'
+        ]);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,12 +58,12 @@ class AccidentCaseController extends Controller
                 $accidentCaseSearchPresenter->getTruckLocation()
             );
 
-            $paginator = $this->get('knp_paginator'); // TODO fix paginatioon
+            $paginator = $this->get('knp_paginator');
             $cases = $paginator->paginate(
                 $casesQuery,
                 $req->query->get('page', 1), 30);
 
-            return $this->render('@Truck/AccidentCase/show_all_found_cases.html.twig', [
+            return $this->render('TruckBundle:AccidentCase:show_all_found_cases.html.twig', [
                 'cases' => $cases
             ]);
         }
