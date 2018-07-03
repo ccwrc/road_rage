@@ -83,7 +83,7 @@ class AccidentCaseRepository extends EntityRepository
 
         if ($truckLocation !== null) {
             $qb->andWhere(
-                $qb->expr()->like('ac.truckLocation', ':truckLocation')
+                $qb->expr()->like('ac.location', ':truckLocation')
             );
             $qb->setParameter('truckLocation', "%$truckLocation%");
         }
