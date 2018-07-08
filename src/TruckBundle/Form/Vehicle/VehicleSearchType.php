@@ -37,7 +37,7 @@ class VehicleSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TruckBundle\Entity\Vehicle',
+            'data_class' => 'TruckBundle\Entity\Vehicle'
         ));
     }
 }
