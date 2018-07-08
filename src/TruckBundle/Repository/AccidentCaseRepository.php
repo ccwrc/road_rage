@@ -7,6 +7,8 @@ namespace TruckBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
+use TruckBundle\Entity\AccidentCase;
+
 /**
  * AccidentCaseRepository
  *
@@ -16,40 +18,24 @@ use Doctrine\ORM\Query;
 class AccidentCaseRepository extends EntityRepository
 {
 
-    public function findAllCasesQuery()
+    public function findAllCasesQuery(): Query
     {
         $em = $this->getEntityManager();
-        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c ORDER BY c.id ASC');
+        return $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c ORDER BY c.id ASC');
     }
 
-    public function findAllActiveCases()
+    public function findAllActiveCasesQuery(): Query
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
-            . 'LIKE :active')->setParameter("active", "active");
-        return $query->getResult();
+        return $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
+            . 'LIKE :active ORDER BY c.id ASC')->setParameter('active', AccidentCase::$statusActive);
     }
 
-    public function findAllActiveCasesQuery()
+    public function findAllInactiveCasesQuery(): Query
     {
         $em = $this->getEntityManager();
-        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
-            . 'LIKE :active ORDER BY c.id ASC')->setParameter("active", "active");
-    }
-
-    public function findAllInactiveCases()
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
-            . 'LIKE :inactive')->setParameter("inactive", "inactive");
-        return $query->getResult();
-    }
-
-    public function findAllInactiveCasesQuery()
-    {
-        $em = $this->getEntityManager();
-        return $query = $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
-            . 'LIKE :inactive ORDER BY c.id ASC')->setParameter("inactive", "inactive");
+        return $em->createQuery('SELECT c FROM TruckBundle:AccidentCase c WHERE c.status '
+            . 'LIKE :inactive ORDER BY c.id ASC')->setParameter('inactive', AccidentCase::$statusInactive);
     }
 
     public function findAllCasesBy(
