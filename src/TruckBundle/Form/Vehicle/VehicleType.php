@@ -34,7 +34,7 @@ class VehicleType extends AbstractType {
                 ->add("registrationNumber", "text", ["label" => "Vehicle registration number: "])
                 ->add("mileage", "text", ["label" => "Vehicle mileage: "])
                 ->add("guaranteeType", "text", ["label" => "Vehicle guarantee type and end date: "])
-                ->add("purchaseDate", "date", ["label" => "Vehicle purchase (sell) date: "])
+                ->add("purchaseDate", "date", ["label" => "Vehicle purchase (sell) date: "]) // TODO birth
                 ->add("nameType", "text", ["label" => "Vehicle name and type: "])
                 ->add("dealer", EntityType::class, [
                     "class" => "TruckBundle:Dealer", "choice_label" => "name",
