@@ -2,7 +2,7 @@
 
 {% block title %}show user{% endblock %}
 
-{% block body %} 
+{% block body %}
 
     {{ include('TruckBundle:User:user_menu.html.twig') }}
 
@@ -15,39 +15,39 @@
             <span class="boldText"> User ID:</span> {{ user.id }} <br/>
             <span class="boldText"> Username:</span> {{ user.username }} <br/>
             <span class="boldText"> E-mail:</span> {{ user.email }} <br/>
-            <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }} 
-            <button title="enable/disable user" 
-                    class="pure-button pure-button-active button50noBackground" 
+            <span class="boldText"> Enabled:</span> {{ user.enabled ? 'Yes':'No' }}
+            <button title="enable/disable user"
+                    class="pure-button pure-button-active button50noBackground"
                     onclick="window.location = '{{ path('truck_user_enabledisableuser', {'userId': user.id}) }}';">
                 change
-            </button>   
+            </button>
             <br/>
             <span class="boldText"> Last login:</span> {{ user.lastLogin | date('d/m/Y H:i:s') }} <br/>
 
-            <hr class="hrStyle" />
+            <hr class="hrStyle"/>
             <span class="boldText"> Roles:</span> <br/>
             {% for role in user.roles %}
                 {% if (role != 'ROLE_SUPER_ADMIN') and (role != 'ROLE_USER') %}
-                    <button title="remove role {{ role }}" 
-                            class="pure-button pure-button-active button70noBackground" 
+                    <button title="remove role {{ role }}"
+                            class="pure-button pure-button-active button70noBackground"
                             onclick="window.location = '{{ path('truck_user_removerolefromuser', {'userId': user.id, 'role': role}) }}';">
-                        remove: 
-                    </button>   
-                {% endif %} 
-                {{ role }} 
+                        remove:
+                    </button>
+                {% endif %}
+                {{ role }}
                 <br/>
             {% else %}
                 <span> No roles. </span>
             {% endfor %}
 
-            <hr class="hrStyle" />
+            <hr class="hrStyle"/>
             {% for permittedRole in permittedRoles %}
-                <button title="add role to user" 
-                        class="pure-button pure-button-active button70noBackground" 
+                <button title="add role to user"
+                        class="pure-button pure-button-active button70noBackground"
                         onclick="window.location = '{{ path('truck_user_addroletouser', {'userId': user.id, 'role': permittedRole}) }}';"
                         style="background-color:rgb(66, 184, 221)">
-                    add role 
-                </button>   
+                    add role
+                </button>
                 {{ permittedRole | split('_')[1] }}
                 <br/>
             {% else %}
@@ -55,15 +55,15 @@
             {% endfor %}
 
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <hr class="hrStyle" />
+                <hr class="hrStyle"/>
                 <br/>
                 <span class="boldText"> Permanently delete user: </span>
                 <br/>
-                <button title="delete user" 
-                        class="pure-button pure-button-active button70noBackground confirm" 
+                <button title="delete user"
+                        class="pure-button pure-button-active button70noBackground confirm"
                         style="background-color:rgb(202, 60, 60)">
                     delete !
-                </button>       
+                </button>
             {% endif %}
 
         {% else %}
@@ -88,6 +88,6 @@
                     };
                 }
             });
-        </script>   
+        </script>
     {% endif %}
 {% endblock %}

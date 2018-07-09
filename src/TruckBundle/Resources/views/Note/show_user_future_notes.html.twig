@@ -2,39 +2,39 @@
 
 {% block title %}all notes - future{% endblock %}
 
-{% block body %} 
+{% block body %}
 
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <center>
-        <h3 class="formTitle">my notes 
-            <button title="switch to future notes" 
+        <h3 class="formTitle">my notes
+            <button title="switch to future notes"
                     class="topMenu"
                     onclick="window.location = '{{ path("truck_note_showuseractualnotes") }}';">
                 (switch to current)
-            </button>  
+            </button>
         </h3>
     </center>
 
     <div class="navigation">
         {{ knp_pagination_render(notes) }}
-    </div>       
+    </div>
 
     <div class="padding7px">
-        {% for note in notes %} 
+        {% for note in notes %}
             <span class="boldText"> Status:</span> {{ note.status }}
-            <span class="boldText"> Date of publication:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} 
-            <button title="edit note" 
+            <span class="boldText"> Date of publication:</span> {{ note.timePublication | date('d/m/Y H:i:s') }}
+            <button title="edit note"
                     class="pure-button pure-button-active button70noBackground"
                     onclick="window.location = '{{ path('truck_note_editnote', {"noteId":note.id}) }}';">
                 edit
-            </button>  
-            <button title="delete note" 
+            </button>
+            <button title="delete note"
                     class="pure-button pure-button-active button70noBackground"
                     onclick="window.location = '{{ path('truck_note_deletefuturenote', {"noteId":note.id}) }}';"
                     style="background-color:rgb(202, 60, 60)">
                 delete
-            </button>                  
+            </button>
             <br/>
             {{ note.content }}
             <hr class="hrStyle"/>
@@ -45,6 +45,6 @@
 
     <div class="navigation">
         {{ knp_pagination_render(notes) }}
-    </div>    
+    </div>
 
 {% endblock %}

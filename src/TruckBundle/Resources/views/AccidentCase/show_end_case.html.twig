@@ -1,14 +1,13 @@
-
-{% if case is not empty %}  
+{% if case is not empty %}
 
     {% if case.progressColor == "#E6E6E6" %}
 
-        <span class="textBold textItalic">Data for the report </span>      
-        <button title="new window" class="panelGreyButton" 
+        <span class="textBold textItalic">Data for the report </span>
+        <button title="new window" class="panelGreyButton"
                 onclick="window.open('{{ path('truck_accidentcase_editcaseend', {"caseId":case.id}) }}');">
             edit
-        </button>              
-        <br/> 
+        </button>
+        <br/>
 
         <span class="textBold textItalic">Arrival time:</span> {{ case.reportArrivalTime }} minutes <br/>
         <span class="textBold textItalic">Service car late:</span> {{ case.reportLate }} minutes <br/>
@@ -16,25 +15,26 @@
         <span class="textBold textItalic">No road service time:</span> {{ case.reportNrsTime }} minutes <br/>
         <span class="textBold textItalic">Repair total time:</span> {{ case.reportRepairTotal }} minutes <br/>
         <span class="textBold textItalic">Case total time:</span> {{ case.reportCaseTotal }} minutes <br/>
-        <span class="textBold textItalic">Repair status (completed/incompleted/canceled):</span> {{ case.reportRepairStatus }} <br/>
+        <span class="textBold textItalic">Repair status (completed/incompleted/canceled):</span> {{ case.reportRepairStatus }}
+        <br/>
 
         {% if case.status == "active" %}
-            <center>                 
-                <button title="deactivate case" class="panelRedButton" 
+            <center>
+                <button title="deactivate case" class="panelRedButton"
                         onclick="window.location = '{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}';">
                     close case {{ case.id }}
-                </button>    
-            </center> 
+                </button>
+            </center>
             <br/>
-        {% else%}    
+        {% else %}
             <center>
-                <button title="activate case" class="panelRedButton" 
+                <button title="activate case" class="panelRedButton"
                         onclick="window.location = '{{ path('truck_accidentcase_activatedeactivatecase', {"caseId":case.id}) }}';">
                     open case {{ case.id }}
-                </button>    
-            </center> 
+                </button>
+            </center>
             <br/>
         {% endif %}
-    {% endif %}  
+    {% endif %}
 
 {% endif %}

@@ -2,8 +2,8 @@
 
 {% block title %}new pg request{% endblock %}
 
-{% block body %} 
-    
+{% block body %}
+
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <div class="pure-form pure-form-aligned">
@@ -14,16 +14,15 @@
             </center>
 
             <div class="padding7px">
-                {{ form_start(form) }} 
-                {{ form_widget(form) }} 
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
                 <center>
                     <input class="pure-button pure-button-active button90red" type="submit" value="add PG"/>
                 </center>
 
                 {{ form_end(form) }}
-            </div> 
+            </div>
         </div>
     </div>
 
 {% endblock %}
-

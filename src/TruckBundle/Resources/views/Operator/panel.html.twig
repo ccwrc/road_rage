@@ -2,9 +2,9 @@
 
 {% block title %}operator panel{% endblock %}
 
-{% block stylesheets %}  
-    <link href="{{ asset('/css/operator.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
+{% block stylesheets %}
+    <link href="{{ asset('/css/operator.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet"/>
 {% endblock %}
 
 
@@ -20,121 +20,121 @@
     {# for operator (overall) #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
-        <button title="new window" class="panelMenuGreyButton" 
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_main_index') }}');">
             main page
-        </button>          
-        <button title="new window" class="panelMenuGreyButton" 
+        </button>
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
             active dealers
-        </button>      
-        <button title="new window" class="panelMenuGreyButton" 
+        </button>
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_accidentcase_caseprogresscolormanual') }}');">
             MANUAL
-        </button>    
-        <br/>    
+        </button>
+        <br/>
     {% endif %}
     {# for operator (notes) #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
-        <button title="new window" class="panelMenuGreyButton" 
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_note_createnote') }}');">
             new note
-        </button>     
-        <button title="new window" class="panelMenuGreyButton" 
+        </button>
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_note_showuseractualnotes') }}');">
             my notes
-        </button>  
-        <button title="new window" class="panelMenuGreyButton" 
+        </button>
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_note_showpublicnotes') }}');">
-            public notes  
-        </button>  
+            public notes
+        </button>
         <br/>
-    {% endif %}    
+    {% endif %}
     {# TODO for control #}
-{#    {% if is_granted('ROLE_CONTROL') %}
-        &nbsp;
-        <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            report panel? 
-        </button>     
-        <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved 
-        </button>  
-        <button title="new window" class="panelMenuGreyButton" 
-                onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
-            reserved 
-        </button>  
-        <br/>
-    {% endif %}#}
+    {#    {% if is_granted('ROLE_CONTROL') %}
+            &nbsp;
+            <button title="new window" class="panelMenuGreyButton"
+                    onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+                report panel?
+            </button>
+            <button title="new window" class="panelMenuGreyButton"
+                    onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+                reserved
+            </button>
+            <button title="new window" class="panelMenuGreyButton"
+                    onclick="window.open('{{ path('truck_dealer_showallactivedealers') }}');">
+                reserved
+            </button>
+            <br/>
+        {% endif %}#}
     {# case bar for operator #}
     {% if is_granted('ROLE_OPERATOR') %}
         &nbsp;
-        <button title="new window" class="panelMenuGreyButton" 
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_vehicle_createvehicle') }}');">
             new vehicle
-        </button>          
-        <button title="new window" class="panelMenuGreyButton" 
+        </button>
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_vehicle_searchvehicle') }}');">
             search vehicle
-        </button>      
-        <button title="new window" class="panelMenuGreyButton" 
+        </button>
+        <button title="new window" class="panelMenuGreyButton"
                 onclick="window.open('{{ path('truck_accidentcase_searchcase') }}');">
-            find a case 
-        </button>               
+            find a case
+        </button>
     {% endif %}
 {% endblock %} {# end block menuBar #}
 
 
 {% block cases %}
-    {% if casesStatus == "inactive" %}  
+    {% if casesStatus == "inactive" %}
         {% render url('truck_accidentcase_showallinactivecases', {"caseId":caseId}) %}
     {% elseif casesStatus == "all" %}
         {% render url('truck_accidentcase_showallcases', {"caseId":caseId}) %}
-    {% else %}    
+    {% else %}
         {% render url('truck_accidentcase_showallactivecases', {"caseId":caseId}) %}
-    {% endif %} 
+    {% endif %}
 {% endblock %} {# end block cases #}
 
 
 {% block monitoring %}
     {% render url('truck_accidentcase_showstartcase', {"caseId":caseId}) %}
-    {% if caseId != 0 %} 
+    {% if caseId != 0 %}
         <button title="Payment Guarantee (request)" class="panelRedButton"
                 onclick="window.location = '{{ path('truck_monitoringpg_createmonitoringpg', {"caseId":caseId}) }}';">
-            PG  
+            PG
         </button>
         <button title="Confirmation Payment Guarantee" class="panelRedButton"
                 onclick="window.location = '{{ path('truck_monitoringcpg_createmonitoringcpg', {"caseId":caseId}) }}';">
-            CPG  
-        </button>        
-        <button title="Repair Order" class="panelOrangeButton" 
+            CPG
+        </button>
+        <button title="Repair Order" class="panelOrangeButton"
                 onclick="window.location = '{{ path('truck_monitoringro_createmonitoringro', {"caseId":caseId}) }}';">
-            RO  
-        </button>     
-        <button title="Estimated Arrival Time" class="panelOrangeButton" 
+            RO
+        </button>
+        <button title="Estimated Arrival Time" class="panelOrangeButton"
                 onclick="window.location = '{{ path('truck_monitoringeta_createmonitoringeta', {"caseId":caseId}) }}';">
             ETA
-        </button>       
-        <button title="STaRt Repair Time" class="panelGreenButton" 
+        </button>
+        <button title="STaRt Repair Time" class="panelGreenButton"
                 onclick="window.location = '{{ path('truck_monitoringstrr_createmonitoringstrr', {"caseId":caseId}) }}';">
             STRR
-        </button>     
-        <button title="END case" class="panelGreenButton" 
+        </button>
+        <button title="END case" class="panelGreenButton"
                 onclick="window.location = '{{ path('truck_monitoringend_createmonitoringend', {"caseId":caseId}) }}';">
             END
-        </button>  
-        &nbsp;    
-        <button title="General. Outgoing phone call/fax/mail/etc." class="panelGreenButton" 
+        </button>
+        &nbsp;
+        <button title="General. Outgoing phone call/fax/mail/etc." class="panelGreenButton"
                 onclick="window.location = '{{ path('truck_monitoringout_createmonitoringout', {"caseId":caseId}) }}';">
             Out
-        </button>       
-        <button title="General. Incoming phone call/fax/mail/etc." class="panelGreenButton" 
+        </button>
+        <button title="General. Incoming phone call/fax/mail/etc." class="panelGreenButton"
                 onclick="window.location = '{{ path('truck_monitoringincoming_createmonitoringincoming', {"caseId":caseId}) }}';">
             Incoming
-        </button>   
-        <br/>               
+        </button>
+        <br/>
     {% endif %}
     {% render url('truck_monitoring_showallmonitoringsforcase', {"caseId":caseId}) %}
     {% render url('truck_accidentcase_showendcase', {"caseId":caseId}) %}
@@ -143,7 +143,7 @@
 
 {% block logged %}
     <a title="Logout" class="casesSwitch" href="{{ path("fos_user_security_logout") }}">
-        {{ app.user.username }} 
+        {{ app.user.username }}
     </a>
 {% endblock %} {# end block logged #}
 
@@ -151,7 +151,7 @@
 {% block infoBar %}
     {% if countPrivateNote != 0 %}
         <a title="new window" target="_blank" class="casesSwitch" href="{{ path("truck_note_showuseractualnotes") }}">
-            my private notes from last 24h: {{ countPrivateNote }}  
+            my private notes from last 24h: {{ countPrivateNote }}
         </a>
         <br/>
     {% endif %}
@@ -164,32 +164,31 @@
 
 {% block javascripts %}
     <script>
-    document.addEventListener("DOMContentLoaded", function() {   
-        
-        var allSpansToMorph = document.getElementsByClassName("morph");
-        for (var i=0; i<allSpansToMorph.length; i++) {
-            if(allSpansToMorph[i].innerHTML.indexOf("PG") === 1) {
-                allSpansToMorph[i].classList.add("morphRed");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("CPG") === 1) {
-                allSpansToMorph[i].classList.add("morphRed");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("RO") === 1) {
-                allSpansToMorph[i].classList.add("morphOrange");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("ETA") === 1) {
-                allSpansToMorph[i].classList.add("morphOrange");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("STRR") === 1) {
-                allSpansToMorph[i].classList.add("morphGreen");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("END") === 1) {
-                allSpansToMorph[i].classList.add("morphGreen");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("WPG") === 1) {
-                allSpansToMorph[i].classList.add("morphRed");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("WCPG") === 1) {
-                allSpansToMorph[i].classList.add("morphRed");
-            } else if(allSpansToMorph[i].innerHTML.indexOf("WRO") === 1) {
-                allSpansToMorph[i].classList.add("morphRed");
-            }
-        }
-                    
-    }); 
-    </script>   
-{% endblock %} {# end block javascripts #}
+        document.addEventListener("DOMContentLoaded", function () {
 
+            var allSpansToMorph = document.getElementsByClassName("morph");
+            for (var i = 0; i < allSpansToMorph.length; i++) {
+                if (allSpansToMorph[i].innerHTML.indexOf("PG") === 1) {
+                    allSpansToMorph[i].classList.add("morphRed");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("CPG") === 1) {
+                    allSpansToMorph[i].classList.add("morphRed");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("RO") === 1) {
+                    allSpansToMorph[i].classList.add("morphOrange");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("ETA") === 1) {
+                    allSpansToMorph[i].classList.add("morphOrange");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("STRR") === 1) {
+                    allSpansToMorph[i].classList.add("morphGreen");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("END") === 1) {
+                    allSpansToMorph[i].classList.add("morphGreen");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("WPG") === 1) {
+                    allSpansToMorph[i].classList.add("morphRed");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("WCPG") === 1) {
+                    allSpansToMorph[i].classList.add("morphRed");
+                } else if (allSpansToMorph[i].innerHTML.indexOf("WRO") === 1) {
+                    allSpansToMorph[i].classList.add("morphRed");
+                }
+            }
+
+        });
+    </script>
+{% endblock %} {# end block javascripts #}

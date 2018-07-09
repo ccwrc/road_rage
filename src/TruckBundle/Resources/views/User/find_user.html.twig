@@ -2,7 +2,7 @@
 
 {% block title %}find user{% endblock %}
 
-{% block body %} 
+{% block body %}
 
     {{ include('TruckBundle:User:user_menu.html.twig') }}
 
@@ -14,14 +14,14 @@
             </center>
 
             <div class="padding7px">
-                {{ form_start(form) }} 
-                {{ form_widget(form) }} 
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
                 <center>
                     <input class="pure-button pure-button-active button90red" type="submit" value="find"/>
                 </center>
                 {{ form_end(form) }}
             </div>
-        </div> 
+        </div>
     </div>
 
 {% endblock %}

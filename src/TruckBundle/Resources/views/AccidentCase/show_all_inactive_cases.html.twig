@@ -1,27 +1,26 @@
-
-<a title="switch to all cases" class="casesSwitch" 
+<a title="switch to all cases" class="casesSwitch"
    href="{{ path('truck_operator_panel', {'caseId': "0", 'casesStatus': "all"}) }}">
     Inactive cases:
 </a>
 <br/>
 
-{% for case in cases %} 
+{% for case in cases %}
 
     {% if caseId == case.id %}
-        <button title="{{ case.vehicle.companyName }}" class="caseButton" 
+        <button title="{{ case.vehicle.companyName }}" class="caseButton"
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', 
+                onclick="window.location = '{{ path('truck_operator_panel',
                     {'caseId': case.id, 'casesStatus': "inactive", 'page': cases.currentPageNumber}) }}';">
             &rarr; {{ case.id }} &larr;
         </button> <br/>
     {% else %}
-        <button title="{{ case.vehicle.companyName }}" class="caseButton" 
+        <button title="{{ case.vehicle.companyName }}" class="caseButton"
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', 
+                onclick="window.location = '{{ path('truck_operator_panel',
                     {'caseId': case.id, 'casesStatus': "inactive", 'page': cases.currentPageNumber}) }}';">
             {{ case.id }}
         </button> <br/>
-    {% endif %}      
+    {% endif %}
 
 {% else %}
     Empty.

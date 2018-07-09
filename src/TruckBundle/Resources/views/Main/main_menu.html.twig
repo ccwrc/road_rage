@@ -1,24 +1,24 @@
 <br/>
 <div class="formTitle">
-    <center> 
-        <button title="back to main page" 
-                class="topMenu" 
+    <center>
+        <button title="back to main page"
+                class="topMenu"
                 onclick="window.location = '{{ path('truck_main_index') }}';">
             main_page
-        </button>   
+        </button>
 
         {% if is_granted('ROLE_DEALER') %}
-            <button title="show active dealers" 
+            <button title="show active dealers"
                     class="topMenu"
                     onclick="window.location = '{{ path("truck_dealer_showallactivedealers") }}';">
                 active_dealers
-            </button>  
-            <button title="search for a vehicle" 
+            </button>
+            <button title="search for a vehicle"
                     class="topMenu"
                     onclick="window.location = '{{ path("truck_vehicle_searchvehicle") }}';">
                 search_vehicle
-            </button>                  
-        {% endif %}    
+            </button>
+        {% endif %}
 
         {% if is_granted('ROLE_OPERATOR') %}
             <button title="go to operator panel"
@@ -26,22 +26,22 @@
                     onclick="window.location = '{{ path("truck_operator_panel") }}';">
                 OPERATOR_PANEL
             </button>
-        {% endif %}        
+        {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
-            <button title="show all users" 
-                    class="topMenu" 
+            <button title="show all users"
+                    class="topMenu"
                     onclick="window.location = '{{ path('truck_user_showallusers') }}';">
                 all_users
-            </button>             
-        {% endif %}              
+            </button>
+        {% endif %}
 
         {% if is_granted('ROLE_USER') %}
-            <button title="logout user" 
-                    class="topMenu" 
+            <button title="logout user"
+                    class="topMenu"
                     onclick="window.location = '{{ path('fos_user_security_logout') }}';">
                 {{ app.user.username }}:logout
-            </button>   
+            </button>
         {% endif %}
-    </center> 
+    </center>
 </div>

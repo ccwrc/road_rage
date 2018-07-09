@@ -2,8 +2,8 @@
 
 {% block title %}show dealer details{% endblock %}
 
-{% block body %} 
-    
+{% block body %}
+
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <center>
@@ -11,15 +11,15 @@
     </center>
 
     <div class="padding7px">
-        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles: 
-            {{ vehicles | length }}/{{ dealer.vehicles | length }}) </span> 
-            {% if is_granted('ROLE_OPERATOR') %}
-            <button title="edit dealer" 
-                    class="pure-button pure-button-active button90red" 
+        <span class="redBoldText"> {{ dealer.name }} ({{ dealer.isActive }}, vehicles:
+            {{ vehicles | length }}/{{ dealer.vehicles | length }}) </span>
+        {% if is_granted('ROLE_OPERATOR') %}
+            <button title="edit dealer"
+                    class="pure-button pure-button-active button90red"
                     onclick="window.location = '{{ path('truck_dealer_editdealer', {"dealerId":dealer.id}) }}';">
                 edit dealer
-            </button>  
-        {% endif %}   
+            </button>
+        {% endif %}
         <br/>
         <span class="boldText"> Address:</span> {{ dealer.street }} <br/>
         <span class="boldText"> City, zip-code:</span> {{ dealer.city }}, {{ dealer.zipCode }} <br/>
@@ -32,30 +32,31 @@
         <span class="boldText"> Comments:</span> {{ dealer.otherComments }} <br/>
     </div>
 
-    <hr class="hrStyle" />
+    <hr class="hrStyle"/>
 
     <div class="navigation">
         {{ knp_pagination_render(vehicles) }}
-    </div>          
+    </div>
 
-    {% for vehicle in vehicles %}  
+    {% for vehicle in vehicles %}
         <div class="padding7px">
-            <span class="greenBoldText">Company: {{ vehicle.companyname }}, VIN: {{ vehicle.vin }}, Registration: {{ vehicle.registrationNumber }} </span>
+            <span class="greenBoldText">Company: {{ vehicle.companyname }}, VIN: {{ vehicle.vin }}
+                , Registration: {{ vehicle.registrationNumber }} </span>
             <br/>
-            <button title="new window" class="pure-button pure-button-active button90green" 
+            <button title="new window" class="pure-button pure-button-active button90green"
                     onclick="window.open('{{ path('truck_vehicle_showvehicle', {"vehicleId":vehicle.id}) }}');">
                 details
-            </button>   
-            <button title="new window" class="pure-button pure-button-active button90green" 
+            </button>
+            <button title="new window" class="pure-button pure-button-active button90green"
                     onclick="window.open('{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}');">
                 edit
-            </button>   
+            </button>
             {% if is_granted('ROLE_OPERATOR') %}
-                <button title="new accident case" 
-                        class="pure-button pure-button-active button90orange" 
+                <button title="new accident case"
+                        class="pure-button pure-button-active button90orange"
                         onclick="window.location = '{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}';">
                     new case
-                </button>   
+                </button>
             {% endif %}
             <br/>
             <span class="boldText"> Street:</span> {{ vehicle.street }} <br/>

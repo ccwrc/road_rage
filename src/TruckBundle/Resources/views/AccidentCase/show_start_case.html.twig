@@ -1,30 +1,29 @@
-
 {% if case is not empty %}
 
-    <span class="textBold textItalic">Truck: </span> {{ case.vehicle.nameType }}, 
-    {{ case.vehicle.registrationNumber }}, Guarantee: 
-    {{ case.vehicle.guaranteeType }}, Dealer: 
-    <a title="show dealer in new window" target="_blank" class="casesSwitch" 
+    <span class="textBold textItalic">Truck: </span> {{ case.vehicle.nameType }},
+    {{ case.vehicle.registrationNumber }}, Guarantee:
+    {{ case.vehicle.guaranteeType }}, Dealer:
+    <a title="show dealer in new window" target="_blank" class="casesSwitch"
        href="{{ path("truck_dealer_showdealer", {"dealerId":case.vehicle.dealer.id }) }}">
         {{ case.vehicle.dealer.name }}
     </a> <br/>
 
-    <span class="textBold textItalic">Company: </span> {{ case.vehicle.companyName }}, Contact: 
-    {{ case.vehicle.contactPerson }}. 
-    <button title="new window" class="panelGreyButton" 
+    <span class="textBold textItalic">Company: </span> {{ case.vehicle.companyName }}, Contact:
+    {{ case.vehicle.contactPerson }}.
+    <button title="new window" class="panelGreyButton"
             onclick="window.open('{{ path('truck_vehicle_showvehicle', {"vehicleId":case.vehicle.id}) }}');">
         vehicle/company details
-    </button>   
+    </button>
     <br/>
 
     <span class="textBold textItalic">Damage description: </span> {{ case.damageDescription }} <br/>
     <span class="textBold textItalic">Location: </span> {{ case.location }} <br/>
-    <span class="textBold textItalic">Contact to driver: </span> {{ case.driverContact }} 
+    <span class="textBold textItalic">Contact to driver: </span> {{ case.driverContact }}
 
-    <button title="new window" class="panelGreyButton" 
+    <button title="new window" class="panelGreyButton"
             onclick="window.open('{{ path('truck_accidentcase_editcase', {"caseId":case.id}) }}');">
         case edit/details
-    </button>  
+    </button>
 
     <hr class="hrStyle"/>
 {% endif %}

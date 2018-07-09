@@ -1,29 +1,28 @@
 <br/>
 <div class="formTitle">
     <center>
-        <button title="back to main page" 
-                class="topMenu" 
+        <button title="back to main page"
+                class="topMenu"
                 onclick="window.location = '{{ path('truck_main_index') }}';">
             main_page
-        </button>   
+        </button>
 
-        <button title="show all users" 
-                class="topMenu" 
+        <button title="show all users"
+                class="topMenu"
                 onclick="window.location = '{{ path('truck_user_showallusers') }}';">
             all_users
-        </button>     
+        </button>
 
-        <button title="find user by username or email" 
-                class="topMenu" 
+        <button title="find user by username or email"
+                class="topMenu"
                 onclick="window.location = '{{ path('truck_user_finduser') }}';">
             find_user
-        </button>               
+        </button>
 
-        <button title="logout user" 
-                class="topMenu" 
+        <button title="logout user"
+                class="topMenu"
                 onclick="window.location = '{{ path('fos_user_security_logout') }}';">
             {{ app.user.username }}:logout
-        </button>    
+        </button>
     </center>
 </div>
-

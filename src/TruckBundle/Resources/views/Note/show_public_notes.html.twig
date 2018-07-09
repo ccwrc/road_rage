@@ -2,7 +2,7 @@
 
 {% block title %}all public notes{% endblock %}
 
-{% block body %} 
+{% block body %}
 
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
@@ -12,20 +12,20 @@
 
     <div class="navigation">
         {{ knp_pagination_render(notes) }}
-    </div>       
+    </div>
 
     <div class="padding7px">
-        {% for note in notes %} 
-            <span class="boldText"> Author:</span> {{ note.username }} 
-            <span class="boldText"> Date:</span> {{ note.timePublication | date('d/m/Y H:i:s') }} 
+        {% for note in notes %}
+            <span class="boldText"> Author:</span> {{ note.username }}
+            <span class="boldText"> Date:</span> {{ note.timePublication | date('d/m/Y H:i:s') }}
             {% if is_granted('ROLE_CONTROL') %}
-                <button title="delete note" 
+                <button title="delete note"
                         class="pure-button pure-button-active button70noBackground"
                         onclick="window.location = '{{ path('truck_note_deletenote', {"noteId":note.id}) }}';"
                         style="background-color:rgb(202, 60, 60)">
                     delete
-                </button>   
-            {% endif %}        
+                </button>
+            {% endif %}
             <br/>
             {{ note.content }}
             <hr class="hrStyle"/>
@@ -36,8 +36,6 @@
 
     <div class="navigation">
         {{ knp_pagination_render(notes) }}
-    </div>    
+    </div>
 
 {% endblock %}
-
-

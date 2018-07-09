@@ -2,8 +2,8 @@
 
 {% block title %}show vehicle {{ vehicle.id }}{% endblock %}
 
-{% block body %}  
-    
+{% block body %}
+
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <center>
@@ -15,15 +15,15 @@
                 onclick="window.location = '{{ path("truck_vehicle_editvehicle", {"vehicleId":vehicle.id}) }}';">
             edit vehicle
         </button>
-        <button title="new window" class="pure-button pure-button-active button90blue" 
+        <button title="new window" class="pure-button pure-button-active button90blue"
                 onclick="window.open('{{ path("truck_dealer_showdealer", {"dealerId":dealer.id}) }}');">
             show dealer
-        </button> 
+        </button>
         {% if is_granted('ROLE_OPERATOR') %}
             <button title="start new case" class="pure-button pure-button-active button90red"
                     onclick="window.location = '{{ path("truck_accidentcase_createcase", {"vehicleId":vehicle.id}) }}';">
                 new case
-            </button>      
+            </button>
         {% endif %}
         <br/><br/>
 
@@ -47,19 +47,18 @@
         Number of accident cases: {{ cases|length }} <br/>
 
         {% if is_granted('ROLE_OPERATOR') %}
-            {% for case in cases %}            
-                <button title="new window" class="pure-button pure-button-active button70noBackground" 
+            {% for case in cases %}
+                <button title="new window" class="pure-button pure-button-active button70noBackground"
                         onclick="window.open('{{ path("truck_operator_panel", {"caseId":case.id, "casesStatus":case.status}) }}');"
-                        style="background-color:{{ case.progressColor }}" >
-                    case {{ case.id }} 
+                        style="background-color:{{ case.progressColor }}">
+                    case {{ case.id }}
                     {% if case.timeStart is not null %}
                         ({{ case.timeStart | date('Y.m.d') }})
                     {% endif %}
                 </button>
             {% else %}
             {% endfor %}
-        {% endif %}    
+        {% endif %}
     </div>
 
 {% endblock %}
-

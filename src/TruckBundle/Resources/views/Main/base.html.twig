@@ -1,89 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>
-            {% block title %} 
-                truck base view 
-            {% endblock %}
-        </title>
-        {% block stylesheets %}
-            <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet" />
-            <link href="{{ asset('/css/index.css') }}" rel="stylesheet" />
-            <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8"/>
+    <title>
+        {% block title %}
+            truck base view
         {% endblock %}
-    </head>
+    </title>
+    {% block stylesheets %}
+        <link href="{{ asset('/css/pure/pure-min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('/css/index.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('/css/buttons.css') }}" rel="stylesheet"/>
+    {% endblock %}
+</head>
 
-    <body>
-        <div class="container">
-            {% block body %}
+<body>
+<div class="container">
+    {% block body %}
 
-                <div class="logo">
-                    {% block logo %}
-                        block logo
-                    {% endblock %}
-                </div>
-
-                <div class="menuBar">
-                    {% block menuBar %}
-                        block menuBar
-                    {% endblock %}
-                </div>
-
-                <div class="clearDiv"></div>
-
-                <div class="cases">
-                    {% block cases %}
-                        block cases
-                    {% endblock %}
-                </div>
-
-                <div class="monitoring">
-                    {% block monitoring %}
-                        block monitoring
-                    {% endblock %}
-                </div>
-
-                <div class="clearDiv"></div>
-
-                <div class="logged">
-                    {% block logged %}
-                        block logged
-                    {% endblock %}
-                </div>
-
-                <div class="infoBar">
-                    {% block infoBar %}
-                        block infoBar
-                    {% endblock %}
-                </div>
-
+        <div class="logo">
+            {% block logo %}
+                block logo
             {% endblock %}
         </div>
 
-            {% block javascripts %}
-                <script>
-                document.addEventListener("DOMContentLoaded", function() {   
-                    var allInputs = document.getElementsByTagName("input");
-                    for (var i=0; i<allInputs.length-1; i++) {
-                        if(allInputs[i].getAttribute("type") !== "checkbox") {
-                            allInputs[i].setAttribute("class", "pure-input-2-3");
-                    }
-                    }
-                    
-                    var allTextareas = document.getElementsByTagName("textarea");
-                    for (var i=0; i<allTextareas.length; i++) {
-                        allTextareas[i].setAttribute("class", "pure-input-2-3");
-                    }  
-                    
-                    var allSelects = document.getElementsByTagName("select");
-                    for (var i=0; i<allSelects.length; i++) {
-                    allSelects[i].setAttribute("class", "pure-u-1-6");
-                    }   
-                }); 
-                </script>   
+        <div class="menuBar">
+            {% block menuBar %}
+                block menuBar
             {% endblock %}
-            
-    </body>
-</html>
+        </div>
 
+        <div class="clearDiv"></div>
+
+        <div class="cases">
+            {% block cases %}
+                block cases
+            {% endblock %}
+        </div>
+
+        <div class="monitoring">
+            {% block monitoring %}
+                block monitoring
+            {% endblock %}
+        </div>
+
+        <div class="clearDiv"></div>
+
+        <div class="logged">
+            {% block logged %}
+                block logged
+            {% endblock %}
+        </div>
+
+        <div class="infoBar">
+            {% block infoBar %}
+                block infoBar
+            {% endblock %}
+        </div>
+
+    {% endblock %}
+</div>
+
+{% block javascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var allInputs = document.getElementsByTagName("input");
+            for (var i = 0; i < allInputs.length - 1; i++) {
+                if (allInputs[i].getAttribute("type") !== "checkbox") {
+                    allInputs[i].setAttribute("class", "pure-input-2-3");
+                }
+            }
+
+            var allTextareas = document.getElementsByTagName("textarea");
+            for (var i = 0; i < allTextareas.length; i++) {
+                allTextareas[i].setAttribute("class", "pure-input-2-3");
+            }
+
+            var allSelects = document.getElementsByTagName("select");
+            for (var i = 0; i < allSelects.length; i++) {
+                allSelects[i].setAttribute("class", "pure-u-1-6");
+            }
+        });
+    </script>
+{% endblock %}
+
+</body>
+</html>

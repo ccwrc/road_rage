@@ -1,23 +1,22 @@
-
-<a title="switch to inactive cases" class="casesSwitch" 
+<a title="switch to inactive cases" class="casesSwitch"
    href="{{ path('truck_operator_panel', {'caseId': "0", 'casesStatus': "inactive"}) }}">
     Active cases:
 </a>
 <br/>
 
-{% for case in cases %} 
+{% for case in cases %}
 
     {% if caseId == case.id %}
-        <button title="{{ case.vehicle.companyName }}" class="caseButton" 
+        <button title="{{ case.vehicle.companyName }}" class="caseButton"
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', 
+                onclick="window.location = '{{ path('truck_operator_panel',
                     {'caseId': case.id, 'page': cases.currentPageNumber}) }}';">
             &rarr; {{ case.id }} &larr;
         </button> <br/>
     {% else %}
-        <button title="{{ case.vehicle.companyName }}" class="caseButton" 
+        <button title="{{ case.vehicle.companyName }}" class="caseButton"
                 style="background-color:{{ case.progressColor }}"
-                onclick="window.location = '{{ path('truck_operator_panel', 
+                onclick="window.location = '{{ path('truck_operator_panel',
                     {'caseId': case.id, 'page': cases.currentPageNumber}) }}';">
             {{ case.id }}
         </button> <br/>
@@ -30,8 +29,3 @@
 <div class="navigation">
     {{ knp_pagination_render(cases) }}
 </div>
-
-
-
-
-

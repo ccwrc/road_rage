@@ -1,14 +1,13 @@
-
 {% for monitoring in monitorings %}
     {# START first line in monitoring#}
     <span class="textBold textItalic morph"> {{ monitoring.code }} </span>
     <span class="textItalic"> {{ monitoring.timeSave | date('d/m/Y H:i:s') }} </span>
     <span class="textBold textItalic">  {{ monitoring.operator }} </span>
-    
-    {% if monitoring.code == "START" %} 
+
+    {% if monitoring.code == "START" %}
         <button title="START edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringstart_editmonitoringstart', {"monitoringId":monitoring.id}) }}';">
-            edit 
+            edit
         </button>
     {% elseif monitoring.code == "PG" %}
         <button title="Withdrawal PG" class="panelRedButton"
@@ -36,7 +35,7 @@
                 onclick="window.location = '{{ path('truck_monitoringwpg_editmonitoringwpg', {"monitoringId":monitoring.id}) }}';">
             edit
         </button>
-            
+
         {% if monitoring.isDocumentSend == 1 %}
             <span title="WPG document was successfully sent." class="greyText">
                 mail sent
@@ -46,7 +45,7 @@
                   class="greyTextRed">
                 mail failed
             </span>
-        {% endif %}            
+        {% endif %}
     {% elseif monitoring.code == "CPG" %}
         <button title="Withdrawal CPG" class="panelRedButton"
                 onclick="window.location = '{{ path('truck_monitoringwcpg_createmonitoringwcpg', {"monitoringCpgId":monitoring.id}) }}';">
@@ -55,12 +54,12 @@
         <button title="CPG edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringcpg_editmonitoringcpg', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button> 
+        </button>
     {% elseif monitoring.code == "WCPG" %}
         <button title="WCPG edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringwcpg_editmonitoringwcpg', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button> 
+        </button>
     {% elseif monitoring.code == "RO" %}
         <button title="Withdrawal RO" class="panelRedButton"
                 onclick="window.location = '{{ path('truck_monitoringwro_createmonitoringwro', {"monitoringRoId":monitoring.id}) }}';">
@@ -69,8 +68,8 @@
         <button title="RO edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringro_editmonitoringro', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button> 
-            
+        </button>
+
         {% if monitoring.isDocumentSend == 1 %}
             <span title="RO document was successfully sent." class="greyText">
                 mail sent
@@ -80,80 +79,80 @@
                   class="greyTextRed">
                 mail failed
             </span>
-        {% endif %}            
+        {% endif %}
     {% elseif monitoring.code == "WRO" %}
         <button title="WRO edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringwro_editmonitoringwro', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>      
-            
+        </button>
+
         {% if monitoring.isDocumentSend == 1 %}
             <span title="WRO document was successfully sent." class="greyText">
                 mail sent
             </span>
         {% else %}
-            <span title="WRO document not sent, please try again later. Is case active?" 
+            <span title="WRO document not sent, please try again later. Is case active?"
                   class="greyTextRed">
                 mail failed
             </span>
-        {% endif %}               
+        {% endif %}
     {% elseif monitoring.code == "ETA" %}
         <button title="ETA edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringeta_editmonitoringeta', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>    
+        </button>
     {% elseif monitoring.code == "STRR" %}
         <button title="STRR edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringstrr_editmonitoringstrr', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>    
+        </button>
     {% elseif monitoring.code == "END" %}
         <button title="END edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringend_editmonitoringend', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>           
+        </button>
     {% elseif monitoring.code == "Out" %}
         <button title="Out edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringout_editmonitoringout', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>          
+        </button>
     {% elseif monitoring.code == "Incoming" %}
         <button title="Incoming edit" class="panelGreyButton"
                 onclick="window.location = '{{ path('truck_monitoringincoming_editmonitoringincoming', {"monitoringId":monitoring.id}) }}';">
             edit
-        </button>          
+        </button>
     {% endif %}
     {# END first line in monitoring#}
     <br/>
     {#  START additional information for code (second line in monitoring) #}
-    {% if monitoring.code == "ETA" %} 
+    {% if monitoring.code == "ETA" %}
         saved ETA: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
-    {% elseif monitoring.code == "PG" or monitoring.code == "WPG" %} 
-        home dealer:   
+    {% elseif monitoring.code == "PG" or monitoring.code == "WPG" %}
+        home dealer:
         <a title="[{{ monitoring.amount }} {{ monitoring.currency }}] show dealer in new window"
-           target="_blank" class="casesSwitch" 
+           target="_blank" class="casesSwitch"
            href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
             {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
         </a> <br/>
-    {% elseif monitoring.code == "CPG" or monitoring.code == "WCPG" %} 
-        dealer confirmed: 
+    {% elseif monitoring.code == "CPG" or monitoring.code == "WCPG" %}
+        dealer confirmed:
         <a title="[{{ monitoring.amount }} {{ monitoring.currency }}] show dealer in new window"
-           target="_blank" class="casesSwitch" 
+           target="_blank" class="casesSwitch"
            href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.homeDealer.id }) }}">
             {{ monitoring.homeDealer.name }} ({{ monitoring.homeDealer.city }})
         </a> <br/>
     {% elseif monitoring.code == "RO" or monitoring.code == "WRO" %}
-        repair dealer: 
+        repair dealer:
         <a title="[{{ monitoring.amount }} {{ monitoring.currency }}] show dealer in new window"
-           target="_blank" class="casesSwitch" 
+           target="_blank" class="casesSwitch"
            href="{{ path("truck_dealer_showdealer", {"dealerId":monitoring.repairDealer.id }) }}">
             {{ monitoring.repairDealer.name }} ({{ monitoring.repairDealer.city }})
         </a> <br/>
-    {% elseif monitoring.code == "STRR" %}    
+    {% elseif monitoring.code == "STRR" %}
         time of start repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
-    {% elseif monitoring.code == "END" %}    
-        time of end repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>        
-    {% endif %}    
+    {% elseif monitoring.code == "END" %}
+        time of end repair: {{ monitoring.timeSet | date('d/m/Y H:i:s') }} <br/>
+    {% endif %}
     {#  END additional information for code (second line in monitoring) #}
 
     <span class="textBold textItalic">contact through:  </span> {{ monitoring.contactThrough }} <br/>

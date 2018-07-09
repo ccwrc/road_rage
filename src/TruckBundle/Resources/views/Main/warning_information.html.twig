@@ -2,8 +2,8 @@
 
 {% block title %}warning information{% endblock %}
 
-{% block body %} 
-    
+{% block body %}
+
     {{ include('TruckBundle:Main:main_menu.html.twig') }}
 
     <center>
@@ -16,17 +16,17 @@
         </p>
         <br/>
 
-        <center>    
+        <center>
             <button title="back to main page" class="pure-button pure-button-active button90blue"
                     onclick="window.location = '{{ path("truck_main_index") }}';">
                 back to MAIN
-            </button>    
+            </button>
 
             {% if is_granted('ROLE_OPERATOR') %}
                 <button title="back to operator panel" class="pure-button pure-button-active button90red"
                         onclick="window.location = '{{ path("truck_operator_panel") }}';">
                     Operator Panel
-                </button>    
+                </button>
             {% endif %}
         </center>
     </div>
