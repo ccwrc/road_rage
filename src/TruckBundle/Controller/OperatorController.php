@@ -44,10 +44,20 @@ final class OperatorController extends Controller
         }
 
         $userId = $this->getUser()->getId();
-        $countPrivateNote = $this->getDoctrine()->getRepository('TruckBundle:Note')
-            ->countUserPrivateNotesFromLast24h($userId);
-        $countPublicNote = $this->getDoctrine()->getRepository('TruckBundle:Note')
-            ->countPublicNotesFromLast24h();
+
+        try {
+            $countPrivateNote = $this->getDoctrine()->getRepository('TruckBundle:Note')
+                ->countUserPrivateNotesFromLast24h($userId);
+        } catch (\Exception $e) {
+            $countPrivateNote = '0';
+        }
+
+        try {
+            $countPublicNote = $this->getDoctrine()->getRepository('TruckBundle:Note')
+                ->countPublicNotesFromLast24h();
+        } catch (\Exception $e) {
+            $countPublicNote = '0';
+        }
 
         return $this->render('TruckBundle:Operator:panel.html.twig', [
             'caseId' => $caseId,
