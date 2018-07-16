@@ -73,8 +73,8 @@ final class OperatorController extends Controller
      */
     private function checkVarIsNumberOrReturnOne($var): int
     {
-        if (is_integer($var)) {
-            return $var;
+        if (is_numeric($var)) {
+            return (int)$var;
         }
         return 1;
     }
